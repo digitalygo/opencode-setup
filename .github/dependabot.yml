@@ -1,0 +1,12 @@
+version: 2
+updates:
+  - package-ecosystem: 'github-actions'
+    directory: '/'
+    schedule:
+      interval: "cron"
+      cronjob: "0 14 * * 1,2,3,4"
+    groups:
+      security-updates:
+        update-types:
+          - "minor"
+          - "patch"
