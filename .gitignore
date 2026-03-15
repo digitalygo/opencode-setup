@@ -1,0 +1,8 @@
+.secrets/
+tmp/
+thoughts/shared/status/
+artifacts/
+.bashrc_private
+node_modules/
+.config/opencode/node_modules/
+replicate-output/
