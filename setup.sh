@@ -178,13 +178,14 @@ run_sync() {
         touch "$shell_rc"
     fi
 
-    if grep -Fq "$alias_line" "$shell_rc"; then
+    if grep -Fxq "$alias_line" "$shell_rc" 2>/dev/null; then
         print_info "Alias already exists in $shell_rc"
-    elif grep -q "^alias sync-opencode=" "$shell_rc" 2>/dev/null; then
+    elif grep -qE '^[[:space:]]*alias[[:space:]]+sync-opencode=' "$shell_rc" 2>/dev/null; then
         local temp_rc
+        local escaped_alias_line
         temp_rc=$(mktemp)
-        sed '/^alias sync-opencode=/d' "$shell_rc" > "$temp_rc"
-        echo "$alias_line" >> "$temp_rc"
+        escaped_alias_line=$(printf '%s\n' "$alias_line" | sed 's/[&/]/\\&/g')
+        sed "0,/^[[:space:]]*alias[[:space:]]\+sync-opencode=.*/s//${escaped_alias_line}/" "$shell_rc" > "$temp_rc"
         mv "$temp_rc" "$shell_rc"
         print_info "Alias updated in $shell_rc"
     else
