@@ -3,6 +3,7 @@ description: Git commit specialist that stages existing changes and crafts conve
 mode: primary
 model: opencode/kimi-k2.5
 temperature: 0.1
+steps: 50
 tools:
   write: false
   edit: false
