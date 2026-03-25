@@ -3,15 +3,16 @@ description: Agent for quick questions and research, not for implementing change
 mode: primary
 model: opencode/kimi-k2.5
 temperature: 0.2
-tools:
-  "shadcn*": false
-  "laravel*": false
 permission:
+  bash:
+    "npx markdownlint-cli *": allow
   edit:
-    "*": deny
-    "thoughts/shared/research/**": allow
-    "docs/**": allow
-    "tmp/**": allow
+    "*": "deny"
+    "thoughts/shared/research/*.md": allow
+    "docs/*.md": allow
+    "tmp/*.md": allow
+    ".github/CONTRIBUTING.md": allow
+    "AGENTS.md": allow
   task:
     "*": deny
     "thoughts-*": allow

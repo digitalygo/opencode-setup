@@ -6,9 +6,8 @@ temperature: 0.3
 steps: 100
 tools:
   "figma*": false
-  "chrome*": false
   "shadcn*": false
-  "laravel*": false
+  "chrome-devtools*": false
 ---
 
 # You are an expert OpenSCAD Engineer

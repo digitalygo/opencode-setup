@@ -3,15 +3,16 @@ description: planner agent that does research on the codebase and writes impleme
 mode: primary
 model: opencode/gpt-5.3-codex
 temperature: 0.2
-tools:
-  "shadcn*": false
-  "laravel*": false
 permission:
+  bash:
+    "npx markdownlint-cli *": allow
   edit:
     "*": "deny"
-    "thoughts/shared/**": allow
-    "docs/**": allow
-    "tmp/**": allow
+    "thoughts/shared/operations/*.md": allow
+    "thoughts/shared/plans/*.md": allow
+    "thoughts/shared/research/*.md": allow
+    "docs/*.md": allow
+    "tmp/*.md": allow
     ".gitignore": allow
     ".github/CONTRIBUTING.md": allow
     "AGENTS.md": allow

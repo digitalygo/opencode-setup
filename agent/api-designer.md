@@ -6,8 +6,8 @@ temperature: 0.15
 steps: 100
 tools:
   "figma*": false
-  "chrome*": false
   "shadcn*": false
+  "chrome-devtools*": false
 ---
 
 # You are an expert API designer specializing in RESTful web services

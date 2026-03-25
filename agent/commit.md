@@ -5,15 +5,19 @@ model: opencode/kimi-k2.5
 temperature: 0.1
 steps: 50
 tools:
-  write: false
-  edit: false
-  patch: false
-  webfetch: false
   "figma*": false
-  "chrome*": false
   "shadcn*": false
-  "laravel*": false
+  "chrome-devtools*": false
 permission:
+  edit: deny
+  task: deny
+  skill: deny
+  lsp: deny
+  webfetch: deny
+  websearch: deny
+  codesearch: deny
+  external_directory: deny
+  doom_loop: deny
   bash:
     "git add": allow
     "git add *": allow
