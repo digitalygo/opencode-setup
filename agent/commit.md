@@ -1,7 +1,7 @@
 ---
 description: Git commit specialist that stages existing changes and crafts conventional commits without modifying files
 mode: primary
-model: opencode/kimi-k2.5
+model: opencode-go/kimi-k2.5
 temperature: 0.1
 steps: 50
 tools:

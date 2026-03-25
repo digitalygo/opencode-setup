@@ -1,7 +1,7 @@
 ---
 description: Static website developer (SSG) using Next.js Static Exports or pure React
 mode: subagent
-model: opencode/kimi-k2.5
+model: opencode-go/kimi-k2.5
 temperature: 0.3
 ---
 

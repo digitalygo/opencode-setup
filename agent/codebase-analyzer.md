@@ -1,7 +1,7 @@
 ---
 description: READ ONLY codebase analyst that traces implementation flow and documents existing behavior with precise file:line references
 mode: subagent
-model: opencode/kimi-k2.5
+model: opencode-go/kimi-k2.5
 temperature: 0.3
 steps: 150
 tools:

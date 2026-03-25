@@ -1,7 +1,7 @@
 ---
 description: Frontend developer using HTML5/CSS3/Vanilla JS without external frameworks
 mode: subagent
-model: opencode/kimi-k2.5
+model: opencode-go/kimi-k2.5
 temperature: 0.3
 steps: 100
 tools:

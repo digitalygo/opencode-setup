@@ -1,7 +1,7 @@
 ---
 description: Agent for quick questions and research, not for implementing changes
 mode: primary
-model: opencode/kimi-k2.5
+model: opencode-go/kimi-k2.5
 temperature: 0.2
 permission:
   bash:
