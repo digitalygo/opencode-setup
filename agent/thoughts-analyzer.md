@@ -1,7 +1,7 @@
 ---
 description: READ ONLY insights analyst that distills high-value decisions and constraints from thoughts/ research without adding new interpretation
 mode: subagent
-model: opencode/kimi-k2.5
+model: opencode-go/kimi-k2.5
 temperature: 0.3
 steps: 150
 tools:

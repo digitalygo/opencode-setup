@@ -1,7 +1,7 @@
 ---
 description: Web Application developer (SSR/Node.js) using Next.js/React for dynamic, complex systems
 mode: subagent
-model: opencode/kimi-k2.5
+model: opencode-go/kimi-k2.5
 temperature: 0.3
 ---
 

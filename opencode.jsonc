@@ -18,7 +18,7 @@
   },
   // model selection
   "model": "opencode/gpt-5.1-codex-max",
-  "small_model": "opencode/kimi-k2.5",
+  "small_model": "opencode-go/kimi-k2.5",
   "instructions": [".github/CONTRIBUTING.md", "AGENTS.md"],
   // pre-configured mcp servers
   "mcp": {
