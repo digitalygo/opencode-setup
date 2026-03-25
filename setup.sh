@@ -70,10 +70,6 @@ cleanup_temp_dir() {
 }
 
 CHANNEL="stable"
-INTERVAL=""
-SCHEDULE_INSTALL=false
-SCHEDULE_REMOVE=false
-SCHEDULE_STATUS=false
 
 parse_args() {
     while [ $# -gt 0 ]; do
@@ -88,26 +84,6 @@ parse_args() {
                     print_error "Invalid channel: $CHANNEL (must be stable, beta, or alpha)"
                     exit 1
                 fi
-                shift 2
-                ;;
-            --schedule-install)
-                SCHEDULE_INSTALL=true
-                shift
-                ;;
-            --schedule-remove)
-                SCHEDULE_REMOVE=true
-                shift
-                ;;
-            --schedule-status)
-                SCHEDULE_STATUS=true
-                shift
-                ;;
-            --interval)
-                if [ $# -lt 2 ]; then
-                    print_error "--interval requires an argument"
-                    exit 1
-                fi
-                INTERVAL="$2"
                 shift 2
                 ;;
             -*)
@@ -196,36 +172,9 @@ run_sync() {
     print_info "Setup completed successfully"
 }
 
-handle_schedule() {
-    local schedule_args="--channel $CHANNEL"
-    if [ -n "$INTERVAL" ]; then
-        schedule_args="$schedule_args --interval $INTERVAL"
-    fi
-
-    if [ "$SCHEDULE_REMOVE" = true ]; then
-        schedule_args="$schedule_args --schedule-remove"
-    elif [ "$SCHEDULE_STATUS" = true ]; then
-        schedule_args="$schedule_args --schedule-status"
-    elif [ "$SCHEDULE_INSTALL" = true ]; then
-        schedule_args="$schedule_args --schedule-install"
-    fi
-
-    if [ ! -f "$TARGET_DIR/sync-opencode-scheduled.sh" ]; then
-        print_error "Scheduled sync script not found at $TARGET_DIR/sync-opencode-scheduled.sh"
-        exit 1
-    fi
-
-    print_info "Delegating to scheduled sync script..."
-    bash "$TARGET_DIR/sync-opencode-scheduled.sh" $schedule_args
-}
-
 main() {
     parse_args "$@"
     run_sync
-
-    if [ "$SCHEDULE_INSTALL" = true ] || [ "$SCHEDULE_REMOVE" = true ] || [ "$SCHEDULE_STATUS" = true ]; then
-        handle_schedule
-    fi
 }
 
 main "$@"
