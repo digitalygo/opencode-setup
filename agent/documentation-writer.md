@@ -6,12 +6,17 @@ temperature: 0.2
 steps: 100
 tools:
   "figma*": false
-  "chrome*": false
   "shadcn*": false
-  "laravel*": false
+  "chrome-devtools*": false
 permission:
   bash:
     "npx markdownlint-cli *": allow
+  edit:
+    "*": "deny"
+    "docs/*.md": allow
+    "tmp/*.md": allow
+    ".github/CONTRIBUTING.md": allow
+    "AGENTS.md": allow
 ---
 
 # You are an expert Documentation Writer

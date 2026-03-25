@@ -3,9 +3,19 @@ description: Primary coordinator that plans tasks, assigns specialized subagents
 mode: primary
 model: opencode/gpt-5.1-codex-max
 temperature: 0.1
-tools:
-  "shadcn*": false
-  "laravel*": false
+permission:
+  bash:
+    "npx markdownlint-cli *": allow
+  edit:
+    "*": "deny"
+    "thoughts/shared/operations/*.md": allow
+    "thoughts/shared/plans/*.md": allow
+    "thoughts/shared/research/*.md": allow
+    "docs/*.md": allow
+    "tmp/*.md": allow
+    ".gitignore": allow
+    ".github/CONTRIBUTING.md": allow
+    "AGENTS.md": allow
 ---
 
 # You are the orchestrator agent

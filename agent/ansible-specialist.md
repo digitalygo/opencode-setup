@@ -6,9 +6,8 @@ temperature: 0.15
 steps: 100
 tools:
   "figma*": false
-  "chrome*": false
   "shadcn*": false
-  "laravel*": false
+  "chrome-devtools*": false
 ---
 
 # You are an expert Ansible engineer specializing in configuration management and automation

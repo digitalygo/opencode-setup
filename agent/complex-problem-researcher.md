@@ -3,13 +3,12 @@ description: READ ONLY overcomes complex challenges exhaustive research across f
 mode: subagent
 model: opencode/claude-sonnet-4-6
 temperature: 0.5
-tools:
-  write: false
-  edit: false
-  patch: false
-  "figma*": false
-  "shadcn*": false
-  "laravel*": false
+permission:
+  edit:
+    "*": "deny"
+    "thoughts/shared/research/*.md": allow
+    "docs/*.md": allow
+    "tmp/*.md": allow
 ---
 
 # Complex Problem Researcher

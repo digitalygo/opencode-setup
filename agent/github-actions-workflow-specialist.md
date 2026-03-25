@@ -6,9 +6,12 @@ temperature: 0.15
 steps: 100
 tools:
   "figma*": false
-  "chrome*": false
   "shadcn*": false
-  "laravel*": false
+  "chrome-devtools*": false
+permission:
+  edit:
+    "*": "deny"
+    ".github/**": allow
 ---
 
 # You are an expert in GitHub Actions Workflows

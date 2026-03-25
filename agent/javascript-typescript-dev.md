@@ -4,9 +4,6 @@ mode: subagent
 model: opencode/kimi-k2.5
 temperature: 0.15
 steps: 100
-tools:
-  "shadcn*": false
-  "laravel*": false
 permission:
   bash:
     "npm *": allow

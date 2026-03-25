@@ -5,10 +5,7 @@ model: opencode/kimi-k2.5
 temperature: 0.15
 steps: 100
 tools:
-  "figma*": false
-  "chrome*": false
   "shadcn*": false
-  "laravel*": false
 permission:
   bash:
     "bundle *": allow

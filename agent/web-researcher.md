@@ -5,13 +5,13 @@ model: opencode/kimi-k2.5
 temperature: 0.3
 steps: 100
 tools:
-  write: false
-  edit: false
-  patch: false
   "figma*": false
-  "chrome*": false
   "shadcn*": false
-  "laravel*": false
+  "chrome-devtools*": false
+permission:
+  edit: deny
+  bash: deny
+  lsp: deny
 ---
 
 # You are an expert Web Research Agent

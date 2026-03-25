@@ -5,8 +5,7 @@ model: opencode/kimi-k2.5
 temperature: 0.3
 steps: 100
 tools:
-  next-devtools: false
-  shadcn: false
+  "shadcn*": false
 ---
 
 # You are an expert Frontend specialist in Vanilla HTML/CSS
