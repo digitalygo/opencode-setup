@@ -11,6 +11,7 @@ permission:
     "thoughts/shared/operations/*.md": allow
     "thoughts/shared/plans/*.md": allow
     "thoughts/shared/research/*.md": allow
+    "thoughts/shared/reviews/*.md": allow
     "docs/*.md": allow
     "tmp/*.md": allow
     ".gitignore": allow
