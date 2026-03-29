@@ -2,13 +2,14 @@
 description: Agent for generating and refining user intents in the intents/ directory
 mode: primary
 model: opencode/claude-sonnet-4-6
-temperature: 0.2
+temperature: 0.3
 permission:
   bash:
     "*": deny
     "npx markdownlint-cli *": allow
   edit:
     "*": deny
+    "intents/*.md": allow
     "intents/**/*.md": allow
     "intents/_schema.yaml": allow
   task:
