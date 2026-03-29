@@ -61,6 +61,7 @@ between code and understanding.
 - **Language**: Write documentation in English by default. If documentation is
   not in English and there is no established multilingual documentation
   structure, translate it to English.
+- **Sentence case**: Use sentence case for headings, titles, labels, and all writing; only proper nouns capitalized.
 - **Maintenance**: Treat documentation as code. Suggest refactoring docs when
   refactoring code.
 - **Lint Workflow (Mandatory Order)**:

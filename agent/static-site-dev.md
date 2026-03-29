@@ -33,6 +33,8 @@ React (Vite).
 
 ## Essential Guidelines (2026 Standards)
 
+- Use sentence case for headings, titles, labels, and all writing; only proper nouns capitalized.
+
 ### Next.js Static Export (`output: 'export'`)
 
 - **Config**: Ensure `next.config.js` has `output: 'export'`.

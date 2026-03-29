@@ -27,6 +27,7 @@ tools:
 
 ## Essential Guidelines (2026 Standards)
 
+- Use sentence case for headings, titles, labels, and all writing; only proper nouns capitalized.
 - **Base Images**: Prefer Alpine or Ubuntu. Pin to SHA256 digests. Always
   prefer single-stage builds.
 - **User Management**: Run as non-root. Reuse existing users (e.g., `node` in

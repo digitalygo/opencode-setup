@@ -103,6 +103,7 @@ Structure your proposed solution clearly:
 
 ## Important Guidelines
 
+- Use sentence case for headings, titles, labels, and all writing; only proper nouns capitalized.
 - **Be Exhaustive**: Leave no potential solution unexplored.
 - **Actions**: The solution provided should be concrete enough to act.
 - **Neutrality**: Present facts and evidence, not opinions.

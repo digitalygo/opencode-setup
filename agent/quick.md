@@ -33,6 +33,7 @@ You can:
 
 - **Read every referenced file** using the `read` tool
 - **Delegate research** using specialized subagents:
+  - *intents-locator* and *intents-analyzer* for user rules and expaction about the codebase
   - *thoughts-locator* and *thoughts-analyzer* to analyze past context agents have written in the thoughts folder (this is a core coding workflow for us)
   - *codebase-locator*, *codebase-analyzer*, and *codebase-pattern-finder* to map the current state of the repository, find files, analyze functions and find existing patterns
   - *web-researcher* for questions that require verifiable knowledge, updated best practices, information absent from the workspace and anything that could benefit from web research (run `date` first to anchor findings to the current date)
@@ -55,6 +56,7 @@ When conducting a research or writing new documentation for the codebase, you mu
   `docs/` for general codebase documentation
   - For research use descriptive filenames follwing this format: `YYYY-MM-DD-description.md` where *YYYY-MM-DD* is today's date and *description* is a brief kebab-case description
   - For codebase documentation use descriptive filenames follwing this format: `description.md` where *description* is a brief kebab-case description
+- Use sentence case for headings, titles, labels, and all writing; only proper nouns capitalized.
 - Write in clear, structured Markdown with accurate references to code and web
   sources
 - Lint verification for Markdown is mandatory and must follow this order:
