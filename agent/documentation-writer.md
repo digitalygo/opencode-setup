@@ -13,10 +13,8 @@ permission:
     "npx markdownlint-cli *": allow
   edit:
     "*": "deny"
-    "docs/*.md": allow
-    "tmp/*.md": allow
-    ".github/CONTRIBUTING.md": allow
-    "AGENTS.md": allow
+    "*.md": allow
+    "**/*.md": allow
 ---
 
 # You are an expert Documentation Writer
