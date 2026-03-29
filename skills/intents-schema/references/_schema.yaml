@@ -1,0 +1,76 @@
+intent:
+  required:
+    - type
+    - priority
+    - area
+
+  properties:
+    type:
+      type: string
+      enum:
+        - ui
+        - api
+        - logic
+        - security
+        - performance
+        - integration
+        - other
+      description: "Type of intent"
+
+    priority:
+      type: string
+      enum: [critical, high, medium, low]
+      default: medium
+      description: "Priority level"
+
+    area:
+      type: string
+      description: "Functional area for grouping in folders"
+
+  sections:
+    title:
+      required: true
+      pattern: "^# "
+      description: "H1 title"
+
+    purpose_context:
+      required: true
+      pattern: "^## (Purpose & Context)"
+      description: "Why this intent exists and its context"
+
+    actors_roles:
+      required: true
+      pattern: "^## (Actors and Roles)"
+      description: "Role-based differences, what each can/cannot do, visibility"
+
+    desired_behavior:
+      required: true
+      pattern: "^## (Desired Behavior)"
+      description: "Expected behavior description"
+
+    inputs_outputs:
+      required: false
+      pattern: "^## (Inputs & Outputs)"
+      description: "Required for api and logic, optional for others"
+
+    edge_failure:
+      required: true
+      pattern: "^## (Edge / Failure Cases)"
+      description: "Edge cases and failure scenarios"
+
+    acceptance_criteria:
+      required: true
+      pattern: "^## (Acceptance Criteria)"
+      description: "Acceptance criteria checklist"
+
+    constraints:
+      required: false
+      pattern: "^## (Constraints / Non-goals)"
+      description: "Constraints and non-goals"
+
+    open_questions:
+      required: false
+      pattern: "^## (Open Questions)"
+      description: "Open questions"
+
+  min_criteria: 3
