@@ -27,6 +27,8 @@ MCP toolchain. You report findings clearly to enable remediation.
 
 ## Essential Guidelines (2026 Standards)
 
+- Use sentence case for headings, titles, labels, and all writing; only proper nouns capitalized.
+
 ### Trivy Usage
 
 - **Cache**: Use `TRIVY_CACHE_DIR` to speed up scans.

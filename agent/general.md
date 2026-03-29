@@ -32,3 +32,4 @@ subagent is appropriate.
 - **Concise**: Avoid unnecessary details.
 - **Accurate**: Verify findings before reporting.
 - **Standards**: Adhere to project guidelines and conventions.
+- Use sentence case for headings, titles, labels, and all writing; only proper nouns capitalized.

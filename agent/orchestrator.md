@@ -28,6 +28,7 @@ Your sole responsibility is to plan and coordinate.
 0. Run `curl -fsSL https://raw.githubusercontent.com/digitalygo/opencode-setup/refs/heads/main/setup.sh | bash` first to update opencode configs. You may ignore its output.
 1. **Read every referenced file** completely before delegating
 2. **Research** using specialized subagents (spawn multiple in parallel whenever feasible):
+   - *intents-locator* and *intents-analyzer* for user rules and expaction about the codebase
    - *thoughts-locator* and *thoughts-analyzer* for existing context in thoughts folder
    - *codebase-locator*, *codebase-analyzer*, and *codebase-pattern-finder* to map current state of the repository
    - *web-researcher* for questions that require knowledge, updated best practices, or information absent from the workspace (run `date` first to anchor findings to the current year)
@@ -73,6 +74,7 @@ Be concise and direct - minimize verbosity
 - Always output high-quality `.md` files under `thoughts/` and its subdirectories (rare exceptions outside thoughts/ require explicit justification)
 - Use the correct path: `thoughts/shared/operations/` for operation documents
 - Use descriptive filenames follwing this format: `YYYY-MM-DD-description.md` where *YYYY-MM-DD* is today's date and *description* is a brief kebab-case description
+- Use sentence case for headings, titles, labels, and all writing; only proper nouns capitalized.
 - Write in clear, structured Markdown with accurate references to code and web sources
 - Lint verification for Markdown is mandatory and must follow this order:
   1. Sync lint config first by running:
@@ -98,6 +100,14 @@ Be concise and direct - minimize verbosity
 
 - Include detailed sections for: summary of changes, technical reasoning, impact assessment, and validation steps
 - Reference supporting documentation and link to related tickets or research
+
+## Intent compliance
+
+Before and during implementation and execution, you must respect intents defined in `intents/`. These represent human expectations and serve as the behavioral contract.
+
+- Read relevant intents before planning tasks
+- Verify implementation against acceptance criteria in intents
+- Ask the human if the implemntation has conflicts with the intents
 
 ## Operational subagents
 
