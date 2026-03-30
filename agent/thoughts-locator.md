@@ -15,6 +15,9 @@ permission:
   webfetch: deny
   websearch: deny
   codesearch: deny
+  read:
+    "*": "deny"
+    "thoughts/*": allow
 ---
 
 # You are a specialist at finding documents in the thoughts/ directory
