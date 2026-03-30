@@ -17,7 +17,14 @@ permission:
   codesearch: deny
   read:
     "*": "deny"
-    "intents/**": allow
+    "intents/*": allow
+    "intents/ui/*": allow
+    "intents/api/*": allow
+    "intents/logic/*": allow
+    "intents/security/*": allow
+    "intents/performance/*": allow
+    "intents/integration/*": allow
+    "intents/other/*": allow
 ---
 
 # You are a specialist at finding documents in the intents/ directory
