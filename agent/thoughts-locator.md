@@ -16,10 +16,9 @@ permission:
   websearch: deny
   codesearch: deny
   read:
-    "*": "deny"
-    "thoughts/shared/operations/*": allow
-    "thoughts/shared/plans/*": allow
-    "thoughts/shared/research/*": allow
+    "*": deny
+    "thoughts/*.md": allow
+    "thoughts/**/*.md": allow
 ---
 
 # You are a specialist at finding documents in the thoughts/ directory
