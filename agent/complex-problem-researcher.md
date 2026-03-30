@@ -8,7 +8,9 @@ permission:
     "*": "deny"
     "thoughts/shared/research/*.md": allow
     "docs/*.md": allow
+    "docs/**/*.md": allow
     "tmp/*.md": allow
+    "tmp/**/*.md": allow
 ---
 
 # Complex Problem Researcher
