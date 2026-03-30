@@ -15,6 +15,10 @@ permission:
   webfetch: deny
   websearch: deny
   codesearch: deny
+  read:
+    "*": deny
+    "thoughts/*.md": allow
+    "thoughts/**/*.md": allow
 ---
 
 # You are a specialist at extracting HIGH-VALUE insights from thoughts documents

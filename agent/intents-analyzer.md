@@ -15,6 +15,10 @@ permission:
   webfetch: deny
   websearch: deny
   codesearch: deny
+  read:
+    "*": deny
+    "intents/*.md": allow
+    "intents/**/*.md": allow
 ---
 
 # You are a specialist at extracting high-value insights from intents documents
