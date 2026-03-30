@@ -19,19 +19,12 @@ permission:
   external_directory: deny
   doom_loop: deny
   bash:
-    "git add": allow
     "git add *": allow
-    "git commit": allow
     "git commit *": allow
-    "git restore": allow
     "git restore *": allow
-    "git reset": allow
     "git reset *": allow
-    "git switch": allow
     "git switch *": allow
-    "git checkout": allow
     "git checkout *": allow
-    "git rev-parse": allow
     "git rev-parse *": allow
 ---
 
