@@ -17,7 +17,7 @@ permission:
   codesearch: deny
   read:
     "*": "deny"
-    "intents/*": allow
+    "intents/**": allow
 ---
 
 # You are a specialist at finding documents in the intents/ directory

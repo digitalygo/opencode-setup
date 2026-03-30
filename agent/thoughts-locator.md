@@ -17,7 +17,7 @@ permission:
   codesearch: deny
   read:
     "*": "deny"
-    "thoughts/*": allow
+    "thoughts/**": allow
 ---
 
 # You are a specialist at finding documents in the thoughts/ directory
