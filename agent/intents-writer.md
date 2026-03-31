@@ -1,7 +1,7 @@
 ---
 description: Agent for generating and refining user intents in the intents/ directory
 mode: primary
-model: opencode/claude-sonnet-4-6
+model: opencode/gpt-5.1-codex-max
 temperature: 0.3
 permission:
   bash:
