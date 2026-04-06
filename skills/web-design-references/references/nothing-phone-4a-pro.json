@@ -1,0 +1,261 @@
+{
+  "meta": {
+    "url": "https://it.nothing.tech/products/phone-4a-pro?Colour=Silver&Capacity=8%2B128GB",
+    "title": "Phone (4a) Pro | Smartphones | Nothing | IT",
+    "captured_at": "2026-04-06T08:36:23.158Z"
+  },
+  "summary": {
+    "fonts": [
+      "NType82-Regular, sans-serif",
+      "ui-sans-serif, system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+      "NType82-Regular, sans-serif",
+      "Ndot-Regular, sans-serif",
+      "LatteraMonoLL, sans-serif"
+    ],
+    "colors": {
+      "background": "rgb(245, 245, 245)",
+      "text": "rgb(0, 0, 0)",
+      "palette": [
+        "rgb(0, 0, 0)",
+        "rgb(229, 231, 235)",
+        "rgb(245, 245, 245)",
+        "rgba(255, 255, 255, 0.8)",
+        "rgb(88, 90, 90)",
+        "rgb(255, 255, 255)",
+        "rgba(88, 90, 90, 0.05)"
+      ]
+    },
+    "typography": {
+      "h1": {
+        "font": "Ndot-Regular, sans-serif",
+        "size": "20px",
+        "weight": "55",
+        "lineHeight": "21.6px",
+        "letterSpacing": "normal",
+        "textTransform": "uppercase"
+      },
+      "h2": {
+        "font": "NType82-Regular, sans-serif",
+        "size": "16px",
+        "weight": "400",
+        "lineHeight": "22.4px",
+        "letterSpacing": "normal",
+        "textTransform": "none"
+      },
+      "body": {
+        "font": "NType82-Regular, sans-serif",
+        "size": "16px",
+        "weight": "400",
+        "lineHeight": "22.4px",
+        "letterSpacing": "normal",
+        "textTransform": "none"
+      }
+    },
+    "cta_sample": [
+      {
+        "text": "€499Add to bag",
+        "tag": "BUTTON",
+        "bg": "rgb(0, 0, 0)",
+        "color": "rgb(255, 255, 255)",
+        "border": "0px solid rgb(229, 231, 235)",
+        "radius": "8px",
+        "padding": "16px",
+        "font": "LatteraMonoLL, sans-serif",
+        "weight": "400"
+      },
+      {
+        "text": "Shop All",
+        "tag": "A",
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(255, 255, 255)",
+        "border": "0px solid rgb(229, 231, 235)",
+        "radius": "0px",
+        "padding": "0px",
+        "font": "Ndot-Regular, sans-serif",
+        "weight": "400"
+      }
+    ],
+    "media": {
+      "images": 22,
+      "videos": 0,
+      "canvas": 0,
+      "svgs": 0
+    },
+    "animations_count": 1660,
+    "layout": {
+      "viewport": {
+        "width": 588,
+        "height": 973
+      },
+      "sections_estimate": 96
+    }
+  },
+  "tokens_p1": {
+    "css_custom_properties": {
+      "--tw-ring-offset-shadow": "0 0 #0000",
+      "--header-height": "64px",
+      "--tw-ring-shadow": "0 0 #0000",
+      "--cart-aside-summary-height-with-discount": "300px",
+      "--accent-yellow": "47 100% 50%",
+      "--aside-width": "400px",
+      "--grey-darker": "180 1% 35%",
+      "--accent-blue": "214 100% 21%",
+      "--grey-lighter": "180 1% 85%",
+      "--tw-border-spacing-x": "0",
+      "--tw-scale-y": "1",
+      "--cell-size": "131px",
+      "--color-dark": "#000",
+      "--tw-ring-color": "rgb(59 130 246 / .5)",
+      "--tw-translate-y": "0",
+      "--tw-rotate": "0",
+      "--tw-ring-offset-color": "#fff",
+      "--accent-red": "350 85% 42%",
+      "--tw-skew-x": "0",
+      "--grey-lightest": "0 0% 96%",
+      "--cart-aside-summary-height": "250px",
+      "--grey-official": "180 1% 70%",
+      "--tw-shadow": "0 0 #0000",
+      "--tw-translate-x": "0",
+      "--tw-ring-offset-width": "0px",
+      "--grid-item-width": "355px",
+      "--tw-scroll-snap-strictness": "proximity",
+      "--tw-scale-x": "1",
+      "--tw-shadow-colored": "0 0 #0000",
+      "--tw-border-spacing-y": "0",
+      "--tw-skew-y": "0",
+      "--color-light": "#fff"
+    },
+    "spacing_scale": [
+      "0px",
+      "normal",
+      "2px",
+      "4px",
+      "8px",
+      "12px",
+      "14px",
+      "16px",
+      "16.5312px",
+      "16.5469px",
+      "32px",
+      "40px 16px",
+      "40px",
+      "80px"
+    ],
+    "border_radius_scale": [
+      "0px",
+      "8px"
+    ],
+    "box_shadows": [],
+    "motion": {
+      "transitions": [
+        "transform | 0.4s | ease | 0s",
+        "all | 0.2s | ease | 0s",
+        "all | 0.2s | cubic-bezier(0.4, 0, 0.2, 1) | 0s"
+      ],
+      "animations": [],
+      "motion_durations": [
+        "0.4s",
+        "0.2s"
+      ],
+      "motion_easings": [
+        "ease",
+        "cubic-bezier(0.4, 0, 0.2, 1)"
+      ]
+    },
+    "sticky_fixed": [
+      {
+        "tag": "HEADER",
+        "class": "fixed left-1/2 z-50 flex w-full max-w-lg -translate-x-1/2-safe flex-col gap-0.5",
+        "position": "fixed",
+        "top": "0px",
+        "bottom": "893px",
+        "zIndex": "50",
+        "height": 80
+      },
+      {
+        "tag": "DIV",
+        "class": "absolute bottom-0 left-1/2 z-30 flex w-full max-w-lg -translate-x-1/2-safe flex-col gap-0.5 p-4 md:bottom-0",
+        "position": "fixed",
+        "top": "631px",
+        "bottom": "0px",
+        "zIndex": "30",
+        "height": 342
+      },
+      {
+        "tag": "DIV",
+        "class": "pointer-events-none fixed inset-0 z-0 size-full overflow-hidden p-8 pr-[calc(2rem+var(--scrollbar-width))] mix-blend-difference",
+        "position": "fixed",
+        "top": "0px",
+        "bottom": "0px",
+        "zIndex": "0",
+        "height": 973
+      }
+    ],
+    "header_height": 80,
+    "footer_height": 1204.46875,
+    "z_index_layers": [
+      "50",
+      "10"
+    ],
+    "breakpoints_actual": []
+  },
+  "tokens_p2": {
+    "letter_spacing": [
+      "normal"
+    ],
+    "text_transform": [
+      "uppercase"
+    ],
+    "font_variant_numeric": [
+      "normal"
+    ],
+    "text_decoration": [
+      "none solid rgb(0, 0, 0)"
+    ],
+    "text_decoration_thickness": [],
+    "text_decoration_offset": [],
+    "border_widths": [
+      "0px"
+    ],
+    "border_styles": [
+      "solid"
+    ],
+    "border_colors": [
+      "rgb(229, 231, 235)"
+    ],
+    "outlines": [
+      "0px none rgb(0, 0, 0) offset 0px",
+      "0px none rgb(88, 90, 90) offset 0px",
+      "0px none rgb(255, 255, 255) offset 0px"
+    ],
+    "opacity_scale": [
+      "1"
+    ],
+    "blend_modes": [],
+    "background_blend_modes": [],
+    "filters": [],
+    "backdrop_filters": [
+      "blur(45px)"
+    ],
+    "background_images": [],
+    "gradients": [],
+    "aspect_ratios": [
+      "1 / 1",
+      "16 / 9",
+      "1.77778 / 1"
+    ],
+    "selection_rules": [],
+    "scrollbar_rules": [],
+    "prefers_reduced_motion": [],
+    "srcsets": [],
+    "icon_system": {
+      "inline_svg": 17,
+      "img_svg": 0,
+      "icon_font_detected": false
+    }
+  },
+  "tokens_states": {
+    "status": "not_collected_cors_stylesheets",
+    "note": "Same-origin CSS needed to extract :hover/:active/:focus/:disabled."
+  }
+}
