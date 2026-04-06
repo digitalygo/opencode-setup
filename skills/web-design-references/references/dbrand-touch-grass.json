@@ -1,0 +1,256 @@
+{
+  "meta": {
+    "name": "dbrand-touch-grass",
+    "source": "https://dbrand.com/shop/limited-edition/touch-grass",
+    "analyzed_at": "2026-04-06",
+    "type": "e-commerce-product-page",
+    "style": "minimalist-brutalist-retro",
+    "tone": "ironic-self-aware-genz"
+  },
+  "color_system": {
+    "primary": {
+      "background": "#0A0A0A",
+      "text": "#FFFFFF",
+      "accent": "#C3C3C3"
+    },
+    "secondary": {
+      "windows_blue": "#0000FF",
+      "windows_gray": "#C0C0C0",
+      "deep_blue": "#0A0C20",
+      "warning_yellow": "#FFBB00",
+      "subtle_gray": "#858585"
+    },
+    "semantic": {
+      "success": "#FFFFFF",
+      "error": "#0000FF"
+    }
+  },
+  "typography": {
+    "fonts": {
+      "heading": "W95fa",
+      "body": "Replica, Arial, Verdana, sans-serif",
+      "story": "Saans"
+    },
+    "scale": {
+      "h1": {"size": "20px", "weight": "400", "line_height": "27.5px"},
+      "h2": {"size": "20px", "weight": "400", "line_height": "27.5px"},
+      "body_large": {"size": "24px", "weight": "400", "line_height": "32px"},
+      "body": {"size": "16px", "weight": "400", "line_height": "1.5"}
+    }
+  },
+  "layout": {
+    "container": "full_bleed",
+    "hero": {
+      "has_video": true,
+      "has_canvas": true,
+      "background_image": "https://cdn.db.io/images/dlg3xw1d/production/b5eda2c803053bbea1b14d85ff8bc2e1f51be043-1440x1024.png"
+    },
+    "sections": "alternating_image_text",
+    "grid_usage": {"flex": 22, "grid": 9}
+  },
+  "components": {
+    "cta_button": {
+      "primary": {
+        "background": "#C3C3C3",
+        "color": "#000000",
+        "padding": "0px 16px",
+        "border_radius": "0px",
+        "font": "W95fa",
+        "font_size": "20px",
+        "font_weight": "400",
+        "border": "none",
+        "text_transform": "none"
+      },
+      "ghost": {
+        "background": "transparent",
+        "color": "#FFFFFF",
+        "border": "1px solid currentColor",
+        "border_radius": "0px"
+      }
+    },
+    "navigation": {
+      "style": "minimal_transparent",
+      "position": "relative",
+      "logo": "svg_center",
+      "menu": "hamburger_left",
+      "search": "icon_right",
+      "cart": "icon_right",
+      "font": "Replica",
+      "font_size": "16px",
+      "color": "#858585"
+    },
+    "product_dialog": {
+      "position": "fixed",
+      "backdrop": "rgba(0,0,0,0.8)",
+      "background": "transparent",
+      "shadow": "0 25px 50px -12px rgba(0,0,0,0.25)",
+      "border_radius": "0px",
+      "sections": ["device_select", "device_model", "type_radio", "add_ons_checkboxes", "whats_included", "price", "add_to_cart"]
+    },
+    "form_elements": {
+      "select": {"background": "#FFFFFF", "border": "0", "padding": "4px", "font": "W95fa", "font_size": "20px", "appearance": "none"},
+      "checkbox": {"size": "20px", "accent_color": "auto"},
+      "radio": {"style": "native"},
+      "label": {"color": "#E0E0E0", "font_size": "14px"}
+    },
+    "breadcrumb": {"font_size": "16px", "color": "#858585", "separator": "/"}
+  },
+  "media": {
+    "totals": {"images": 83, "svgs": 40, "videos": 5, "canvas": 7},
+    "cdn": "cdn.db.io",
+    "product_photos": {"format": "webp", "hero": "2048x1366", "portrait": "819x1024"},
+    "illustrations": "svg",
+    "backgrounds": "png/webp",
+    "videos": {"autoplay": true, "loop": true, "muted": true}
+  },
+  "animations": {
+    "elements_with_animation": 589,
+    "hover_effects": 37,
+    "scroll_animations": 2,
+    "video_elements": 5,
+    "canvas_elements": 7,
+    "hover": "brightness_change",
+    "page_transitions": "none"
+  },
+  "copywriting": {
+    "tone": "ironic self-aware gen-z",
+    "headlines": ["Touch Grass (Again)", "once upon a time", "look up it's free", "the end is near"],
+    "cta_copy": ["Buy Grass", "Add to Cart", "This is not a joke."],
+    "body_examples": [
+      "Humanity was addicted to smartphones...",
+      "Touch Grass is back. Blue Sky is new...",
+      "Temperatures will rise. Democracies will fall..."
+    ]
+  },
+  "responsive": {
+    "viewport_meta": "width=device-width, initial-scale=1",
+    "breakpoints": {"mobile": "<768px", "tablet": "768-1024px", "desktop": ">1024px"},
+    "current_viewport": "588x973"
+  },
+  "ecommerce": {
+    "device_selection": "category + device comboboxes",
+    "type_selection": "radio case_vs_skin",
+    "add_ons": "checkbox list with prices",
+    "bundle_offer": "Free Blue Sky with Touch Grass",
+    "cta": "Buy Grass / Add to Cart"
+  },
+  "layout_structure": {
+    "section_order": [
+      "hero",
+      "story_blocks",
+      "promo_block",
+      "product_dialog",
+      "gallery"
+    ],
+    "hero": {
+      "position": "top_of_page",
+      "bleed": "full_bleed",
+      "text_alignment": "left_center",
+      "text_layout": "stacked",
+      "cta_position": "under_headline",
+      "canvas_overlay": "atop_video",
+      "background": "sky_image"
+    },
+    "story_sections": {
+      "pattern": "alternating_image_text",
+      "image_position": ["left", "right"],
+      "text_width": "60-80ch",
+      "margins": "minimal",
+      "section_gaps": "none"
+    },
+    "promo_note": {
+      "element": "clippy",
+      "position": "docked_lower_right"
+    },
+    "product_dialog": {
+      "position": "fixed_center",
+      "type": "overlay",
+      "layer": "above_page",
+      "backdrop": "translucent"
+    },
+    "breadcrumb": {
+      "position": "bottom_of_content"
+    },
+    "gallery": {
+      "layout": "grid",
+      "content": "device_shots"
+    },
+    "spacing": {
+      "vertical_gaps": "near_zero",
+      "flow": "tight_brutalist"
+    },
+    "navigation": {
+      "position": "top_banner",
+      "logo": "center",
+      "menu": "left",
+      "cart_search": "right",
+      "sticky": false
+    }
+  },
+  "tokens_p1": {
+    "css_custom_properties": {"--container-md":"28rem","--tw-inset-shadow-alpha":"100%","--atlas-loading-skeleton-highlight-color":"rgba(0, 0, 0, 0.02)","--atlas-space-small":"12px","--layout-maxw":"80rem","--tw-mask-left-to-position":"100%","--color-secondary-900":"#332500","--atlas-popover-shadow":"0 20px 48px 0 rgba(55, 63, 71, 0.16), 0 12px 24px 0 rgba(55, 63, 71, 0.2), 0 0 12px 0 rgba(55, 63, 71, 0.08)","--atlas-margin-h1":"24px","--font-base":"\"Replica\", \"Arial\", \"Verdana\", sans-serif","--atlas-button-padding-small":"5px 12px","--atlas-input-border-radius-small":"8px","--spacing-hero-block":"calc(100 * 1svh - 4rem - 0px - 0px - 0px - 0px)","--blur-lg":"16px","--aspect-video":"16 / 9","--spacing-layout-px":"min(4vw, (80rem + 0rem) * .04)","--breakpoint-xs":"30rem","--spacing-ui-x-sm":".5rem","--atlas-button-icon-size-tiny":"24px","--atlas-faq-font-weight":"500","--atlas-favorites-font-weight":"undefined","--scrollbar-fg":"#858585","--color-surface-400":"#525252","--color-neutral-300":"oklch(87% 0 0)","--tw-mask-conic":"linear-gradient(#fff,#fff)","--tw-outline-style":"solid","--ease-in":"cubic-bezier(.4, 0, 1, 1)","--color-surface-800":"#c2c2c2","--atlas-widget-background-color":"#FFFFFF","--tw-inset-ring-shadow":"0 0 #0000","--text-base--line-height":"1.375em","--color-primary-400":"#ffc933","--color-success-subtle":"#ceeba2","--color-surface-900":"#e0e0e0","--atlas-button-border-radius":"8px","--color-primary-300":"#ffd666","--font-mono":"\"Replica Mono\", ui-monospace, \"SFMono-Regular\", \"Menlo\", \"Monaco\", \"Consolas\", \"Liberation Mono\", \"Courier New\", monospace","--atlas-button-font-weight":"500","--color-primary-800":"#664b00","--tracking-wider":".05em","--atlas-shadow-medium":"0px 8px 16px 0px rgba(55, 63, 71, 0.2)","--scrollbar-bg":"#141414","--color-fg-muted":"#c2c2c2","--color-primary-500":"#fb0","--text-h1--weight":"400","--animate-fade-out":"fade-out .25s both","--atlas-card-shadow":"0px 2px 8px 0px rgba(55, 63, 71, 0.08), 0px 1px 2px 0px rgba(55, 63, 71, 0.12)","--font-ui":"\"Diatype Semi-Mono\", \"Courier New\", \"Courier\", \"monospace\"","--tw-mask-top-to-position":"100%","--text-h2--wrap":"balance","--color-primary-700":"#997000","--atlas-chat-bubble-display-name":"#797979","--text-9xl--line-height":"1","--atlas-text-negative":"#be2119","--tw-inset-shadow":"0 0 #0000","--color-secondary-fg":"#000","--tw-gradient-from":"rgba(0, 0, 0, 0)","--color-white":"#fff","--color-gray-400":"oklch(70.7% .022 261.325)","--font-DiatypeSemiMono":"\"Diatype Semi-Mono\", \"Courier New\", \"Courier\", \"monospace\"","--tw-shadow-alpha":"100%","--tw-gradient-to":"rgba(0, 0, 0, 0)","--color-secondary-400":"#ffc933","--radius-sm":".25rem","--atlas-button-border-radius-tiny":"8px","--font-weight-bold":"700","--breakpoint-5xl":"160rem","--color-fg-subtle":"#858585","--atlas-drawer-inset-border-radius":"12px","--atlas-favorites-font-family":"undefined","--text-ui--transform":"uppercase","--atlas-text-placeholder":"#747576","--tw-mask-linear-from-position":"0%","--text-2xs":".625rem","--spacing-ui-x-btn-md":"2rem","--color-error-subtle":"#f9b4b4","--tw-gradient-via-position":"50%","--atlas-margin-large":"10px","--tw-mask-left-from-color":"black","--atlas-space-32":"32px","--atlas-background-success":"#518b22","--font-weight-extralight":"200","--atlas-space-mini":"8px","--text-xs--line-height":"calc(1 / .75)","--color-neutral-700":"oklch(37.1% 0 0)","--atlas-button-text-transform":"none","--tw-mask-right":"linear-gradient(#fff,#fff)","--atlas-favorites-icon-color":"undefined","--atlas-input-padding":"7px 12px","--color-primary-subtle":"#ffe499","--tw-gradient-to-position":"100%","--atlas-text-secondary":"#00000080","--font-h1":"\"Replica\", \"Helvetica\", \"Arial\", \"sans-serif\"","--atlas-space-tiny":"4px","--default-transition-duration":".15s","--animate-pulse":"pulse 2s cubic-bezier(.4, 0, .6, 1) infinite","--radius-2xl":"1rem","--text-2xs--line-height":"1.6","--atlas-input-border-radius-normal":"8px","--radius-md":".375rem","--layout-mx-screen":"max((100vw - 80rem + 0rem) / 2, min(4vw, (80rem + 0rem) * .04))","--color-warning-50":"#fdf7e6","--radius-lg":".5rem","--color-neutral-900":"oklch(20.5% 0 0)","--container-xs":"20rem","--text-xl":"1.25rem","--color-error-50":"#fdecec","--spacing-ui-y-sm":".5rem","--atlas-button-icon-size-normal":"40px","--atlas-loading-skeleton-color":"rgba(0, 0, 0, 0.05)","--color-warning-muted":"#eec239","--color-error-600":"#bf3636","--color-primary-fg":"#000","--atlas-font-family-mono":"ui-monospace, Menlo, Monaco, \"Cascadia Mono\", \"Roboto Mono\", \"Oxygen Mono\", \"Ubuntu Monospace\", \"Cantarell\", \"Source Code Pro\", \"Fira Mono\", \"Droid Sans Mono\", Verdana, monospace","--leading-relaxed":"1.625","--leading-snug":"1.375","--text-9xl":"8rem","--color-success-300":"#b5e073","--color-warning-900":"#2f2402","--default-transition-timing-function":"cubic-bezier(.4, 0, .2, 1)","--atlas-icon-size-jumbo":"40px","--atlas-margin-h5":"12px","--atlas-toast-border-radius-redesign":"4px","--atlas-focus-outline-color":"rgba(65, 161, 230, 0.2)","--atlas-favorites-fill-color":"rgba(255,255,255,0)","--atlas-drawer-border-radius":"24px","--atlas-line-height-display":"52px","--text-2xl--line-height":"calc(2 / 1.5)","--tw-mask-right-from-color":"black","--spacing":".25rem","--tw-translate-z":"0","--atlas-caution-base":"#fdd926","--atlas-button-border-radius-small":"8px","--tw-gradient-via":"rgba(0, 0, 0, 0)","--color-success-500":"#84cc16","--hero-mb":"0px","--tw-scale-y":"1","--atlas-card-border-radius-small":"12px","--color-secondary":"#fb0","--color-error-900":"#300e0e","--text-8xl":"6rem","--tw-mask-radial":"linear-gradient(#fff,#fff)","--container-6xl":"72rem","--atlas-margin-h4":"12px","--text-xl--line-height":"calc(1.75 / 1.25)","--atlas-font-weight-heading":"400","--breakpoint-lg":"64rem","--container-3xl":"48rem","--text-sm":".875rem","--tw-translate-y":"0","--hero-mt":"0px","--text-h2--line-height":"1em","--ease-out":"cubic-bezier(0, 0, .2, 1)","--atlas-background-error":"#be2119","--atlas-font-size-display":"40px","--tracking-h2":"0em","--tw-content":"\"\"","--tw-mask-top":"linear-gradient(#fff,#fff)","--tw-mask-linear-position":"0deg","--atlas-line-height-normal":"24px","--color-surface":"#292929","--leading-tight":"1.25","--atlas-heading-text-primary":"#000000","--atlas-text-primary":"#000000","--tw-mask-top-to-color":"transparent","--atlas-chat-bubble-background":"#f2f2f2","--color-success-700":"#4f7a0d","--font-h2":"\"Replica\", \"Arial\", \"Verdana\", sans-serif","--tw-border-style":"solid","--color-error":"#ef4444","--color-surface-subtle":"#292929","--dvh":"1dvh","--atlas-widget-side-spacing":"40px","--atlas-space-8":"8px","--tw-translate-x":"0","--color-primary-200":"#ffe499","--color-black":"#000","--atlas-heading-text-secondary":"#00000080","--container-3xs":"16rem","--atlas-font-size-h1":"40px","--atlas-font-size-h3":"24px","--color-neutral-400":"oklch(70.8% 0 0)","--atlas-button-disabled-color":"grey","--atlas-card-border-radius-normal":"32px","--tw-mask-right-to-color":"transparent","--atlas-line-height-small":"20px","--font-weight-thin":"100","--atlas-input-error":"#cc3c28","--atlas-tabs-border-radius":"12px","--atlas-chat-bubble-text-primary":"#322e2f","--color-surface-50":"#0a0a0a","--atlas-margin-h2":"24px","--color-secondary-700":"#997000","--tw-mask-right-from-position":"0%","--animate-bounce":"bounce 1s infinite","--atlas-text-primary-inverse":"#FFFFFF","--atlas-loading-spinner-size-large":"24px","--color-error-800":"#601b1b","--text-h1":"2rem","--color-warning-500":"#eab308","--container-xl":"36rem","--screen-mb":"0px","--tw-mask-linear":"linear-gradient(#fff,#fff)","--text-4xl--line-height":"calc(2.5 / 2.25)","--atlas-message-border-radius":"16px","--atlas-chip-border-radius":"4px","--color-warning-400":"#eec239","--atlas-space-12":"12px","--atlas-space-medium":"16px","--color-error-fg":"#000","--tracking-tight":"-.025em","--spacing-layout-maxw":"calc(80rem + 0rem)","--atlas-space-huge":"32px","--tw-ring-shadow":"0 0 #0000","--text-2xl":"1.5rem","--color-primary-muted":"#ffc933","--atlas-line-height-large":"28px","--text-base--transform":"none","--radius-ui":".25rem","--tw-drop-shadow-alpha":"100%","--color-surface-600":"#858585","--text-h2":"1.5rem","--text-7xl":"4.5rem","--atlas-widget-starting-radius":"8px","--color-error-400":"#f26969","--text-lg":"1.125rem","--atlas-input-background-disabled":"rgba(0, 0, 0, 0.05)","--text-8xl--line-height":"1","--color-error-200":"#f9b4b4","--atlas-line-height-tiny":"16px","--color-secondary-800":"#664b00","--color-secondary-600":"#cc9600","--color-primary-900":"#332500","--color-bg":"#000","--color-secondary-100":"#fff1cc","--text-ui--wrap":"balance","--tw-mask-linear-to-color":"transparent","--color-error-muted":"#f26969","--svh":"1svh","--tw-mask-linear-from-color":"black","--text-5xl--line-height":"1","--breakpoint-xl":"80rem","--leading-normal":"1.5","--spacing-ui-y-md":"1rem","--atlas-button-padding-normal":"7px 12px","--color-success-fg":"#000","--color-bg-surface":"#141414","--spacing-ui-x-md":"1.25rem","--text-h1--wrap":"balance","--atlas-line-height-h1":"48px","--color-surface-700":"#a3a3a3","--atlas-font-size-h5":"16px","--tw-mask-left-from-position":"0%","--atlas-faq-fill-color":"#000000","--atlas-button-primary":"#000000","--atlas-button-border-radius-normal":"8px","--atlas-margin-display":"24px","--blur-xl":"24px","--spacing-screen-block":"calc(100 * 1lvh - 0px - 0px)","--tw-ring-offset-color":"#fff","--text-lg--line-height":"calc(1.75 / 1.125)","--breakpoint-2xl":"96rem","--atlas-icon-size-small":"20px","--color-secondary-subtle":"#ffe499","--color-secondary-500":"#fb0","--atlas-overlay-light":"rgba(0, 0, 0, 0.05)","--atlas-space-large":"20px","--atlas-chip-padding":"4px","--font-sans":"\"Replica\", \"Arial\", \"Verdana\", sans-serif","--color-error-300":"#f58f8f","--atlas-icon-size-medium":"24px","--tw-scale-z":"1","--breakpoint-4xl":"128rem","--atlas-space-enormous":"40px","--atlas-font-size-h2":"32px","--font-dbf-base":"\"dbf-base\", \"Arial\", \"Verdana\", sans-serif","--text-h2--transform":"none","--color-success-800":"#355209","--container-sm":"24rem","--spacing-ui-x-lg":"1.5rem","--tw-ring-offset-width":"0px","--atlas-favorites-font-color":"undefined","--atlas-toast-border-radius":"12px","--text-6xl":"3.75rem","--tw-scroll-snap-strictness":"proximity","--default-font-family":"\"Replica\", \"Arial\", \"Verdana\", sans-serif","--font-weight-medium":"500","--text-h2--weight":"400","--container-lg":"32rem","--color-secondary-200":"#ffe499","--aspect-vertical-video":"9 / 16","--atlas-font-weight-heading-bold":"bolder","--grid-template-columns-fit-evenly":"repeat(auto-fit, minmax(0, 1fr))","--atlas-range-input-background":"rgba(0, 0, 0, 0.05)","--tracking-h1":"0em","--atlas-range-input-thumb-border":"2px solid rgba(0, 0, 0, 0.15)","--color-warning-fg":"#000","--color-warning-subtle":"#f7e19c","--color-surface-200":"#292929","--atlas-line-height-h3":"32px","--text-7xl--line-height":"1","--tw-mask-top-from-color":"black","--atlas-progress-bar-border-radius":"4px","--spacing-ui-y-lg":"1.5rem","--color-error-700":"#8f2929","--tw-gradient-from-position":"0%","--color-success-50":"#f3fae8","--screen-mt":"0px","--color-surface-fg":"#fff","--atlas-button-icon-size-small":"32px","--atlas-select-panel-shadow":"0px 8px 16px 0px rgba(55, 63, 71, 0.2)","--ease-in-out":"cubic-bezier(.4, 0, .2, 1)","--color-success-200":"#ceeba2","--tw-ring-offset-shadow":"0 0 #0000","--atlas-border-light":"rgba(0, 0, 0, 0.05)","--atlas-overlay-heavy":"rgba(0, 0, 0, 0.5)","--layout-maxw-delta":"0rem","--atlas-font-weight-bold":"bolder","--drop-shadow-md":"0 3px 3px #0000001f","--text-base--wrap":"wrap","--atlas-loading-spinner-size-medium":"20px","--tracking-base":"0em","--tracking-tighter":"-.05em","--atlas-border-dark":"rgba(0, 0, 0, 0.5)","--font-weight-black":"900","--color-surface-muted":"#525252","--atlas-border-focus":"#41a1e6","--color-success-400":"#9dd645","--atlas-primary-color":"#000000","--color-warning-800":"#5e4803","--atlas-favorites-hub-icon-color":"#000000","--color-error-100":"#fcdada","--radius-3xl":"1.5rem","--atlas-loading-spinner-size-small":"16px","--tw-mask-linear-to-position":"100%","--color-primary-600":"#cc9600","--color-surface-500":"#666","--color-bg-muted":"#525252","--atlas-button-text-disabled-color":"lightgrey","--color-success-100":"#e6f5d0","--atlas-margin-h3":"12px","--text-h1--transform":"none","--atlas-faq-font-color":"#FFFFFF","--tw-mask-right-to-position":"100%","--container-5xl":"64rem","--atlas-thumbnail-border-radius":"8px","--color-surface-300":"#3d3d3d","--atlas-margin-small":"8px","--color-warning":"#eab308","--spacing-ui-x-btn-sm":"1rem","--atlas-space-16":"16px","--color-secondary-300":"#ffd666","--atlas-range-input-thumb-size":"24px","--color-warning-200":"#f7e19c","--atlas-range-input-thumb-background":"#FFFFFF","--color-success-muted":"#9dd645","--atlas-background-content":"#FFFFFF","--color-success":"#84cc16","--atlas-space-20":"20px","--tracking-wide":".025em","--font-weight-semibold":"600","--text-base--weight":"400","--atlas-font-family":"Replica, Arial, Verdana, sans-serif","--color-secondary-50":"#fff8e6","--atlas-icon-size-large":"32px","--color-warning-700":"#8c6b05","---header-block":"4rem","--color-slate-100":"oklch(96.8% .007 247.896)","--atlas-widget-bottom-spacing":"40px","--container-2xs":"18rem","--atlas-font-size-tiny":"12px","--atlas-overlay-medium":"rgba(0, 0, 0, 0.15)","--color-primary-100":"#fff1cc","--tracking-ui":"0em","--atlas-space-jumbo":"24px","--color-error-500":"#ef4444","--atlas-chat-input-padding":"16px 48px 16px 12px","--container-4xl":"56rem","--atlas-text-positive":"#366d12","--atlas-space-24":"24px","--breakpoint-3xl":"112rem","--atlas-icon-size-tiny":"12px","--text-ui--weight":"500","--tw-mask-left-to-color":"transparent","--atlas-heading-font-family":"Replica, Arial, Verdana, sans-serif","--animate-fade-in":"fade-in .25s both","--color-warning-300":"#f2d16b","--text-ui":"1rem","--atlas-heading-text-negative":"#be2119","--tw-mask-left":"linear-gradient(#fff,#fff)","--atlas-loading-spinner-size-jumbo":"32px","--font-Replica":"\"Replica\", \"Helvetica\", \"Arial\", \"sans-serif\"","--atlas-line-height-h5":"24px","--atlas-font-size-large":"18px","--atlas-font-weight-normal":"400","--atlas-space-40":"40px","--atlas-font-size-h4":"18px","--text-4xl":"2.25rem","--radius-full":"calc(infinity * 1px)","--breakpoint-md":"48rem","--color-warning-100":"#fbf0ce","--atlas-background-main":"#FFFFFF","--container-2xl":"42rem","--tw-shadow":"0 0 #0000","--text-sm--line-height":"calc(1.25 / .875)","--color-warning-700":"#8c6b05","--text-shadow-lg":"0px 1px 2px #0000001a, 0px 3px 2px #0000001a, 0px 4px 8px #0000001a","--color-primary":"#fb0","--text-3xl--line-height":"1.2","--atlas-font-size-normal":"16px","--color-bg-subtle":"#292929","--tw-mask-top-from-position":"0%","--text-5xl":"3rem","--atlas-margin-normal":"8px","--text-3xl":"1.875rem","--text-xs":".75rem","--atlas-font-size-small":"14px","--atlas-line-height-h4":"24px","--tracking-widest":".1em","--color-surface-100":"#141414","--font-weight-medium":"500","--font-weight-normal":"400","--tw-scale-x":"1","--atlas-icon-size-mini":"16px","--text-ui--line-height":"1.5em","--atlas-button-padding-tiny":"3px 8px","--radius-xs":".125rem","--color-fg":"#fff","--spacing-ui-x-btn-sm":"1rem","--lvh":"1lvh","--layout-px":"min(4vw, (80rem + 0rem) * .04)","--text-h1--line-height":"1em","--color-success-900":"#1a2904","--atlas-space-4":"4px","--color-success-600":"#6aa312","--atlas-progress-bar-height":"8px","--tw-mask-bottom":"linear-gradient(#fff,#fff)","--atlas-line-height-h2":"40px","--radius-xl":".75rem","--breakpoint-sm":"40rem","--atlas-margin-tiny":"4px","--color-secondary-muted":"#ffc933","--text-6xl--line-height":"1","--color-primary-50":"#fff8e6","--leading-loose":"2","--container-7xl":"80rem","--text-base":"1rem","--blur-sm":"8px","--atlas-text-selection":"rgba(150, 180, 255, 0.5)","--default-mono-font-family":"\"Replica Mono\", ui-monospace, \"SFMono-Regular\", \"Menlo\", \"Monaco\", \"Consolas\", \"Liberation Mono\", \"Courier New\", monospace"},
+    "spacing_scale": ["-12px", "-96px", "-1px", "0px", "normal", "auto", "8px", "16px", "12px", "24px", "28px", "32px", "304.812px", "32px normal", "174.484px", "64px", "128px", "144px"],
+    "border_radius_scale": ["0px"],
+    "box_shadows": ["rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.25) 0px 25px 50px -12px"],
+    "motion": {
+      "transitions": [
+        "opacity, transform, translate, background-color, backdrop-filter, display, overlay | 0.2s | linear, ease-out, ease-out, ease, ease, ease, ease | 0s, 0s, 0s, 0s, 0s, 0s, 0s",
+        "transform, translate, scale, rotate | 0.3s | cubic-bezier(0.4, 0, 0.2, 1) | 0s",
+        "color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, --tw-gradient-from, --tw-gradient-via, --tw-gradient-to, opacity, box-shadow, transform, translate, scale, rotate, filter, -webkit-backdrop-filter, backdrop-filter, display, content-visibility, overlay, pointer-events | 0.3s | cubic-bezier(0.4, 0, 0.2, 1) | 0s"
+      ],
+      "animations": [
+        "bounce | 1s | ease | 0s | infinite",
+        "svelte-1wplqrz---grass-screen-fx--scene | auto | ease | 0s | 1",
+        "svelte-1wplqrz---grass-screen-fx--outer | auto | ease | 0s | 1"
+      ],
+      "motion_durations": ["0.2s", "0.3s", "1s", "auto"],
+      "motion_easings": ["linear, ease-out, ease-out, ease, ease, ease, ease", "cubic-bezier(0.4, 0, 0.2, 1)", "ease"]
+    },
+    "sticky_fixed": [
+      {"tag": "A", "class": "skip-content absolute z-[9999] bg-primary px-4 py-2 text-primary-fg outline-current svelte-1v2axqk", "position": "fixed", "top": "0px", "bottom": "957px", "zIndex": "9999", "height": 16},
+      {"tag": "DIALOG", "class": "fixed inset-0 top-(---header-block) overflow-visible bg-transparent outline-none focus-visible:outline-2 svelte-7qr7gp", "position": "fixed", "top": "64px", "bottom": "0px", "zIndex": "auto", "height": 0},
+      {"tag": "DIALOG", "class": "header-subdialog fixed inset-0 overflow-visible bg-transparent outline-none backdrop:hidden focus-visible:outline-2 svelte-7qr7gp", "position": "fixed", "top": "0px", "bottom": "0px", "zIndex": "auto", "height": 0},
+      {"tag": "DIV", "class": "fixed inset-0 -z-20 svelte-c9s4xv", "position": "fixed", "top": "0px", "bottom": "0px", "zIndex": "-20", "height": 973},
+      {"tag": "DIV", "class": "sticky top-0 -z-10 min-h-hero-block svelte-c9s4xv", "position": "sticky", "top": "0px", "bottom": "auto", "zIndex": "-10", "height": 973},
+      {"tag": "DIV", "class": "pointer-events-none sticky top-0 z-10 min-h-screen-block pt-16 lg:pt-24", "position": "sticky", "top": "0px", "bottom": "auto", "zIndex": "10", "height": 921},
+      {"tag": "P", "class": "sticky bottom-0 z-10 order-last -m-screen-mt mx-auto grid min-h-[50vh] max-w-2xl items-end pt-32 pb-36 text-2xl lg:text-3xl lg:mr-0 svelte-5lfiu1", "position": "sticky", "top": "auto", "bottom": "0px", "zIndex": "10", "height": 486.5},
+      {"tag": "DIV", "class": "sticky bottom-0 z-20 order-last wrapper-nested min-h-screen-mb overflow-x-clip border-t-2 border-t-bg-surface bg-bg", "position": "sticky", "top": "auto", "bottom": "0px", "zIndex": "20", "height": 52},
+      {"tag": "DIV", "class": "grass-screen-fx sticky top-hero-mt isolate grid-center h-screen w-full contain-layout svelte-1wplqrz", "position": "sticky", "top": "0px", "bottom": "auto", "zIndex": "auto", "height": 973},
+      {"tag": "DIV", "class": "sticky top-0 flex h-screen-block w-max gap-x-16 py-16 will-change-transform", "position": "sticky", "top": "0px", "bottom": "auto", "zIndex": "auto", "height": 921},
+      {"tag": "DIV", "class": "", "position": "fixed", "top": "0px", "bottom": "973px", "zIndex": "auto", "height": 0}
+    ],
+    "header_height": 64,
+    "footer_height": 973,
+    "z_index_layers": ["9999", "50", "10", "-20", "-10", "20", "100"],
+    "breakpoints_actual": ["max-width: 480px", "max-width: 640px"]
+  },
+  "tokens_p2": {
+    "letter_spacing": ["normal"],
+    "text_transform": ["none", "uppercase"],
+    "font_variant_numeric": ["normal"],
+    "text_decoration": ["none solid rgb(0, 0, 0)", "none solid rgb(255, 255, 255)", "none solid rgb(133, 133, 133)"],
+    "text_decoration_thickness": ["auto"],
+    "text_decoration_offset": ["auto"],
+    "border_widths": ["0px", "1px", "2px"],
+    "border_styles": ["solid"],
+    "border_colors": ["rgb(0, 0, 0)", "rgb(255, 255, 255)", "rgb(82, 82, 82)", "rgb(229, 229, 229)", "rgb(195, 195, 195)", "rgb(150, 150, 150)", "rgb(133, 133, 133)"],
+    "outlines": ["0px none rgb(0, 0, 0) offset 0px", "0px none rgb(255, 255, 255) offset 0px", "0px none rgb(255, 255, 255) offset -8px", "0px none rgb(133, 133, 133) offset 0px"],
+    "opacity_scale": ["1", "0", "0.5", "0.75"],
+    "blend_modes": [],
+    "background_blend_modes": [],
+    "filters": [],
+    "backdrop_filters": [],
+    "background_images": ["url(\"data:image/svg+xml,%3csvg%20width='24'%20height='24'%20viewBox='0%200%2024%2024'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M12,1A11,11,0,1,0,23,12,11,11,0,0,0,12,1Zm0,19a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z'%20opacity='.25'/%3e%3cpath%20d='M10.14,1.16a11,11,0,0,0-9,8.92A1.59,1.59,0,0,0,2.46,12,1.52,1.52,0,0,0,4.11,10.7a8,8,0,0,1,6.66-6.61A1.42,1.42,0,0,0,12,2.69h0A1.57,1.57,0,0,0,10.14,1.16Z'%3e%3canimateTransform%20attributeName='transform'%20type='rotate'%20dur='0.75s'%20values='0%2012%2012;360%2012%2012'%20repeatCount='indefinite'/%3e%3c/path%3e%3c/svg%3e\")"],
+    "gradients": ["url(\"data:image/svg+xml,%3csvg%20width='24'%20height='24'%20viewBox='0%200%2024%2024'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M12,1A11,11,0,1,0,23,12,11,11,0,0,0,12,1Zm0,19a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z'%20opacity='.25'/%3e%3cpath%20d='M10.14,1.16a11,11,0,0,0-9,8.92A1.59,1.59,0,0,0,2.46,12,1.52,1.52,0,0,0,4.11,10.7a8,8,0,0,1,6.66-6.61A1.42,1.42,0,0,0,12,2.69h0A1.57,1.57,0,0,0,10.14,1.16Z'%3e%3canimateTransform%20attributeName='transform'%20type='rotate'%20dur='0.75s'%20values='0%2012%2012;360%2012%2012'%20repeatCount='indefinite'/%3e%3c/path%3e%3c/svg%3e\")"],
+    "aspect_ratios": ["1 / 1", "7.2 / 1", "2 / 1", "auto 1440 / 1024", "auto 143 / 47", "auto 546 / 302", "auto 1115 / 526", "auto 64 / 82", "auto 820 / 1024", "auto 660 / 256", "auto 819 / 1024", "auto 0 / 0", "4 / 3", "auto 3321 / 3321", "auto 1920 / 1440", "auto 2048 / 6144", "auto 511 / 256", "auto 472 / 256", "auto 2048 / 1366", "auto 4096 / 2731", "auto 246 / 8", "auto 246 / 2", "auto 94 / 94"],
+    "selection_rules": [".kl-hub-dialog ::selection, .kl-hub-drawer ::selection { background-color: var(--atlas-text-selection); }"],
+    "scrollbar_rules": [".Carousel-carousel-om4IR::-webkit-scrollbar { display: none; }"],
+    "prefers_reduced_motion": ["(prefers-reduced-motion: reduce)", "(prefers-reduced-motion: no-preference)"],
+    "srcsets": [],
+    "icon_system": {"inline_svg": 0, "img_svg": 40, "icon_font_detected": false}
+  },
+  "tokens_states": {
+    "status": "not_collected_cors_stylesheets",
+    "note": "Cross-origin stylesheets block rule access for :hover/:active/:focus/:disabled; capture requires same-origin or inline CSS."
+  }
+}
