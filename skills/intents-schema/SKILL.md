@@ -19,6 +19,8 @@ Collection of rules and schemas for our custom Intents framework. Schema and tem
 2. locate templates and schemas matching your case
 3. verify
 
+if local references cannot be read, view them online at <https://github.com/digitalygo/opencode-setup/tree/main/skills/intents-schema/references>
+
 ## Reference Index
 
 | File | Topics Covered |

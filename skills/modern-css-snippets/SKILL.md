@@ -1,11 +1,11 @@
 ---
 name: modern-css-snippets
-description: Modern CSS rules, Use this when editing CSS files
+description: Keeps agents up to date on modern CSS capabilities and replacements for legacy approaches. Use this when editing CSS files.
 ---
 
 # Modern CSS Snippets
 
-Reference collection of modern CSS patterns that replace legacy JavaScript-heavy or hacky CSS approaches. Sourced from [modern-css.com](https://modern-css.com).
+Use this skill to stay current on modern CSS capabilities and replacements for legacy approaches. This is a reference collection of modern CSS patterns that replace legacy JavaScript-heavy or hacky CSS approaches. Sourced from [modern-css.com](https://modern-css.com).
 
 ## What This Skill Does
 
@@ -41,6 +41,8 @@ Outputs are textual guidance and code snippets:
 4. Verify browser support for the modern feature (check [caniuse.com](https://caniuse.com))
 5. Implement the CSS with `@supports` feature detection when needed
 6. Test in target browsers and provide fallbacks for unsupported features
+
+if local references are not readable, view them online at <https://github.com/digitalygo/opencode-setup/tree/main/skills/modern-css-snippets/references>
 
 ## Reference Index
 
