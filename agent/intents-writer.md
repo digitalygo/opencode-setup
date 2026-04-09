@@ -1,7 +1,7 @@
 ---
 description: Agent for generating and refining user intents in the intents/ directory
 mode: primary
-model: opencode/gpt-5.1-codex-max
+model: openai/gpt-5.4
 temperature: 0.3
 permission:
   bash:

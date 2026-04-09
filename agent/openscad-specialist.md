@@ -1,7 +1,7 @@
 ---
 description: OpenSCAD engineer creating parametric, print-ready 3D models
 mode: subagent
-model: opencode/gpt-5.3-codex
+model: openai/gpt-5.4
 temperature: 0.3
 steps: 100
 tools:
