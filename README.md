@@ -2,7 +2,7 @@
 
 welcome to the [OpenCode](https://opencode.ai/) setup repository for [digitalygo](https://digitalygo.it)!
 
-this repository contains our full OpenCode setup, including configurations, agents, skills, commands, and our custom made Docker image for pentesting. you can expect automated releases via semantic-release.
+this repository contains our full OpenCode setup, including configurations, agents, skills, and commands. you can expect automated releases via semantic-release.
 
 for full contribution guidelines, see [CONTRIBUTING.md](.github/CONTRIBUTING.md).
 
@@ -21,7 +21,9 @@ prerequisites:
 curl -fsSL https://raw.githubusercontent.com/digitalygo/opencode-setup/main/setup.sh | bash
 ```
 
-with this script we also install the alias `sync-opencode` in your `.bashrc` or `.zshrc` to easily run future syncs without the need to remember the full command
+with this script we also install the alias `sync-opencode` in your `.bashrc` or `.zshrc` to easily run future syncs without the need to remember the full command.
+
+to preview changes without applying, run: `setup.sh --dry-run`
 
 ### option 2: manual setup
 
@@ -37,33 +39,44 @@ with this script we also install the alias `sync-opencode` in your `.bashrc` or 
    rsync -av --delete --exclude=.git/ --exclude=.secrets/ --exclude=.github/ --exclude=thoughts/ --exclude=.gitignore --exclude=.markdownlint.json --exclude=.markdownlintignore --exclude=.releaserc.json "opencode-setup/" "~/.config/opencode/"
    ```
 
-3. **create a feature / fix branch**
+## what gets synced
 
-   please adhere to conventional commits and git flow standards
+the setup script and manual rsync copy runtime configuration to `~/.config/opencode/` while preserving repository-internal files:
 
-   ```bash
-   git checkout -b feature/your-feature-name
-   ```
+**synced to `~/.config/opencode/`:**
 
-## project overview
+- `agent/` - ai agents and subagents
+- `command/` - custom command definitions
+- `intents/` - intent definitions
+- `opencode.jsonc` - main OpenCode configuration
+- `plugins/` - plugin definitions
+- `setup.sh` - installation script
+- `skills/` - skill definitions
 
-this repository contains our full OpenCode setup, including configurations, agents, skills, commands, and our custom made Docker image for pentesting
+**stays repository-internal (excluded from sync):**
 
-you can expect automated releases via semantic-release
+- `.github/` - GitHub automation
+- `.gitignore` - git ignore rules
+- `.markdownlint.json` and `.markdownlintignore` - linting configuration
+- `.releaserc.json` - semantic-release configuration
+- `.secrets/` - local secrets (preserved if exists)
+- `thoughts/` - working notes and thoughts
 
 ## folder structure
 
-understanding the repository structure is crucial for effective contributions. please kep files and edits as tidy as possible
+understanding the repository structure is crucial for effective contributions. please keep files and edits as tidy as possible
 
 - `.github/` - GitHub automation and configuration
-- `agent/` - our collection of ai agents and subagents
+- `agent/` - ai agents and subagents
 - `command/` - custom command definitions
-- `skills/` - our skills collection
-- `.markdownlint*` - markdownlint configuration
-- `.releaserc.jsonc` - semantic-release configuration
+- `intents/` - intent definitions
+- `plugins/` - plugin definitions
+- `skills/` - skill definitions
+- `thoughts/` - working notes and thoughts
+- `.markdownlint.json` and `.markdownlintignore` - markdownlint configuration
+- `.releaserc.json` - semantic-release configuration
 - `opencode.jsonc` - main OpenCode configuration
-- `setup.sh` - our automatic installation script
-- `AGENTS.md` - agent documentation
+- `setup.sh` - automatic installation script
 
 ---
 
