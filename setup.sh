@@ -110,9 +110,14 @@ run_sync() {
     trap cleanup_temp_dir EXIT
 
     print_info "Target directory: $TARGET_DIR"
-    print_info "Cloning repository..."
 
-    if ! git clone --depth 1 https://github.com/digitalygo/opencode-setup.git "$TEMP_DIR"; then
+    local branch="$CHANNEL"
+    if [ "$CHANNEL" = "stable" ]; then
+        branch="main"
+    fi
+    print_info "Cloning repository (channel: $CHANNEL, branch: $branch)..."
+
+    if ! git clone --branch "$branch" --depth 1 https://github.com/digitalygo/opencode-setup.git "$TEMP_DIR"; then
         print_error "Failed to clone repository"
         exit 1
     fi
