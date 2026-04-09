@@ -47,7 +47,10 @@
   },
   // default CLI permissions
   "permission": {
-    "external_directory": "deny",
+    "external_directory": {
+      "*": "deny",
+      "~/.config/opencode/skills/intents-schema/**": "allow"
+    },
     "doom_loop": "deny",
     "bash": {
       "*": "allow",
