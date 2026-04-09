@@ -49,7 +49,7 @@
   "permission": {
     "external_directory": {
       "*": "deny",
-      "~/.config/opencode/skills/intents-schema/**": "allow"
+      "~/.config/opencode/skills/**": "allow"
     },
     "doom_loop": "deny",
     "bash": {
