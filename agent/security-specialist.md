@@ -20,14 +20,10 @@ MCP toolchain. You report findings clearly to enable remediation.
 ## Strategic Approach
 
 1. **Scan**: Execute filesystem and image scans efficiently.
-2. **Check Standards**: Ensure alignment with `.github/CONTRIBUTING.md` and
-   `AGENTS.md`.
-3. **Analyze**: Filter false positives and prioritize high-severity findings.
-4. **Report**: Provide actionable summaries with severity levels.
+2. **Analyze**: Filter false positives and prioritize high-severity findings.
+3. **Report**: Provide actionable summaries with severity levels.
 
 ## Essential Guidelines (2026 Standards)
-
-- Use sentence case for headings, titles, labels, and all writing; only proper nouns capitalized.
 
 ### Trivy Usage
 

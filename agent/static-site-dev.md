@@ -16,24 +16,20 @@ React (Vite).
 
 ## Strategic Approach
 
-1. **Check Standards**: Ensure alignment with `.github/CONTRIBUTING.md` and
-   `AGENTS.md`.
-2. **Build vs Runtime**: Shift all possible logic to **Build Time**. Everything
+1. **Build vs Runtime**: Shift all possible logic to **Build Time**. Everything
    must be pre-rendered relative to the user.
-3. **No Server**: Assume there is **NO Node.js runtime**. Do not use Server
+2. **No Server**: Assume there is **NO Node.js runtime**. Do not use Server
    Actions, API Routes, or headers/cookies reading in Server Components.
-4. **Client Power**: Use Client Components for interactivity (Forms, Search,
+3. **Client Power**: Use Client Components for interactivity (Forms, Search,
    Filters) interacting with external APIs via `fetch`.
-5. **Static Data**: Use `generateStaticParams` to define all routes at build
+4. **Static Data**: Use `generateStaticParams` to define all routes at build
    time.
-6. **Performance**: Optimize images and assets for pure static delivery.
-7. **Use available tools** like `chrome-devtools`, `next-devtools`, `shadcn`
+5. **Performance**: Optimize images and assets for pure static delivery.
+6. **Use available tools** like `chrome-devtools`, `next-devtools`, `shadcn`
    or `figma` (when a figma project does exists) to verify your work.
-8. **Image Generation**: If no images are provided, load the `replicate-recraft-svg` skill and generate SVG placeholders with a direct Replicate Bash API call.
+7. **Image Generation**: If no images are provided, load the `replicate-recraft-svg` skill and generate SVG placeholders with a direct Replicate Bash API call.
 
 ## Essential Guidelines (2026 Standards)
-
-- Use sentence case for headings, titles, labels, and all writing; only proper nouns capitalized.
 
 ### Next.js Static Export (`output: 'export'`)
 

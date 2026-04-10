@@ -54,15 +54,15 @@ This document lists recommended intents for the opencode-setup repository based 
 
 ### Medium Priority (Workflows)
 
-5. EXP-skill-creation-workflow.md
-6. EXP-command-creation-workflow.md
-7. EXP-model-selection-preferences.md
+1. EXP-skill-creation-workflow.md
+2. EXP-command-creation-workflow.md
+3. EXP-model-selection-preferences.md
 
 ### Lower Priority (Advanced)
 
-8. EXP-github-actions-integration.md
-9. EXP-docker-workspace-setup.md
-10. EXP-huggingface-hub-integration.md
+1. EXP-github-actions-integration.md
+2. EXP-docker-workspace-setup.md
+3. EXP-huggingface-hub-integration.md
 
 ---
 

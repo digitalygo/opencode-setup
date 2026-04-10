@@ -155,8 +155,8 @@ This is a small fix with asymmetric value: it removes uncertainty from one of th
 
 The repository has already invested heavily in the intents system:
 
-- dedicated intent agents in `agent/intents-locator.md` and `agent/intents-analyzer.md`
-- a full intents skill in `skills/intents-schema/SKILL.md`
+- dedicated intent agents in `agent/directives-locator.md` and `agent/directives-analyzer.md`
+- a full intents skill in `skills/directives-schema/SKILL.md`
 - research and operations notes in `thoughts/shared/research/2026-03-27-opencode-intents.md` and `thoughts/shared/operations/2026-03-30-intents-expectations-refresh.md`
 
 However, the actual `intents/` directory currently contains only `intents/ui/` and no real `EXP-*.md` intent documents.
@@ -241,9 +241,9 @@ For a repo that installs and updates agent behavior, the installer is part of th
 
 ### Next wave
 
-7. Add the first real intent documents
-8. Consolidate duplicated lint and process instructions
-9. Improve installer ergonomics with `--help` and `--dry-run`
+1. Add the first real intent documents
+2. Consolidate duplicated lint and process instructions
+3. Improve installer ergonomics with `--help` and `--dry-run`
 
 ## Expected outcomes by area
 

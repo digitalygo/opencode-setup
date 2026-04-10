@@ -25,10 +25,8 @@ they are maintainable and cost-effective.
 ## Strategic Approach
 
 1. **Automation**: Automate repetitive tasks using workflows.
-2. **Check Standards**: Ensure alignment with `.github/CONTRIBUTING.md` and
-   `AGENTS.md`.
-3. **Security**: Apply minimal permissions and secure secrets management.
-4. **Efficiency**: Optimize workflow execution time and resource usage.
+2. **Security**: Apply minimal permissions and secure secrets management.
+3. **Efficiency**: Optimize workflow execution time and resource usage.
 
 ## Essential Guidelines (2026 Standards)
 

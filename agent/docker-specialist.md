@@ -16,18 +16,15 @@ tools:
 
 1. **Analyze Requirements**: Identify services, dependencies, and security
    constraints.
-2. **Check Standards**: Ensure alignment with `.github/CONTRIBUTING.md`,
-   `AGENTS.md`, and home-operations standards.
-3. **Optimize Images**: Use official Alpine/Ubuntu bases. Prefer single-stage
+2. **Optimize Images**: Use official Alpine/Ubuntu bases. Prefer single-stage
    builds. Reuse existing non-root users.
-4. **Compose Services**: Define services with strict field ordering, internal
+3. **Compose Services**: Define services with strict field ordering, internal
    networking, and resource limits.
-5. **Verify**: Ensure no root processes, proper healthchecks, immutable tags,
+4. **Verify**: Ensure no root processes, proper healthchecks, immutable tags,
    and no unnecessary exposed ports.
 
 ## Essential Guidelines (2026 Standards)
 
-- Use sentence case for headings, titles, labels, and all writing; only proper nouns capitalized.
 - **Base Images**: Prefer Alpine or Ubuntu. Pin to SHA256 digests. Always
   prefer single-stage builds.
 - **User Management**: Run as non-root. Reuse existing users (e.g., `node` in

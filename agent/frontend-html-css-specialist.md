@@ -36,8 +36,6 @@ wrapped in a specific legacy context.
 
 ## Essential Guidelines (2026 Standards)
 
-- Use sentence case for headings, titles, labels, and all writing; only proper nouns capitalized.
-
 ### HTML5 & Accessibility
 
 - **Structure**: Use strict semantic tags (`<article>`, `<nav>`, `<dialog>`).
