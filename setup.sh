@@ -149,7 +149,7 @@ run_sync() {
         fi
 
         echo "Rsync operation:"
-        echo "  rsync -av --delete --exclude=.git/ --exclude=.secrets/ --exclude=.github/ --exclude=thoughts/ --exclude=.gitignore --exclude=.markdownlint.json --exclude=.markdownlintignore --exclude=.releaserc.json <temp-dir>/ $TARGET_DIR/"
+        echo "  rsync -av --delete --exclude=.git/ --exclude=.secrets/ --exclude=.github/ --exclude=substrate/ --exclude=.gitignore --exclude=.markdownlint.json --exclude=.markdownlintignore --exclude=.releaserc.json <temp-dir>/ $TARGET_DIR/"
         echo ""
 
         if [ "$secrets_existed" = true ]; then
@@ -210,7 +210,7 @@ run_sync() {
     mkdir -p "$TARGET_DIR" "$TARGET_DIR/.secrets"
 
     print_info "Copying configuration files..."
-    if ! rsync -av --delete --exclude=.git/ --exclude=.secrets/ --exclude=.github/ --exclude=thoughts/ --exclude=.gitignore --exclude=.markdownlint.json --exclude=.markdownlintignore --exclude=.releaserc.json "$SOURCE_DIR/" "$TARGET_DIR/"; then
+    if ! rsync -av --delete --exclude=.git/ --exclude=.secrets/ --exclude=.github/ --exclude=substrate/ --exclude=.gitignore --exclude=.markdownlint.json --exclude=.markdownlintignore --exclude=.releaserc.json "$SOURCE_DIR/" "$TARGET_DIR/"; then
         print_error "Failed to copy configuration files"
         exit 1
     fi

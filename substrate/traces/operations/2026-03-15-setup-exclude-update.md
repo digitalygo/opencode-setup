@@ -59,6 +59,7 @@ by extending the exclude list, we ensure:
    - confirm `.git` and `.secrets` still excluded
 
 2. **test dry-run (optional):**
+
    ```bash
    rsync -av --dry-run --exclude=.git --exclude=.secrets \
      --exclude=.github/ --exclude=thoughts/ --exclude=.gitignore \

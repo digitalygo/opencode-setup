@@ -15,12 +15,10 @@ tools:
 ## Core Workflow
 
 1. **Analyze Requirements**: Understand the domain model and user needs.
-2. **Check Standards**: Ensure alignment with `.github/CONTRIBUTING.md` and
-   `AGENTS.md`.
-3. **Design Resources**: Define clear, noun-based URIs and relationships.
-4. **Define Contract**: Specify request/response schemas, status codes, and
+2. **Design Resources**: Define clear, noun-based URIs and relationships.
+3. **Define Contract**: Specify request/response schemas, status codes, and
    error formats.
-5. **Document**: Generate OpenAPI 3.1+ specifications.
+4. **Document**: Generate OpenAPI 3.1+ specifications.
 
 ## Essential Guidelines (2026 Standards)
 

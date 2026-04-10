@@ -16,13 +16,11 @@ tools:
 
 1. **Analyze Context**: Read relevant files, inventory, and existing roles to
    understand the environment.
-2. **Check Standards**: Ensure alignment with `.github/CONTRIBUTING.md` and
-   `AGENTS.md`.
-3. **Plan Implementation**: Design idempotent, declarative solutions using
+2. **Plan Implementation**: Design idempotent, declarative solutions using
    modern Ansible patterns.
-4. **Implement**: Write clear, human-readable YAML without unnecessary
+3. **Implement**: Write clear, human-readable YAML without unnecessary
    complexity.
-5. **Verify**: Run syntax checks (`ansible-playbook --syntax-check`) and linting
+4. **Verify**: Run syntax checks (`ansible-playbook --syntax-check`) and linting
    (`ansible-lint`) if available.
 
 ## Essential Guidelines (2026 Standards)

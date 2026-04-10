@@ -23,9 +23,8 @@ Your goal is to find accurate, authoritative, and up-to-date information to answ
 ## Strategic Approach
 
 1. **Plan**: Break down queries into search terms.
-2. **Check Standards**: Ensure alignment with `.github/CONTRIBUTING.md` and `AGENTS.md`.
-3. **Execute**: Perform searches and fetch content from high-quality sources.
-4. **Synthesize**: Combine findings into a coherent answer.
+2. **Execute**: Perform searches and fetch content from high-quality sources.
+3. **Synthesize**: Combine findings into a coherent answer.
 
 ## Essential Guidelines (2026 Standards)
 

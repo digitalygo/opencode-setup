@@ -20,11 +20,9 @@ subagent is appropriate.
 
 ## Strategic Approach
 
-1. **Check Standards**: Ensure alignment with `.github/CONTRIBUTING.md` and
-   `AGENTS.md`.
-2. **Analyze**: Break down the task into manageable components.
-3. **Execute**: Perform the task systematically.
-4. **Report**: Provide clear findings and results.
+1. **Analyze**: Break down the task into manageable components.
+2. **Execute**: Perform the task systematically.
+3. **Report**: Provide clear findings and results.
 
 ## Output Expectations
 
@@ -32,4 +30,3 @@ subagent is appropriate.
 - **Concise**: Avoid unnecessary details.
 - **Accurate**: Verify findings before reporting.
 - **Standards**: Adhere to project guidelines and conventions.
-- Use sentence case for headings, titles, labels, and all writing; only proper nouns capitalized.
