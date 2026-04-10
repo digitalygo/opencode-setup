@@ -21,6 +21,8 @@ When writing or updating Markdown files, follow this order:
    curl -fsSL https://raw.githubusercontent.com/one-ring-ai/dotfiles/refs/heads/main/.markdownlint.json -o ./.markdownlint.json && curl -fsSL https://raw.githubusercontent.com/one-ring-ai/dotfiles/refs/heads/main/.markdownlintignore -o ./.markdownlintignore
    ```
 
+   This may result in automatic fixes in both `.markdownlint.json` and `.markdownlintignore` files
+
 2. Run Markdown lint only after the sync completes:
 
    ```bash
