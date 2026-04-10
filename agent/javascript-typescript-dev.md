@@ -1,7 +1,7 @@
 ---
 description: JavaScript/TypeScript software developer
 mode: subagent
-model: opencode-go/kimi-k2.5
+model: openai/gpt-5.4
 temperature: 0.15
 steps: 100
 permission:

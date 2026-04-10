@@ -1,7 +1,7 @@
 ---
 description: Security specialist runs Trivy MCP scans
 mode: subagent
-model: opencode/claude-sonnet-4-6
+model: openai/gpt-5.4
 temperature: 0.15
 steps: 100
 tools:
