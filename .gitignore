@@ -1,6 +1,6 @@
 .secrets/
 tmp/
-thoughts/shared/status/
+substrate/traces/status/
 artifacts/
 .bashrc_private
 node_modules/

@@ -2,16 +2,16 @@
 status: completed
 created_at: 2026-03-30
 files_edited:
-  - skills/intents-schema/SKILL.md
-  - skills/intents-schema/references/_schema.yaml
-  - skills/intents-schema/references/_templates/default.md
-  - skills/intents-schema/references/_templates/ui.md
-  - skills/intents-schema/references/_templates/api.md
-  - skills/intents-schema/references/_templates/logic.md
-  - skills/intents-schema/references/_templates/security.md
+  - skills/directives-schema/SKILL.md
+  - skills/directives-schema/references/_schema.yaml
+  - skills/directives-schema/references/_templates/default.md
+  - skills/directives-schema/references/_templates/ui.md
+  - skills/directives-schema/references/_templates/api.md
+  - skills/directives-schema/references/_templates/logic.md
+  - skills/directives-schema/references/_templates/security.md
   - agent/intents-writer.md
-  - agent/intents-analyzer.md
-  - agent/intents-locator.md
+  - agent/directives-analyzer.md
+  - agent/directives-locator.md
   - agent/documentation-writer.md
   - agent/orchestrator.md
   - agent/planner.md
@@ -33,7 +33,7 @@ supporting_docs:
 
 ## Summary of changes
 
-- Updated intents-schema skill and templates to enforce role-aware expectations, remove tags, add Inputs & Outputs and acceptance criteria requirements, and add `other` type.
+- Updated directives-schema skill and templates to enforce role-aware expectations, remove tags, add Inputs & Outputs and acceptance criteria requirements, and add `other` type.
 - Refreshed intents-writer prompt to auto-infer frontmatter from user answers, require Actors and Roles, mandate Inputs & Outputs for API/Logic, and forbid placeholders in acceptance criteria.
 - Synced markdownlint configuration and ran lint fix across markdown files.
 

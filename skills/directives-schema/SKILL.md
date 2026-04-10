@@ -1,17 +1,18 @@
 ---
-name: intents-schema
-description: Complete ruleset for the Intents framework, with templates, schemas and how the framework works
+name: directives-schema
+description: Complete ruleset for the Mycelium framework directives, with templates, schemas and how the framework works
 ---
 
-# Intents framework
+# Mycelium framework directives
 
-Collection of rules and schemas for our custom Intents framework. Schema and templates live in this skill and are not replicated elsewhere.
+Collection of rules and schemas for our custom Mycelium directives framework. Schema and templates live in this skill and are not replicated elsewhere.
 
 ## What this skill does
 
-- provides templates ready to be used for writing new intents
+- provides templates ready to be used for writing new directives
 - provides a schema to validate against
-- provides general rules for our intents framework
+- provides general rules for our directives framework
+- explains how to detect and migrate from legacy layouts
 
 ## How to use this skill
 
@@ -19,7 +20,7 @@ Collection of rules and schemas for our custom Intents framework. Schema and tem
 2. locate templates and schemas matching your case
 3. verify
 
-if local references cannot be read, view them online at <https://github.com/digitalygo/opencode-setup/tree/main/skills/intents-schema/references>
+if local references cannot be read, view them online at <https://github.com/digitalygo/opencode-setup/tree/main/skills/directives-schema/references>
 
 ## Reference Index
 
@@ -85,10 +86,32 @@ area: string
 
 ## Available templates
 
-Reference templates in intents/_templates/:
+Reference templates in `skills/directives-schema/references/_templates/`:
 
 - `default.md` for general use
 - `ui.md` for interface components
 - `api.md` for endpoints
 - `logic.md` for business logic
 - `security.md` for security features
+
+Directives are written to `substrate/directives/` in the target repository, using these templates as reference.
+
+## Legacy layout detection
+
+If you cannot find `substrate/directives/` or `substrate/traces/`, the repository may use the legacy layout:
+
+- Legacy directives location: `intents/`
+- Legacy traces location: `thoughts/`
+
+### Detection steps
+
+1. Check if `substrate/directives/` exists → new layout present
+2. Check if `intents/` exists → legacy layout present
+3. If neither exists → new repository, create `substrate/directives/` as needed
+
+### Migration
+
+If legacy layout detected, recommend running the official migration command:
+`migrate-to-mycelium`
+
+This command safely moves all files from the old layout to the new substrate-based structure.

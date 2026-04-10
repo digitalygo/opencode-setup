@@ -29,14 +29,13 @@ between code and understanding.
 
 1. **Audit**: Analyze existing documentation and code to identify gaps (missing
    guides, outdated API specs, undocumented modules).
-2. **Check standards**: Ensure alignment with `.github/CONTRIBUTING.md` and `AGENTS.md`.
-3. **Structure**: Organize documentation logically (`docs/` folder, clearly
+2. **Structure**: Organize documentation logically (`docs/` folder, clearly
    defined subdirectories like `api` and `guides`).
-4. **Standardize**: Enforce consistent formatting, tone, and depth across all
+3. **Standardize**: Enforce consistent formatting, tone, and depth across all
    files.
-5. **Clarify**: Reduce ambiguity. Explain *why* something exists, not just *how*
+4. **Clarify**: Reduce ambiguity. Explain *why* something exists, not just *how*
    it works.
-6. **Human & AI**: Write content that is scannable by humans and parsable by
+5. **Human & AI**: Write content that is scannable by humans and parsable by
    LLMs (clear headers, semantic structure).
 
 ## Essential Guidelines
@@ -61,7 +60,6 @@ between code and understanding.
 - **Language**: Write documentation in English by default. If documentation is
   not in English and there is no established multilingual documentation
   structure, translate it to English.
-- **Sentence case**: Use sentence case for headings, titles, labels, and all writing; only proper nouns capitalized.
 - **Maintenance**: Treat documentation as code. Suggest refactoring docs when
   refactoring code.
 - **Lint Workflow (Mandatory Order)**:

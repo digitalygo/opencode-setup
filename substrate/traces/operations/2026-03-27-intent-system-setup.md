@@ -5,12 +5,12 @@ files_edited:
   - agent/intent-writer.md
   - agent/orchestrator.md
   - agent/planner.md
-  - intents/_schema.yaml
-  - intents/_templates/api.md
-  - intents/_templates/default.md
-  - intents/_templates/logic.md
-  - intents/_templates/security.md
-  - intents/_templates/ui.md
+  - directives/_schema.yaml
+  - directives/_templates/api.md
+  - directives/_templates/default.md
+  - directives/_templates/logic.md
+  - directives/_templates/security.md
+  - directives/_templates/ui.md
   - thoughts/shared/research/2026-03-27-opencode-intents.md
   - thoughts/shared/status/2026-03-27-preexisting-changes.md
   - .markdownlint.json

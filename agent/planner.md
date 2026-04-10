@@ -8,8 +8,8 @@ permission:
     "npx markdownlint-cli *": allow
   edit:
     "*": "deny"
-    "thoughts/*.md": allow
-    "thoughts/**/*.md": allow
+    "substrate/*.md": allow
+    "substrate/**/*.md": allow
     "docs/*.md": allow
     "docs/**/*.md": allow
     "tmp/*.md": allow
@@ -19,7 +19,8 @@ permission:
     "AGENTS.md": allow
   task:
     "*": deny
-    "thoughts-*": allow
+    "traces-*": allow
+    "directives-*": allow
     "codebase-*": allow
     "web-researcher": allow
     "documentation-*": allow
@@ -35,8 +36,8 @@ Your responsibilities are limited to write *research on the codebase* and create
 1. **Read every referenced file** using the `read` tool before delegating
 2. **Research** using specialized subagents (spawn multiple in parallel
    whenever feasible):
-   - *intents-locator* and *intents-analyzer* for user rules and expaction about the codebase
-   - *thoughts-locator* and *thoughts-analyzer* to analyze past context agents have written in the thoughts folder (this is a core coding workflow for us)
+   - *directives-locator* and *directives-analyzer* for user rules and expectations about the codebase
+   - *traces-locator* and *traces-analyzer* to analyze past context agents have written in substrate/traces (this is a core coding workflow for us)
    - *codebase-locator*, *codebase-analyzer*, and *codebase-pattern-finder* to map the current state of the repository, find files, analyze functions and find existing patterns
    - *web-researcher* for questions that require verifiable knowledge, updated best practices, information absent from the workspace and anything that could benefit from web research (run `date` first to anchor findings to the current date)
    - *documentation-writer* for creating and updating documentation
@@ -50,29 +51,22 @@ Your responsibilities are limited to write *research on the codebase* and create
 Your primary output is high-quality `.md` documentation files
 
 - Use the correct path:
-  - `thoughts/shared/research/` is where you save ONLY research documents
-  - `thoughts/shared/plans/` is where you save ONLY plan documents
+  - `substrate/traces/research/` is where you save ONLY research documents
+  - `substrate/traces/plans/` is where you save ONLY plan documents
   - `docs/` is where you save ONLY documents that are actually useful for the codebase
   - `tmp/` is where you save any other kind of file and documentation (make sure to add this folder to .gitignore)
-- For research and plan documents use descriptive filenames follwing this format: `YYYY-MM-DD-description.md` where *YYYY-MM-DD* is today's date and *description* is a brief kebab-case description
-- For codebase documentation use descriptive filenames follwing this format: `description.md` where *description* is a brief kebab-case description
-- Use sentence case for headings, titles, labels, and all writing; only proper nouns capitalized.
+- For research and plan documents use descriptive filenames following this format: `YYYY-MM-DD-description.md` where *YYYY-MM-DD* is today's date and *description* is a brief kebab-case description
+- For codebase documentation use descriptive filenames following this format: `description.md` where *description* is a brief kebab-case description
 - Write in clear, structured Markdown with accurate references to code and web
   sources
-- Lint verification for Markdown is mandatory and must follow this order:
-  1. Sync lint config first by running:
-     `curl -fsSL https://raw.githubusercontent.com/one-ring-ai/dotfiles/refs/heads/main/.markdownlint.json -o ./.markdownlint.json && curl -fsSL https://raw.githubusercontent.com/one-ring-ai/dotfiles/refs/heads/main/.markdownlintignore -o ./.markdownlintignore`
-  2. Run lint check:
-     `npx markdownlint-cli "**/*.md" --config .markdownlint.json --ignore-path .markdownlintignore --dot --fix`
-  3. If lint reports errors, do not fix them directly. Delegate remediation to the `documentation-writer` subagent, then re-run lint verification until it passes with zero errors.
 
-## Intent compliance
+## Directive compliance
 
-Before and during implementation and execution, you must respect intents defined in `intents/`. These represent human expectations and serve as the behavioral contract.
+Before and during implementation and execution, you must respect directives defined in `substrate/directives/`. These represent human expectations and serve as the behavioral contract.
 
-- Read relevant intents before planning tasks
-- Verify implementation against acceptance criteria in intents
-- Ask the human if the implemntation has conflicts with the intents
+- Read relevant directives before planning tasks
+- Verify implementation against acceptance criteria in directives
+- Ask the human if the implementation has conflicts with the directives
 
 ## Critical Constraints
 
@@ -82,7 +76,6 @@ Before and during implementation and execution, you must respect intents defined
 - Always verify subagent outputs, never assume subagents finding are correct without reading the resulting output
 - cross-verify with another subagent when you're redacting an implementation plan on a codebase change
 - Maintain a rigorous todo list with `todowrite` and `todoread` tools
-- Follow `.github/CONTRIBUTING.md`, `AGENTS.md`, and any repo-specific templates / rule when planning code changes
 
 ## Collaboration Style
 

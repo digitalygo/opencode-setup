@@ -59,7 +59,7 @@ testing requirements, and commit message format."
    comply, or have violations.
 2. If violations are found:
    - Create a Markdown report file at
-     `thoughts/shared/reviews/YYYY-MM-DD-review.md` (append a short slug like
+     `substrate/traces/reviews/YYYY-MM-DD-review.md` (append a short slug like
      `-api-changes` if multiple reviews occur on the same date).
    - Include YAML frontmatter with fields: `date` (current date), `reviewer`
      (agent name), `git_commit` (current HEAD or specified ref), `branch`
@@ -72,6 +72,9 @@ testing requirements, and commit message format."
        sections), and recommended fix.
    - Ensure all findings reference specific sections of
      `.github/CONTRIBUTING.md` or other standards.
+   - If `substrate/traces/` does not exist, check for legacy `thoughts/`
+     directory and report that the repository needs migration before creating
+     review files.
 3. If no violations are detected, state "No violations of
    `.github/CONTRIBUTING.md` were found in the reviewed changes" and do not
    create a review file.
@@ -81,7 +84,7 @@ testing requirements, and commit message format."
 Communicate results to the user:
 
 - If a review report was created, provide a link to the file (e.g.,
-  `thoughts/shared/reviews/YYYY-MM-DD-review.md`) and summarize key findings,
+  `substrate/traces/reviews/YYYY-MM-DD-review.md`) and summarize key findings,
   highlighting any blocking issues that must be addressed before merging.
 - If no issues were found, confirm compliance and note that no report was
   generated.

@@ -29,6 +29,7 @@ project-root/
 ```
 
 **Perché `intents/`:**
+
 - Comunica che sono **intenti umani**, non specifiche tecniche
 - Diverso da `docs/` (documentazione), `specs/` (specifiche rigide)
 - Corto, memorabile, evocativo
@@ -44,6 +45,7 @@ project-root/
 - **Estensione**: `.md`
 
 **Esempi:**
+
 ```
 EXP-header-dynamic-title.md
 EXP-sidebar-navigation-menu.md
@@ -54,12 +56,14 @@ EXP-site-structure-drag-drop.md
 ```
 
 **Perché il prefisso EXP-:**
+
 - Distingue gli intenti da altri file nella cartella (README, schema, etc.)
 - Ordinamento: tutti gli intenti raggruppati in ls/alfabetico
 - Estensibile: puoi aggiungere altri tipi (DOC-*, RULE-*, etc.)
 - Chiaro: un colpo d'occhio capisci cosa è un intento implementabile
 
 **Perché senza numeri:**
+
 - Non serve ordinare globalmente (usiamo cartelle)
 - Facile da rinominare senza rompere referenze
 - Ordine alfabetico è sufficiente dentro ogni cartella
@@ -68,6 +72,7 @@ EXP-site-structure-drag-drop.md
 ### 2.3 Organizzazione Cartelle
 
 **Per Area Funzionale** (consigliato):
+
 ```
 intents/
 ├── _schema.yaml
@@ -125,11 +130,13 @@ intents/
 | `integrations/` | Servizi esterni, API terze | `EXP-stripe-payments.md`, `EXP-sendgrid-emails.md`, `EXP-oauth-google.md` |
 
 **Note:**
+
 - Queste sono cartelle *suggerite*, non obbligatorie. Adatta alla tua applicazione.
 - Puoi aggiungere cartelle specifiche del dominio (es. `ecommerce/`, `analytics/`, `reports/`)
 - Per progetti piccoli, puoi usare struttura flat (tutto in `intents/`)
 
 **Per Tipo** (alternativa):
+
 ```
 intents/
 ├── ui/
@@ -139,6 +146,7 @@ intents/
 ```
 
 **Flat** (progetti piccoli):
+
 ```
 intents/
 ├── EXP-header-dynamic-title.md
@@ -310,6 +318,7 @@ tags: []
 ```
 
 #### Response Success (200)
+
 ```json
 {
   "field1": "tipo - descrizione",
@@ -318,6 +327,7 @@ tags: []
 ```
 
 #### Response Errori
+
 - `400 Bad Request`: [quando si verifica]
 - `401 Unauthorized`: [quando si verifica]
 - `403 Forbidden`: [quando si verifica]
@@ -325,26 +335,28 @@ tags: []
 - `500 Internal Error`: [quando si verifica]
 
 #### Rate Limiting
+
 - [Descrizione limiti se applicabili]
 
 ### [Altra Operazione se necessaria]
+
 ...
 
 ## Comportamento
 
 ### Validazione
+
 - [Regole di validazione input]
 - [Formati attesi]
 - [Constraints]
 
 ### Business Logic
+
 - [Logica applicativa]
 - [Side effects]
 - [Eventi triggerati]
 
 ### Casi Edge
-- [Caso limite]: [comportamento]
-- [Caso limite]: [comportamento]
 
 ## Criteri di Accettazione
 
@@ -356,9 +368,11 @@ tags: []
 - [ ] Logging appropriato
 
 ## Note
+
 - [Considerazioni su autenticazione/autorizzazione]
 - [Performance considerations]
 - [Backward compatibility se applicabile]
+
 ```
 
 ### 4.3 Template Logic (`_templates/logic.md`)
@@ -607,20 +621,24 @@ tags: [tag1, tag2]
 - "Valida questo intento": controlla struttura
 - "Dove salvarlo?": suggerisci cartella e nome file
 - "Trova simili": cerca intenti correlati
+
 ```
 
 ### 5.2 Esempio Conversazione
 
 **Utente:**
 ```
+
 Voglio che l'header del CMS mostri sempre il titolo della pagina in cui sono.
-Tipo se sono su Dashboard mostra "DiggoCMS - Dashboard", se sono su Pages 
+Tipo se sono su Dashboard mostra "DiggoCMS - Dashboard", se sono su Pages
 mostra "DiggoCMS - Pages", ecc.
+
 ```
 
 **Agente:**
 ```
-Ottimo! Stai descrivendo un header dinamico. 
+
+Ottimo! Stai descrivendo un header dinamico.
 
 Proposta per il file: `intents/navigation/EXP-header-dynamic-title.md`
 
@@ -678,6 +696,7 @@ senza bisogno di refresh.
 ```
 
 Ti va bene? Vuoi modificare qualcosa?
+
 ```
 
 ---
@@ -722,6 +741,7 @@ intents export navigation/header navigation/sidebar > context.md
 ## 7. Confronto: Vecchio vs Nuovo Approccio
 
 ### ❌ Vecchio (Numerato)
+
 ```
 expectations/
 ├── EXP-001-header.md
@@ -729,12 +749,15 @@ expectations/
 ├── EXP-003-login.md
 └── EXP-004-session.md
 ```
+
 **Problemi:**
+
 - Numerazione globale impossibile da mantenere
 - Dove metto EXP-005? Dopo EXP-004, ma se ho 100 file?
 - Rinominare EXP-001 in EXP-045 = rompo tutti i riferimenti
 
 ### ✅ Nuovo (Descrittivo con prefisso)
+
 ```
 intents/
 ├── auth/
@@ -744,7 +767,9 @@ intents/
     ├── EXP-header-dynamic-title.md
     └── EXP-sidebar-navigation.md
 ```
+
 **Vantaggi:**
+
 - Nomi parlanti, auto-documentanti
 - Facile trovare quello che cerchi
 - Rinominare non rompe nulla (non ci sono riferimenti numerici)
@@ -755,12 +780,14 @@ intents/
 ## 8. Workflow
 
 ### Step 1: Setup
+
 ```bash
 mkdir -p intents/{auth,navigation,content,settings}/_templates
 touch intents/_schema.yaml
 ```
 
 ### Step 2: Nuovo Intento
+
 ```bash
 # Manuale
 cat > intents/navigation/EXP-header-dynamic-title.md << 'EOF'
@@ -778,6 +805,7 @@ EOF
 ```
 
 ### Step 3: Sviluppo
+
 ```
 Umano: Descrive comportamento in intents/navigation/EXP-header-dynamic-title.md
        (cosa vuole, non come farlo)
@@ -793,6 +821,7 @@ AI:     Legge intents/navigation/EXP-header-dynamic-title.md
 ## 9. Conclusioni
 
 **Intent-Based Specs:**
+
 - ✅ **Prefisso EXP-** (distingue dagli altri file)
 - ✅ **Nomi descrittivi** (no numeri)
 - ✅ **Cartella `intents/`** (chiaro, evocativo)

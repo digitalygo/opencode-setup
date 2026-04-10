@@ -22,15 +22,13 @@ and modern ecosystem tools like Pest.
 
 1. **Architecture**: Use a Service Layer or Modular monolith approach. Keep
    controllers thin and models focused on data.
-2. **Check Standards**: Ensure alignment with `.github/CONTRIBUTING.md` and
-   `AGENTS.md`.
-3. **Type Safety**: Enforce strict types (`declare(strict_types=1)`) and use
+2. **Type Safety**: Enforce strict types (`declare(strict_types=1)`) and use
    static analysis (Larastan/PHPStan level 8+) to catch errors early.
-4. **Testing First**: Use **Pest** for expressive, developer-friendly tests.
+3. **Testing First**: Use **Pest** for expressive, developer-friendly tests.
    Aim for high coverage on business logic.
-5. **Modern PHP**: Leverage PHP 8.5 features like Property Hooks,
+4. **Modern PHP**: Leverage PHP 8.5 features like Property Hooks,
    `json_validate`, and asymmetric visibility (`private(set)`).
-6. **Performance**: Optimize Eloquent queries (eager loading), use Caching
+5. **Performance**: Optimize Eloquent queries (eager loading), use Caching
    strategically.
 
 ## Essential Guidelines (2026 Standards)
