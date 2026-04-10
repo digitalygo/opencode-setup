@@ -1,9 +1,9 @@
 ---
 status: completed
 created_at: 2026-04-06
-files_edited: [skills/intents-schema/SKILL.md, skills/modern-css-snippets/SKILL.md, skills/web-design-references/SKILL.md, skills/web-design-references/references/dbrand-touch-grass.json]
+files_edited: [skills/directives-schema/SKILL.md, skills/modern-css-snippets/SKILL.md, skills/web-design-references/SKILL.md, skills/web-design-references/references/dbrand-touch-grass.json]
 rationale: Clarified CSS skill scope and added a web design reference skill with public fallback links and full JSON snapshot.
-supporting_docs: [https://github.com/digitalygo/opencode-setup/tree/main/skills/intents-schema/references, https://github.com/digitalygo/opencode-setup/tree/main/skills/modern-css-snippets/references, https://github.com/digitalygo/opencode-setup/tree/main/skills/web-design-references/references]
+supporting_docs: [https://github.com/digitalygo/opencode-setup/tree/main/skills/directives-schema/references, https://github.com/digitalygo/opencode-setup/tree/main/skills/modern-css-snippets/references, https://github.com/digitalygo/opencode-setup/tree/main/skills/web-design-references/references]
 ---
 
 ## Summary of changes
@@ -11,7 +11,7 @@ supporting_docs: [https://github.com/digitalygo/opencode-setup/tree/main/skills/
 - Updated modern-css-snippets description to emphasize staying current on modern CSS capabilities and legacy replacements, keeping GitHub fallback for references.
 - Added new web-design-references skill outlining purpose, usage, JSON structure overview, and GitHub fallback for references.
 - Included the dbrand-touch-grass design snapshot JSON under the new skill references directory and refreshed the Reference Index with all available design JSONs.
-- Maintained intents-schema fallback note for online references.
+- Maintained directives-schema fallback note for online references.
 
 ## Technical reasoning
 

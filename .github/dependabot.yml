@@ -4,7 +4,7 @@ updates:
     directory: '/'
     schedule:
       interval: "cron"
-      cronjob: "0 14 * * 1,2,3,4"
+      cronjob: "0 14 * * 3"
     groups:
       security-updates:
         update-types:

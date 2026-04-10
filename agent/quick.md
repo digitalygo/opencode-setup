@@ -8,7 +8,7 @@ permission:
     "npx markdownlint-cli *": allow
   edit:
     "*": "deny"
-    "thoughts/shared/research/*.md": allow
+    "substrate/traces/research/*.md": allow
     "docs/*.md": allow
     "docs/**/*.md": allow
     "tmp/*.md": allow
@@ -18,7 +18,8 @@ permission:
     "AGENTS.md": allow
   task:
     "*": deny
-    "thoughts-*": allow
+    "traces-*": allow
+    "directives-*": allow
     "codebase-*": allow
     "web-researcher": allow
     "documentation-*": allow
@@ -36,8 +37,8 @@ You can:
 
 - **Read every referenced file** using the `read` tool
 - **Delegate research** using specialized subagents:
-  - *intents-locator* and *intents-analyzer* for user rules and expaction about the codebase
-  - *thoughts-locator* and *thoughts-analyzer* to analyze past context agents have written in the thoughts folder (this is a core coding workflow for us)
+  - *directives-locator* and *directives-analyzer* for user rules and expectations about the codebase
+  - *traces-locator* and *traces-analyzer* to analyze past context agents have written in substrate/traces (this is a core coding workflow for us)
   - *codebase-locator*, *codebase-analyzer*, and *codebase-pattern-finder* to map the current state of the repository, find files, analyze functions and find existing patterns
   - *web-researcher* for questions that require verifiable knowledge, updated best practices, information absent from the workspace and anything that could benefit from web research (run `date` first to anchor findings to the current date)
   - *documentation-writer* for creating and updating documentation
@@ -46,7 +47,7 @@ You can:
   - if you conducted a *research*, you need to capture all findings in details, keeping in mind the user scope if given
   - if you *just answered* and user question, you don't need to create documentation
   - if the user ask you to save your findings as documentation, keep in mind that you can only write in the following folders:
-    - `thoughts/shared/research/` is where you save ONLY research documents
+    - `substrate/traces/research/` is where you save ONLY research documents
     - `docs/` is where you save ONLY documents that are actually useful for the codebase
     - `tmp/` is where you save any other kind of file and documentation
 
@@ -54,20 +55,13 @@ You can:
 
 When conducting a research or writing new documentation for the codebase, you must follow these rules:
 
-- Your primary output is high-quality `.md` files under `thoughts/shared/research/` and `docs/`
-- Use the correct path: `thoughts/shared/research/` for research documents and
+- Your primary output is high-quality `.md` files under `substrate/traces/research/` and `docs/`
+- Use the correct path: `substrate/traces/research/` for research documents and
   `docs/` for general codebase documentation
-  - For research use descriptive filenames follwing this format: `YYYY-MM-DD-description.md` where *YYYY-MM-DD* is today's date and *description* is a brief kebab-case description
-  - For codebase documentation use descriptive filenames follwing this format: `description.md` where *description* is a brief kebab-case description
-- Use sentence case for headings, titles, labels, and all writing; only proper nouns capitalized.
+  - For research use descriptive filenames following this format: `YYYY-MM-DD-description.md` where *YYYY-MM-DD* is today's date and *description* is a brief kebab-case description
+  - For codebase documentation use descriptive filenames following this format: `description.md` where *description* is a brief kebab-case description
 - Write in clear, structured Markdown with accurate references to code and web
   sources
-- Lint verification for Markdown is mandatory and must follow this order:
-  1. Sync lint config first by running:
-     `curl -fsSL https://raw.githubusercontent.com/one-ring-ai/dotfiles/refs/heads/main/.markdownlint.json -o ./.markdownlint.json && curl -fsSL https://raw.githubusercontent.com/one-ring-ai/dotfiles/refs/heads/main/.markdownlintignore -o ./.markdownlintignore`
-  2. Run lint check:
-     `npx markdownlint-cli "**/*.md" --config .markdownlint.json --ignore-path .markdownlintignore --dot --fix`
-  3. If lint reports errors, do not fix them directly. Delegate remediation to the `documentation-writer` subagent, then re-run lint verification until it passes with zero errors.
 
 ## Critical constraints
 

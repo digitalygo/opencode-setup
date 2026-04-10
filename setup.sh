@@ -70,6 +70,16 @@ cleanup_temp_dir() {
 }
 
 CHANNEL="stable"
+DRY_RUN="false"
+
+print_usage() {
+    echo "Usage: $0 [OPTIONS]"
+    echo ""
+    echo "Options:"
+    echo "  --channel <stable|beta|alpha>  Set the release channel (default: stable)"
+    echo "  --dry-run                      Show what would be done without making changes"
+    echo "  --help                         Show this help message"
+}
 
 parse_args() {
     while [ $# -gt 0 ]; do
@@ -85,6 +95,14 @@ parse_args() {
                     exit 1
                 fi
                 shift 2
+                ;;
+            --dry-run)
+                DRY_RUN="true"
+                shift
+                ;;
+            --help)
+                print_usage
+                exit 0
                 ;;
             -*)
                 print_error "Unknown option: $1"
@@ -104,17 +122,71 @@ run_sync() {
     local user_home
     user_home=$(determine_user_home)
 
-    readonly TARGET_DIR="$user_home/.config/opencode"
-    readonly TEMP_DIR=$(mktemp -d)
-
-    trap cleanup_temp_dir EXIT
-
-    print_info "Target directory: $TARGET_DIR"
+    local -r TARGET_DIR="$user_home/.config/opencode"
 
     local branch="$CHANNEL"
     if [ "$CHANNEL" = "stable" ]; then
         branch="main"
     fi
+
+    if [ "$DRY_RUN" = "true" ]; then
+        echo "[DRY-RUN] Would perform the following actions:"
+        echo ""
+        echo "Target directory: $TARGET_DIR"
+        echo "Channel: $CHANNEL"
+        echo "Branch: $branch"
+        echo ""
+        echo "Repository clone:"
+        echo "  git clone --branch $branch --depth 1 https://github.com/digitalygo/opencode-setup.git <temp-dir>"
+        echo ""
+        echo "Directory creation:"
+        echo "  mkdir -p $TARGET_DIR $TARGET_DIR/.secrets"
+        echo ""
+
+        local secrets_existed=false
+        if [ -d "$TARGET_DIR/.secrets" ]; then
+            secrets_existed=true
+        fi
+
+        echo "Rsync operation:"
+        echo "  rsync -av --delete --exclude=.git/ --exclude=.secrets/ --exclude=.github/ --exclude=substrate/ --exclude=.gitignore --exclude=.markdownlint.json --exclude=.markdownlintignore --exclude=.releaserc.json <temp-dir>/ $TARGET_DIR/"
+        echo ""
+
+        if [ "$secrets_existed" = true ]; then
+            echo "Secrets preservation: existing .secrets directory would be preserved"
+        fi
+        echo ""
+
+        local shell_rc="$user_home/.bashrc"
+        if [[ "$OSTYPE" == "darwin"* ]]; then
+            shell_rc="$user_home/.zshrc"
+        fi
+
+        local alias_line="alias sync-opencode='curl -fsSL https://raw.githubusercontent.com/digitalygo/opencode-setup/main/setup.sh | bash'"
+
+        echo "Shell RC file: $shell_rc"
+        echo ""
+        echo "Alias handling:"
+        if [ ! -f "$shell_rc" ]; then
+            echo "  - Create new file: $shell_rc"
+            echo "  - Append alias to file"
+        elif grep -Fxq "$alias_line" "$shell_rc" 2>/dev/null; then
+            echo "  - Alias already exists, no changes needed"
+        elif grep -qE '^[[:space:]]*alias[[:space:]]+sync-opencode=' "$shell_rc" 2>/dev/null; then
+            echo "  - Update existing alias definition"
+        else
+            echo "  - Append new alias to file"
+        fi
+        echo ""
+        echo "[DRY-RUN] No changes were made to the system"
+        return 0
+    fi
+
+    local -r TEMP_DIR=$(mktemp -d)
+
+    trap cleanup_temp_dir EXIT
+
+    print_info "Target directory: $TARGET_DIR"
     print_info "Cloning repository (channel: $CHANNEL, branch: $branch)..."
 
     if ! git clone --branch "$branch" --depth 1 https://github.com/digitalygo/opencode-setup.git "$TEMP_DIR"; then
@@ -122,7 +194,7 @@ run_sync() {
         exit 1
     fi
 
-    readonly SOURCE_DIR="$TEMP_DIR"
+    local -r SOURCE_DIR="$TEMP_DIR"
 
     if [ ! -d "$SOURCE_DIR" ]; then
         print_error "Source directory not found in repository"
@@ -138,7 +210,7 @@ run_sync() {
     mkdir -p "$TARGET_DIR" "$TARGET_DIR/.secrets"
 
     print_info "Copying configuration files..."
-    if ! rsync -av --delete --exclude=.git/ --exclude=.secrets/ --exclude=.github/ --exclude=thoughts/ --exclude=.gitignore --exclude=.markdownlint.json --exclude=.markdownlintignore --exclude=.releaserc.json "$SOURCE_DIR/" "$TARGET_DIR/"; then
+    if ! rsync -av --delete --exclude=.git/ --exclude=.secrets/ --exclude=.github/ --exclude=substrate/ --exclude=.gitignore --exclude=.markdownlint.json --exclude=.markdownlintignore --exclude=.releaserc.json "$SOURCE_DIR/" "$TARGET_DIR/"; then
         print_error "Failed to copy configuration files"
         exit 1
     fi
@@ -166,7 +238,7 @@ run_sync() {
         local escaped_alias_line
         temp_rc=$(mktemp)
         escaped_alias_line=$(printf '%s\n' "$alias_line" | sed 's/[&/]/\\&/g')
-        sed "0,/^[[:space:]]*alias[[:space:]]\+sync-opencode=.*/s//${escaped_alias_line}/" "$shell_rc" > "$temp_rc"
+        sed "0,/^[[:space:]]*alias[[:space:]]\\+sync-opencode=.*/s//${escaped_alias_line}/" "$shell_rc" > "$temp_rc"
         mv "$temp_rc" "$shell_rc"
         print_info "Alias updated in $shell_rc"
     else

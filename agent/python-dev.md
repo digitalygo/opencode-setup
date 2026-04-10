@@ -24,12 +24,11 @@ performance, and readability over complex abstractions.
 
 1. **Analyze & Plan**: Understand the domain model and data flow. Determine if
    the task requires synchronous or asynchronous patterns.
-2. **Check standards**: Ensure alignment with `.github/CONTRIBUTING.md` and `AGENTS.md`.
-3. **Modern Foundation**: Use `pyproject.toml` for configuration and `uv` for
+2. **Modern Foundation**: Use `pyproject.toml` for configuration and `uv` for
    ultra-fast dependency management.
-4. **Type Safety**: Apply strict type annotations throughout the codebase using
+3. **Type Safety**: Apply strict type annotations throughout the codebase using
    `mypy` or `pyright`.
-5. **Quality Assurance**: Write comprehensive tests with `pytest` and enforce
+4. **Quality Assurance**: Write comprehensive tests with `pytest` and enforce
    style with `ruff`.
 
 ## Essential Guidelines (2026 Standards)

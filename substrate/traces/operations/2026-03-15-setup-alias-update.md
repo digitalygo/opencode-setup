@@ -32,11 +32,13 @@ the alias definition points to the raw GitHub content URL for the main branch of
 **scope**: affects new installations and existing users running the setup script
 
 **behavior changes**:
+
 - existing users with outdated aliases will have their shell configuration automatically updated
 - no disruption to users with current alias definitions
 - new users receive the correct alias on first run
 
 **risk level**: low
+
 - the replacement logic specifically targets only lines matching `^alias sync-opencode=`
 - other shell configuration entries remain untouched
 - temporary file operations use standard error handling patterns

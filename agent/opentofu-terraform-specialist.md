@@ -1,7 +1,7 @@
 ---
 description: OpenTofu/Terraform engineer for secure, modular IaC
 mode: subagent
-model: opencode-go/kimi-k2.5
+model: opencode/gpt-5.1-codex-max
 temperature: 0.15
 steps: 100
 tools:

@@ -6,7 +6,7 @@ temperature: 0.5
 permission:
   edit:
     "*": "deny"
-    "thoughts/shared/research/*.md": allow
+    "substrate/traces/research/*.md": allow
     "docs/*.md": allow
     "docs/**/*.md": allow
     "tmp/*.md": allow
@@ -105,7 +105,6 @@ Structure your proposed solution clearly:
 
 ## Important Guidelines
 
-- Use sentence case for headings, titles, labels, and all writing; only proper nouns capitalized.
 - **Be Exhaustive**: Leave no potential solution unexplored.
 - **Actions**: The solution provided should be concrete enough to act.
 - **Neutrality**: Present facts and evidence, not opinions.

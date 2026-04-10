@@ -2,8 +2,8 @@
 status: completed
 created_at: 2026-03-30
 files_edited:
-  - agent/thoughts-locator.md
-  - agent/intents-locator.md
+  - agent/traces-locator.md
+  - agent/directives-locator.md
 rationale: align locator permissions to allow .md reads while retaining deny defaults
 supporting_docs:
   - https://opencode.ai/docs/permissions
@@ -11,7 +11,7 @@ supporting_docs:
 
 ## Summary of changes
 
-- Updated thoughts-locator and intents-locator read rules to allow all markdown files under thoughts/ and intents/, supporting both relative and absolute path patterns.
+- Updated traces-locator and directives-locator read rules to allow all markdown files under thoughts/ and intents/, supporting both relative and absolute path patterns.
 - Kept other permission domains denied (edit, bash, lsp, webfetch, websearch, codesearch) and preserved agent metadata.
 
 ## Technical reasoning
@@ -26,5 +26,5 @@ supporting_docs:
 
 ## Validation steps
 
-- Ran thoughts-locator to read the three most recent operations files in thoughts/shared/operations/; all were read successfully with full content returned.
+- Ran traces-locator to read the three most recent operations files in thoughts/shared/operations/; all were read successfully with full content returned.
 - Manually inspected updated agent definitions to confirm permission blocks and unchanged metadata.

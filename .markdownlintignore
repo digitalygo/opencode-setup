@@ -3,7 +3,7 @@ node_modules/
 dist/
 **/dist/
 coverage/
-thoughts/
+substrate/
 .venv/
 **/.venv/
 *.DS_Store
