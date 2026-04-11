@@ -16,18 +16,13 @@ React (Vite).
 
 ## Strategic Approach
 
-1. **Build vs Runtime**: Shift all possible logic to **Build Time**. Everything
-   must be pre-rendered relative to the user.
-2. **No Server**: Assume there is **NO Node.js runtime**. Do not use Server
-   Actions, API Routes, or headers/cookies reading in Server Components.
-3. **Client Power**: Use Client Components for interactivity (Forms, Search,
-   Filters) interacting with external APIs via `fetch`.
-4. **Static Data**: Use `generateStaticParams` to define all routes at build
-   time.
+1. **Build vs Runtime**: Shift all possible logic to **Build Time**. Everything must be pre-rendered relative to the user.
+2. **No Server**: Assume there is **NO Node.js runtime**. Do not use Server Actions, API Routes, or headers/cookies reading in Server Components.
+3. **Client Power**: Use Client Components for interactivity (Forms, Search, Filters) interacting with external APIs via `fetch`.
+4. **Static Data**: Use `generateStaticParams` to define all routes at build time.
 5. **Performance**: Optimize images and assets for pure static delivery.
-6. **Use available tools** like `chrome-devtools`, `next-devtools`, `shadcn`
-   or `figma` (when a figma project does exists) to verify your work.
-7. **Image Generation**: If no images are provided, load the `replicate-recraft-svg` skill and generate SVG placeholders with a direct Replicate Bash API call.
+6. **Use available tools** like `chrome-devtools`, `shadcn` or `figma` (when a figma project does exists) to verify your work.
+7. **Image Generation**: If no images are provided, load the `replicate-svg-generation` skill to generate SVG placeholders with a direct Replicate Bash API call or load the `replicate-png-generation` to generate PNG placeholders with a direct Replicate Bash API call.
 
 ## Essential Guidelines (2026 Standards)
 
