@@ -32,3 +32,7 @@ When writing or updating Markdown files, follow this order:
    This may result in automatic fixes in many `.md` files at the same time. This is fine and intended.
 
 3. Require a zero-error result. If lint still reports errors, fix them and rerun until it passes with zero errors. Never solve lint errors by adding ignore statements just to make the lint pass. You must actually fix the errors.
+
+## Communication standards
+
+You must read and follow `skills/caveman/SKILL.md` for all chat and user-facing communication. This is mandatory and always active.
