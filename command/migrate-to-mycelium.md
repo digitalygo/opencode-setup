@@ -12,7 +12,8 @@ migrate a repository from the legacy `thoughts/` and `intents/` layout to the My
 this command performs a structure-only migration:
 
 - moves `thoughts/` content to `substrate/traces/` (removing the `shared/` layer)
-- moves `intents/` content to `substrate/directives/`
+- moves `intents/` content to `substrate/directives/` (legacy intents were developer instructions)
+- creates `substrate/expectations/` for new repositories (no legacy source; expectations capture client expectations)
 - preserves all files and nested structure
 - refuses to proceed on ambiguous or conflicting states
 
@@ -50,7 +51,7 @@ conditions:
 
 - neither old nor new layout exists
 
-action: create empty `substrate/traces/` and `substrate/directives/` directories. report success.
+action: create empty `substrate/traces/`, `substrate/directives/`, and `substrate/expectations/` directories. report success.
 
 #### state 4: mixed layout (ambiguous)
 
@@ -69,15 +70,16 @@ for legacy repositories, perform these moves in order:
 1. create `substrate/` directory if missing
 2. create `substrate/traces/` subdirectory
 3. create `substrate/directives/` subdirectory
-4. move `thoughts/shared/operations/` → `substrate/traces/operations/`
-5. move `thoughts/shared/plans/` → `substrate/traces/plans/`
-6. move `thoughts/shared/research/` → `substrate/traces/research/`
-7. move `thoughts/shared/reviews/` → `substrate/traces/reviews/`
-8. move `thoughts/shared/status/` → `substrate/traces/status/`
-9. move any remaining `thoughts/` content → `substrate/traces/`
-10. move `intents/` → `substrate/directives/`
-11. verify all files exist at new paths
-12. remove empty old directories (`thoughts/shared/*`, then `thoughts/`, `intents/`)
+4. create `substrate/expectations/` subdirectory (new, no legacy source)
+5. move `thoughts/shared/operations/` → `substrate/traces/operations/`
+6. move `thoughts/shared/plans/` → `substrate/traces/plans/`
+7. move `thoughts/shared/research/` → `substrate/traces/research/`
+8. move `thoughts/shared/reviews/` → `substrate/traces/reviews/`
+9. move `thoughts/shared/status/` → `substrate/traces/status/`
+10. move any remaining `thoughts/` content → `substrate/traces/`
+11. move `intents/` → `substrate/directives/` (legacy intents were developer instructions)
+12. verify all files exist at new paths
+13. remove empty old directories (`thoughts/shared/*`, then `thoughts/`, `intents/`)
 
 ### 3. safety checks
 
@@ -113,7 +115,10 @@ migration complete: repository converted to Mycelium layout
 
 moved:
 - {count} files from thoughts/ to substrate/traces/
-- {count} files from intents/ to substrate/directives/
+- {count} files from intents/ to substrate/directives/ (developer instructions)
+
+created:
+- substrate/expectations/ (client expectations, no legacy source)
 
 new structure:
 - substrate/traces/operations/
@@ -121,7 +126,8 @@ new structure:
 - substrate/traces/research/
 - substrate/traces/reviews/
 - substrate/traces/status/
-- substrate/directives/
+- substrate/directives/ (structured developer instructions, DRC-*.md)
+- substrate/expectations/ (client expectations, EXP-*.md)
 
 updated:
 - .gitignore
