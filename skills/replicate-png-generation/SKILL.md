@@ -5,18 +5,18 @@ description: Generate PNG images with Replicate via direct Bash HTTP calls. Use 
 
 # Replicate PNG image generation
 
-## What this skill does
+## what you do with this skill
 
-- Generates a `.png` image using `google/nano-banana-2` on Replicate.
-- Uses a direct `curl` call to Replicate HTTP API.
-- Saves the PNG locally for immediate usage.
-- Uses token from `~/.config/opencode/.secrets/replicate-key`.
+- generate a `.png` image using `google/nano-banana-2` on Replicate
+- use a direct `curl` call to Replicate HTTP API
+- save the PNG locally for immediate usage
+- use token from `~/.config/opencode/.secrets/replicate-key`
 
 ## When to use
 
 Use this skill when you need to generate a PNG image.
 
-## Input schema to respect
+## Input schema
 
 Required:
 
@@ -41,7 +41,7 @@ Rules:
 - Format: `uri`
 - The output is a URL to the generated `.png` file (when `output_format=png`).
 
-## Direct Bash workflow (HTTP API)
+## Direct bash workflow (HTTP API)
 
 ```bash
 set -euo pipefail

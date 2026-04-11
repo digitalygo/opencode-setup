@@ -5,7 +5,7 @@ description: Read this if you detect legacy thoughts/ and intents/ layouts to ga
 
 # Mycelium migration skill
 
-this skill helps agents detect repository layouts and ensures hard cutover to the Mycelium standard. agents must not create new files in legacy paths.
+you detect repository layouts and ensure hard cutover to the Mycelium standard. do not create new files in legacy paths.
 
 ## quick detection guide
 
@@ -40,7 +40,7 @@ if these exist and `substrate/` does not, the repository uses the legacy layout 
 
 ## hard cutover rule
 
-**agents must not create new traces or directives in legacy paths.**
+**do not create new traces or directives in legacy paths.**
 
 if you detect a legacy-only repository:
 
@@ -97,7 +97,7 @@ the migration command:
 4. preserves all nested directory structure
 5. provides verification before removing source directories
 
-## agent behavior guidelines
+## your behavior guidelines
 
 ### when reading historical content
 
@@ -114,7 +114,7 @@ the migration command:
 
 ### when running subagents
 
-subagents with path-specific permissions will fail on legacy layouts. if a subagent reports permission denied:
+when running subagents with path-specific permissions on legacy layouts, they will fail. if a subagent reports permission denied:
 
 1. check for legacy layout
 2. migrate the repository first
