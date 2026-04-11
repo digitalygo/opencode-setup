@@ -19,9 +19,9 @@ Define who uses this component and what they can see/do:
 - **Viewer**: Read-only access to specific columns, no editing capabilities, can sort and filter
 - **Guest**: Public-facing view with limited columns visible, no interaction beyond basic sorting
 
-## Desired Behavior
+## Implementation Requirements
 
-### Visual States
+### Visual states
 
 - **Default**: Clean table layout with alternating row colors, visible headers, standard 14px text
 - **Hover**: Row background lightens, cursor changes to pointer on interactive cells, action buttons appear
@@ -40,7 +40,7 @@ Define who uses this component and what they can see/do:
 - **Keyboard**: Tab navigates between cells, Enter activates row selection or editing, Arrow keys move between rows, Space toggles row selection
 - **Touch**: Tap selects row, long press for context menu, swipe left for quick actions, pinch to adjust column widths
 
-### Responsive Behavior
+### Responsive behavior
 
 - **Desktop (>=1024px)**: Full table with all columns visible, horizontal scrolling for overflow, fixed header on scroll
 - **Tablet (768-1023px)**: Priority columns visible, expandable rows for additional data, touch-optimized row heights

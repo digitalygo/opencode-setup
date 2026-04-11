@@ -28,9 +28,9 @@ like Authentication, Database Mutations, Real-time updates, and robust SSR.
 5. **auth**: OAuth-based
    authentication require careful env management and secure handling of
    secrets.
-6. **Use available tools** like `chrome-devtools`, `shadcn`
+6. **Use available tools** like `chrome-devtools`, `next-devtools`, `shadcn`
    or `figma` (when a figma project does exists) to verify your work.
-7. **Image Generation**: If no images are provided, load the `replicate-svg-generation` skill to generate SVG placeholders with a direct Replicate Bash API call or load the `replicate-png-generation` to generate PNG placeholders with a direct Replicate Bash API call. 
+7. **Image Generation**: If no images are provided, load the `replicate-svg-generation` skill to generate SVG placeholders with a direct Replicate Bash API call or load the `replicate-png-generation` to generate PNG placeholders with a direct Replicate Bash API call.
 
 ## File Editing Permissions
 

@@ -3,14 +3,16 @@ description: Review repository changes for CONTRIBUTING compliance
 agent: planner
 ---
 
-# Review Changes
+# Review changes
+
+Read and follow `skills/caveman-review/SKILL.md` for all review communication.
 
 Perform a comprehensive review of repository changes against the standards
 outlined in `.github/CONTRIBUTING.md`, ensuring compliance with code style,
 naming conventions, Docker standards, code best practices, API design and
 testing requirements.
 
-## Initial Response
+## Initial response
 
 Acknowledge the review request by stating: "I'll review the repository changes
 for compliance with `.github/CONTRIBUTING.md`. This includes checking code
@@ -35,7 +37,7 @@ testing requirements, and commit message format."
 6. If the review scope is ambiguous request clarification from the user before
    proceeding.
 
-## Analysis Process
+## Analysis process
 
 1. For each modified file, run `git diff --unified=0 <file>` to capture exact
    line numbers of changes.
@@ -53,7 +55,7 @@ testing requirements, and commit message format."
 4. Maintain a Todo list via TodoWrite to track review subtasks, such as "Analyze
    file X for style violations" or "Check commit messages in range Y".
 
-## Reporting Findings
+## Reporting findings
 
 1. Summarize overall compliance: State whether changes fully comply, partially
    comply, or have violations.
@@ -79,7 +81,7 @@ testing requirements, and commit message format."
    `.github/CONTRIBUTING.md` were found in the reviewed changes" and do not
    create a review file.
 
-## Final Response
+## Final response
 
 Communicate results to the user:
 

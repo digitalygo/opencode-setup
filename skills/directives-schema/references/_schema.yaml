@@ -1,4 +1,4 @@
-intent:
+directive:
   required:
     - type
     - priority
@@ -15,7 +15,7 @@ intent:
         - performance
         - integration
         - other
-      description: "Type of intent"
+      description: "Type of directive"
 
     priority:
       type: string
@@ -36,17 +36,17 @@ intent:
     purpose_context:
       required: true
       pattern: "^## (Purpose & Context)"
-      description: "Why this intent exists and its context"
+      description: "Why this directive exists, technical rationale"
 
     actors_roles:
       required: true
       pattern: "^## (Actors and Roles)"
       description: "Role-based differences, what each can/cannot do, visibility"
 
-    desired_behavior:
+    implementation_requirements:
       required: true
-      pattern: "^## (Desired Behavior)"
-      description: "Expected behavior description"
+      pattern: "^## (Implementation Requirements)"
+      description: "Architecture, logic, workflows, base flow"
 
     inputs_outputs:
       required: false
