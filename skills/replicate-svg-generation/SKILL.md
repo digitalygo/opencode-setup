@@ -5,18 +5,18 @@ description: Generate SVG images with Replicate via direct Bash HTTP calls. Use 
 
 # Replicate SVG vector image generation
 
-## What this skill does
+## what you do with this skill
 
-- Generates a `.svg` image using `recraft-ai/recraft-v4-svg` on Replicate.
-- Uses a direct `curl` call to Replicate HTTP API.
-- Saves the SVG locally for immediate usage.
-- Uses token from `~/.config/opencode/.secrets/replicate-key`.
+- generate a `.svg` image using `recraft-ai/recraft-v4-svg` on Replicate
+- use a direct `curl` call to Replicate HTTP API
+- save the SVG locally for immediate usage
+- use token from `~/.config/opencode/.secrets/replicate-key`
 
 ## When to use
 
 Use this skill when you need to generate an SVG vector image.
 
-## Input schema to respect
+## Input schema
 
 Required:
 
@@ -39,7 +39,7 @@ Rules:
 - Format: `uri`
 - The output is a URL to the generated `.svg`.
 
-## Direct Bash workflow (HTTP API)
+## Direct bash workflow (HTTP API)
 
 ```bash
 set -euo pipefail

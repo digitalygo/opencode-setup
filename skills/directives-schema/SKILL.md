@@ -5,24 +5,24 @@ description: Complete ruleset for the Mycelium framework directives, with templa
 
 # Mycelium framework directives
 
-Collection of rules and schemas for our custom Mycelium directives framework. Schema and templates live in this skill and are not replicated elsewhere.
+Use these rules and schemas for Mycelium framework directives. Schema and templates live in this skill and are not replicated elsewhere.
 
-## What this skill does
+## What you do
 
-- provides templates ready to be used for writing new directives
-- provides a schema to validate against
-- provides general rules for our directives framework
-- explains how to detect and migrate from legacy layouts
+- use templates to write new directives
+- validate against the schema
+- follow general rules for the directives framework
+- detect and migrate from legacy layouts
 
-## How to use this skill
+## How to use
 
 1. open the relevant reference set under [`references/`](references/)
-2. locate templates and schemas matching your case
+2. find templates and schemas matching your case
 3. verify
 
 if local references cannot be read, view them online at <https://github.com/digitalygo/opencode-setup/tree/main/skills/directives-schema/references>
 
-## Reference Index
+## Reference index
 
 | File | Topics Covered |
 |------|----------------|
@@ -94,11 +94,11 @@ Reference templates in `skills/directives-schema/references/_templates/`:
 - `logic.md` for business logic
 - `security.md` for security features
 
-Directives are written to `substrate/directives/` in the target repository, using these templates as reference.
+Write directives to `substrate/directives/` in the target repository, using these templates as reference.
 
 ## Legacy layout detection
 
-If you cannot find `substrate/directives/` or `substrate/traces/`, the repository may use the legacy layout:
+When `substrate/directives/` or `substrate/traces/` are not found, the repository may use the legacy layout:
 
 - Legacy directives location: `intents/`
 - Legacy traces location: `thoughts/`
@@ -113,5 +113,3 @@ If you cannot find `substrate/directives/` or `substrate/traces/`, the repositor
 
 If legacy layout detected, recommend running the official migration command:
 `migrate-to-mycelium`
-
-This command safely moves all files from the old layout to the new substrate-based structure.
