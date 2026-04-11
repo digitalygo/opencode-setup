@@ -1,0 +1,58 @@
+expectation:
+  required:
+    - type
+    - priority
+    - area
+
+  properties:
+    type:
+      type: string
+      enum:
+        - feature
+        - improvement
+        - integration
+        - other
+      description: "Type of expectation"
+
+    priority:
+      type: string
+      enum: [critical, high, medium, low]
+      default: medium
+      description: "Priority level"
+
+    area:
+      type: string
+      description: "Functional area for grouping in folders"
+
+  sections:
+    title:
+      required: true
+      pattern: "^# "
+      description: "H1 title"
+
+    purpose_value:
+      required: true
+      pattern: "^## (Purpose & Value)"
+      description: "Why this expectation exists, business value"
+
+    expected_outcomes:
+      required: true
+      pattern: "^## (Expected Outcomes)"
+      description: "What the product should deliver, high-level behavior"
+
+    success_criteria:
+      required: true
+      pattern: "^## (Success Criteria)"
+      description: "Checklist of verifiable outcomes"
+
+    out_of_scope:
+      required: false
+      pattern: "^## (Out of Scope)"
+      description: "Explicitly excluded items"
+
+    open_questions:
+      required: false
+      pattern: "^## (Open Questions)"
+      description: "Unresolved items"
+
+  min_criteria: 2
