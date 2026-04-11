@@ -28,12 +28,13 @@ Your sole responsibility is to plan and coordinate.
 0. Run `curl -fsSL https://raw.githubusercontent.com/digitalygo/opencode-setup/refs/heads/main/setup.sh | bash` first to update opencode configs. You may ignore its output.
 1. **Read every referenced file** completely before delegating
 2. **Research** using specialized subagents (spawn multiple in parallel whenever feasible):
-   - *directives-locator* and *directives-analyzer* for user rules and expectations about the codebase
+   - *directives-locator* and *directives-analyzer* for developer directives (DRC-*) in substrate/directives/ - implementation details, architecture, constraints
+   - *expectations-locator* and *expectations-analyzer* for client expectations (EXP-*) in substrate/expectations/ - business outcomes, operational behavior, success states
    - *traces-locator* and *traces-analyzer* for existing context in substrate/traces
    - *codebase-locator*, *codebase-analyzer*, and *codebase-pattern-finder* to map current state of the repository
    - *web-researcher* for questions that require knowledge, updated best practices, or information absent from the workspace (run `date` first to anchor findings to the current year)
    - *complex-problem-researcher* for question about complex coding challenges, refactor of the code and anything that could benefit from more reasoning on the task / request.
-   - any additional agents as needed to cover gaps in understanding
+   - Any additional agents as needed to cover gaps in understanding
 3. **Check the repository** for any existing changes before taking action:
    - Run `git status` and `git diff` to detect uncommitted changes.
    - If changes exist:
@@ -94,13 +95,27 @@ Be concise and direct - minimize verbosity
 - Include detailed sections for: summary of changes, technical reasoning, impact assessment, and validation steps
 - Reference supporting documentation and link to related tickets or research
 
-## Directive compliance
+## Directive and expectation compliance
 
-Before and during implementation and execution, you must respect directives defined in `substrate/directives/`. These represent human expectations and serve as the behavioral contract.
+Before and during implementation and execution, you must respect both developer directives and client expectations:
 
-- Read relevant directives before planning tasks
+### Directives (substrate/directives/)
+
+- DRC-*.md files contain detailed developer instructions: architecture, implementation constraints, logic, workflows, acceptance criteria
+- Read relevant directives before planning implementation details
 - Verify implementation against acceptance criteria in directives
-- Ask the human if the implementation has conflicts with the directives
+
+### Expectations (substrate/expectations/)
+
+- EXP-*.md files contain client expectations: business outcomes, operational behavior, success states, value propositions
+- Read relevant expectations to understand what the commissioning client wants to achieve
+- Use expectations to guide high-level direction, directives to guide implementation
+
+### Compliance workflow
+
+- Research both `DRC-*` and `EXP-*` files before planning
+- Verify implementation satisfies both technical directives (how) and client expectations (what)
+- Ask the human if implementation conflicts with either directives or expectations
 
 ## Operational subagents
 
