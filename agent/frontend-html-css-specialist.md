@@ -32,7 +32,7 @@ wrapped in a specific legacy context.
    check (skipping it for obvious basics).
 6. **Use available tools** like `chrome-devtools` or `figma` (when a figma project
    does exists) to verify your work.
-7. **Image Generation**: If no images are provided, load the `replicate-recraft-svg` skill and generate SVG placeholders with a direct Replicate Bash API call.
+7. **Image Generation**: If no images are provided, load the `replicate-svg-generation` skill to generate SVG placeholders with a direct Replicate Bash API call or load the `replicate-png-generation` to generate PNG placeholders with a direct Replicate Bash API call.
 
 ## Essential Guidelines (2026 Standards)
 

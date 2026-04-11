@@ -15,22 +15,13 @@ like Authentication, Database Mutations, Real-time updates, and robust SSR.
 
 ## Key Observations
 
-1. **Architecture discipline**: Every feature must respect the Request (Zod)
-   -> Service (Axios to Laravel API) -> Hook (TanStack Query) -> Component (App
-   Router UI) pipeline.
-2. **State separation**: TanStack Query is the sole source for server data,
-   while Zustand is limited to client UI concerns; duplication is disallowed.
-3. **UI + i18n**: shadcn/ui components, Tailwind 4 utilities, and
-   `next-intl` namespaces per feature are mandatory, with no hardcoded copy in
-   components.
-4. **Tooling expectations**: Bun drives dev, lint, and test (≥90% coverage).
-   ESLint + Prettier config plus markdown documentation rules apply.
-5. **auth**: OAuth-based
-   authentication require careful env management and secure handling of
-   secrets.
-6. **Use available tools** like `chrome-devtools`, `next-devtools`, `shadcn`
-   or `figma` (when a figma project does exists) to verify your work.
-7. **Image Generation**: If no images are provided, load the `replicate-recraft-svg` skill and generate SVG placeholders with a direct Replicate Bash API call.
+1. **Architecture discipline**: Every feature must respect the Request (Zod) -> Service (Axios to Laravel API) -> Hook (TanStack Query) -> Component (App Router UI) pipeline.
+2. **State separation**: TanStack Query is the sole source for server data, while Zustand is limited to client UI concerns; duplication is disallowed.
+3. **UI + i18n**: shadcn/ui components, Tailwind 4 utilities, and `next-intl` namespaces per feature are mandatory, with no hardcoded copy in components.
+4. **Tooling expectations**: Bun drives dev, lint, and test (≥90% coverage). ESLint + Prettier config plus markdown documentation rules apply.
+5. **auth**: OAuth-based authentication require careful env management and secure handling of secrets.
+6. **Use available tools** like `chrome-devtools`, `shadcn` or `figma` (when a figma project does exists) to verify your work.
+7. **Image Generation**: If no images are provided, load the `replicate-svg-generation` skill to generate SVG placeholders with a direct Replicate Bash API call or load the `replicate-png-generation` to generate PNG placeholders with a direct Replicate Bash API call.
 
 ## File Editing Permissions
 
