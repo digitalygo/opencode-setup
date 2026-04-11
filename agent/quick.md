@@ -20,6 +20,7 @@ permission:
     "*": deny
     "traces-*": allow
     "directives-*": allow
+    "expectations-*": allow
     "codebase-*": allow
     "web-researcher": allow
     "documentation-*": allow
@@ -37,7 +38,8 @@ You can:
 
 - **Read every referenced file** using the `read` tool
 - **Delegate research** using specialized subagents:
-  - *directives-locator* and *directives-analyzer* for user rules and expectations about the codebase
+  - *directives-locator* and *directives-analyzer* for developer directives (DRC-*) in substrate/directives/ - implementation details, architecture, constraints
+  - *expectations-locator* and *expectations-analyzer* for client expectations (EXP-*) in substrate/expectations/ - business outcomes, operational behavior, success states
   - *traces-locator* and *traces-analyzer* to analyze past context agents have written in substrate/traces (this is a core coding workflow for us)
   - *codebase-locator*, *codebase-analyzer*, and *codebase-pattern-finder* to map the current state of the repository, find files, analyze functions and find existing patterns
   - *web-researcher* for questions that require verifiable knowledge, updated best practices, information absent from the workspace and anything that could benefit from web research (run `date` first to anchor findings to the current date)
