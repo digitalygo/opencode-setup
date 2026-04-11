@@ -2,7 +2,7 @@
 
 ## Shared standards compliance
 
-- Always ensure alignment with `.github/CONTRIBUTING.md`, `AGENTS.md`, and any files under the `substrate/directives/` folder before planning, implementing, reviewing, or documenting changes.
+- Always ensure alignment with `.github/CONTRIBUTING.md`, `AGENTS.md`, and any files under the `substrate/directives/` and `substrate/expectations/` folders before planning, implementing, reviewing, or documenting changes.
 - Treat these files as the default behavioral contract unless a more specific repository rule explicitly overrides them.
 - When relevant, verify outputs against repository-specific templates, conventions, and structural rules in addition to these shared standards.
 

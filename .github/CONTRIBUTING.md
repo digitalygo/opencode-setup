@@ -53,6 +53,10 @@ understanding the repository structure is crucial for effective contributions. p
 - `agent/` - our collection of ai agents and subagents
 - `command/` - custom command definitions
 - `skills/` - our skills collection
+- `substrate/` - Mycelium framework storage
+  - `traces/` - agent-written documentation
+  - `directives/` - structured developer instructions (DRC-*.md)
+  - `expectations/` - client expectations (EXP-*.md)
 - `.markdownlint*` - markdownlint configuration
 - `.releaserc.jsonc` - semantic-release configuration
 - `opencode.jsonc` - main OpenCode configuration
