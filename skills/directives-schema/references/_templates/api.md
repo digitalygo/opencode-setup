@@ -19,7 +19,7 @@ Define which roles can access this endpoint and their permissions:
 - **User**: Can read and update own profile data, cannot access other user records or modify roles
 - **Service**: Internal service-to-service access for authentication and audit systems
 
-### Permission Matrix
+### Permission matrix
 
 | Role | GET | POST | PUT | DELETE |
 |------|-----|------|-----|--------|
@@ -28,9 +28,9 @@ Define which roles can access this endpoint and their permissions:
 | User | Own only | Own only | Own only | No |
 | Service | Yes | Yes | No | No |
 
-## Desired Behavior
+## Implementation Requirements
 
-### Get User
+### Get user
 
 **Method**: `GET`  
 **Path**: `/api/v1/users/{userId}`
@@ -43,7 +43,7 @@ Define which roles can access this endpoint and their permissions:
 }
 ```
 
-#### Response Success (200 OK)
+#### Response success (200 OK)
 
 ```json
 {
@@ -57,7 +57,7 @@ Define which roles can access this endpoint and their permissions:
 }
 ```
 
-#### Error Responses
+#### Error responses
 
 | Status | Code | When it occurs |
 |--------|------|----------------|
@@ -68,7 +68,7 @@ Define which roles can access this endpoint and their permissions:
 | 429 | Too Many Requests | Rate limit of 100 requests per minute exceeded |
 | 500 | Internal Error | Unexpected server error, incident ID logged |
 
-#### Rate Limiting
+#### Rate limiting
 
 - **Limit**: 100 requests per minute per user
 - **Scope**: Per authenticated user
@@ -76,7 +76,7 @@ Define which roles can access this endpoint and their permissions:
 
 ## Inputs & Outputs
 
-### Input Parameters
+### Input parameters
 
 | Name | Type | Required | Location | Description |
 |------|------|----------|----------|-------------|
@@ -84,7 +84,7 @@ Define which roles can access this endpoint and their permissions:
 | include | string | No | query | Related resources to embed, default empty |
 | fields | string | No | query | Specific fields to return, default all |
 
-### Output Fields
+### Output fields
 
 | Name | Type | Nullable | Description |
 |------|------|----------|-------------|

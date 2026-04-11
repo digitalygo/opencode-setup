@@ -18,13 +18,13 @@ Describe the different user roles that interact with this feature and their resp
 - **User**: Can view and edit own profile, change password, manage notification preferences, and view limited activity history
 - **Guest**: Can view public profile information only, cannot edit or access restricted settings
 
-## Desired Behavior
+## Implementation Requirements
 
-### Base Flow
+### Base flow
 
 User navigates to profile page from navigation menu. System displays current profile information in editable form. User makes changes and clicks save. System validates input, updates data, and displays success confirmation.
 
-### Role-Based Variations
+### Role-based variations
 
 Describe how the behavior changes based on user role:
 
@@ -32,7 +32,7 @@ Describe how the behavior changes based on user role:
 - **User view**: Displays personal profile with editable fields, privacy settings, and connected account management
 - **Guest view**: Shows read-only public profile with basic information, no edit capabilities, login prompt for additional features
 
-### Responsive States
+### Responsive states
 
 - **Desktop**: Full two-column layout with sidebar navigation, expanded forms, inline validation
 - **Tablet**: Single column with collapsible sidebar, touch-optimized form fields, modal dialogs for confirmations
