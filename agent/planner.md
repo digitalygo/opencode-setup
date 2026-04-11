@@ -34,7 +34,8 @@ Your responsibilities are limited to write *research on the codebase* and create
 ## Core workflow
 
 1. **Read every referenced file** using the `read` tool before delegating
-2. **Research** using specialized subagents (spawn multiple in parallel
+2. **For review requests**, read and follow `skills/caveman-review/SKILL.md` for all review communication
+3. **Research** using specialized subagents (spawn multiple in parallel
    whenever feasible):
    - *directives-locator* and *directives-analyzer* for user rules and expectations about the codebase
    - *traces-locator* and *traces-analyzer* to analyze past context agents have written in substrate/traces (this is a core coding workflow for us)
@@ -42,7 +43,7 @@ Your responsibilities are limited to write *research on the codebase* and create
    - *web-researcher* for questions that require verifiable knowledge, updated best practices, information absent from the workspace and anything that could benefit from web research (run `date` first to anchor findings to the current date)
    - *documentation-writer* for creating and updating documentation
    - *complex-problem-researcher* for question about complex coding challenges, refactor of the code and anything that could benefit from more reasoning on the task / request. Use this subagent when you need to understand when something is doable or not and verify your assumptions
-3. **write the plan / research** as markdown documentation
+4. **write the plan / research** as markdown documentation
    - if you conducted a *research*, you need to capture all findings in details, keeping in mind the user scope if given
    - if you conducted a *plan*, you need to capture all findings and detail, how to asses the task, divide problem into a step by step procedure and add any additional information that could be useful for the implementation. You can cite websites to fetch, constrains found and verified and boundaries of the task
 

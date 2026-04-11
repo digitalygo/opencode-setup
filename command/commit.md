@@ -3,6 +3,7 @@ description: Commit changes
 agent: commit
 ---
 
-# Commit Changes
+# Commit changes
 
-Please commit the changes made during this session and make sure to follow the git commit agent instructions
+Read and follow `skills/caveman-commit/SKILL.md` for writing the commit message.
+Commit the changes made during this session following the commit agent instructions.
