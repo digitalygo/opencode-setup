@@ -51,7 +51,8 @@ the setup script and manual rsync copy runtime configuration to `~/.config/openc
 - `plugins/` - plugin definitions
 - `setup.sh` - installation script
 - `skills/` - skill definitions
-- `substrate/directives/` - Mycelium human-authored behavioral directives
+- `substrate/directives/` - Mycelium structured developer instructions
+- `substrate/expectations/` - Mycelium client high-level expectations
 
 **stays repository-internal (excluded from sync):**
 
@@ -69,14 +70,15 @@ repositories using the legacy layout have `thoughts/` and `intents/` at root lev
 this repository uses the Mycelium framework with substrate-based organization:
 
 - `substrate/traces/` - agent-written documentation (operations, plans, research, reviews, status)
-- `substrate/directives/` - human-authored behavioral directives (previously `intents/`)
+- `substrate/directives/` - structured developer instructions (`DRC-*.md` files)
+- `substrate/expectations/` - client expectations (`EXP-*.md` files)
 
 ### legacy layout
 
 repositories using the old layout have:
 
 - `thoughts/` instead of `substrate/traces/`
-- `intents/` instead of `substrate/directives/`
+- `intents/` instead of `substrate/directives/` (intents were developer instructions, not expectations)
 
 ### migration
 
@@ -91,9 +93,10 @@ this command:
 
 1. detects the current layout (legacy, new, or mixed)
 2. moves files from `thoughts/` to `substrate/traces/` (removing the `shared/` layer)
-3. moves files from `intents/` to `substrate/directives/`
-4. preserves all content and nested structure
-5. refuses to proceed on ambiguous or mixed layouts
+3. moves files from `intents/` to `substrate/directives/` (legacy intents were developer instructions)
+4. creates `substrate/expectations/` for new repositories (no legacy source; expectations capture client expectations)
+5. preserves all content and nested structure
+6. refuses to proceed on ambiguous or mixed layouts
 
 see the `mycelium-migration` skill for detailed detection logic and fallback guidance.
 
@@ -108,7 +111,8 @@ understanding the repository structure is crucial for effective contributions. p
 - `skills/` - skill definitions
 - `substrate/` - Mycelium framework storage
   - `traces/` - agent-written documentation (operations, plans, research, reviews, status)
-  - `directives/` - human-authored behavioral directives
+  - `directives/` - structured developer instructions (`DRC-*.md`)
+  - `expectations/` - client expectations (`EXP-*.md`)
 - `.markdownlint.json` and `.markdownlintignore` - markdownlint configuration
 - `.releaserc.json` - semantic-release configuration
 - `opencode.jsonc` - main OpenCode configuration
@@ -117,7 +121,7 @@ understanding the repository structure is crucial for effective contributions. p
 legacy repositories may also contain:
 
 - `thoughts/` - legacy agent-written docs (migrate to `substrate/traces/`)
-- `intents/` - legacy directives (migrate to `substrate/directives/`)
+- `intents/` - legacy developer instructions (migrate to `substrate/directives/`)
 
 ---
 

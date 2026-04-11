@@ -47,12 +47,16 @@ prerequisites:
 
 ## folder structure
 
-understanding the repository structure is crucial for effective contributions. please kep files and edits as tidy as possible
+understanding the repository structure is crucial for effective contributions. please keep files and edits as tidy as possible
 
 - `.github/` - gitHub automation and configuration
 - `agent/` - our collection of ai agents and subagents
 - `command/` - custom command definitions
 - `skills/` - our skills collection
+- `substrate/` - Mycelium framework storage
+  - `traces/` - agent-written documentation
+  - `directives/` - structured developer instructions (DRC-*.md)
+  - `expectations/` - client expectations (EXP-*.md)
 - `.markdownlint*` - markdownlint configuration
 - `.releaserc.jsonc` - semantic-release configuration
 - `opencode.jsonc` - main OpenCode configuration
@@ -62,25 +66,6 @@ understanding the repository structure is crucial for effective contributions. p
 ## code style guidelines
 
 ### bash scripts
-
-```bash
-#!/usr/bin/env bash
-set -euo pipefail  # Always use these options
-
-# Use readonly for constants
-readonly SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-
-# Function naming: snake_case
-function install_dependencies() {
-    local package="$1"
-    # Proper quoting
-    if command -v "$package" >/dev/null 2>&1; then
-        echo "$package is already installed"
-    fi
-}
-```
-
-**requirements:**
 
 - always use `set -euo pipefail`
 - use readonly variables for constants
@@ -114,6 +99,29 @@ agent definition files live in `agent/`. use these patterns so names stay predic
 - `*-researcher.md` for research/fallback agents (e.g., `generalist-researcher.md`, `web-researcher.md`)
 - stick with lowercase kebab-case and avoid titles like `engineer` or `expert` in filenames
 
+### prompt writing style
+
+when writing agent prompts, skill instructions, command definitions, or any instruction file that gets injected into an active agent, address the reader directly in second person:
+
+- write to `you`, not about agents as an external group
+- use active, direct phrasing
+
+applies to files like:
+
+- `agent/*.md`
+- `command/*.md`
+- `skills/**/SKILL.md`
+- any other prompt or instruction file
+
+examples:
+
+| avoid | prefer |
+|-------|--------|
+| "all agents must" | "you must" |
+| "this skill does" | "you will" |
+| "the agent should" | "you should" |
+| "agents are expected to" | "you are expected to" |
+
 ## conventional commits
 
 this repository uses semantic-release, which *requires* conventional commits
@@ -142,29 +150,6 @@ this repository uses semantic-release, which *requires* conventional commits
 - `chore`: other changes that don't modify src or test files
 - `revert`: reverts a previous commit
 
-### Examples
-
-```bash
-feat(opencode): add new plugin system
-fix(setup): resolve permission issues in installation
-docs: update contributing guidelines
-refactor(bash): extract common functions to utils
-perf(startup): optimize shell initialization
-test(plugins): add integration tests for plugin system
-build: update dependencies to latest versions
-ci: add automated testing workflow
-chore: update README with new features
-revert: undo previous plugin changes
-```
-
-### commit message rules
-
-- use imperative mood ("add" not "adds" or "added")
-- don't capitalize first letter
-- no period at the end
-- keep description short
-- use body for detailed explanations when needed
-
 ### impact on releases
 
 - `feat` commits trigger minor version bump
@@ -176,7 +161,7 @@ revert: undo previous plugin changes
 
 when opening new pr, *always target `alpha`* branch. please try to keep prs *small* and *focused*
 
-### branching strategyalways target `alpha`
+### branching strategy always target `alpha`
 
 - `main` - production branch (protected)
 - `beta` - beta releases branch (protected)
