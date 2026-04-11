@@ -18,9 +18,9 @@ Describe how different roles interact with this logic (if applicable):
 - **User**: Receives automatic discount calculations at checkout, views applied discounts in cart summary
 - **System**: Automated execution during checkout process, scheduled recalculation for expired promotions
 
-## Desired Behavior
+## Implementation Requirements
 
-### Algorithm Steps
+### Algorithm steps
 
 1. Validate input order data including items, quantities, and customer identifier
 2. Retrieve active promotions matching order criteria and customer segment
@@ -29,7 +29,7 @@ Describe how different roles interact with this logic (if applicable):
 5. Enforce maximum discount caps and stacking rules
 6. Calculate final totals and prepare detailed breakdown
 
-### Business Rules
+### Business rules
 
 - Percentage discounts apply to item subtotal before fixed discounts
 - Customer tier discounts stack with promotional codes up to maximum 50% total
@@ -37,7 +37,7 @@ Describe how different roles interact with this logic (if applicable):
 - Expired promotion codes return specific error with expiration timestamp
 - Bulk discounts apply per item category with quantity breakpoints at 10, 50, and 100 units
 
-### Role-Based Variations
+### Role-based variations
 
 Describe how behavior changes per role (if any):
 
@@ -67,7 +67,7 @@ Describe how behavior changes per role (if any):
 | currency | string | No | Currency code matching input |
 | calculationId | string | No | Unique identifier for this calculation event |
 
-### Performance Characteristics
+### Performance characteristics
 
 - **Time complexity**: O(n log n) where n is number of items plus number of active promotions
 - **Space complexity**: O(n) for storing discount calculations and intermediate results

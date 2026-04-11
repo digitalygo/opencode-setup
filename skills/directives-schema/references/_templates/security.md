@@ -14,21 +14,21 @@ Protects user accounts by requiring secondary verification beyond passwords, pre
 
 Define legitimate users, administrators, and potential threat actors:
 
-### Legitimate Roles
+### Legitimate roles
 
 - **Admin**: Can configure MFA requirements for organization, view MFA audit logs, temporarily disable MFA for users with documented approval
 - **Verified User**: Authenticated users with confirmed identity who have enrolled at least one MFA method
 - **Guest**: Unauthenticated users with limited access who cannot access MFA-protected resources
 
-### Threat Actors
+### Threat actors
 
 - **Attacker**: Motivated by financial gain or data theft, assumed capabilities include password lists, phishing, and automated credential stuffing
 - **Automated Bot**: Systematic login attempts from multiple IPs, behavior patterns include rapid sequential attempts and credential list iteration
 - **Compromised Account**: Legitimate user with stolen credentials, attacker may have password but lacks access to secondary authentication method
 
-## Desired Behavior
+## Implementation Requirements
 
-### Base Case (Legitimate User)
+### Base case (legitimate user)
 
 1. User attempts login with username and password
 2. System verifies credentials and checks MFA enrollment status
@@ -37,7 +37,7 @@ Define legitimate users, administrators, and potential threat actors:
 5. System validates second factor and creates authenticated session
 6. Activity is logged with timestamp, IP address, and MFA method used
 
-### Negative Case (Attack/Unauthorized Access)
+### Negative case (attack/unauthorized access)
 
 1. Attacker attempts login with stolen credentials from breach database
 2. System detects valid password but MFA requirement blocks access
@@ -46,7 +46,7 @@ Define legitimate users, administrators, and potential threat actors:
 5. Incident is logged with credential used, IP address, user agent, and geolocation
 6. Alert is sent to security team and notification email sent to account owner
 
-### Role-Based Permissions
+### Role-based permissions
 
 | Action | Admin | Verified User | Guest | Blocked |
 |--------|-------|---------------|-------|---------|
@@ -58,7 +58,7 @@ Define legitimate users, administrators, and potential threat actors:
 
 ## Inputs & Outputs
 
-### Security Inputs
+### Security inputs
 
 | Input | Source | Validation |
 |-------|--------|------------|
@@ -68,7 +68,7 @@ Define legitimate users, administrators, and potential threat actors:
 | IP address | Request | Reputation check against threat intelligence, geolocation anomaly detection |
 | User agent | Request | Anomaly detection for automated tools or unexpected browsers |
 
-### Security Outputs
+### Security outputs
 
 | Output | Destination | Retention |
 |--------|-------------|-----------|
@@ -85,7 +85,7 @@ Define legitimate users, administrators, and potential threat actors:
 - **Audit system failure**: Fail-secure behavior blocking sensitive operations until logging restored
 - **Encryption key compromise**: Automated key rotation within 24 hours, re-encryption of stored data
 
-### Rate Limiting / Throttling
+### Rate limiting / Throttling
 
 | Endpoint | Limit | Window | Exceeded Action |
 |----------|-------|--------|-----------------|
@@ -93,7 +93,7 @@ Define legitimate users, administrators, and potential threat actors:
 | API | 100 | 1 minute | 429 response with retry header |
 | Sensitive | 10 | 1 hour | Escalated review + CAPTCHA challenge |
 
-### Audit and Logging
+### Audit and logging
 
 - **What is logged**: Authentication attempts, MFA enrollment changes, permission modifications, sensitive data access, administrative overrides
 - **Log format**: Structured JSON with correlation ID, timestamp in ISO 8601, actor identification, action type, result status
