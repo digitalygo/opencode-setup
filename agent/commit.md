@@ -16,7 +16,6 @@ permission:
   webfetch: deny
   websearch: deny
   codesearch: deny
-  external_directory: deny
   doom_loop: deny
   bash:
     "git add *": allow
