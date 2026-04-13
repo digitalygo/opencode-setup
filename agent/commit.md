@@ -11,7 +11,6 @@ tools:
 permission:
   edit: deny
   task: deny
-  skill: deny
   lsp: deny
   webfetch: deny
   websearch: deny
