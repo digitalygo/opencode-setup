@@ -1,7 +1,7 @@
 ---
 description: Primary coordinator that plans tasks, assigns specialized subagents, and verifies results without doing the implementation
 mode: primary
-model: opencode/gpt-5.1-codex-max
+model: opencode/gpt-5.2-codex
 temperature: 0.1
 permission:
   bash:

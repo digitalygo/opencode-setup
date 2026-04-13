@@ -1,7 +1,7 @@
 ---
 description: Agent for generating and refining developer directives in the substrate/directives/ directory
 mode: primary
-model: opencode/gpt-5.1-codex-max
+model: opencode/gpt-5.2-codex
 temperature: 0.3
 permission:
   bash:
