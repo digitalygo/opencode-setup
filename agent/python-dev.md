@@ -1,7 +1,7 @@
 ---
 description: Python software developer
 mode: subagent
-model: openai/gpt-5.4
+model: openai/gpt-5.4-mini
 temperature: 0.15
 steps: 100
 tools:
