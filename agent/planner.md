@@ -1,7 +1,7 @@
 ---
 description: planner agent that does research on the codebase and writes implementation plans without executing work
 mode: primary
-model: opencode/gpt-5.1-codex-max
+model: opencode/gpt-5.2-codex
 temperature: 0.2
 permission:
   bash:

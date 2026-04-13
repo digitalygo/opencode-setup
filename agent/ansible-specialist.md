@@ -1,7 +1,7 @@
 ---
 description: Ansible automation specialist
 mode: subagent
-model: opencode/gpt-5.1-codex-max
+model: opencode/gpt-5.2-codex
 temperature: 0.15
 steps: 100
 tools:
