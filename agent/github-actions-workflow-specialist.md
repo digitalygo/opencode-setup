@@ -2,7 +2,6 @@
 description: GitHub Actions workflow specialist
 mode: subagent
 model: opencode-go/kimi-k2.5
-temperature: 0.15
 steps: 100
 tools:
   "figma*": false

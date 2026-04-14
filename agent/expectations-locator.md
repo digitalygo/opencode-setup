@@ -2,7 +2,6 @@
 description: READ ONLY expectations locator for EXP-* client expectation files under substrate/expectations/
 mode: subagent
 model: opencode-go/kimi-k2.5
-temperature: 0.3
 steps: 150
 tools:
   "figma*": false

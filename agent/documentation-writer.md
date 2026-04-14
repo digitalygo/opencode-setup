@@ -2,7 +2,6 @@
 description: Documentation writer for both human engineers and AI agents
 mode: subagent
 model: opencode-go/kimi-k2.5
-temperature: 0.2
 steps: 100
 tools:
   "figma*": false
