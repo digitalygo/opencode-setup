@@ -2,7 +2,6 @@
 description: JavaScript/TypeScript software developer
 mode: subagent
 model: opencode-go/kimi-k2.5
-temperature: 0.15
 steps: 100
 permission:
   bash:
