@@ -127,6 +127,7 @@ This is the complete list of operational subagents:
 - **documentation-writer**: for writing / editing all kind of documentation
 - **frontend-html-css-specialist**: for writing / editing frontend html css code
 - **github-actions-workflow-specialist**: for writing / editing github actions workflow code
+- **go-dev**: for writing / editing go code
 - **javascript-typescript-dev**: for writing / editing javascript typescript code (avoid to give this agent tasks related to frontend code if possible)
 - **openscad-specialist**: for writing / editing openscad code
 - **opentofu-terraform-specialist**: for writing / editing opentofu terraform code
