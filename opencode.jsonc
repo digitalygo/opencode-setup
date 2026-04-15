@@ -126,6 +126,7 @@
       "docker bake *": "allow",
       "docker compose ps": "allow",
       "docker compose logs *": "allow",
+      "docker compose config": "allow"
     },
   },
 }
