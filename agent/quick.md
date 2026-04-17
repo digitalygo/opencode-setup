@@ -1,7 +1,7 @@
 ---
 description: Agent for quick questions and research, not for implementing changes
 mode: primary
-model: opencode-go/kimi-k2.5
+model: openai/gpt-5.4-mini
 permission:
   bash:
     "npx markdownlint-cli *": allow
