@@ -8,8 +8,6 @@ tools:
   "shadcn*": false
   "chrome-devtools*": false
 permission:
-  bash:
-    "npx markdownlint-cli *": allow
   edit:
     "*": "deny"
     "*.md": allow

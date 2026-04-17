@@ -15,6 +15,7 @@ permission:
     "docker pull *": allow
     "docker build *": allow
     "docker save *": allow
+    "curl -fsSL *": allow
   edit:
     "*": deny
     "substrate/traces/reviews/*.md": allow
