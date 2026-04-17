@@ -3,8 +3,6 @@ description: Agent for quick questions and research, not for implementing change
 mode: primary
 model: openai/gpt-5.4-mini
 permission:
-  bash:
-    "npx markdownlint-cli *": allow
   edit:
     "*": "deny"
     "substrate/traces/research/*.md": allow
@@ -21,8 +19,9 @@ permission:
     "directives-*": allow
     "expectations-*": allow
     "codebase-*": allow
-    "web-researcher": allow
+    "security-*": allow
     "documentation-*": allow
+    "web-researcher": allow
     "complex-problem-researcher": allow
 ---
 
