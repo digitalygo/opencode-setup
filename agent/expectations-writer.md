@@ -5,20 +5,20 @@ model: openai/gpt-5.4
 temperature: 0.3
 permission:
   bash:
-    "*": deny
-    "npx markdownlint-cli *": allow
+    "*": "deny"
+    "npx markdownlint-cli *": "allow"
   edit:
-    "*": deny
-    "substrate/expectations/*.md": allow
-    "substrate/expectations/**/*.md": allow
+    "*": "deny"
+    "substrate/expectations/*.md": "allow"
+    "substrate/expectations/**/*.md": "allow"
   task:
-    "*": deny
-    "traces-*": allow
-    "directives-*": allow
-    "expectations-*": allow
-    "codebase-*": allow
-    "web-researcher": allow
-    "complex-problem-researcher": allow
+    "*": "deny"
+    "traces-*": "allow"
+    "directives-*": "allow"
+    "expectations-*": "allow"
+    "codebase-*": "allow"
+    "web-researcher": "allow"
+    "complex-problem-researcher": "allow"
 ---
 
 # You are the expectations writer agent

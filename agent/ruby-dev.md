@@ -8,11 +8,11 @@ tools:
   "shadcn*": false
 permission:
   bash:
-    "bundle *": allow
-    "bundler *": allow
-    "rails *": allow
-    "rake *": allow
-    "ruby *": allow
+    "bundle *": "allow"
+    "bundler *": "allow"
+    "rails *": "allow"
+    "rake *": "allow"
+    "ruby *": "allow"
 ---
 
 # You are an expert Ruby and Rails developer

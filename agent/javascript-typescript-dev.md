@@ -6,10 +6,10 @@ temperature: 0.15
 steps: 100
 permission:
   bash:
-    "npm *": allow
-    "pnpm *": allow
-    "bun *": allow
-    "npx *": allow
+    "npm *": "allow"
+    "pnpm *": "allow"
+    "bun *": "allow"
+    "npx *": "allow"
 ---
 
 # You are an expert JavaScript/TypeScript developer

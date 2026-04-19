@@ -6,19 +6,19 @@ temperature: 0.2
 permission:
   edit:
     "*": "deny"
-    "*.md": allow
-    "**/*.md": allow
-    ".gitignore": allow
+    "*.md": "allow"
+    "**/*.md": "allow"
+    ".gitignore": "allow"
   task:
-    "*": deny
-    "traces-*": allow
-    "directives-*": allow
-    "expectations-*": allow
-    "codebase-*": allow
-    "security-*": allow
-    "documentation-*": allow
-    "web-researcher": allow
-    "complex-problem-researcher": allow
+    "*": "deny"
+    "traces-*": "allow"
+    "directives-*": "allow"
+    "expectations-*": "allow"
+    "codebase-*": "allow"
+    "security-*": "allow"
+    "documentation-*": "allow"
+    "web-researcher": "allow"
+    "complex-problem-researcher": "allow"
 ---
 
 # You are the planning agent

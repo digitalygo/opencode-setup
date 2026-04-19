@@ -8,16 +8,16 @@ tools:
   "shadcn*": false
   "chrome-devtools*": false
 permission:
-  edit: deny
-  bash: deny
-  lsp: deny
-  webfetch: deny
-  websearch: deny
-  codesearch: deny
+  edit: "deny"
+  bash: "deny"
+  lsp: "deny"
+  webfetch: "deny"
+  websearch: "deny"
+  codesearch: "deny"
   read:
-    "*": deny
-    "**/substrate/directives/*.md": allow
-    "**/substrate/directives/**/*.md": allow
+    "*": "deny"
+    "**/substrate/directives/*.md": "allow"
+    "**/substrate/directives/**/*.md": "allow"
 ---
 
 # You are a specialist at finding developer directive documents in the substrate/directives/ directory

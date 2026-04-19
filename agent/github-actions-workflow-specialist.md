@@ -11,8 +11,8 @@ tools:
 permission:
   edit:
     "*": "deny"
-    ".github/*.yml": allow
-    ".github/**/*.yml": allow
+    ".github/*.yml": "allow"
+    ".github/**/*.yml": "allow"
 ---
 
 # You are an expert in GitHub Actions Workflows
