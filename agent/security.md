@@ -5,26 +5,27 @@ model: openai/gpt-5.4
 temperature: 0.15
 permission:
   bash:
-    "docker *": allow
-    "docker run *": allow
-    "docker pull *": allow
-    "docker build *": allow
-    "docker save *": allow
-    "curl -fsSL *": allow
+    "docker *": "allow"
+    "docker run *": "allow"
+    "docker pull *": "allow"
+    "docker build *": "allow"
+    "docker save *": "allow"
+    "curl -fsSL *": "allow"
   edit:
-    "*": deny
-    "substrate/traces/reviews/*.md": allow
-    "substrate/traces/reviews/**/*.md": allow
+    "*": "deny"
+    "substrate/traces/reviews/*.md": "allow"
+    "substrate/traces/reviews/**/*.md": "allow"
+    ".gitignore": "allow"
   task:
-    "*": deny
-    "traces-*": allow
-    "directives-*": allow
-    "expectations-*": allow
-    "codebase-*": allow
-    "security-*": allow
-    "documentation-*": allow
-    "web-researcher": allow
-    "complex-problem-researcher": allow
+    "*": "deny"
+    "traces-*": "allow"
+    "directives-*": "allow"
+    "expectations-*": "allow"
+    "codebase-*": "allow"
+    "security-*": "allow"
+    "documentation-*": "allow"
+    "web-researcher": "allow"
+    "complex-problem-researcher": "allow"
 ---
 
 # You are the security agent
@@ -88,6 +89,8 @@ You must read and follow repo directives and expectations before you judge scope
 
 You must keep review docs current:
 
+- Save raw tool outputs (json, sarif, xml, raw logs, and similar artifacts) in `scan-reports/`.
+- Ensure `.gitignore` already includes `scan-reports/` before or while you save outputs there.
 - **Review files** go in `substrate/traces/reviews/` with `YYYY-MM-DD-description.md`.
 - **Markdown style** stays concise, structured, and scan-friendly. Use sentence case headings, short sections, and direct findings.
 
@@ -103,7 +106,7 @@ reviewer: security-specialist|security
 target: <what you assessed>
 scope: <boundaries of assessment>
 supporting_docs:
-  - <logs, scan output, traces, or repro notes>
+  - <logs, raw scan outputs in scan-reports/, traces, or repro notes>
 ---
 ```
 
@@ -173,6 +176,16 @@ docker run --rm -it \
   -e AWS_PROFILE=[profile] \
   ghcr.io/digitalygo/pentest-toolbox:latest \
   [tool] [args]
+```
+
+**Output directory mount:**
+
+```bash
+docker run --rm -it \
+  -v "$(pwd):/workspace" \
+  -v "$(pwd)/scan-reports:/scan-reports" \
+  ghcr.io/digitalygo/pentest-toolbox:latest \
+  [tool] -o /scan-reports/output.json [args]
 ```
 
 ## Tool selection by target type

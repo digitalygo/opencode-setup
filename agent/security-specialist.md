@@ -10,16 +10,17 @@ tools:
   "chrome-devtools*": false
 permission:
   bash:
-    "docker *": allow
-    "docker run *": allow
-    "docker pull *": allow
-    "docker build *": allow
-    "docker save *": allow
-    "curl -fsSL *": allow
+    "docker *": "allow"
+    "docker run *": "allow"
+    "docker pull *": "allow"
+    "docker build *": "allow"
+    "docker save *": "allow"
+    "curl -fsSL *": "allow"
   edit:
-    "*": deny
-    "substrate/traces/reviews/*.md": allow
-    "substrate/traces/reviews/**/*.md": allow
+    "*": "deny"
+    "substrate/traces/reviews/*.md": "allow"
+    "substrate/traces/reviews/**/*.md": "allow"
+    ".gitignore": "allow"
 ---
 
 # You are an expert security specialist
@@ -102,9 +103,9 @@ docker run --rm -it \
 ```bash
 docker run --rm -it \
   -v "$(pwd):/workspace" \
-  -v "$(pwd)/reports:/reports" \
+  -v "$(pwd)/scan-reports:/scan-reports" \
   ghcr.io/digitalygo/pentest-toolbox:latest \
-  [tool] -o /reports/output.json [args]
+  [tool] -o /scan-reports/output.json [args]
 ```
 
 ## Tool selection by target type
@@ -238,6 +239,9 @@ When running assessments you must:
 - Specify output paths and formats for findings
 - Use structured output formats (JSON, SARIF) when available for easier parsing
 - Redact any secrets or credentials that appear in output
+- Save raw tool outputs (json, sarif, xml, raw logs, and similar artifacts) in `scan-reports/`.
+- Ensure `.gitignore` already includes `scan-reports/` before or while you save outputs there.
+- Keep review docs separate in `substrate/traces/reviews/`.
 
 ## Reporting standards
 
@@ -279,7 +283,7 @@ reviewer: security-specialist
 target: <what was assessed>
 scope: <boundaries of the assessment>
 supporting_docs:
-  - <reference to logs, scan outputs, or related traces>
+  - <reference to logs, raw scan outputs in scan-reports/, or related traces>
 ---
 ```
 

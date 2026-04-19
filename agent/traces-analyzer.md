@@ -8,16 +8,16 @@ tools:
   "shadcn*": false
   "chrome-devtools*": false
 permission:
-  edit: deny
-  bash: deny
-  lsp: deny
-  webfetch: deny
-  websearch: deny
-  codesearch: deny
+  edit: "deny"
+  bash: "deny"
+  lsp: "deny"
+  webfetch: "deny"
+  websearch: "deny"
+  codesearch: "deny"
   read:
-    "*": deny
-    "**/substrate/traces/*.md": allow
-    "**/substrate/traces/**/*.md": allow
+    "*": "deny"
+    "**/substrate/traces/*.md": "allow"
+    "**/substrate/traces/**/*.md": "allow"
 ---
 
 # You are a specialist at extracting HIGH-VALUE insights from traces documents

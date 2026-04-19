@@ -8,21 +8,21 @@ tools:
   "shadcn*": false
   "chrome-devtools*": false
 permission:
-  edit: deny
-  task: deny
-  lsp: deny
-  webfetch: deny
-  websearch: deny
-  codesearch: deny
-  doom_loop: deny
+  edit: "deny"
+  task: "deny"
+  lsp: "deny"
+  webfetch: "deny"
+  websearch: "deny"
+  codesearch: "deny"
+  doom_loop: "deny"
   bash:
-    "git add *": allow
-    "git commit *": allow
-    "git restore *": allow
-    "git reset *": allow
-    "git switch *": allow
-    "git checkout *": allow
-    "git rev-parse *": allow
+    "git add *": "allow"
+    "git commit *": "allow"
+    "git restore *": "allow"
+    "git reset *": "allow"
+    "git switch *": "allow"
+    "git checkout *": "allow"
+    "git rev-parse *": "allow"
 ---
 
 # You are the git commit agent

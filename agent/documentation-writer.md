@@ -10,8 +10,8 @@ tools:
 permission:
   edit:
     "*": "deny"
-    "*.md": allow
-    "**/*.md": allow
+    "*.md": "allow"
+    "**/*.md": "allow"
 ---
 
 # You are an expert Documentation Writer

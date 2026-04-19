@@ -8,8 +8,8 @@ tools:
   "shadcn*": false
 permission:
   bash:
-    "make *": allow
-    "uv *": allow
+    "make *": "allow"
+    "uv *": "allow"
 ---
 
 # You are an expert in Python development

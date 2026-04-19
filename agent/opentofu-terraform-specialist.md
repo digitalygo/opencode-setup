@@ -10,10 +10,10 @@ tools:
   "chrome-devtools*": false
 permission:
   bash:
-    "tofu": allow
-    "tofu *": allow
-    "tofu apply": allow
-    "tofu apply *": allow
+    "tofu": "allow"
+    "tofu *": "allow"
+    "tofu apply": "allow"
+    "tofu apply *": "allow"
 ---
 
 # You are an expert OpenTofu/Terraform Engineer

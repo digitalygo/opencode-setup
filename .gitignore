@@ -6,3 +6,4 @@ artifacts/
 node_modules/
 .config/opencode/node_modules/
 replicate-output/
+scan-reports/
