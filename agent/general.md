@@ -1,7 +1,7 @@
 ---
 description: General-purpose fallback agent, use when no specialized subagent applies
 mode: subagent
-model: opencode-go/kimi-k2.5
+model: opencode-go/kimi-k2.6
 steps: 100
 tools:
   "figma*": false
