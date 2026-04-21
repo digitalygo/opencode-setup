@@ -1,7 +1,7 @@
 ---
 description: READ ONLY traces locator that surfaces relevant documents in traces/ by topic and category without interpreting their contents
 mode: subagent
-model: opencode-go/kimi-k2.5
+model: opencode-go/kimi-k2.6
 steps: 150
 tools:
   "figma*": false

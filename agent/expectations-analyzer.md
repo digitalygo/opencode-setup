@@ -1,7 +1,7 @@
 ---
 description: READ ONLY analyst for EXP-* client expectation documents
 mode: subagent
-model: opencode-go/kimi-k2.5
+model: opencode-go/kimi-k2.6
 steps: 150
 tools:
   "figma*": false

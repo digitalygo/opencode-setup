@@ -1,7 +1,7 @@
 ---
 description: JavaScript/TypeScript software developer
 mode: subagent
-model: opencode-go/kimi-k2.5
+model: opencode-go/kimi-k2.6
 steps: 100
 permission:
   bash:
