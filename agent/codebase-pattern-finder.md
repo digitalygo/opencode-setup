@@ -1,7 +1,7 @@
 ---
 description: READ ONLY pattern finder that locates related implementations and returns file-referenced code snippets and usage conventions for reuse
 mode: subagent
-model: opencode-go/kimi-k2.5
+model: opencode-go/kimi-k2.6
 steps: 150
 tools:
   "figma*": false
