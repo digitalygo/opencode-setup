@@ -1,7 +1,7 @@
 ---
 description: Agent for generating and refining client expectations in the substrate/expectations/ directory
 mode: primary
-model: openai/gpt-5.4
+model: openai/gpt-5.5
 temperature: 0.3
 permission:
   bash:

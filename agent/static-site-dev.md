@@ -1,7 +1,7 @@
 ---
 description: Static site developer (SSG) using Next.js static exports or React with Docker and Caddy
 mode: subagent
-model: openai/gpt-5.4
+model: openai/gpt-5.5
 temperature: 0.3
 ---
 
