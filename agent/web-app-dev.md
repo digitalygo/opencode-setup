@@ -1,7 +1,7 @@
 ---
 description: Web application developer for dynamic, data-driven systems using Next.js/React frontend with Laravel backend
 mode: subagent
-model: openai/gpt-5.4
+model: openai/gpt-5.5
 temperature: 0.3
 ---
 
