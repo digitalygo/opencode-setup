@@ -2,7 +2,7 @@
 description: Security specialist for comprehensive authorized security assessments using the pentest toolbox
 mode: subagent
 model: opencode-go/kimi-k2.6
-temperature: 0.15
+temperature: 0.1
 steps: 100
 tools:
   "figma*": false

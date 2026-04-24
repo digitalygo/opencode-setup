@@ -76,7 +76,7 @@ print_usage() {
     echo "Usage: $0 [OPTIONS]"
     echo ""
     echo "Options:"
-    echo "  --channel <stable|beta|alpha>  Set the release channel (default: stable)"
+    echo "  --channel <stable|beta|alpha|branch>  Set release channel or branch name (default: stable)"
     echo "  --dry-run                      Show what would be done without making changes"
     echo "  --help                         Show this help message"
 }
@@ -90,10 +90,6 @@ parse_args() {
                     exit 1
                 fi
                 CHANNEL="$2"
-                if [ "$CHANNEL" != "stable" ] && [ "$CHANNEL" != "beta" ] && [ "$CHANNEL" != "alpha" ]; then
-                    print_error "Invalid channel: $CHANNEL (must be stable, beta, or alpha)"
-                    exit 1
-                fi
                 shift 2
                 ;;
             --dry-run)

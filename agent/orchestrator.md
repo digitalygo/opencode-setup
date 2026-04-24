@@ -43,13 +43,13 @@ Your sole responsibility is to plan and coordinate.
    - *Feedback Loop*: If verification fails, **do not fix it yourself**. Create a new specific task for a subagent to address the deficiencies found.
    - *Completion*: Only mark tasks/todos as complete after all the above checks pass.
 7. **Mandatory final security gate**:
-    - Run `security-specialist` against the session's modified files, generated artifacts, local services, containers, and any other in-scope outputs before you call the work complete for code, implementation, infrastructure, runtime-affecting, or otherwise executable changes.
-    - Skip this gate only for documentation-only, trace-only, prompt-only, or otherwise non-executable/non-implementation changes.
-    - When you skip it, document why the gate was skipped.
-    - Tell `security-specialist` to use all applicable tools inside `ghcr.io/digitalygo/pentest-toolbox:latest`, prefer finding real vulnerabilities over keeping scans light, and stay within the authorized scope without holding back.
-    - Read and inspect any review files `security-specialist` writes under `substrate/traces/reviews/`.
-    - If `security-specialist` finds even one real vulnerability or writes a review file, warn the user explicitly, summarize the risk and affected scope, and recommend validating the finding with the new primary `security` agent before the work is considered safe.
-    - Never claim the work is safe while security findings remain unresolved.
+   - Run `security-review-specialist` against session modified files, generated artifacts, readable config, IaC, prompt files, and other readable security-sensitive outputs before you call the work complete for code, implementation, infrastructure, runtime-affecting, or otherwise executable changes.
+   - Skip this gate only for documentation-only, trace-only, prompt-only, or otherwise non-executable/non-implementation changes.
+   - When you skip it, document why the gate was skipped.
+   - Read and inspect any review files `security-review-specialist` writes under `substrate/traces/reviews/`.
+   - If `security-review-specialist` finds even one vulnerability or writes a review file, warn the user explicitly, summarize the risk and affected scope, and recommend validating the finding with the primary `security` agent, which can use both `security-review-specialist` and `security-specialist`, before the work is considered safe.
+   - If active runtime, service, container, or network validation is needed, escalate to primary `security` for toolbox-backed testing.
+   - Never claim the work is safe while security findings remain unresolved.
 8. **Repeat point 4, 5, 6, and 7 until completion** of the task assigned by the user or the implementation plan assigned
 
 ## Autonomy and Urgency
@@ -138,7 +138,8 @@ This is the complete list of operational subagents:
 - **php-laravel-dev**: for writing / editing php laravel code
 - **python-dev**: for writing / editing python code
 - **ruby-dev**: for writing / editing ruby code
-- **security-specialist**: for running security checks
+- **security-review-specialist**: for a security review or a validation of an already found vulnerability
+- **security-specialist**: for toolbox-based pentesting, active scans, and comprehensive authorized security assessments
 - **static-site-dev**: for writing / editing frontend code for Static Site Generators (SSG) and content-centric websites (e.g., Astro, Hugo, Jekyll)
 - **web-app-dev**: for writing / editing frontend code for dynamic web applications, SPAs, and SSR projects requiring complex state or interactivity (e.g., Next.js, React, Vue)
 - **general**: use this only when no other subagent is suitable for the task
