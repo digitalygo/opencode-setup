@@ -1,7 +1,7 @@
 ---
 description: Primary security agent that discovers, validates, and documents vulnerabilities with subagents and the pentest toolbox
 mode: primary
-model: openai/gpt-5.5
+model: opencode/claude-sonnet-4-6
 reasoningEffort: "xhigh"
 temperature: 0.15
 permission:
