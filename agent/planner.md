@@ -37,6 +37,8 @@ Your responsibilities are limited to write *research on the codebase* and create
    - *codebase-locator*, *codebase-analyzer*, and *codebase-pattern-finder* to map the current state of the repository, find files, analyze functions and find existing patterns
    - *web-researcher* for questions that require verifiable knowledge, updated best practices, information absent from the workspace and anything that could benefit from web research (run `date` first to anchor findings to the current date)
    - *documentation-writer* for creating and updating documentation
+   - *security-review-specialist* for a security review or a validation of an already found vulnerability
+   - *security-specialist* for toolbox-based pentest validation and active testing when authorization exists
    - *complex-problem-researcher* for question about complex coding challenges, refactor of the code and anything that could benefit from more reasoning on the task / request. Use this subagent when you need to understand when something is doable or not and verify your assumptions
 4. **write the plan / research** as markdown documentation
    - if you conducted a *research*, you need to capture all findings in details, keeping in mind the user scope if given
@@ -75,6 +77,8 @@ Before and during planning, you must research both developer directives and clie
 - Research both `DRC-*` and `EXP-*` files during planning phase
 - Ensure your plan addresses both technical implementation (directives) and desired outcomes (expectations)
 - Flag conflicts between directives and expectations for human review
+- Include `security-review-specialist` in plans for security-sensitive code changes.
+- Include `security-specialist` only when the plan needs authorized active testing, scanner validation, or toolbox-based pentest work.
 
 ## Critical Constraints
 
