@@ -2,6 +2,7 @@
 description: Agent for generating and refining developer directives in the substrate/directives/ directory
 mode: primary
 model: openai/gpt-5.5
+reasoningEffort: "xhigh"
 temperature: 0.3
 permission:
   bash:
