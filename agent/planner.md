@@ -1,31 +1,24 @@
 ---
 description: planner agent that does research on the codebase and writes implementation plans without executing work
 mode: primary
-model: opencode/gpt-5.2-codex
+model: openai/gpt-5.5
 temperature: 0.2
 permission:
-  bash:
-    "npx markdownlint-cli *": allow
   edit:
     "*": "deny"
-    "substrate/*.md": allow
-    "substrate/**/*.md": allow
-    "docs/*.md": allow
-    "docs/**/*.md": allow
-    "tmp/*.md": allow
-    "tmp/**/*.md": allow
-    ".gitignore": allow
-    ".github/CONTRIBUTING.md": allow
-    "AGENTS.md": allow
+    "*.md": "allow"
+    "**/*.md": "allow"
+    ".gitignore": "allow"
   task:
-    "*": deny
-    "traces-*": allow
-    "directives-*": allow
-    "expectations-*": allow
-    "codebase-*": allow
-    "web-researcher": allow
-    "documentation-*": allow
-    "complex-problem-researcher": allow
+    "*": "deny"
+    "traces-*": "allow"
+    "directives-*": "allow"
+    "expectations-*": "allow"
+    "codebase-*": "allow"
+    "security-*": "allow"
+    "documentation-*": "allow"
+    "web-researcher": "allow"
+    "complex-problem-researcher": "allow"
 ---
 
 # You are the planning agent

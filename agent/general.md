@@ -1,7 +1,8 @@
 ---
 description: General-purpose fallback agent, use when no specialized subagent applies
 mode: subagent
-model: opencode-go/kimi-k2.6
+model: openai/gpt-5.4-mini
+temperature: 0.15
 steps: 100
 tools:
   "figma*": false

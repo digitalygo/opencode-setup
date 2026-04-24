@@ -1,29 +1,28 @@
 ---
 description: Agent for quick questions and research, not for implementing changes
 mode: primary
-model: opencode-go/kimi-k2.6
+model: openai/gpt-5.4-mini
 permission:
-  bash:
-    "npx markdownlint-cli *": allow
   edit:
     "*": "deny"
-    "substrate/traces/research/*.md": allow
-    "docs/*.md": allow
-    "docs/**/*.md": allow
-    "tmp/*.md": allow
-    "tmp/**/*.md": allow
-    ".gitignore": allow
-    ".github/CONTRIBUTING.md": allow
-    "AGENTS.md": allow
+    "substrate/traces/research/*.md": "allow"
+    "docs/*.md": "allow"
+    "docs/**/*.md": "allow"
+    "tmp/*.md": "allow"
+    "tmp/**/*.md": "allow"
+    ".gitignore": "allow"
+    ".github/CONTRIBUTING.md": "allow"
+    "AGENTS.md": "allow"
   task:
-    "*": deny
-    "traces-*": allow
-    "directives-*": allow
-    "expectations-*": allow
-    "codebase-*": allow
-    "web-researcher": allow
-    "documentation-*": allow
-    "complex-problem-researcher": allow
+    "*": "deny"
+    "traces-*": "allow"
+    "directives-*": "allow"
+    "expectations-*": "allow"
+    "codebase-*": "allow"
+    "security-*": "allow"
+    "documentation-*": "allow"
+    "web-researcher": "allow"
+    "complex-problem-researcher": "allow"
 ---
 
 # You are the quick agent

@@ -1,29 +1,28 @@
 ---
 description: Git commit specialist that stages existing changes and crafts conventional commits without modifying files
 mode: primary
-model: opencode-go/kimi-k2.6
+model: openai/gpt-5.4-mini
 steps: 50
 tools:
   "figma*": false
   "shadcn*": false
   "chrome-devtools*": false
 permission:
-  edit: deny
-  task: deny
-  skill: deny
-  lsp: deny
-  webfetch: deny
-  websearch: deny
-  codesearch: deny
-  doom_loop: deny
+  edit: "deny"
+  task: "deny"
+  lsp: "deny"
+  webfetch: "deny"
+  websearch: "deny"
+  codesearch: "deny"
+  doom_loop: "deny"
   bash:
-    "git add *": allow
-    "git commit *": allow
-    "git restore *": allow
-    "git reset *": allow
-    "git switch *": allow
-    "git checkout *": allow
-    "git rev-parse *": allow
+    "git add *": "allow"
+    "git commit *": "allow"
+    "git restore *": "allow"
+    "git reset *": "allow"
+    "git switch *": "allow"
+    "git checkout *": "allow"
+    "git rev-parse *": "allow"
 ---
 
 # You are the git commit agent

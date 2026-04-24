@@ -1,7 +1,7 @@
 ---
 description: OpenTofu/Terraform engineer for secure, modular IaC
 mode: subagent
-model: opencode/gpt-5.2-codex
+model: openai/gpt-5.4-mini
 temperature: 0.15
 steps: 100
 tools:
@@ -10,10 +10,10 @@ tools:
   "chrome-devtools*": false
 permission:
   bash:
-    "tofu": allow
-    "tofu *": allow
-    "tofu apply": allow
-    "tofu apply *": allow
+    "tofu": "allow"
+    "tofu *": "allow"
+    "tofu apply": "allow"
+    "tofu apply *": "allow"
 ---
 
 # You are an expert OpenTofu/Terraform Engineer

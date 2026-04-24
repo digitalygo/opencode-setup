@@ -17,7 +17,7 @@
     ],
   },
   // model selection
-  "model": "opencode/gpt-5.2-codex",
+  "model": "openai/gpt-5.5",
   "small_model": "opencode-go/kimi-k2.6",
   "instructions": [".github/CONTRIBUTING.md", "AGENTS.md"],
   // pre-configured mcp servers
@@ -107,7 +107,7 @@
       "yes > /dev/null": "deny",
       "stress *": "deny",
       "eval *": "deny",
-      "git *": "deny",
+      "git *": "ask",
       "git status": "allow",
       "git status *": "allow",
       "git diff": "allow",
@@ -126,6 +126,7 @@
       "docker bake *": "allow",
       "docker compose ps": "allow",
       "docker compose logs *": "allow",
+      "docker compose config": "allow"
     },
   },
 }
