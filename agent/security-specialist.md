@@ -9,13 +9,6 @@ tools:
   "shadcn*": false
   "chrome-devtools*": false
 permission:
-  bash:
-    "docker *": "allow"
-    "docker run *": "allow"
-    "docker pull *": "allow"
-    "docker build *": "allow"
-    "docker save *": "allow"
-    "curl -fsSL *": "allow"
   edit:
     "*": "deny"
     "substrate/traces/reviews/*.md": "allow"

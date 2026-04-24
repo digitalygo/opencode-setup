@@ -4,12 +4,6 @@ mode: subagent
 model: opencode-go/kimi-k2.6
 temperature: 0.15
 steps: 100
-permission:
-  bash:
-    "npm *": "allow"
-    "pnpm *": "allow"
-    "bun *": "allow"
-    "npx *": "allow"
 ---
 
 # You are an expert JavaScript/TypeScript developer

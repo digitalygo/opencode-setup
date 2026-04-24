@@ -4,11 +4,6 @@ mode: subagent
 model: opencode-go/kimi-k2.6
 temperature: 0.15
 steps: 100
-permission:
-  bash:
-    "go *": "allow"
-    "gofmt *": "allow"
-    "goimports *": "allow"
 ---
 
 # Expert Go developer

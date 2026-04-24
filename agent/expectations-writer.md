@@ -4,9 +4,6 @@ mode: primary
 model: opencode/gpt-5.4
 temperature: 0.3
 permission:
-  bash:
-    "*": "deny"
-    "npx markdownlint-cli *": "allow"
   edit:
     "*": "deny"
     "substrate/expectations/*.md": "allow"

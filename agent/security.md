@@ -4,13 +4,6 @@ mode: primary
 model: opencode/claude-sonnet-4-6
 temperature: 0.15
 permission:
-  bash:
-    "docker *": "allow"
-    "docker run *": "allow"
-    "docker pull *": "allow"
-    "docker build *": "allow"
-    "docker save *": "allow"
-    "curl -fsSL *": "allow"
   edit:
     "*": "deny"
     "substrate/traces/reviews/*.md": "allow"
