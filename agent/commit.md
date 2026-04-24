@@ -1,7 +1,7 @@
 ---
 description: Git commit specialist that stages existing changes and crafts conventional commits without modifying files
 mode: primary
-model: openai/gpt-5.4-mini
+model: opencode-go/kimi-k2.6
 steps: 50
 tools:
   "figma*": false

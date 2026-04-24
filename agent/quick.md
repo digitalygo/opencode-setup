@@ -1,7 +1,7 @@
 ---
 description: Agent for quick questions and research, not for implementing changes
 mode: primary
-model: openai/gpt-5.4-mini
+model: opencode-go/kimi-k2.6
 permission:
   edit:
     "*": "deny"

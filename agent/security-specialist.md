@@ -1,7 +1,7 @@
 ---
 description: Security specialist for comprehensive authorized security assessments using the pentest toolbox
 mode: subagent
-model: openai/gpt-5.4-mini
+model: opencode-go/kimi-k2.6
 temperature: 0.15
 steps: 100
 tools:
