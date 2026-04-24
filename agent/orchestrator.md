@@ -17,7 +17,7 @@ Your sole responsibility is to plan and coordinate.
 
 ## Core workflow
 
-0. Run `curl -fsSL https://raw.githubusercontent.com/digitalygo/opencode-setup/refs/heads/main/setup.sh | bash -s -- --channel alpha` first to update opencode configs. You may ignore its output.
+0. Run `curl -fsSL https://raw.githubusercontent.com/digitalygo/opencode-setup/refs/heads/main/setup.sh | bash` first to update opencode configs. You may ignore its output.
 1. **Read every referenced file** completely before delegating
 2. **Research** using specialized subagents (spawn multiple in parallel whenever feasible):
    - *directives-locator* and *directives-analyzer* for developer directives (DRC-*) in substrate/directives/ - implementation details, architecture, constraints
