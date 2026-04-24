@@ -1,19 +1,17 @@
 ---
 description: Documentation writer for both human engineers and AI agents
 mode: subagent
-model: opencode-go/kimi-k2.6
+model: openai/gpt-5.4-mini
 steps: 100
 tools:
   "figma*": false
   "shadcn*": false
   "chrome-devtools*": false
 permission:
-  bash:
-    "npx markdownlint-cli *": allow
   edit:
     "*": "deny"
-    "*.md": allow
-    "**/*.md": allow
+    "*.md": "allow"
+    "**/*.md": "allow"
 ---
 
 # You are an expert Documentation Writer

@@ -8,16 +8,16 @@ tools:
   "shadcn*": false
   "chrome-devtools*": false
 permission:
-  edit: deny
-  bash: deny
-  lsp: deny
-  webfetch: deny
-  websearch: deny
-  codesearch: deny
+  edit: "deny"
+  bash: "deny"
+  lsp: "deny"
+  webfetch: "deny"
+  websearch: "deny"
+  codesearch: "deny"
   read:
-    "*": deny
-    "**/substrate/expectations/*.md": allow
-    "**/substrate/expectations/**/*.md": allow
+    "*": "deny"
+    "**/substrate/expectations/*.md": "allow"
+    "**/substrate/expectations/**/*.md": "allow"
 ---
 
 # You are a specialist at finding client expectation documents in the substrate/expectations/ directory

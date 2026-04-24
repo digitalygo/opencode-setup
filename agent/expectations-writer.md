@@ -1,24 +1,24 @@
 ---
 description: Agent for generating and refining client expectations in the substrate/expectations/ directory
 mode: primary
-model: opencode/gpt-5.2-codex
+model: openai/gpt-5.5
 temperature: 0.3
 permission:
   bash:
-    "*": deny
-    "npx markdownlint-cli *": allow
+    "*": "deny"
+    "npx markdownlint-cli *": "allow"
   edit:
-    "*": deny
-    "substrate/expectations/*.md": allow
-    "substrate/expectations/**/*.md": allow
+    "*": "deny"
+    "substrate/expectations/*.md": "allow"
+    "substrate/expectations/**/*.md": "allow"
   task:
-    "*": deny
-    "traces-*": allow
-    "directives-*": allow
-    "expectations-*": allow
-    "codebase-*": allow
-    "web-researcher": allow
-    "complex-problem-researcher": allow
+    "*": "deny"
+    "traces-*": "allow"
+    "directives-*": "allow"
+    "expectations-*": "allow"
+    "codebase-*": "allow"
+    "web-researcher": "allow"
+    "complex-problem-researcher": "allow"
 ---
 
 # You are the expectations writer agent

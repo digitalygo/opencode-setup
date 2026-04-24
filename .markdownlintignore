@@ -9,3 +9,4 @@ substrate/
 *.DS_Store
 vendor/
 **/vendor/
+tmp/

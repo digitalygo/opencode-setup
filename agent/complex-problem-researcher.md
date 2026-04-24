@@ -6,11 +6,11 @@ temperature: 0.5
 permission:
   edit:
     "*": "deny"
-    "substrate/traces/research/*.md": allow
-    "docs/*.md": allow
-    "docs/**/*.md": allow
-    "tmp/*.md": allow
-    "tmp/**/*.md": allow
+    "substrate/traces/research/*.md": "allow"
+    "docs/*.md": "allow"
+    "docs/**/*.md": "allow"
+    "tmp/*.md": "allow"
+    "tmp/**/*.md": "allow"
 ---
 
 # Complex Problem Researcher

@@ -1,7 +1,8 @@
 ---
 description: GitHub Actions workflow specialist
 mode: subagent
-model: opencode-go/kimi-k2.6
+model: openai/gpt-5.4-mini
+temperature: 0.15
 steps: 100
 tools:
   "figma*": false
@@ -10,8 +11,8 @@ tools:
 permission:
   edit:
     "*": "deny"
-    ".github/*.yml": allow
-    ".github/**/*.yml": allow
+    ".github/*.yml": "allow"
+    ".github/**/*.yml": "allow"
 ---
 
 # You are an expert in GitHub Actions Workflows

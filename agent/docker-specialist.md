@@ -1,7 +1,7 @@
 ---
 description: Docker engineer
 mode: subagent
-model: opencode/gpt-5.2-codex
+model: openai/gpt-5.4-mini
 temperature: 0.15
 steps: 100
 tools:

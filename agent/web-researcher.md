@@ -8,9 +8,9 @@ tools:
   "shadcn*": false
   "chrome-devtools*": false
 permission:
-  edit: deny
-  bash: deny
-  lsp: deny
+  edit: "deny"
+  bash: "deny"
+  lsp: "deny"
 ---
 
 # You are an expert Web Research Agent
