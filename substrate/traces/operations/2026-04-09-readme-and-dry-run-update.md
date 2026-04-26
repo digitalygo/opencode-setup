@@ -1,7 +1,7 @@
 ---
 status: completed
 created_at: 2026-04-09
-updated_at: 2026-04-24
+updated_at: 2026-04-26
 files_edited:
   - README.md
   - setup.sh
@@ -12,10 +12,14 @@ rationale:
   - align public documentation with the actual repository contents and setup flow
   - add a safe preview mode to the installer without changing normal setup behavior
   - allow setup previews and installs from non-release branches used for agent work
+  - keep dry-run output aligned with later export handling for `OPENCODE_ENABLE_EXA=true`
+  - record that no DRC or EXP files exist in this repository per locator results
 supporting_docs:
   - .github/CONTRIBUTING.md
   - AGENTS.md
   - thoughts/shared/research/2026-04-09-repository-improvement-opportunities.md
+  - README.md
+  - setup.sh
 ---
 
 # README and dry-run update
@@ -73,3 +77,30 @@ supporting_docs:
 - Exercised dry-run behavior for `async`, `main`, `stable`, `beta`, and `alpha`.
 - Verified help output with `bash setup.sh --help`.
 - Ran ShellCheck with `docker run --rm -v "$PWD/setup.sh:/mnt/setup.sh:ro" koalaman/shellcheck:stable /mnt/setup.sh`.
+
+## Update on 2026-04-26
+
+### Summary of changes
+
+- Documented that `setup.sh` now idempotently manages `export OPENCODE_ENABLE_EXA=true` in same shell RC file as `sync-opencode` alias.
+- Recorded that dry-run output now reports export handling.
+- Reconfirmed repo locator results show no DRC or EXP files under `substrate/directives/` or `substrate/expectations/`.
+
+### Technical reasoning
+
+- Keeping alias and export edits in same RC file preserves single-source shell startup state.
+- Idempotent export replacement prevents duplicate config lines on repeated runs.
+- Dry-run must expose export behavior so preview matches live setup semantics.
+
+### Impact assessment
+
+- Shell startup files now converge to one alias line and one export line after reruns.
+- Preview mode gives clearer visibility into all shell RC mutations.
+- No docs under DRC or EXP paths exist, so no linked policy file needs updates.
+
+### Validation steps
+
+- Used provided validation results: `bash -n setup.sh`, `bash ./setup.sh --dry-run --channel alpha`, ShellCheck via `koalaman/shellcheck:stable`.
+- Verified live temp-home setup ran twice with `export_count=1` and `alias_count=1`.
+- Verified temp-home replacement from `export OPENCODE_ENABLE_EXA=false` to true with old count 0.
+- Synced markdownlint configuration and ran `npx markdownlint-cli "**/*.md" --config .markdownlint.json --ignore-path .markdownlintignore --dot --fix` to zero errors.

@@ -69,6 +69,48 @@ cleanup_temp_dir() {
     fi
 }
 
+ensure_shell_rc_line() {
+    local shell_rc="$1"
+    local exact_line="$2"
+    local grep_pattern="$3"
+    local sed_pattern="$4"
+    local already_message="$5"
+    local updated_message="$6"
+    local added_message="$7"
+
+    if grep -Fxq "$exact_line" "$shell_rc" 2>/dev/null; then
+        print_info "$already_message"
+    elif grep -qE "$grep_pattern" "$shell_rc" 2>/dev/null; then
+        local temp_rc
+        local escaped_exact_line
+        temp_rc=$(mktemp)
+        escaped_exact_line=$(printf '%s\n' "$exact_line" | sed 's/[&/]/\\&/g')
+        sed "0,/$sed_pattern/s//${escaped_exact_line}/" "$shell_rc" > "$temp_rc"
+        mv "$temp_rc" "$shell_rc"
+        print_info "$updated_message"
+    else
+        echo "$exact_line" >> "$shell_rc"
+        print_info "$added_message"
+    fi
+}
+
+report_shell_rc_line_state() {
+    local shell_rc="$1"
+    local exact_line="$2"
+    local match_pattern="$3"
+
+    if [ ! -f "$shell_rc" ]; then
+        echo "  - Create new file: $shell_rc"
+        echo "  - Append export line to file"
+    elif grep -Fxq "$exact_line" "$shell_rc" 2>/dev/null; then
+        echo "  - Export already exists, no changes needed"
+    elif grep -qE "$match_pattern" "$shell_rc" 2>/dev/null; then
+        echo "  - Update existing export definition"
+    else
+        echo "  - Append new export line to file"
+    fi
+}
+
 CHANNEL="stable"
 DRY_RUN="false"
 
@@ -159,6 +201,8 @@ run_sync() {
         fi
 
         local alias_line="alias sync-opencode='curl -fsSL https://raw.githubusercontent.com/digitalygo/opencode-setup/main/setup.sh | bash'"
+        local exa_line="export OPENCODE_ENABLE_EXA=true"
+        local exa_match_pattern='^[[:space:]]*export[[:space:]]+OPENCODE_ENABLE_EXA='
 
         echo "Shell RC file: $shell_rc"
         echo ""
@@ -173,6 +217,9 @@ run_sync() {
         else
             echo "  - Append new alias to file"
         fi
+        echo ""
+        echo "Export handling:"
+        report_shell_rc_line_state "$shell_rc" "$exa_line" "$exa_match_pattern"
         echo ""
         echo "[DRY-RUN] No changes were made to the system"
         return 0
@@ -222,6 +269,9 @@ run_sync() {
 
     print_info "Adding sync-opencode alias to $shell_rc..."
     local alias_line="alias sync-opencode='curl -fsSL https://raw.githubusercontent.com/digitalygo/opencode-setup/main/setup.sh | bash'"
+    local exa_line="export OPENCODE_ENABLE_EXA=true"
+    local exa_match_pattern='^[[:space:]]*export[[:space:]]+OPENCODE_ENABLE_EXA='
+    local exa_sed_pattern='^[[:space:]]*export[[:space:]]\+OPENCODE_ENABLE_EXA=.*'
 
     if [ ! -f "$shell_rc" ]; then
         touch "$shell_rc"
@@ -241,6 +291,9 @@ run_sync() {
         echo "$alias_line" >> "$shell_rc"
         print_info "Alias added to $shell_rc"
     fi
+
+    print_info "Adding OPENCODE_ENABLE_EXA export to $shell_rc..."
+    ensure_shell_rc_line "$shell_rc" "$exa_line" "$exa_match_pattern" "$exa_sed_pattern" "OPENCODE_ENABLE_EXA export already exists in $shell_rc" "OPENCODE_ENABLE_EXA export updated in $shell_rc" "OPENCODE_ENABLE_EXA export added to $shell_rc"
 
     print_info "Setup completed successfully"
 }
