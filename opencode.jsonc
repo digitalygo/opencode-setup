@@ -3,7 +3,7 @@
   "default_agent": "orchestrator",
   "autoupdate": true,
   "compaction": {
-    "auto": true,
+    "auto": false,
     "prune": true,
   },
   "watcher": {
