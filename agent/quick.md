@@ -1,7 +1,7 @@
 ---
 description: Agent for quick questions and research, not for implementing changes
 mode: primary
-model: openai/gpt-5.4-mini
+model: opencode-go/deepseek-v4-pro
 permission:
   edit:
     "*": "deny"
