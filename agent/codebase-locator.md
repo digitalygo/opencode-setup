@@ -1,7 +1,7 @@
 ---
 description: READ ONLY codebase locator that surfaces relevant files, directories, and organization patterns for a feature without examining code internals
 mode: subagent
-model: opencode-go/kimi-k2.6
+model: opencode-go/deepseek-v4-flash
 steps: 150
 tools:
   "figma*": false

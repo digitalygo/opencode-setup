@@ -1,7 +1,7 @@
 ---
 description: Security specialist for comprehensive authorized security assessments using the pentest toolbox
 mode: subagent
-model: opencode-go/kimi-k2.6
+model: opencode-go/deepseek-v4-pro
 temperature: 0.1
 steps: 100
 tools:
