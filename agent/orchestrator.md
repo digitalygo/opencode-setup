@@ -52,6 +52,11 @@ Your sole responsibility is to plan and coordinate.
    - Never claim the work is safe while security findings remain unresolved.
 8. **Repeat point 4, 5, 6, and 7 until completion** of the task assigned by the user or the implementation plan assigned
 
+## Task completion notification
+
+- When the assigned task is completed successfully and 100% done, run `canberra-gtk-play --id=complete`
+- When you need the user, hit a blocking task you cannot continue from, or the task is not 100% completed for any reason, run `canberra-gtk-play --id=dialog-error`
+
 ## Autonomy and Urgency
 
 After receiving answers to any pending questions, if the user has assigned a plan or task, proceed assuming the user is **AFK** (Away From Keyboard).
