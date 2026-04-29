@@ -1,8 +1,8 @@
 ---
 description: planner agent that does research on the codebase and writes implementation plans without executing work
 mode: primary
-model: openai/gpt-5.5
-reasoningEffort: "xhigh"
+model: openai/gpt-5.4
+variant: xhigh
 temperature: 0.2
 permission:
   edit:
