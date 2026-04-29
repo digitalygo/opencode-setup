@@ -5,6 +5,7 @@
   "compaction": {
     "auto": false,
     "prune": true,
+    "preserve_recent_tokens": 10000,
   },
   "watcher": {
     "ignore": [
@@ -15,6 +16,10 @@
       "venv/**",
       ".venv/**",
     ],
+  },
+  // tool output settings
+  "tool_output": {
+    "max_lines": 4000
   },
   // model selection
   "model": "openai/gpt-5.5",
