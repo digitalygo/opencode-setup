@@ -1,7 +1,7 @@
 ---
 description: planner agent that does research on the codebase and writes implementation plans without executing work
 mode: primary
-color: "#bc62ca"
+color: "#cc73da"
 model: openai/gpt-5.4
 variant: xhigh
 temperature: 0.2
