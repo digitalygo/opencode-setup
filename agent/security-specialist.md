@@ -2,7 +2,7 @@
 description: Security specialist for comprehensive authorized security assessments using the pentest toolbox
 mode: subagent
 model: opencode-go/deepseek-v4-pro
-temperature: 0.1
+temperature: 0.15
 steps: 100
 tools:
   "figma*": false

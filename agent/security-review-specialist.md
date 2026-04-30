@@ -1,8 +1,8 @@
 ---
 description: Security review specialist for code changes
 mode: subagent
-model: opencode/claude-opus-4-7
-temperature: 0.1
+model: opencode/claude-sonnet-4-6
+temperature: 0.15
 steps: 100
 tools:
   "figma*": false
