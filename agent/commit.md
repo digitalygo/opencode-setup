@@ -1,6 +1,7 @@
 ---
 description: Git commit specialist that stages existing changes and crafts conventional commits without modifying files
 mode: primary
+commit: #35d520
 model: opencode-go/deepseek-v4-flash
 steps: 50
 tools:
