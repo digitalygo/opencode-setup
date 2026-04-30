@@ -1,21 +1,12 @@
 ---
 description: Security review specialist for code changes
 mode: subagent
-model: opencode/claude-sonnet-4-6
-temperature: 0.15
-steps: 100
+model: opencode-go/deepseek-v4-pro
 tools:
   "figma*": false
   "shadcn*": false
   "chrome-devtools*": false
 permission:
-  bash:
-    "docker *": "allow"
-    "docker run *": "allow"
-    "docker pull *": "allow"
-    "docker build *": "allow"
-    "docker save *": "allow"
-    "curl -fsSL *": "allow"
   edit:
     "*": "deny"
     "substrate/traces/reviews/*.md": "allow"

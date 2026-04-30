@@ -2,16 +2,9 @@
 description: Primary security agent that discovers, validates, and documents vulnerabilities with subagents and the pentest toolbox
 mode: primary
 color: "#fa6565"
-model: opencode/claude-sonnet-4-6
+model: opencode/claude-opus-4-7
 temperature: 0.15
 permission:
-  bash:
-    "docker *": "allow"
-    "docker run *": "allow"
-    "docker pull *": "allow"
-    "docker build *": "allow"
-    "docker save *": "allow"
-    "curl -fsSL *": "allow"
   edit:
     "*": "deny"
     "substrate/traces/reviews/*.md": "allow"
