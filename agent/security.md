@@ -1,7 +1,7 @@
 ---
 description: Primary security agent that discovers, validates, and documents vulnerabilities with subagents and the pentest toolbox
 mode: primary
-color: "#fc4e4e"
+color: "#fa6565"
 model: opencode/claude-sonnet-4-6
 temperature: 0.15
 permission:
