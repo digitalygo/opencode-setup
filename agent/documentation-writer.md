@@ -1,6 +1,7 @@
 ---
 description: Documentation writer for both human engineers and AI agents
 mode: subagent
+color: #f8d00d
 model: opencode-go/deepseek-v4-pro
 steps: 100
 tools:
