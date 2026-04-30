@@ -1,7 +1,8 @@
 ---
 description: Security review specialist for code changes
 mode: subagent
-model: opencode-go/deepseek-v4-pro
+model: openai/gpt-5.4
+variant: xhigh
 tools:
   "figma*": false
   "shadcn*": false
