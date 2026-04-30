@@ -6,10 +6,6 @@ temperature: 0.15
 steps: 100
 tools:
   "shadcn*": false
-permission:
-  bash:
-    "make *": "allow"
-    "uv *": "allow"
 ---
 
 # You are an expert in Python development

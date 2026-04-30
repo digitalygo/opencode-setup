@@ -6,9 +6,6 @@ model: openai/gpt-5.4
 variant: xhigh
 temperature: 0.3
 permission:
-  bash:
-    "*": "deny"
-    "npx markdownlint-cli *": "allow"
   edit:
     "*": "deny"
     "substrate/expectations/*.md": "allow"
