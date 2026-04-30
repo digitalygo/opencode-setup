@@ -1,6 +1,7 @@
 ---
 description: Agent for generating and refining developer directives in the substrate/directives/ directory
 mode: primary
+color: "#f8d00d"
 model: openai/gpt-5.4
 variant: xhigh
 temperature: 0.3
