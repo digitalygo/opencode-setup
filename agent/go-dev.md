@@ -4,11 +4,6 @@ mode: subagent
 model: openai/gpt-5.4-mini
 temperature: 0.15
 steps: 100
-permission:
-  bash:
-    "go *": "allow"
-    "gofmt *": "allow"
-    "goimports *": "allow"
 ---
 
 # Expert Go developer
