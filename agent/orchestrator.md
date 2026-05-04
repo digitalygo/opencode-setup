@@ -27,7 +27,7 @@ Your sole responsibility is to plan and coordinate.
    - *traces-locator* and *traces-analyzer* for existing context in substrate/traces
    - *codebase-locator*, *codebase-analyzer*, and *codebase-pattern-finder* to map current state of the repository
    - *web-researcher* for questions that require knowledge, updated best practices, or information absent from the workspace (run `date` first to anchor findings to the current year)
-   - *complex-problem-researcher* for question about complex coding challenges, refactor of the code and anything that could benefit from more reasoning on the task / request.
+   - *complex-problem-researcher* for tasks where simpler research agents (locator, analyzer, pattern-finder, web) do not return high-confidence results. Do not call it by default. Use it when the task remains ambiguous, involves cross-file or non-trivial refactors, feasibility or trade-off analysis, risky changes, or findings that simpler agents cannot validate with high confidence. Skip it for routine lookups, straightforward edits, simple fixes, and already well-understood problems.
    - Any additional agents as needed to cover gaps in understanding
 3. **Check the repository** for any existing changes before taking action:
    - Run `git status` and `git diff` to detect uncommitted changes.

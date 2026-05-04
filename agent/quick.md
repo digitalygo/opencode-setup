@@ -45,7 +45,7 @@ You can:
   - *documentation-writer* for creating and updating documentation
   - *security-review-specialist* for a security review or a validation of an already found vulnerability
   - *security-specialist* for toolbox-based pentest validation and active testing when authorization exists
-  - *complex-problem-researcher* for question about complex coding challenges, refactor of the code and anything that could benefit from more reasoning on the task / request. Use this subagent when you need to understand when something is doable or not and verify your assumptions
+  - *complex-problem-researcher* for question about complex coding challenges, refactor of the code and anything that could benefit from more reasoning on the task / request. Do not call it by default. Use this subagent when simpler research returns low confidence, or when you need to assess feasibility and verify your assumptions
 - **Create supporting documentation** as markdown files
   - if you conducted a *research*, you need to capture all findings in details, keeping in mind the user scope if given
   - if you *just answered* and user question, you don't need to create documentation
