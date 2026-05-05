@@ -1,7 +1,7 @@
 ---
 status: completed
 created_at: 2026-04-09
-updated_at: 2026-04-26
+updated_at: 2026-05-05
 files_edited:
   - README.md
   - setup.sh
@@ -14,6 +14,9 @@ rationale:
   - allow setup previews and installs from non-release branches used for agent work
   - keep dry-run output aligned with later export handling for `OPENCODE_ENABLE_EXA=true`
   - record that no DRC or EXP files exist in this repository per locator results
+  - refresh README as comprehensive entrypoint covering purpose, setup flow, agent/command/skill architecture, MCP integrations, release model, and contribution flow
+  - remove stale "plugins/" references and align manual rsync docs with real setup.sh exclusions
+  - document DRC/EXP as supported concepts rather than present content since no such files exist on disk
 supporting_docs:
   - .github/CONTRIBUTING.md
   - AGENTS.md
@@ -104,3 +107,37 @@ supporting_docs:
 - Verified live temp-home setup ran twice with `export_count=1` and `alias_count=1`.
 - Verified temp-home replacement from `export OPENCODE_ENABLE_EXA=false` to true with old count 0.
 - Synced markdownlint configuration and ran `npx markdownlint-cli "**/*.md" --config .markdownlint.json --ignore-path .markdownlintignore --dot --fix` to zero errors.
+
+## Update on 2026-05-05
+
+### Summary of changes
+
+- Comprehensive README refresh to document repository purpose, setup flow, agent/command/skill architecture, MCP integrations, release model, and contribution flow.
+- Removed stale `plugins/` references since no such directory exists in the repository.
+- Aligned manual rsync documentation with actual `setup.sh` exclusion behavior (whole `substrate/` tree excluded from sync; `substrate/` is repo-internal).
+- Added installer options (`--channel`, `--help`) and prerequisite descriptions (`curl`, `git`, `rsync`, `mktemp`, shell rc file, Docker for contributing).
+- Described primary entrypoints (mode: primary agents — `orchestrator`, `planner`, `quick`, `commit`, `security`, `directives-writer`, `expectations-writer`), subagent categories under `agent/`, and `skills/`/`command/` directory purposes.
+- Documented MCP integrations (`figma`, `shadcn`, `chrome-devtools`) and semantic-release model (`alpha` → `beta` → `main`).
+- Clarified that no DRC or EXP files exist on disk; README now presents these as supported Mycelium concepts rather than present content.
+- Only file edited for implementation was `README.md`; this operation file update is the documentation trail.
+
+### Technical reasoning
+
+- The README is the repository's public-facing entrypoint and must accurately reflect what exists, not what is planned.
+- Stale structural references (e.g., `plugins/`) mislead users and agents; removing them from documentation reduces confusion.
+- Documenting the `substrate/` directory as repo-internal and excluded from sync aligns user expectations with installer behavior.
+- Explicitly listing what does not exist (DRC, EXP files) prevents future agents from searching for missing content while keeping the architectural blueprint visible.
+
+### Impact assessment
+
+- Users and agents now have a single accurate overview of repository structure, setup mechanics, and architecture.
+- No runtime behavior, release pipeline, or sync logic changed; this is a documentation-only refresh.
+- Future contributors arriving via README will understand the correct directory layout and contribution flow without discovering stale references.
+
+### Validation steps
+
+- Confirmed workspace was clean before starting (`git status` reported no tracked changes).
+- Read `README.md`, `setup.sh`, `opencode.jsonc`, `AGENTS.md`, `.github/CONTRIBUTING.md`, and all agent/command/skill directories.
+- Verified no `plugins/` directory exists on disk and no DRC/EXP files exist under `substrate/directives/` or `substrate/expectations/`.
+- Verified README content matches actual directory structure and setup.sh behavior by cross-referencing each claim against the filesystem.
+- Only file modified for implementation was `README.md`.
