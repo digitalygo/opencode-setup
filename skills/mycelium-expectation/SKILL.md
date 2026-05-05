@@ -1,6 +1,6 @@
 ---
-name: expectations-schema
-description: Ruleset for client expectations in the Mycelium framework
+name: mycelium-expectation
+description: Ruleset for authoring client expectations in the Mycelium framework
 ---
 
 # Mycelium framework: client expectations
@@ -36,7 +36,7 @@ Expectations intentionally avoid:
 2. Adapt it to your specific expectation
 3. Keep it outcome-focused
 
-If local references cannot be read, view them online at <https://github.com/digitalygo/opencode-setup/tree/main/skills/expectations-schema/references>
+If local references cannot be read, view them online at <https://github.com/digitalygo/opencode-setup/tree/main/skills/mycelium-expectation/references>
 
 ## Reference index
 
@@ -72,14 +72,14 @@ area: string
 ## Required sections
 
 1. **Title** (H1)
-2. **Purpose & Value** - why this expectation exists, business value
-3. **Expected Outcomes** - what the product should deliver, high-level behavior
-4. **Success Criteria** - checklist of verifiable outcomes (minimum 2 items)
+2. **Purpose & Value** — why this expectation exists, business value
+3. **Expected Outcomes** — what the product should deliver, high-level behavior
+4. **Success Criteria** — checklist of verifiable outcomes (minimum 2 items)
 
 ## Optional sections
 
-- **Out of Scope** - explicitly excluded
-- **Open Questions** - unresolved items
+- **Out of Scope** — explicitly excluded
+- **Open Questions** — unresolved items
 
 ## File naming
 
@@ -97,7 +97,7 @@ area: string
 | Structure | Detailed, structured | Lighter, high-level |
 | Content | Architecture, logic, constraints | Business behavior, success states, product results |
 
-For developer directives, see the `directives-schema` skill.
+For developer directives, see the `mycelium-directive` skill.
 
 ## Key differences from directives
 
@@ -108,15 +108,8 @@ For developer directives, see the `directives-schema` skill.
 
 ## Available templates
 
-Reference template in `skills/expectations-schema/references/_templates/`:
+Reference template in `skills/mycelium-expectation/references/_templates/`:
 
 - `default.md` for general use
 
 Write expectations to `substrate/expectations/` in the target repository.
-
-## Migration note
-
-Legacy EXP files in `substrate/directives/` should be reviewed:
-
-- If they contain implementation details → convert to DRC-* format
-- If they describe outcomes → move to EXP-* in substrate/expectations/

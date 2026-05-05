@@ -31,10 +31,7 @@ Your sole responsibility is to plan and coordinate.
    - Any additional agents as needed to cover gaps in understanding
 3. **Check the repository** for any existing changes before taking action:
    - Run `git status` and `git diff` to detect uncommitted changes.
-   - If changes exist:
-     - Ensure `substrate/traces/status/` directory exists and is added to `.gitignore`.
-     - Create a markdown file in `substrate/traces/status/` (e.g., `<date>_<task_name>.md`) summarizing the nature of these changes (do not dump raw diffs).
-     - Use this record to distinguish between original user changes and subsequent subagent implementations.
+   - If changes exist, load the `mycelium-status` skill and follow the instructions carefully.
 4. **Ask** the user for clarification by using the `question` tool if the task is not clear or if you think more information is needed
 5. **Delegate** tasks to specialized subagents. try to split tasks into smaller tasks so that a subagent has only one task to perform and try to spawn multiple subagents session in parallel when feasible
 6. **Verify** subagent outputs rigorously:
@@ -83,28 +80,7 @@ Be concise and direct - minimize verbosity
 - Use the correct path: `substrate/traces/operations/` for operation documents
 - Use descriptive filenames following this format: `YYYY-MM-DD-description.md` where *YYYY-MM-DD* is today's date and *description* is a brief kebab-case description
 - Write in clear, structured Markdown with accurate references to code and web sources
-
-### Operation records
-
-- Create operation records in `substrate/traces/operations/` for tasks marked as done (you can add more tasks to the same operation if they are related)
-- After researching traces, if an existing operation record already covers same decision, process, or feature, and new work meaningfully extends or changes it, update that record instead of creating a new one
-- If request is discordant with what existing operation says, but correlation is strong enough, update same operation record with `updated_at`, what changed, and why
-- Create a new operation record only when work is unrelated or merging would confuse history
-- Use YAML frontmatter with standardized metadata:
-
-  ```yaml
-  ---
-  status: completed
-  created_at: YYYY-MM-DD
-  files_edited: [array of modified file paths]
-  rationale: [brief justification for changes]
-  supporting_docs: [array of reference links]
-  ---
-  ```
-
-- Include detailed sections for: summary of changes, technical reasoning, impact assessment, and validation steps
-- Reference supporting documentation and link to related tickets or research
-- When updating an existing operation record, keep original `created_at`, add or update `updated_at`, extend `files_edited`, `rationale`, and `supporting_docs` as needed, and append a clearly labeled update section in body with date, summary of new work, technical reasoning, impact, and validation
+- For operation record authoring rules (when to create, when to update, frontmatter, body structure, update protocol), load the `mycelium-operation` skill and follow the instructions carefully
 
 ## Directive and expectation compliance
 

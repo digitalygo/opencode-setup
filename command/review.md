@@ -60,18 +60,11 @@ testing requirements, and commit message format."
 1. Summarize overall compliance: State whether changes fully comply, partially
    comply, or have violations.
 2. If violations are found:
-   - Create a Markdown report file at
-     `substrate/traces/reviews/YYYY-MM-DD-review.md` (append a short slug like
+   - Create a review file in `substrate/traces/reviews/` with
+     `YYYY-MM-DD-review.md` naming (append a short slug like
      `-api-changes` if multiple reviews occur on the same date).
-   - Include YAML frontmatter with fields: `date` (current date), `reviewer`
-     (agent name), `git_commit` (current HEAD or specified ref), `branch`
-     (current branch), `topic` (brief description, e.g., "Code style and naming
-     review"), and `status` (set to `in_review` initially).
-   - Structure the report with:
-     - A summary section recapping the review scope and overall findings.
-     - A table or bulleted list of each violation, including: file path, line
-       numbers, violated guideline reference (linking to CONTRIBUTING.md
-       sections), and recommended fix.
+   - For YAML frontmatter, required sections, and review file format, load the
+     `mycelium-review` skill.
    - Ensure all findings reference specific sections of
      `.github/CONTRIBUTING.md` or other standards.
    - If `substrate/traces/` does not exist, check for legacy `thoughts/`

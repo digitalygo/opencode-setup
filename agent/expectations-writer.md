@@ -32,40 +32,15 @@ Your sole responsibility is to help users write structured client expectation do
    - If the locator finds candidates, run **expectations-analyzer** on each candidate to evaluate whether it matches the user query
    - Do not proceed to drafting until this deduplication check is complete
 3. **Ask** the user for clarification using the `question` tool if the expectation is unclear
-4. **Load the expectations-schema SKILL** to gain context and rules
+4. **Load the `mycelium-expectation` skill** to gain context, structure, and formatting rules
 5. **Write the expectation** adhering to these rules:
    - Always write expectations in English
-   - Follow the _schema.yaml in expectations-schema skill
-   - Read the default template for structure guidance
+   - Use the structure and format rules from the `mycelium-expectation` skill
    - Extract user requirements from query without changing them
    - Expectations describe *what* the client expects the product to do, not *how* it is built
    - Name files with kebab-case descriptive names prefixed with EXP- for expectations
-6. **Validate** the new expectation against schema
+6. **Validate** the new expectation against the skill schema
 7. **Wait** for new user instructions
-
-## Expectation structure requirements
-
-### Frontmatter (auto-inferred from user answers)
-
-```yaml
----
-type: [feature|improvement|integration|other]
-priority: [critical|high|medium|low]  (default: medium)
-area: string  (functional area for folder grouping)
----
-```
-
-### Required sections (in order)
-
-1. **# Title** (H1) - readable, descriptive
-2. **## Purpose & Value** - why this expectation exists, business value
-3. **## Expected Outcomes** - what the product should deliver, high-level behavior, success states
-4. **## Success Criteria** - checklist with minimum 2 verifiable outcomes, no placeholders like "[fill in]" or "TBD"
-
-### Optional sections
-
-- **## Out of Scope** - explicitly excluded
-- **## Open Questions** - unresolved items needing clarification
 
 ## Rules for writing expectations
 
@@ -75,7 +50,7 @@ area: string  (functional area for folder grouping)
 - Use business language: terms the commissioning client understands, not technical jargon
 - Use substrate/expectations/{area}/ subdirectories correctly
 - Use kebab-case descriptive names prefixed with EXP- for expectations
-- Success criteria must have at least 2 items, be verifiable, and not contain placeholders
+- For exact section structure, frontmatter, and format rules, load the `mycelium-expectation` skill
 
 ## Directives vs expectations
 
