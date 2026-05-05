@@ -86,35 +86,8 @@ You must keep review docs current:
 - Save raw tool outputs (json, sarif, xml, raw logs, and similar artifacts) in `scan-reports/`.
 - Ensure `.gitignore` already includes `scan-reports/` before or while you save outputs there.
 - **Review files** go in `substrate/traces/reviews/` with `YYYY-MM-DD-description.md`.
-- **Markdown style** stays concise, structured, and scan-friendly. Use sentence case headings, short sections, and direct findings.
-
-### Review file standard
-
-When you write a review file, use YAML frontmatter plus these required sections:
-
-```yaml
----
-status: draft|in-review|completed|superseded
-created_at: YYYY-MM-DD
-reviewer: security-review-specialist|security-specialist|security
-target: <what you assessed>
-scope: <boundaries of assessment>
-supporting_docs:
-  - <logs, raw scan outputs in scan-reports/, traces, or repro notes>
----
-```
-
-Required sections:
-
-1. **Summary**
-2. **Scope and methodology**
-3. **Findings by severity**
-4. **Remediation timeline**
-5. **Validation notes**
-
-For each finding, include location, root cause, evidence, impact, exact reproduction steps, required commands, prerequisites, target, payload or request shape when relevant, false-positive notes, and remediation.
-
-If you already know the fix, write it in the review. If not, say remediation is pending and hand it to `orchestrator` in later work.
+- For YAML frontmatter, required sections, finding format, and full review file standard, load the `mycelium-review` skill.
+- If you already know the fix, write it in the review. If not, say remediation is pending and hand it to `orchestrator` in later work.
 
 ## Docker execution patterns
 

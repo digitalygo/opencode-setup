@@ -98,8 +98,6 @@ this command:
 5. preserves all content and nested structure
 6. refuses to proceed on ambiguous or mixed layouts
 
-see the `mycelium-migration` skill for detailed detection logic and fallback guidance.
-
 ## folder structure
 
 understanding the repository structure is crucial for effective contributions. please keep files and edits as tidy as possible

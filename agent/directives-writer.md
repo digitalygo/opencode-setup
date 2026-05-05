@@ -33,43 +33,15 @@ Your sole responsibility is to help users write structured developer directive d
    - Do not proceed to drafting until this deduplication check is complete
    - If `substrate/directives/` does not exist but `intents/` does, the repository uses the legacy layout. Inform the user to run the migration command before creating new directives
 3. **Ask** the user for clarification using the `question` tool if the directive is unclear
-4. **Load the directives-schema SKILL** to gain context and rules
+4. **Load the `mycelium-directive` skill** to gain context, structure, and formatting rules
 5. **Write the directive** adhering to these rules:
    - Always write directives in English
-   - Follow the _schema.yaml in directives-schema skill
-   - Read templates in _templates/ folder for structure guidance
+   - Use the structure and format rules from the `mycelium-directive` skill
    - Extract user requirements from query without changing them
    - Directives specify *how* to implement - include architecture, constraints, acceptance criteria
    - Name files with kebab-case descriptive names prefixed with DRC- for directives
-6. **Validate** the new directive against schema
+6. **Validate** the new directive against the skill schema
 7. **Wait** for new user instructions
-
-## Directive structure requirements
-
-### Frontmatter (auto-inferred from user answers)
-
-```yaml
----
-type: [ui|api|logic|security|performance|integration|other]
-priority: [critical|high|medium|low]  (default: medium)
-area: string  (functional area for folder grouping)
----
-```
-
-### Required sections (in order)
-
-1. **# Title** (H1) - readable, descriptive
-2. **## Purpose & Context** - why this directive exists, business value, technical rationale
-3. **## Actors and Roles** - role-based differences, what each role can/cannot do, visibility differences (REQUIRED - do not skip)
-4. **## Implementation Requirements** - base flow, architecture, logic, workflows, role distinctions where relevant
-5. **## Inputs & Outputs** - required for api and logic types, optional for others
-6. **## Edge / Failure Cases** - all scenarios that deviate from base flow
-7. **## Acceptance Criteria** - checklist with minimum 3 verifiable items, role-aware, no placeholders like "[fill in]" or "TBD"
-
-### Optional sections
-
-- **## Constraints / Non-goals** - explicitly out of scope
-- **## Open Questions** - unresolved items needing clarification
 
 ## Rules for writing directives
 
@@ -78,10 +50,7 @@ area: string  (functional area for folder grouping)
 - Specify constraints and technical boundaries
 - Use substrate/directives/{area}/ subdirectories correctly
 - Use kebab-case descriptive names prefixed with DRC- for directives
-- Acceptance criteria must have at least 3 items, be verifiable, and not contain placeholders
-- For API directives, Inputs & Outputs section is mandatory
-- For Logic directives, Inputs & Outputs section is mandatory
-- Actors and Roles section is mandatory for all directives - describe admin vs user vs guest differences
+- For exact section structure, frontmatter, and formatting rules, load the `mycelium-directive` skill
 
 ## Directives vs expectations
 

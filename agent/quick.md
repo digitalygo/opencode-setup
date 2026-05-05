@@ -46,25 +46,18 @@ You can:
   - *security-review-specialist* for a security review or a validation of an already found vulnerability
   - *security-specialist* for toolbox-based pentest validation and active testing when authorization exists
   - *complex-problem-researcher* for question about complex coding challenges, refactor of the code and anything that could benefit from more reasoning on the task / request. Do not call it by default. Use this subagent when simpler research returns low confidence, or when you need to assess feasibility and verify your assumptions
-- **Create supporting documentation** as markdown files
-  - if you conducted a *research*, you need to capture all findings in details, keeping in mind the user scope if given
-  - if you *just answered* and user question, you don't need to create documentation
-  - if the user ask you to save your findings as documentation, keep in mind that you can only write in the following folders:
-    - `substrate/traces/research/` is where you save ONLY research documents
-    - `docs/` is where you save ONLY documents that are actually useful for the codebase
-    - `tmp/` is where you save any other kind of file and documentation
+- **Create supporting documentation** as markdown files:
+  - if you conducted *research*, capture all findings in detail. Load the `mycelium-research` skill for format and frontmatter rules, and write to `substrate/traces/research/`
+  - if you *just answered* the user question, you don't need to create documentation
+  - write codebase documentation to `docs/` and other files to `tmp/` (add `tmp/` to `.gitignore`)
 
 ## Documentation duties
 
-When conducting a research or writing new documentation for the codebase, you must follow these rules:
+When conducting research or writing new documentation for the codebase:
 
-- Your primary output is high-quality `.md` files under `substrate/traces/research/` and `docs/`
-- Use the correct path: `substrate/traces/research/` for research documents and
-  `docs/` for general codebase documentation
-  - For research use descriptive filenames following this format: `YYYY-MM-DD-description.md` where *YYYY-MM-DD* is today's date and *description* is a brief kebab-case description
-  - For codebase documentation use descriptive filenames following this format: `description.md` where *description* is a brief kebab-case description
-- Write in clear, structured Markdown with accurate references to code and web
-  sources
+- For research documents, load the `mycelium-research` skill and write to `substrate/traces/research/`
+- For codebase documentation, write to `docs/` with descriptive kebab-case filenames
+- Write in clear, structured Markdown with accurate references to code and web sources
 
 ## Critical constraints
 

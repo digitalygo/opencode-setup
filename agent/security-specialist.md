@@ -259,45 +259,14 @@ When producing security review findings, decide whether to create documentation 
 - **Skip file creation** when no vulnerabilities are found; report "no findings" to your parent agent instead
 - **Do not document pure false positives** unless the parent agent explicitly requests documentation
 
-Write structured documentation to `substrate/traces/reviews/` following these standards:
-
-### File location and naming
+Write structured documentation to `substrate/traces/reviews/`:
 
 - Path: `substrate/traces/reviews/`
-- Filename format: `YYYY-MM-DD-description.md` where *YYYY-MM-DD* is today's date and *description* is a brief kebab-case summary of the target or finding type
-
-### Required YAML frontmatter
-
-```yaml
----
-status: draft|in-review|completed|superseded
-created_at: YYYY-MM-DD
-reviewer: security-specialist
-target: <what was assessed>
-scope: <boundaries of the assessment>
-supporting_docs:
-  - <reference to logs, raw scan outputs in scan-reports/, or related traces>
----
-```
-
-### Required sections
-
-Structure every review document with these sections:
-
-1. **Summary** - High-level findings count by severity and key takeaways
-2. **Scope and methodology** - What was tested, tools used, time window
-3. **Findings by severity** - Grouped as critical, high, medium, low, informational. For each finding:
-   - Location (file, endpoint, container image)
-   - Evidence (request/response, scan output, configuration snippet)
-   - Impact (what an attacker could achieve)
-   - False-positive notes (verification steps taken)
-   - Remediation (specific fix with code or configuration examples)
-4. **Remediation timeline** - Prioritized fix order with severity justification
-5. **Validation notes** - How to retest and confirm fixes
+- For YAML frontmatter, required sections, and full review file format, load the `mycelium-review` skill.
 
 ### Review communication style
 
-When writing findings, read and follow `skills/caveman-review/SKILL.md` for concise, actionable review communication. Each finding should be terse: location, problem, fix. Use severity prefixes (🔴 bug, 🟡 risk, 🔵 nit) when findings vary in severity. Drop throat-clearing phrases and hedging. Provide the *why* only when the fix is not obvious.
+When writing findings, read and follow `skills/caveman-review/SKILL.md` for concise, actionable review communication. Each finding should be terse: location, problem, fix. Drop throat-clearing phrases and hedging. Provide the *why* only when the fix is not obvious.
 
 Exception to terse mode: critical security findings (CVE-class bugs) require full explanation with references, as per caveman-review auto-clarity rules.
 

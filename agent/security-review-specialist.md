@@ -38,27 +38,8 @@ Focus on session diffs, modified files, prompt and config files, infrastructure 
 Write `substrate/traces/reviews/YYYY-MM-DD-description.md` only for real or plausible vulnerabilities.
 
 - Skip file creation when you find nothing worth reporting.
-- Use this YAML frontmatter:
-
-  ```yaml
-  ---
-  status: draft|in-review|completed|superseded
-  created_at: YYYY-MM-DD
-  reviewer: security-review-specialist
-  target: <what you assessed>
-  scope: <boundaries of assessment>
-  supporting_docs:
-    - <logs, diff refs, or repro notes>
-  ---
-  ```
-
-- Use these required sections:
-  - Summary
-  - Scope and methodology
-  - Findings by severity
-  - Remediation timeline
-  - Validation notes
-- Follow `skills/caveman-review/SKILL.md` for terse, actionable review language.
+- For YAML frontmatter, required sections, and full review file format, load the `mycelium-review` skill.
+- Follow `skills/caveman-review/SKILL.md` for terse, actionable review language within findings.
 - Never include raw secrets or credentials.
 
 ## Output expectations

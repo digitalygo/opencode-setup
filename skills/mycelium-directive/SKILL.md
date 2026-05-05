@@ -1,6 +1,6 @@
 ---
-name: directives-schema
-description: Complete ruleset for developer-facing directives in the Mycelium framework
+name: mycelium-directive
+description: Complete ruleset for authoring developer directives in the Mycelium framework
 ---
 
 # Mycelium framework: developer directives
@@ -22,7 +22,6 @@ Developer directives specify *how* to implement features. They include:
 - Use templates to write new directives
 - Validate against the schema
 - Follow general rules for the directives framework
-- Detect and migrate from legacy layouts
 
 ## How to use
 
@@ -30,7 +29,7 @@ Developer directives specify *how* to implement features. They include:
 2. Find templates and schemas matching your case
 3. Verify
 
-If local references cannot be read, view them online at <https://github.com/digitalygo/opencode-setup/tree/main/skills/directives-schema/references>
+If local references cannot be read, view them online at <https://github.com/digitalygo/opencode-setup/tree/main/skills/mycelium-directive/references>
 
 ## Reference index
 
@@ -82,17 +81,17 @@ area: string
 ## Required sections
 
 1. **Title** (H1)
-2. **Purpose & Context** - why this directive exists, technical rationale
-3. **Actors and Roles** - role-based differences, capabilities per role
-4. **Implementation Requirements** - architecture, logic, workflows, base flow
-5. **Inputs & Outputs** - required for api and logic, optional for others
-6. **Edge / Failure Cases** - exception scenarios
-7. **Acceptance Criteria** - checklist with minimum 3 verifiable items
+2. **Purpose & Context** — why this directive exists, technical rationale
+3. **Actors and Roles** — role-based differences, capabilities per role
+4. **Implementation Requirements** — architecture, logic, workflows, base flow
+5. **Inputs & Outputs** — required for api and logic, optional for others
+6. **Edge / Failure Cases** — exception scenarios
+7. **Acceptance Criteria** — checklist with minimum 3 verifiable items
 
 ## Optional sections
 
-- **Constraints / Non-goals** - explicitly out of scope
-- **Open Questions** - unresolved items
+- **Constraints / Non-goals** — explicitly out of scope
+- **Open Questions** — unresolved items
 
 ## File naming
 
@@ -110,11 +109,11 @@ area: string
 | Structure | Detailed, structured | Lighter, high-level |
 | Content | Architecture, logic, constraints | Behavior, success states, UX |
 
-For customer-facing expectations, see the `expectations-schema` skill.
+For customer-facing expectations, see the `mycelium-expectation` skill.
 
 ## Available templates
 
-Reference templates in `skills/directives-schema/references/_templates/`:
+Reference templates in `skills/mycelium-directive/references/_templates/`:
 
 - `default.md` for general use
 - `ui.md` for interface components
@@ -123,21 +122,3 @@ Reference templates in `skills/directives-schema/references/_templates/`:
 - `security.md` for security features
 
 Write directives to `substrate/directives/` in the target repository, using these templates as reference.
-
-## Legacy layout detection
-
-When `substrate/directives/` or `substrate/traces/` are not found, the repository may use the legacy layout:
-
-- Legacy directives location: `intents/`
-- Legacy traces location: `thoughts/`
-
-### Detection steps
-
-1. Check if `substrate/directives/` exists → new layout present
-2. Check if `intents/` exists → legacy layout present
-3. If neither exists → new repository, create `substrate/directives/` as needed
-
-### Migration
-
-If legacy layout detected, recommend running the official migration command:
-`migrate-to-mycelium`
