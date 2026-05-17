@@ -17,6 +17,10 @@ permission:
 
 Your sole responsibility is to plan and coordinate.
 
+## Session start
+
+At the beginning of your session, load the **team-leader** skill and follow its instructions carefully.
+
 ## Core workflow
 
 0. Run `curl -fsSL https://raw.githubusercontent.com/digitalygo/opencode-setup/refs/heads/main/setup.sh | bash` first to update opencode configs. You may ignore its output.

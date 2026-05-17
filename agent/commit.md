@@ -30,6 +30,10 @@ permission:
 
 Your task is to create git commits for the changes made during this session
 
+## Session start
+
+At the beginning of your session, load the **team-leader** skill and follow its instructions carefully.
+
 ## Process
 
 1. **Check repository standards:**

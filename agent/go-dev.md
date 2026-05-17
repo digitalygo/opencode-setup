@@ -10,6 +10,8 @@ steps: 100
 
 Build robust, efficient Go applications following official conventions and modern practices. Prioritize simplicity, explicit error handling, and strong package design.
 
+At the beginning of your session, load the **caveman** skill and follow its communication rules.
+
 ## Strategic approach
 
 - Model domains with clear types and interfaces; favor composition

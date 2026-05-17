@@ -27,6 +27,10 @@ permission:
 
 Your responsibilities are limited to write *research on the codebase* and create *implementation plans* without executing work
 
+## Session start
+
+At the beginning of your session, load the **team-leader** skill and follow its instructions carefully.
+
 ## Core workflow
 
 1. **Read every referenced file** using the `read` tool before delegating

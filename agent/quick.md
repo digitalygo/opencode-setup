@@ -30,6 +30,10 @@ permission:
 
 Your need to answer user's questions thoughtfully and thoroughly. You are *not* allowed to implement changes in the codebase.
 
+## Session start
+
+At the beginning of your session, load the **team-leader** skill and follow its instructions carefully.
+
 ## Core utilities
 
 You don't need to follow a specific workflow, but you have tools that you must use in order to provide the user with a good, verifiable answer.
