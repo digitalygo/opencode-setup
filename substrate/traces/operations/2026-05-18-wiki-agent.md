@@ -34,7 +34,7 @@ Design choices:
 - **Model**: `openai/gpt-5.4` matches the orchestrator and planner tier, appropriate for a primary coordination role.
 - **Temperature**: `0.1` enforces factual, non-speculative output suitable for knowledge curation.
 - **Color**: `#4a9f6e` (green) distinguishes it from existing primary agents (orchestrator purple, quick teal, planner pink).
-- **Permissions**: write access limited to `docs/**/*.md`, `tmp/**/*.md`, `substrate/traces/**/*.md`, and `.gitignore`. All code files are denied. Task permissions mirror the read-only subagent set from `quick` and `planner`.
+- **Permissions**: write access limited to `docs/**/*.md`, `tmp/**/*.md`, and `substrate/traces/operations/*.md`. All code files and `.gitignore` are denied. Task permissions are limited to `traces-*`, `codebase-*`, `documentation-*`, `web-researcher`, and `complex-problem-researcher` — only subagents the wiki agent actually delegates to.
 - **No implementation capability**: the agent explicitly states it does not implement code and directs users to the orchestrator for implementation work.
 
 # Impact assessment
@@ -102,3 +102,48 @@ Each fix maps directly to a security review finding:
 - Ran `grep -r "expectations-\*" agent/wiki.md` — zero matches.
 - Ran `grep "\.gitignore" agent/wiki.md` — zero matches outside descriptive context.
 - Verified markdown structure remains lint-clean: sentence case, consistent heading hierarchy, no trailing whitespace.
+
+---
+
+## Update 2026-05-18: Karpathy-style prompt refinement
+
+### Summary of new work
+
+Refined the `agent/wiki.md` prompt body to align with Karpathy-style "LLM wiki" framing. The frontmatter (permissions, model, temperature, color) was not changed. All prior security remediations from the previous update remain intact.
+
+### Technical reasoning
+
+The initial prompt described the wiki agent as a generic curator — reading, linking, merging, restructuring. The refined prompt positions the wiki as a retrieval system: canonical memory that answers questions before general model knowledge, structured for fast LLM retrieval through summaries, indexes, aliases, tags, and cross-links.
+
+Specific changes made:
+
+- **Opening reframed**: the wiki is now described as "a retrieval-first, markdown-native knowledge base that serves as canonical memory" and pages are "durable, inspectable, git-friendly markdown artifacts."
+- **Wiki philosophy section added**: three principles — answer from the wiki first, the wiki is canonical memory (overrides model priors), every page is a retrieval artifact.
+- **Four new core principles**: retrieval over generation (search wiki before generating), append and link over rewrite (dated additions preserve history), preserve author voice and uncertainty (keep "I think", "maybe", user phrasing), evergreen pages from transient notes (promote recurring topics from `tmp/` to `docs/`).
+- **Core workflow restructured**: replaced the 7-step linear list with four named workflows — query, capture, refactor, synthesize — plus a research subagents subsection and a documentation subsection. Each workflow has its own step-by-step guidance.
+- **Web research downgraded**: `web-researcher` is now described as "a last resort for leads" whose output must be treated as "unverified." All web-sourced claims must be flagged with `[unverified: web research YYYY-MM-DD]` and confirmed by the user before becoming wiki facts. The provenance principle no longer lists web research as a valid source.
+- **No-speculation updated**: now proposes research, import, or capture tasks instead of claiming web verification. Added explicit rule: "Do not claim that a web search verified a fact unless the user confirms the result."
+- **Maintenance tasks expanded**: added tag consistency checks, missing cross-link detection, index/summary page review, and transient-note-to-evergreen promotion scans.
+- **No claims of verified web sources**: delegated web research was attempted during this refinement but could not access the web. The Karpathy-style framing is based on user direction and cautious adaptation of unverified LLM-wiki design patterns, not on confirmed online citations. All web-researcher-related language in the prompt explicitly labels its output as unverified.
+
+### Impact assessment
+
+- Wiki agent now has a coherent retrieval-first philosophy that guides every workflow decision.
+- The four-workflow model (query/capture/refactor/synthesize) gives the agent clear decision criteria for how to approach any user request.
+- Append-and-link and preserve-voice principles protect the user's own writing from being overwritten by agent paraphrasing.
+- Evergreen promotion workflow creates a path from messy transient notes to structured permanent pages.
+- Web research is now treated as a source of leads, not verified facts, eliminating the risk of the agent treating hallucinated web results as confirmed knowledge.
+- All existing security remediations (narrowed permissions, secret boundary, strengthened constraints) are preserved without change.
+
+### Validation steps
+
+- Read `agent/wiki.md` in full and confirmed the wiki philosophy section appears before core principles.
+- Verified all four new core principles (retrieval over generation, append and link over rewrite, preserve author voice and uncertainty, evergreen pages from transient notes) are present and in sentence case.
+- Confirmed core workflow now contains four named subsections (query, capture, refactor, synthesize) with step-by-step guidance.
+- Verified provenance-first no longer lists "web research" as a source; instead directs to propose research or import tasks.
+- Confirmed strict no-speculation now includes "Do not claim that a web search verified a fact unless the user confirms the result."
+- Verified web-researcher is described as "a last resort for leads" with mandatory `[unverified: …]` flagging.
+- Checked maintenance tasks include tag consistency, cross-links, index review, and evergreen promotion scans.
+- Confirmed frontmatter (permissions, model, temperature, color) is unchanged.
+- Verified all security remediations from the previous update remain intact: task permissions exclude `directives-*` and `expectations-*`, edit permissions use `substrate/traces/operations/*.md`, `.gitignore` removed, secret boundary present, critical constraints use `Do **NOT**` all-caps.
+- Ran `grep "web research" agent/wiki.md` — the only matches are in the downgraded/unverified context, not as a claimed source of truth.
