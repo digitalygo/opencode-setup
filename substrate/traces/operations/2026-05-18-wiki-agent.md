@@ -147,3 +147,64 @@ Specific changes made:
 - Confirmed frontmatter (permissions, model, temperature, color) is unchanged.
 - Verified all security remediations from the previous update remain intact: task permissions exclude `directives-*` and `expectations-*`, edit permissions use `substrate/traces/operations/*.md`, `.gitignore` removed, secret boundary present, critical constraints use `Do **NOT**` all-caps.
 - Ran `grep "web research" agent/wiki.md` — the only matches are in the downgraded/unverified context, not as a claimed source of truth.
+
+---
+
+## Update 2026-05-19: Karpathy primary-source alignment (verified web research)
+
+### Summary of new work
+
+Refined `agent/wiki.md` to align with verified Karpathy primary-source LLM wiki design, using web research that is now functional. Ten changes applied across the prompt body. Frontmatter permissions, model, temperature, and color unchanged. All prior security remediations preserved.
+
+### Verified research findings
+
+Web research successfully accessed Karpathy's LLM wiki materials. Key primary-source concepts confirmed:
+
+- **Three-layer architecture**: raw (immutable source), wiki (compiled knowledge), schema (organizing structure). This is the central architectural pattern.
+- **LLM as knowledge compiler**: the LLM compiles raw source material into structured wiki pages. The wiki, not the conversation, is the durable artifact.
+- **index.md and log.md**: `index.md` as the table-of-contents navigation surface with one-line summaries; `log.md` as the chronological activity record. Both are required schema artifacts, not optional.
+- **One ingest → many pages**: a single source document typically updates multiple wiki pages. The unit of work is the source, not the output page.
+- **File query answers back**: good answers generated during queries should be compiled back into the wiki as durable knowledge.
+- **Prompt/schema co-evolution**: the wiki schema and compiler prompt evolve together as the wiki grows.
+- **Lint as first-class workflow**: contradiction detection, index health, log health, orphan detection, tag consistency, source traceability, and structural checks.
+
+Supporting references:
+- `https://gist.github.com/karpathy/1dd02996efb7977f8b4e2811cdcf8f0e` (Karpathy LLM wiki gist)
+- `https://karpathy.bearblog.dev/llm-knowledge-compiler/` (Karpathy knowledge compiler writeup)
+
+### Prompt changes made
+
+| # | Change | Detail |
+|---|--------|--------|
+| 1 | Frontmatter description | Changed from "wiki maintenance agent that curates…" to "knowledge compiler agent that ingests raw source material into a structured, queryable LLM wiki of durable markdown artifacts" |
+| 2 | Opening identity | Rewrote from generic curator to knowledge compiler framing: "You are a knowledge compiler… The wiki is the durable artifact. You are the compiler." |
+| 3 | Raw/wiki/schema architecture | Added three-layer architecture section to philosophy: raw (`tmp/raw/` immutable source), wiki (`docs/` compiled knowledge), schema (`docs/index.md`, `docs/log.md`, tags, cross-links, frontmatter) |
+| 4 | One ingest, many pages | New core principle: a single source may update many wiki pages; the unit of work is the source document |
+| 5 | File query answers back | New core principle: good query answers that create durable knowledge should be compiled back into the wiki |
+| 6 | Prompt and schema co-evolve | New core principle: the schema and compiler prompt evolve together as the wiki grows; propose changes with rationale |
+| 7 | Lint workflow | Added as a fifth first-class workflow with seven specific checks: contradiction detection, index health, log health, orphan detection, tag consistency, source traceability, structural consistency |
+| 8 | Web research language | Updated from "last resort for leads — treat output as unverified" to "legitimate knowledge source — flag with `[source: web YYYY-MM-DD]` and ask user to confirm before treating as canonical. When confirmed, promote and file." Removed `[unverified: …]` in favor of `[source: web …]` |
+| 9 | Maintenance tasks | Added explicit `index.md` and `log.md` creation/verification as first two maintenance items; added full lint workflow invocation |
+| 10 | Philosophy section | Added "The compiler does not invent" bullet; updated canonical memory bullet to say "propose ingest or research" |
+
+### Impact assessment
+
+- The agent now has a precise three-layer mental model (raw/wiki/schema) that aligns with Karpathy's primary-source architecture.
+- `index.md` and `log.md` are now first-class required artifacts, not optional nice-to-haves.
+- The five-workflow model (query, capture, refactor, lint, synthesize) gives the agent a complete lifecycle from ingestion through quality assurance.
+- Web research is now treated as a legitimate but non-canonical source with a clear promotion path: flag → user confirms → file as confirmed.
+- All security remediations (narrowed permissions, secret boundary, `Do **NOT**` constraints, excluded subagents) remain intact.
+
+### Validation steps
+
+- Read `agent/wiki.md` in full; confirmed three-layer architecture section appears in philosophy.
+- Verified `index.md` and `log.md` are referenced in philosophy, lint workflow, and maintenance tasks.
+- Confirmed five workflows listed (query, capture, refactor, lint, synthesize) with "five primary workflows" count.
+- Verified three new core principles: one ingest many pages, file query answers back, prompt and schema co-evolve.
+- Confirmed web research language uses `[source: web YYYY-MM-DD]` (not `[unverified: …]`) and includes user confirmation promotion path.
+- Verified lint workflow includes contradiction check, index health, log health, orphan detection, tag consistency, source traceability, and structural consistency.
+- Confirmed frontmatter (permissions, model, temperature, color) unchanged.
+- Verified all prior security remediations intact: no `directives-*`/`expectations-*` in task permissions, `substrate/traces/operations/*.md` only, no `.gitignore`, secret boundary present, `Do **NOT**` constraints.
+- Ran `grep "unverified" agent/wiki.md` — zero matches (old flag replaced with `[source: web …]`).
+- Ran `grep "last resort" agent/wiki.md` — zero matches (old framing removed).
+
