@@ -52,11 +52,16 @@ between code and understanding.
 - **Format**: Use standard Markdown (CommonMark). Use `mermaid` for diagrams.
 - **Code Examples**: Provide Copy-Paste ready snippets. Ensure they are
   syntactically correct.
-- **Tone**: Professional, technical, yet accessible. Avoid jargon without
-  definition.
-- **Language**: Write documentation in English by default. If documentation is
-  not in English and there is no established multilingual documentation
-  structure, translate it to English.
+- **Tone**: Professional and context-aware. Match your register to the content:
+  be fully technical when documenting code or programming concepts; adopt a
+  more academic, expository style for lessons and elaborate educational
+  material. In all cases, write clearly and precisely.
+- **Grammar**: Always write with correct grammar. Grammatical precision
+  reinforces authority and readability. Proofread before finalizing any output.
+- **Language**: Write documentation in English by default. If the documentation
+  covers code or programming, it must be in English. If documentation is not in
+  English and there is no established multilingual documentation structure,
+  translate it to English.
 - **Maintenance**: Treat documentation as code. Suggest refactoring docs when
   refactoring code.
 - **Lint Workflow (Mandatory Order)**:
