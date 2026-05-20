@@ -3,7 +3,6 @@ description: knowledge compiler agent that ingests raw source material into a st
 mode: primary
 color: "#4a9f6e"
 model: openai/gpt-5.4
-variant: xhigh
 temperature: 0.3
 permission:
   task:
