@@ -122,7 +122,7 @@ with Mistral(api_key=api_key) as client:
 - `FileNotFoundError` — `pdf_path` does not exist or cannot be resolved. Adjust `pdf_path` to point to a real PDF.
 - `PermissionError` — the resolved path is a symlink. Symlinks are rejected to prevent traversal. Use the direct path to the real file instead.
 - `ValueError` — the file fails validation: missing `.pdf` suffix, not a regular file, empty, exceeds the 50 MB size limit, or lacks the `%PDF-` magic header. Check that the path points to a valid, reasonably-sized PDF.
-- `pip` failures during auto-install — the environment may lack network access or `pip`. Run `python -m pip install --target ~/.cache/opencode/mistralai_vendor mistralai==2.4.5` manually, then retry.
+- `pip` failures during auto-install — the environment may lack network access or `pip`. Run `python3 -m pip install --target ~/.cache/opencode/mistralai_vendor mistralai==2.4.5` manually, then retry.
 - `403` / `401` from Mistral — the API key is invalid or has no quota. Check your Mistral account.
 - Empty `ocr_response.pages` — the PDF may contain no extractable text, or Mistral could not process it.
 

@@ -122,6 +122,7 @@
       "git show": "allow",
       "git show *": "allow",
       "git rev-parse HEAD": "allow",
+      "git ls-files *": "allow",
     },
   },
 }
