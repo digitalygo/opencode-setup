@@ -1,0 +1,54 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended",
+    ":disableDependencyDashboard"
+  ],
+  "schedule": ["before 10am on wednesday"],
+  "timezone": "Europe/Rome",
+  "labels": ["dependencies"],
+  "customManagers": [
+    {
+      "customType": "jsonata",
+      "fileFormat": "toml",
+      "managerFilePatterns": [
+        "/^skills/dependency-catalog/references/dependency-catalog\\.toml$/"
+      ],
+      "matchStrings": [
+        "entries[mode = 'managed'].{\"depName\": dep_name, \"currentValue\": recommended_version, \"datasource\": datasource, \"versioning\": versioning}"
+      ]
+    }
+  ],
+  "packageRules": [
+    {
+      "description": "Group all dependency catalog updates into a single PR",
+      "matchManagers": ["custom.jsonata"],
+      "matchFileNames": [
+        "skills/dependency-catalog/references/dependency-catalog.toml"
+      ],
+      "groupName": "dependency catalog baseline",
+      "groupSlug": "dependency-catalog",
+      "commitMessageTopic": "dependency catalog",
+      "commitMessageAction": "",
+      "commitMessageExtra": "",
+      "semanticCommits": "enabled",
+      "semanticCommitType": "chore",
+      "prBodyDefinitions": {
+        "Package": "{{{depNameLinked}}}"
+      },
+      "prBodyColumns": [
+        "Package",
+        "Change"
+      ],
+      "separateMajorMinor": false,
+      "separateMinorPatch": false
+    },
+    {
+      "description": "Require minimum baseline policy review for all catalog entries",
+      "matchFileNames": [
+        "skills/dependency-catalog/references/dependency-catalog.toml"
+      ],
+      "reviewersFromCodeOwners": true
+    }
+  ]
+}
