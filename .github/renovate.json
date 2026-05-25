@@ -15,7 +15,7 @@
         "/^skills/dependency-catalog/references/dependency-catalog\\.toml$/"
       ],
       "matchStrings": [
-        "entries[mode = 'managed'].{\"depName\": dep_name, \"currentValue\": recommended_version, \"datasource\": datasource, \"versioning\": versioning}"
+        "entries[mode = 'managed'].{\"depName\": dep_name, \"currentValue\": recommended_version, \"datasource\": datasource, \"versioning\": versioning, \"extractVersion\": extract_version}"
       ]
     }
   ],
