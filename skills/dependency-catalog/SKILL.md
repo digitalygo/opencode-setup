@@ -20,11 +20,9 @@ The authoritative catalog is `references/dependency-catalog.toml` inside this sk
 
 ## How to read the catalog
 
-1. read the catalog before making any dependency decision. the catalog lives at `references/dependency-catalog.toml` relative to this skill. when working outside this repo, use the synced path `~/.config/opencode/skills/dependency-catalog/references/dependency-catalog.toml`
-2. locate the entry by matching its `id` field:
-   - managed entries use an `ecosystem:name` prefix: `npm:react`, `pypi:pytest`, `github-action:actions/checkout`, `docker:caddy`, `composer:laravel/framework`, `rubygems:rails`
-   - curated entries use plain strings: `php`, `ruby`, `python`, `node-lts`, `bun`, `opentofu`, `ansible-core`
-3. check the `comparison` field for the versioning scheme: `semver`, `pep440`, `composer`, `ruby`, `docker`, `github-actions`, or `node`. combined with `policy = minimum-baseline`, the catalog version is a floor — use at least this version, higher is allowed
+1. the catalog is long — do not read the entire file by default. instead, search for the dependency you need first: grep by `id` (e.g., `npm:react`, `pypi:pytest`, `docker:caddy`) or by upstream name (e.g., `oven-sh/bun`). the catalog lives at `references/dependency-catalog.toml` relative to this skill. when working outside this repo, use the synced path `~/.config/opencode/skills/dependency-catalog/references/dependency-catalog.toml`
+2. once you find the matching line, read only the nearby section (the surrounding `[[entries]]` block) to get the full entry. managed entries use an `ecosystem:name` prefix: `npm:react`, `pypi:pytest`, `github-action:actions/checkout`, `docker:caddy`, `composer:laravel/framework`, `rubygems:rails`, `runtime:node-lts`, `language:python`, `language:ruby`, `runtime:bun`, `iac:opentofu`, `automation:ansible-core`. curated entries use plain strings: `php`
+3. check the `comparison` field for the versioning scheme: `semver`, `python`, `composer`, `ruby`, `docker`, `github-actions`, or `node`. combined with `policy = minimum-baseline`, the catalog version is a floor — use at least this version, higher is allowed
 
 ## Operational rules
 
@@ -39,7 +37,7 @@ The catalog is a **minimum approved baseline**, not a ceiling. use it to avoid s
 
 ### Missing entries
 
-If no matching catalog entry exists, use your best judgment for the version. Note the absence so the entry can be created or curated later.
+If no matching catalog entry exists, use your best judgment for the version. Report the absence to the user so the entry can be created or curated.
 
 ### Catalog maintenance
 
@@ -59,19 +57,18 @@ schema_version = "1.0.0"
 updated_at = "2026-05-25"
 
 [[entries]]
-id = "npm:react"
+id = "runtime:bun"
 mode = "managed"
-ecosystem = "npm"
+ecosystem = "runtime"
 comparison = "semver"
-recommended_version = "19.2.6"
+recommended_version = "1.3.14"
 policy = "minimum-baseline"
-source_url = "https://github.com/facebook/react"
-notes = "React library"
-
-# managed entries also include:
-datasource = "npm"
-dep_name = "react"
-versioning = "npm"
+source_url = "https://github.com/oven-sh/bun"
+notes = "Bun runtime"
+datasource = "github-releases"
+dep_name = "oven-sh/bun"
+versioning = "semver"
+extract_version = "^bun-v(?<version>.+)$"
 ```
 
 | field | meaning |
@@ -81,14 +78,15 @@ versioning = "npm"
 | `id` | entry identifier; `ecosystem:name` prefix for managed entries, plain string for curated entries |
 | `mode` | `managed` (auto-updated by Renovate) or `curated` (maintainer-set) |
 | `ecosystem` | domain classifier: `npm`, `pypi`, `php`, `ruby`, `docker`, `github-actions`, `language`, `runtime`, `iac`, `automation` |
-| `comparison` | versioning scheme: `semver`, `pep440`, `composer`, `ruby`, `docker`, `github-actions`, or `node` |
+| `comparison` | versioning scheme: `semver`, `pep440`, `python`, `composer`, `ruby`, `docker`, `github-actions`, or `node` |
 | `recommended_version` | the approved baseline version to target |
 | `policy` | always `minimum-baseline` — the catalog is a floor, not a ceiling |
 | `source_url` | authoritative upstream source for verification |
 | `notes` | human-readable context about the entry |
-| `datasource` | Renovate datasource (`npm`, `pypi`, `packagist`, `rubygems`, `docker`, `github-tags`); only on managed entries |
+| `datasource` | Renovate datasource (`npm`, `pypi`, `packagist`, `rubygems`, `docker`, `github-tags`, `github-releases`, `node-version`, `python-version`, `ruby-version`); only on managed entries |
 | `dep_name` | upstream package name used by Renovate; only on managed entries |
-| `versioning` | version comparison scheme for Renovate (`npm`, `pep440`, `composer`, `ruby`, `regex:...`); only on managed entries |
+| `versioning` | version comparison scheme for Renovate (`npm`, `pep440`, `python`, `composer`, `ruby`, `node`, `regex:...`); only on managed entries |
+| `extract_version` | optional tag normalization regex forwarded to Renovate as `extractVersion`; only on managed entries |
 
 ## Ecosystem-specific notes
 
@@ -118,8 +116,8 @@ Match by `id` prefix `github-action:` (e.g., `github-action:actions/checkout`, `
 
 ### Language and runtime baselines
 
-Curated entries with plain `id` strings (e.g., `php`, `python`, `ruby`, `node-lts`, `bun`). Comparison varies by entry: `semver`, `ruby`, `pep440`, or `node`. `policy = minimum-baseline`. Use `recommended_version` as the minimum; do not downgrade projects already running newer versions.
+Managed entries with prefixed `id` strings (e.g., `runtime:node-lts`, `language:python`, `language:ruby`, `runtime:bun`). Comparison varies by entry: `semver`, `ruby`, `python`, or `node`. `policy = minimum-baseline`. Use `recommended_version` as the minimum; do not downgrade projects already running newer versions.
 
 ### IaC and automation
 
-Curated entries with plain `id` strings (e.g., `opentofu`, `ansible-core`). Comparison is `semver` or `pep440`. `policy = minimum-baseline`. Use `recommended_version` as the minimum baseline.
+Managed entries with prefixed `id` strings (e.g., `runtime:bun`, `iac:opentofu`, `automation:ansible-core`). Comparison is `semver` or `pep440`. `policy = minimum-baseline`. Use `recommended_version` as the minimum baseline.
