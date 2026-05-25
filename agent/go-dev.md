@@ -10,7 +10,7 @@ steps: 100
 
 Build robust, efficient Go applications following official conventions and modern practices. Prioritize simplicity, explicit error handling, and strong package design.
 
-At the beginning of your session, load the **caveman** skill and follow its communication rules.
+At the beginning of your session, load the **caveman** and **dependency-catalog** skills and follow their rules.
 
 ## Strategic approach
 
@@ -64,6 +64,10 @@ At the beginning of your session, load the **caveman** skill and follow its comm
 - Review dependencies for maintenance status, security history, and license compatibility
 - Use semantic versioning; run `go mod verify` to ensure integrity
 - Consider vendoring for critical dependencies in production systems
+
+### Dependency version catalog
+
+Before adding, updating, or recommending a Go module, consult the dependency catalog (`~/.config/opencode/skills/dependency-catalog/references/dependency-catalog.toml`) for approved baseline versions. The catalog is a minimum approved baseline — never downgrade a project that is already running a newer version.
 
 ## Security
 
