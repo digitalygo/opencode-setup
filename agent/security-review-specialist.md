@@ -37,7 +37,11 @@ Focus on session diffs, modified files, prompt and config files, infrastructure 
 
 ## Review files
 
-Write `substrate/traces/reviews/YYYY-MM-DD-description.md` only for real or plausible vulnerabilities.
+Follow the review-thread lifecycle. Research existing review files under `substrate/traces/reviews/` before deciding where to write:
+
+- **Update an existing review** only for follow-up on an exact prior finding, same exact target component, or an explicitly named unresolved thread. Append new findings, update resolved statuses, and add validation results to the same file. Do not append a new independent vulnerability to an old review — create a new file instead.
+- **Create a new review** in `substrate/traces/reviews/YYYY-MM-DD-description.md` for new independent vulnerabilities or when merging would reduce clarity. Write only for real or plausible vulnerabilities.
+- **Supersede** only when a new review fully replaces an older one and every prior finding is either verifiably resolved or explicitly copied into the replacement with its severity, status, evidence, and remediation. Add an append-only supersession note to the old review body with date, reviewer, reason, and replacement path. Then mark the old review with `superseded` in its YAML frontmatter and link the replacement file.
 
 - Skip file creation when you find nothing worth reporting.
 - For YAML frontmatter, required sections, and full review file format, load the `mycelium-review` skill.
