@@ -255,11 +255,13 @@ Structure your findings with:
 
 ## Review documentation duties
 
-When producing security review findings, decide whether to create documentation based on results:
+When producing security review findings, follow the review-thread lifecycle. Research existing review files under `substrate/traces/reviews/` before deciding where to write:
 
-- **Create a review file** when you find one or more real vulnerabilities
-- **Skip file creation** when no vulnerabilities are found; report "no findings" to your parent agent instead
-- **Do not document pure false positives** unless the parent agent explicitly requests documentation
+- **Update an existing review thread** when validation or follow-up work changes the status of an exact prior finding, targets the same exact component, or extends an explicitly named unresolved thread. Append status changes and validation results to the existing file. Do not add a new independent vulnerability to an old thread — create a new file instead.
+- **Create a new review file** when you find one or more real vulnerabilities that are not already documented in an open thread. A new independent finding always gets a new file, even if it is in the same repository or risk family.
+- **Supersede an older review** only when a new review fully replaces it and every prior finding is verifiably resolved or explicitly copied into the replacement with severity, status, evidence, and remediation. Add an append-only supersession note to the old review body with date, reviewer, reason, and replacement path. Set the older review's status to `superseded`, set `superseded_by` to the path of the new file, and mention the supersession in the new review.
+- **Skip file creation** when no vulnerabilities are found; report "no findings" to your parent agent instead.
+- **Do not document pure false positives** unless the parent agent explicitly requests documentation.
 
 Write structured documentation to `substrate/traces/reviews/`:
 

@@ -1,7 +1,7 @@
 ---
 status: completed
 created_at: 2026-05-05
-updated_at: 2026-05-05
+updated_at: 2026-05-25
 files_edited:
   - README.md
   - agent/directives-writer.md
@@ -40,9 +40,11 @@ files_edited:
   - skills/mycelium-review/SKILL.md
   - skills/mycelium-status/SKILL.md
   - substrate/traces/operations/2026-05-05-mycelium-authoring-skills.md
+  - substrate/traces/reviews/2026-05-25-review-thread-lifecycle-security.md
   - substrate/traces/status/2026-05-05-orchestrator-status-skill-tightening-workspace-state.md
   - substrate/traces/status/2026-05-05-planner-documentation-skill-tightening-workspace-state.md
   - substrate/traces/status/2026-05-05-orchestrator-operation-skill-delegation-workspace-state.md
+  - substrate/traces/status/2026-05-25-review-lifecycle-update-workspace-state.md
 rationale:
   - replace inline embedded authoring schemas with dedicated skills agents load on demand
   - unify all Mycelium trace and document types under one `mycelium-` skill prefix
@@ -52,6 +54,8 @@ rationale:
   - tighten orchestrator status guidance so inline mechanics move fully into `mycelium-status`, keeping the orchestrator prompt minimal and delegating concrete status record creation steps to the status skill
   - tighten planner markdown-documentation guidance and move removed inline context into `mycelium-plan` and `mycelium-research` skills
   - tighten orchestrator operation-record guidance by removing the inline `### Operation records` prompt section and keeping operation-record rules entirely in `mycelium-operation`
+  - add an update-first review-thread lifecycle so related review follow-ups reuse one thread when correlation is exact and auditable
+  - tighten supersede and update rules so review reuse cannot hide unresolved findings or bury new independent issues
 supporting_docs:
   - .github/CONTRIBUTING.md
   - AGENTS.md
@@ -60,9 +64,12 @@ supporting_docs:
   - substrate/traces/operations/2026-05-04-complex-problem-researcher-selection-guidance.md
   - substrate/traces/plans/2026-04-09-mycelium-substrate-migration.md
   - substrate/traces/research/2026-04-09-repository-improvement-opportunities.md
+  - substrate/traces/research/2026-05-25-review-trace-lifecycle-options.md
+  - substrate/traces/reviews/2026-05-25-review-thread-lifecycle-security.md
   - substrate/traces/status/2026-05-05-orchestrator-status-skill-tightening-workspace-state.md
   - substrate/traces/status/2026-05-05-planner-documentation-skill-tightening-workspace-state.md
   - substrate/traces/status/2026-05-05-orchestrator-operation-skill-delegation-workspace-state.md
+  - substrate/traces/status/2026-05-25-review-lifecycle-update-workspace-state.md
 ---
 
 # Summary of changes
@@ -222,3 +229,34 @@ This follow-up completes the separation: the orchestrator now delegates operatio
 - Confirmed the skill now explicitly calls for supporting documentation links, related research traces, and related tickets when available.
 - Confirmed `substrate/traces/status/2026-05-05-orchestrator-operation-skill-delegation-workspace-state.md` exists and correctly documents the three layers of pre-existing refactor changes before this follow-up.
 - Final security gate skipped intentionally: this follow-up changed only prompt Markdown, skill Markdown, and trace Markdown. No executable code, runtime configuration, infrastructure, or service behavior was modified.
+
+# Update 2026-05-25 — review-thread lifecycle tightening
+
+## Summary of changes
+
+- Updated `skills/mycelium-review/SKILL.md` with a review-thread lifecycle so reviews no longer default to one new file per follow-up. The skill now defines when to update an existing thread, when to create a new file, how to supersede safely, and how to append dated updates without rewriting history.
+- Updated `agent/security.md`, `agent/security-review-specialist.md`, `agent/security-specialist.md`, and `command/review.md` so security and compliance review flows follow the same lifecycle rules instead of assuming every new finding thread starts in a fresh file.
+- Ran the mandatory security gate on these prompt and skill changes. The first pass created `substrate/traces/reviews/2026-05-25-review-thread-lifecycle-security.md` with two medium audit-integrity findings. Follow-up prompt changes resolved both findings, and the existing review thread was updated append-only to record the resolutions.
+
+## Technical reasoning
+
+The repository already solved trace fragmentation for operation records through update-first reuse. Review files still lacked that lifecycle, so long-lived targets could accumulate multiple adjacent files with overlapping scope and manual cross-references. This follow-up extends the same maintenance philosophy to reviews, but with a tighter correlation test than operations.
+
+The initial implementation used broad thread matching and a weak supersede flow. Security review showed that those rules could let a prompt writer hide unresolved findings by superseding too loosely or bury a new independent issue inside an older review file. The final rules therefore only allow review updates for an exact prior finding, the same exact target component in the same unresolved thread, or an explicitly named unresolved thread. Superseding now requires every prior finding to be resolved with evidence or carried forward explicitly, plus an append-only supersession note in the older file.
+
+This keeps the user's desired review-history continuity without sacrificing visibility or audit integrity.
+
+## Impact assessment
+
+- `mycelium-review` is now the single source of truth for review-thread lifecycle, not only review formatting.
+- Security and compliance review writers now share one reuse model: exact follow-up threads update; new independent issues create new files.
+- Superseding a review is now constrained enough to preserve unresolved findings instead of letting them disappear behind `status: superseded`.
+- Future long-lived targets should accumulate fewer fragmented review files while keeping high visibility for newly discovered issues.
+
+## Validation steps
+
+- Checked workspace state with `git status --short` and `git diff --stat`, then created `substrate/traces/status/2026-05-25-review-lifecycle-update-workspace-state.md` to separate the pre-existing research trace from this implementation task.
+- Read `skills/mycelium-review/SKILL.md`, `command/review.md`, `agent/security.md`, `agent/security-review-specialist.md`, and `agent/security-specialist.md` in full before delegating edits.
+- Reviewed targeted `git diff` output and re-read the final content of all modified files directly after each subagent pass.
+- Synced Markdown lint config and ran `npx markdownlint-cli "**/*.md" --config .markdownlint.json --ignore-path .markdownlintignore --dot --fix`, then reran `npx markdownlint-cli "**/*.md" --config .markdownlint.json --ignore-path .markdownlintignore --dot` with zero errors.
+- Ran `security-review-specialist` on the modified prompt and skill files. Read the generated review file `substrate/traces/reviews/2026-05-25-review-thread-lifecycle-security.md`, delegated remediation for both medium findings, then re-ran `security-review-specialist` to validate the fixes and confirm the existing review thread records both findings as resolved with no new security findings.

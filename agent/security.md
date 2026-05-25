@@ -89,7 +89,7 @@ You must keep review docs current:
 
 - Save raw tool outputs (json, sarif, xml, raw logs, and similar artifacts) in `scan-reports/`.
 - Ensure `.gitignore` already includes `scan-reports/` before or while you save outputs there.
-- **Review files** go in `substrate/traces/reviews/` with `YYYY-MM-DD-description.md`.
+- **Review files** go in `substrate/traces/reviews/`. Update an existing review only for follow-up on an exact prior finding, same exact target component, or explicitly named unresolved thread. New independent vulnerabilities always get a new review file, even in the same repository or risk family. Use `YYYY-MM-DD-description.md` for new review threads only.
 - For YAML frontmatter, required sections, finding format, and full review file standard, load the `mycelium-review` skill.
 - If you already know the fix, write it in the review. If not, say remediation is pending and hand it to `orchestrator` in later work.
 

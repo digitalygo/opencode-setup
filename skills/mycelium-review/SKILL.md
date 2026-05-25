@@ -60,6 +60,68 @@ Optional fields:
 - `git_commit` — current HEAD or specified commit ref (use for compliance reviews)
 - `branch` — current branch name (use for compliance reviews)
 - `topic` — brief description e.g. "code style and naming review" (use for compliance reviews)
+- `updated_at` — date of most recent append-only update in YYYY-MM-DD format
+- `superseded_by` — path to the replacement review file when status is `superseded`
+
+## Review lifecycle: reuse over new files
+
+Reviews are thread documents, not one-shot reports. Before creating a new file, research existing reviews under `substrate/traces/reviews/` for related threads.
+
+### Decision tree
+
+Update an existing review only when follow-up work addresses one of:
+
+1. **Exact prior finding** — you are validating or remediating a finding already documented in the existing review.
+2. **Exact target component** — the same file, service, image, or named component as the existing review, and the work continues the same unresolved thread.
+3. **Explicitly named unresolved thread** — the existing review body names a specific thread and the new work extends that thread directly.
+
+Create a new review when:
+
+- The target is new or different from all existing reviews, or
+- The work introduces a new independent vulnerability or compliance issue not already documented in an open thread — even if it is in the same repository or broad risk family.
+
+### Marking a review superseded
+
+Supersede is allowed only when a new review fully replaces an older one and every prior finding is accounted for. Before superseding, confirm:
+
+- **Resolved or carried forward** — every finding in the old review is either verifiably resolved (with evidence) or explicitly copied into the replacement with the same severity, status, evidence, and remediation.
+- **Carry-forward listing** — the new review lists all carried-forward findings under a `## Carried-forward findings` section with origin path, original date, and preservation of severity and evidence.
+- **Supersession note** — append an update section to the old review body with date, reviewer, reason, and path to the replacement. This note is append-only and lives in the body (not only frontmatter).
+
+Then apply the frontmatter changes:
+
+- Set the older review's status to `superseded`.
+- Set `superseded_by` in the older review's frontmatter to the path of the replacement file.
+- Mention in the new review that it supersedes the older file (e.g., "Supersedes `substrate/traces/reviews/YYYY-MM-DD-old-review.md`").
+
+### How to update an existing review
+
+When updating an existing review:
+
+1. **Preserve the frontmatter**: keep the original `created_at` and set or update `updated_at` to today's date.
+2. **Preserve existing content**: do not delete or rewrite prior findings; the body is append-only.
+3. **Append an update section** at the bottom of the body with the following structure:
+
+```markdown
+## Update: YYYY-MM-DD by <reviewer>
+
+### Prior finding status
+
+- Finding 1 (severity): resolved | unresolved | partially resolved — brief note
+- Finding 2 (severity): resolved | unresolved | partially resolved — brief note
+
+### New findings
+
+(reuse the finding format from the original body: location, evidence, impact, false-positive notes, remediation)
+
+### New validation notes
+
+How to retest and confirm fixes for the new findings.
+```
+
+If no prior findings remain, summarize that all prior findings are resolved before documenting new ones.
+
+This lifecycle applies equally to security reviews and compliance reviews.
 
 ## Body structure
 
