@@ -1,7 +1,7 @@
 ---
 description: Security review specialist for code changes
 mode: subagent
-model: openai/gpt-5.5
+model: opencode/gpt-5.5
 variant: xhigh
 tools:
   "figma*": false
