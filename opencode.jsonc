@@ -54,7 +54,8 @@
   "permission": {
     "external_directory": {
       "*": "deny",
-      "~/.config/opencode/skills/**": "allow"
+      "~/.config/opencode/skills/**": "allow",
+      "~/Documents/**": "allow"
     },
     "doom_loop": "deny",
     "bash": {
