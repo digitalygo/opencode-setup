@@ -1,7 +1,7 @@
 ---
 description: Static site developer (SSG) using Next.js static exports or React with Docker and Caddy
 mode: subagent
-model: opencode-go/deepseek-v4-pro
+model: opencode-go/kimi-k2.6
 temperature: 0.3
 ---
 
