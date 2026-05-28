@@ -1,11 +1,13 @@
 ---
 status: completed
 created_at: 2026-04-28
+updated_at: 2026-05-28
 files_edited:
   - agent/orchestrator.md
   - substrate/traces/operations/2026-04-28-orchestrator-completion-notification.md
 rationale:
   - add explicit audible success and error notifications for orchestrator completion states so the user gets immediate desktop feedback even when AFK
+  - remove canberra-gtk-play notification section from orchestrator prompt; the sound dependency adds noise on headless/remote sessions and the audible feedback is no longer desired
 supporting_docs:
   - .github/CONTRIBUTING.md
   - AGENTS.md
@@ -46,4 +48,29 @@ No DRC or EXP files exist in the repository, so no directive or expectation comp
 - Confirmed no DRC (`substrate/directives/`) or EXP (`substrate/expectations/`) files exist in the repository.
 - Read `AGENTS.md` and `.github/CONTRIBUTING.md` to confirm no policy violation: the change is prompt/documentation-only, sentence-case headings are used, no comments were added, and the notification section uses direct second-person address consistent with the contribution style guide.
 - Final security gate (core workflow step 7) was intentionally skipped because the change is prompt/documentation-only and non-executable. No code, IaC, runtime configuration, or executable artifact was modified. The orchestrator's own security-gate exception rule explicitly permits skipping the gate for documentation-only, trace-only, prompt-only, or otherwise non-executable changes, with documentation of the skip reason — which is satisfied here.
+- Synced Markdown lint configuration and ran `npx markdownlint-cli "**/*.md" --config .markdownlint.json --ignore-path .markdownlintignore --dot --fix` followed by the same command without `--fix`; both completed with zero reported errors.
+
+## Update — 2026-05-28: removal of canberra-gtk-play notification section
+
+### Summary of new work
+
+Removed the `## Task completion notification` section from `agent/orchestrator.md`, which instructed the orchestrator to run `canberra-gtk-play --id=complete` on success and `canberra-gtk-play --id=dialog-error` on error/blocking states. No other orchestrator content was modified.
+
+### Technical reasoning
+
+The `canberra-gtk-play` commands introduce a hard dependency on a desktop sound server (PulseAudio/PipeWire) and `libcanberra` being installed. This produces errors and noise on headless servers, remote SSH sessions, CI/CD environments, and any system without a desktop sound stack. The audible feedback was an experimental convenience but is no longer desired after real-world usage showed the dependency is brittle and the noise is distracting rather than helpful.
+
+### Impact assessment
+
+- Orchestrator no longer attempts to play system sounds at task completion or error states.
+- No desktop dependency is required for orchestrator operation.
+- No other agents, prompts, or repository files are affected.
+- The removal is a revert of the original 2026-04-28 change; the orchestrator prompt returns to its pre-notification state.
+
+### Validation steps
+
+- Read `agent/orchestrator.md` in full and confirmed the `## Task completion notification` section is fully removed. The `## Autonomy and Urgency` heading now follows directly after core workflow step 8 with a single blank line separator.
+- Reviewed `git diff -- agent/orchestrator.md` to verify only the targeted section was removed and no other content was altered.
+- Read `.github/CONTRIBUTING.md` and `AGENTS.md` to confirm no policy violation: the change is prompt-only, sentence-case headings are preserved, no comments were added, and the orchestrator prompt remains in second-person address.
+- Security gate (core workflow step 7) was intentionally skipped because the change is prompt-only and non-executable. No code, IaC, runtime configuration, or executable artifact was modified. The orchestrator's own security-gate exception rule explicitly permits skipping for documentation-only, trace-only, prompt-only, or otherwise non-executable changes.
 - Synced Markdown lint configuration and ran `npx markdownlint-cli "**/*.md" --config .markdownlint.json --ignore-path .markdownlintignore --dot --fix` followed by the same command without `--fix`; both completed with zero reported errors.
