@@ -7,5 +7,9 @@
   "attention": {
     "enabled": true,
     "volume": 0.8,
+    "sounds": {
+      "done": "~/.config/opencode/sounds/done.mp3",
+      "permission": "~/.config/opencode/sounds/permission.mp3"
+    }
   }
 }
