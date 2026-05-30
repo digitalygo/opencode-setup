@@ -10,7 +10,7 @@ description: Convert a local PDF file to a Markdown file using Mistral OCR. Use 
 - take a local `.pdf` file and extract all readable text via Mistral OCR
 - produce a clean `.md` file with the extracted content, page by page
 - keep the original PDF unchanged
-- use `MISTRAL_API_KEY` already exported from `~/.bashrc`
+- use token from `~/.config/opencode/.secrets/mistral-key`
 
 ## When to use
 
@@ -85,7 +85,12 @@ if header != b"%PDF-":
 
 output_path = pdf_path.with_suffix(".md")
 
-api_key = os.environ["MISTRAL_API_KEY"]
+secrets_path = Path.home() / ".config" / "opencode" / ".secrets" / "mistral-key"
+if not secrets_path.is_file():
+    raise FileNotFoundError(f"Missing Mistral token at {secrets_path}")
+api_key = secrets_path.read_text(encoding="utf-8").strip()
+if not api_key:
+    raise ValueError(f"Mistral token at {secrets_path} is empty")
 
 with Mistral(api_key=api_key) as client:
     uploaded_pdf = client.files.upload(
@@ -118,7 +123,7 @@ with Mistral(api_key=api_key) as client:
 
 ## Error handling
 
-- `KeyError: 'MISTRAL_API_KEY'` — the environment variable is not set. Verify `~/.bashrc` exports it and that the shell session has sourced it.
+- `FileNotFoundError` for `~/.config/opencode/.secrets/mistral-key` — the token file is missing. Create it with your Mistral API key as its sole content. `ValueError` — the token file exists but is empty. Populate it with a valid key.
 - `FileNotFoundError` — `pdf_path` does not exist or cannot be resolved. Adjust `pdf_path` to point to a real PDF.
 - `PermissionError` — the resolved path is a symlink. Symlinks are rejected to prevent traversal. Use the direct path to the real file instead.
 - `ValueError` — the file fails validation: missing `.pdf` suffix, not a regular file, empty, exceeds the 50 MB size limit, or lacks the `%PDF-` magic header. Check that the path points to a valid, reasonably-sized PDF.
