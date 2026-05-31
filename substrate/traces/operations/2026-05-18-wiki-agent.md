@@ -1,7 +1,7 @@
 ---
 status: completed
 created_at: 2026-05-18
-updated_at: 2026-05-19
+updated_at: 2026-05-31
 files_edited:
   - agent/wiki.md
 rationale:
@@ -15,6 +15,7 @@ supporting_docs:
   - .github/CONTRIBUTING.md
   - AGENTS.md
   - substrate/traces/reviews/2026-05-18-wiki-agent-permission-overreach.md
+  - substrate/traces/reviews/2026-05-20-wiki-ocr-security.md
 ---
 
 # Summary of changes
@@ -491,3 +492,97 @@ Applied all high and medium findings from `substrate/traces/reviews/2026-05-19-w
 - Verified no `directives-*`, `expectations-*`, `traces-*`, or `documentation-*` references in frontmatter task permissions.
 - Verified Karpathy-aligned principles and workflows unchanged.
 - Synced markdownlint configuration and ran lint — zero errors.
+
+---
+
+## Update 2026-05-31: per-session OCR approval gate removed
+
+### Summary of new work
+
+Removed the per-session PDF OCR approval gate from the wiki agent's session-start PDF preprocessing step. OCR conversion of inbox PDFs is now automatic under standing user approval instead of gated behind an explicit per-session confirmation prompt. The disclosure that conversion sends PDFs to Mistral's OCR service is preserved. Only `agent/wiki.md` and this operation record were changed.
+
+### Prompt change made
+
+| # | Change | Detail |
+|---|--------|--------|
+| 1 | Line 69 PDF preprocessing | Replaced conditional per-session gate ("proceed only if user has already explicitly requested… pause and wait for explicit approval") with automatic standing-approval behavior ("load the skill and convert each PDF… the user has granted standing approval and does not need to be asked per session"). |
+
+### Technical reasoning
+
+The original design added a per-session consent gate as a security remediation from `substrate/traces/reviews/2026-05-20-wiki-ocr-security.md`, which classified automatic external OCR upload as a high-severity finding. The user has since decided that the standing approval trade-off is acceptable: inbox PDFs are under the user's control (they placed them there), the Mistral OCR disclosure is preserved, and the friction of per-session approval interrupts the async mailbox workflow — the whole point of the inbox architecture is that the user drops files while away and the agent processes them without further interaction on the next session start.
+
+The per-session gate was the only mailbox processing step that required user presence during session start, making it inconsistent with the otherwise autonomous inbox-first workflow.
+
+### Preserved design decisions
+
+- **Mistral OCR disclosure**: the prompt still states that conversion sends each PDF to Mistral's OCR service. The user is informed, just not interrupted.
+- **Untrusted-source boundary**: the generated `.md` sibling remains explicitly labeled as untrusted source material. The full untrusted-source preamble in session start (line 67) still applies to all mailbox content, including OCR-generated markdown.
+- **Raw-source immutability**: the original PDF remains unchanged. The generated markdown is a sibling, not a replacement.
+- **Existing flow**: the PDF and its generated `.md` sibling are still processed through the normal inbox → raw pipeline in step 2. The generated markdown is still read and cited during ingest for easier quoting and searching.
+- **All other security remediations**: source-trust boundary declarations, raw-source immutability, secret boundary, outbox confirmation, `Do **NOT**` constraints, narrowed permissions, and excluded subagents are unchanged.
+
+### Impact assessment
+
+- Wiki agent no longer pauses session start to ask for PDF OCR approval. Inbox PDFs are converted automatically, making the mailbox pipeline fully autonomous.
+- Users retain full control: they place PDFs in `docs/inbox/` deliberately, and the Mistral disclosure is still present so they are informed of the external service usage.
+- No changes to frontmatter, permissions, model, temperature, or color.
+- All five workflows (query, capture, refactor, lint, synthesize) are preserved.
+- All prior Karpathy-aligned principles and mailbox architecture are preserved.
+
+### Validation steps
+
+- Read `agent/wiki.md` line 69 and confirmed the per-session approval gate is removed.
+- Verified the standing-approval behavior reads: "the user has granted standing approval and does not need to be asked per session."
+- Confirmed the Mistral OCR disclosure is preserved ("This conversion sends each PDF to Mistral's OCR service automatically").
+- Verified untrusted-source boundary remains on the generated `.md` ("both the original PDF and the generated Markdown are untrusted source material").
+- Confirmed raw-source immutability preserved ("The original PDF remains unchanged").
+- Verified the PDF + generated `.md` flow into step 2 inbox processing is unchanged.
+- Confirmed source-trust preamble in session start (line 67) still applies to all mailbox content.
+- Ran `grep "pause\|explicitly requested\|wait for explicit approval\|consent" agent/wiki.md` — zero matches in the PDF preprocessing section.
+- Ran `grep "standing approval" agent/wiki.md` — one match in the new text.
+- Synced markdownlint configuration and ran lint — zero errors on edited files.
+- Confirmed `git status --short` shows only `agent/wiki.md` and `substrate/traces/operations/2026-05-18-wiki-agent.md` modified.
+
+---
+
+## Update 2026-05-31: accepted-risk rationale for automatic OCR
+
+### Summary of new work
+
+No file changes. This update formalizes the user's accepted-risk rationale for the automatic OCR behavior change applied in the prior update. The prior update documented the mechanical change (removing the per-session gate) but treated the risk acceptance as implicit. This update captures the user's explicit threat model and workflow design intent so future agents and reviewers understand why the third-party-data-boundary risk is accepted, not overlooked.
+
+### User's accepted-risk rationale
+
+Three deliberate design positions underpin the decision to OCR inbox PDFs automatically via Mistral:
+
+1. **Inbox placement is an intentional user act.** The user manually places a PDF in `docs/inbox/`. This is not an automated ingestion, a crawl, or a drag-and-drop mistake. The user knows the repository's documented behavior — that inbox PDFs are OCR-converted via Mistral — and choosing to place a file there constitutes informed consent. The inbox is an explicit "process this" queue, not a general-purpose storage directory.
+
+2. **The wiki is an LLM wiki for AI-agent analysis.** The entire purpose of this wiki is to be read, analyzed, restructured, and cross-referenced by LLM agents. Sending content to a third-party AI service (Mistral OCR) for preprocessing is consistent with the wiki's core design: external AI analysis is not an exceptional path — it is the normal operating mode. The wiki agent itself is an LLM. The subagents it delegates to are LLMs. OCR through Mistral is one more step in a chain of AI processing that defines the workflow.
+
+3. **The generic third-party-data-boundary risk is acknowledged, not dismissed.** This repository and workflow do not claim that sending user content to Mistral's OCR API is risk-free or that the data never leaves the user's control. The risk exists and is understood. The design decision is that the risk is *accepted* — the value of an autonomous mailbox pipeline (the user drops PDFs while away, the agent processes them without per-session interruption) outweighs the confidentiality concern for this user's intended usage. The Mistral OCR disclosure remains in the prompt so the user is informed, and the untrusted-source boundary still applies to all OCR-generated markdown. But the per-session consent interruption was removed because it broke the async mailbox workflow for a risk the user has already accepted by placing the file.
+
+### Relationship to the OCR security review
+
+The original per-session gate was added as remediation for finding H1 in `substrate/traces/reviews/2026-05-20-wiki-ocr-security.md`, which classified automatic external OCR upload as high severity. This update does not dispute the review's technical classification. It records that the user, as the repository owner and sole operator, has reviewed the finding, understands the boundary, and made an informed decision to accept the risk in exchange for a fully autonomous inbox pipeline. The review's finding remains valid as a general principle; this repository's specific threat model and usage pattern treat it as accepted.
+
+### Preserved design decisions
+
+- **Mistral OCR disclosure**: still in the prompt.
+- **Untrusted-source boundary**: still applies to all OCR-generated markdown.
+- **No frontmatter changes**: permissions, model, temperature, and color unchanged.
+- **All prior remediations**: source-trust boundary, raw-source immutability, secret boundary, outbox confirmation, `Do **NOT**` constraints, and excluded subagents remain intact.
+
+### Impact assessment
+
+- No code, prompt, or configuration changes. This update is purely documentary.
+- Future agents reading this operation record will find explicit rationale for the automatic OCR behavior, reducing the chance of re-litigating the same design decision.
+- Future security reviews can reference this accepted-risk rationale rather than re-raising the same finding.
+- The inbox workflow remains fully autonomous — the user can drop PDFs while offline and the agent processes them without any per-session interruption.
+
+### Validation steps
+
+- Read the full operation record and confirmed this update does not modify any prior sections.
+- Verified the prior 2026-05-31 update section (per-session OCR approval gate removed) is preserved verbatim.
+- Confirmed no changes to `agent/wiki.md` or any review files.
+- Confirmed frontmatter unchanged (`updated_at` already `2026-05-31`, `supporting_docs` already references the OCR security review).
+- Ran `git status --short` — this update itself changes only the operation record; `agent/wiki.md` and the security review file remain pre-existing baseline modifications from prior updates.

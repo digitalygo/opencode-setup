@@ -1,6 +1,7 @@
 ---
 status: completed
 created_at: 2026-05-20
+updated_at: 2026-05-31
 reviewer: security-review-specialist
 target: agent/wiki.md, skills/mistral-ocr-pdf-to-md/SKILL.md, tmp/01-attività-economiche.md
 scope: read-only follow-up security review of wiki-agent OCR consent gating, OCR skill dependency bootstrap, file validation, network/API handling, and generated Markdown artifact risk
@@ -8,6 +9,7 @@ supporting_docs:
   - agent/wiki.md
   - skills/mistral-ocr-pdf-to-md/SKILL.md
   - tmp/01-attività-economiche.md
+  - substrate/traces/operations/2026-05-18-wiki-agent.md
 ---
 
 # Summary
@@ -43,3 +45,31 @@ Reviewed `git status --short`, scoped `git diff`, full `agent/wiki.md`, full `sk
 # Validation notes
 
 After remediation, inspect `skills/mistral-ocr-pdf-to-md/SKILL.md` and confirm no runtime `pip install` occurs, or confirm the bootstrap uses hash-locked dependencies, a scrubbed subprocess environment, and cache owner/mode/symlink checks before `sys.path` import. Reconfirm `agent/wiki.md:70` still requires explicit consent before external OCR. Re-review generated Markdown only as untrusted source; current `tmp/01-attività-economiche.md` shows relative image references only and no active content.
+
+## Update: 2026-05-31 by security-review-specialist
+
+### Prior finding status
+
+- Prior high automatic external OCR upload: unresolved — the per-session consent gate is removed and the prompt now claims standing approval for every inbox PDF.
+- M1 runtime dependency bootstrap (medium): partially unresolved and not fully reassessed. The current OCR skill still bootstraps `mistralai==2.4.5` at runtime if import fails, but now reads the token from `~/.config/opencode/.secrets/mistral-key` after install.
+- Prior direct-file path validation (medium): resolved for the reviewed direct-file flow. No change observed in this scoped review.
+
+### New findings
+
+#### High: H1 reopened: standing approval auto-uploads inbox PDFs to Mistral without per-session authorization
+
+- **Location**: `agent/wiki.md:69`, `substrate/traces/operations/2026-05-18-wiki-agent.md:512`, `substrate/traces/operations/2026-05-18-wiki-agent.md:526-527`, `skills/mistral-ocr-pdf-to-md/SKILL.md:95-121`
+- **Evidence**: `agent/wiki.md:69` instructs the wiki agent to load `mistral-ocr-pdf-to-md` and convert every `.pdf` in `docs/inbox/`. The same line says conversion sends each PDF to Mistral automatically and that the user has standing approval, with no per-session prompt. The operation record states the old per-session gate was added as a high-severity remediation and is now removed (`substrate/traces/operations/2026-05-18-wiki-agent.md:512`). It also says the pipeline is fully autonomous and users retain control because they place PDFs in `docs/inbox/` (`substrate/traces/operations/2026-05-18-wiki-agent.md:526-527`). The OCR skill uploads PDF bytes to Mistral and deletes the uploaded file after OCR (`skills/mistral-ocr-pdf-to-md/SKILL.md:95-121`).
+- **Impact**: Any PDF present in `docs/inbox/` at wiki-agent session start crosses the local-workspace trust boundary and is sent to Mistral before the current user can review, redact, or approve that specific upload. Sensitive contracts, IDs, medical records, customer data, or proprietary PDFs can be disclosed to a third-party OCR service through accidental placement, stale inbox state, sync tooling, shared workstation use, or another local process writing into the inbox. The source-trust boundary protects later Markdown ingestion, but it does not prevent the pre-ingest upload.
+- **False-positive notes**: If a single-user deployment explicitly accepts all future OCR uploads for every PDF placed in `docs/inbox/`, the behavior is intentional for that deployment. The prompt still discloses Mistral use, and the skill deletes the uploaded file in a `finally` block. Risk remains because the prompt encodes global standing approval instead of verifying current user, session, file name, file size, sensitivity, or policy at runtime.
+- **Remediation**: Restore default-deny OCR authorization. Before upload, list pending PDFs with names and sizes, state that Mistral will receive the PDF bytes, and wait for explicit approval in the current session. If async processing must stay, require a user-created per-file approval marker, such as a same-basename `.ocr-approved` sidecar or an approved manifest containing file name and hash. Never treat prompt text alone as durable consent for future third-party uploads.
+
+### New validation notes
+
+After remediation, re-read `agent/wiki.md` and confirm PDF preprocessing cannot call `mistral-ocr-pdf-to-md` until explicit current-session approval or a per-file approval marker is present. Confirm the operation record no longer describes automatic standing approval as safe without that gate. No Docker, scanner, network, OCR execution, pip install, or active tests run.
+
+### Deployment acceptance note
+
+- **General security status**: H1 remains valid as a general security concern. Automatic OCR still sends PDF bytes from `docs/inbox/` to Mistral (`agent/wiki.md:69`, `skills/mistral-ocr-pdf-to-md/SKILL.md:95-121`) before any per-session review, so it crosses a third-party boundary.
+- **Accepted deployment context**: The user clarified that, in this deployment, manual placement of a PDF into `docs/inbox/` is the explicit consent signal for external OCR. Under that workflow, automatic conversion is accepted by design, not treated as evidence that the general concern is invalid.
+- **Risk posture**: This is an accepted-by-design risk for this LLM wiki workflow because AI analysis of ingested documents is the intended purpose. For other deployments, especially shared workstations, synced inboxes, regulated data, or unclear data ownership, the default-deny or per-file approval-marker remediation above still applies.
