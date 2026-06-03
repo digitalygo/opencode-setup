@@ -1,7 +1,7 @@
 ---
 description: Docker engineer
 mode: subagent
-model: opencode-go/deepseek-v4-pro
+model: openrouter/deepseek/deepseek-v4-pro
 temperature: 0.15
 steps: 100
 tools:

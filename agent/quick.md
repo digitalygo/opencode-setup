@@ -2,7 +2,7 @@
 description: Agent for quick questions and research, not for implementing changes
 mode: primary
 color: "#0df8cc"
-model: opencode-go/deepseek-v4-pro
+model: openrouter/deepseek/deepseek-v4-pro
 permission:
   edit:
     "*": "deny"

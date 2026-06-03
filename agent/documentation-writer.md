@@ -1,7 +1,7 @@
 ---
 description: Documentation writer for both human engineers and AI agents
 mode: subagent
-model: opencode-go/deepseek-v4-pro
+model: openrouter/deepseek/deepseek-v4-pro
 steps: 100
 tools:
   "figma*": false
