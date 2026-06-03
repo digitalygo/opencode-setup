@@ -1,7 +1,7 @@
 ---
 description: Web application developer for dynamic, data-driven systems using Next.js/React frontend with Laravel backend
 mode: subagent
-model: opencode/gemini-3.5-flash
+model: opencode-go/kimi-k2.6
 temperature: 0.3
 ---
 
