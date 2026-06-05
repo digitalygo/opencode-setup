@@ -45,7 +45,7 @@ Follow the review-thread lifecycle. Research existing review files under `substr
 
 - Skip file creation when you find nothing worth reporting.
 - For YAML frontmatter, required sections, and full review file format, load the `mycelium-review` skill.
-- Follow `skills/caveman-review/SKILL.md` for terse, actionable review language within findings.
+- Follow the review communication style section of the **mycelium-review** skill for terse, actionable review language within findings.
 - Never include raw secrets or credentials.
 
 ## Output expectations

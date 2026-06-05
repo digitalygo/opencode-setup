@@ -34,7 +34,7 @@ At the beginning of your session, load the **team-leader** skill and follow its 
 ## Core workflow
 
 1. **Read every referenced file** using the `read` tool before delegating
-2. **For review requests**, read and follow `skills/caveman-review/SKILL.md` for all review communication
+2. **For review requests**, load the **mycelium-review** skill and follow its review communication style for all review communication
 3. **Research** using specialized subagents (spawn multiple in parallel whenever feasible):
    - *directives-locator* and *directives-analyzer* for developer directives (DRC-*) in substrate/directives/ - implementation details, architecture, constraints
    - *expectations-locator* and *expectations-analyzer* for client expectations (EXP-*) in substrate/expectations/ - business outcomes, operational behavior, success states

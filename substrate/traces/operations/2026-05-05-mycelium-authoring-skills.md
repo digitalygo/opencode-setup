@@ -1,7 +1,7 @@
 ---
 status: completed
 created_at: 2026-05-05
-updated_at: 2026-05-25
+updated_at: 2026-06-05
 files_edited:
   - README.md
   - agent/directives-writer.md
@@ -51,6 +51,7 @@ rationale:
   - remove the migration-awareness skill now that the hard cutover is complete and no legacy layout exists
   - keep historical trace references to removed skills because those are audit history, not active routing
   - consolidate review output guidance into a single `mycelium-review` skill
+  - consolidate review communication style into `mycelium-review` skill, removing `caveman-review` references from active files while preserving them in historical trace records
   - tighten orchestrator status guidance so inline mechanics move fully into `mycelium-status`, keeping the orchestrator prompt minimal and delegating concrete status record creation steps to the status skill
   - tighten planner markdown-documentation guidance and move removed inline context into `mycelium-plan` and `mycelium-research` skills
   - tighten orchestrator operation-record guidance by removing the inline `### Operation records` prompt section and keeping operation-record rules entirely in `mycelium-operation`
@@ -260,3 +261,30 @@ This keeps the user's desired review-history continuity without sacrificing visi
 - Reviewed targeted `git diff` output and re-read the final content of all modified files directly after each subagent pass.
 - Synced Markdown lint config and ran `npx markdownlint-cli "**/*.md" --config .markdownlint.json --ignore-path .markdownlintignore --dot --fix`, then reran `npx markdownlint-cli "**/*.md" --config .markdownlint.json --ignore-path .markdownlintignore --dot` with zero errors.
 - Ran `security-review-specialist` on the modified prompt and skill files. Read the generated review file `substrate/traces/reviews/2026-05-25-review-thread-lifecycle-security.md`, delegated remediation for both medium findings, then re-ran `security-review-specialist` to validate the fixes and confirm the existing review thread records both findings as resolved with no new security findings.
+
+# Update 2026-06-05 — caveman-review removal confirmation
+
+## Summary of changes
+
+Confirmed that all active `caveman-review` references have been removed from the repository. Active files — `README.md`, `agent/planner.md`, `agent/security-review-specialist.md`, `agent/security.md`, and `agent/security-specialist.md` — now reference only `mycelium-review` as the review skill. The `skills/mycelium-review/SKILL.md` carries the single authoritative review communication style. No active file loads or mentions `caveman-review`. The only remaining `caveman-review` references are in historical trace files under `substrate/traces/operations/`, which is correct per the established audit-history policy.
+
+## Technical reasoning
+
+The original authoring-skill refactor (2026-05-05) consolidated review output guidance into `mycelium-review` but left the review communication style split between `mycelium-review` and the legacy `caveman-review` skill. The review-thread lifecycle follow-up (2026-05-25) moved the communication style fully into `mycelium-review` as part of the lifecycle update, and the security agents and review command adopted `mycelium-review` for both format and style. This follow-up verifies that no stale `caveman-review` routing remains, so future agents never load a skill that has been functionally replaced by `mycelium-review`.
+
+Historical traces that mention `caveman-review` are deliberately preserved. Those records document real past decisions; altering them would break audit integrity. This follows the same policy established in the migration plan for `mycelium-migration`, `directives-schema`, and `expectations-schema` historical references.
+
+## Impact assessment
+
+- No active agent, command, or README references `caveman-review`. Risk of an agent loading a defunct review skill is eliminated.
+- `mycelium-review` is the single discoverable review skill for all review-format and review-style needs.
+- Historical trace files are undisturbed, preserving the full audit trail.
+- No new files created and no existing files modified beyond this operation record update.
+
+## Validation steps
+
+- Read `README.md`, `agent/planner.md`, `agent/security-review-specialist.md`, `agent/security.md`, and `agent/security-specialist.md` directly. Confirmed every review-skill reference points to `mycelium-review` and none points to `caveman-review`. Also read `skills/mycelium-review/SKILL.md` and confirmed it self-identifies as `mycelium-review`.
+- Ran targeted `git diff` on the active files to confirm the review-skill reference state.
+- Grepped the entire repository for `caveman-review`. All remaining matches are in `substrate/traces/operations/` historical files: `2026-04-11-caveman-prompt-instructions-update.md`, `2026-04-13-caveman-language-and-question-clarity.md`, `2026-04-16-security-review-docs-standardization.md`, `2026-04-16-security-workflow-expansion.md`, and the rationale section of this operation record. Zero matches in active agent, command, skill, or README files.
+- Synced Markdown lint config with `curl -fsSL https://raw.githubusercontent.com/one-ring-ai/dotfiles/refs/heads/main/.markdownlint.json -o ./.markdownlint.json && curl -fsSL https://raw.githubusercontent.com/one-ring-ai/dotfiles/refs/heads/main/.markdownlintignore -o ./.markdownlintignore`, ran `npx markdownlint-cli "**/*.md" --config .markdownlint.json --ignore-path .markdownlintignore --dot --fix`, then reran `npx markdownlint-cli "**/*.md" --config .markdownlint.json --ignore-path .markdownlintignore --dot` with zero errors.
+- Final security gate skipped: this follow-up was a prompt-only/documentation-only change. No executable code, runtime configuration, infrastructure, or service behavior was modified.

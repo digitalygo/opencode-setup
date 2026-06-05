@@ -135,7 +135,6 @@ Skills provide specialized instruction packs for agents. loaded on demand via th
 | Skill | Purpose |
 |---|---|
 | `caveman` | Compressed communication format, mandatory for all agent-user interactions |
-| `caveman-review` | Compressed code review comments |
 | `godot-game-dev` | End-to-end Godot game development workflow |
 | `modern-css-snippets` | Modern CSS capabilities and legacy replacements |
 | `mycelium-operation` | Operations record authoring rules |

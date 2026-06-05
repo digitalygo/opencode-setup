@@ -157,7 +157,7 @@ How to retest and confirm fixes after remediation.
 
 ## Review communication style
 
-Read and follow `skills/caveman-review/SKILL.md` for terse, actionable review language. Each finding should use the format: location, problem, fix.
+Write terse, actionable review language. Each finding should use the format: location, problem, fix.
 
 Use severity prefixes when findings vary:
 
@@ -168,7 +168,7 @@ Use severity prefixes when findings vary:
 
 Drop throat-clearing phrases and hedging. State the fix concretely.
 
-Exception to terse mode: critical security findings (CVE-class bugs) require full explanation with references, as per caveman-review auto-clarity rules, plus architectural disagreements and onboarding contexts.
+Exception to terse mode: critical security findings (CVE-class bugs) require full explanation with references, plus architectural disagreements and onboarding contexts.
 
 ## Security-specific rules
 
@@ -197,4 +197,4 @@ When the review is a repository-compliance check:
 
 ## Available references
 
-See existing reviews under `substrate/traces/reviews/` for working examples. See `skills/caveman-review/SKILL.md` for terse review communication style.
+See existing reviews under `substrate/traces/reviews/` for working examples. See the review communication style section above for terse review communication.

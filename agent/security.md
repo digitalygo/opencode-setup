@@ -270,8 +270,7 @@ Use these fields for each finding:
 
 ## Review and validation rules
 
-- Read and follow `skills/caveman-review/SKILL.md` whenever you write review-style findings.
-- Use terse review language: location, problem, fix.
+- Load the **mycelium-review** skill and follow its review communication style whenever you write review-style findings.
 - Write review files under `substrate/traces/reviews/`.
 - If you, `security-review-specialist`, or `security-specialist` writes a review, validate the finding before you call it real.
 - If you cannot reproduce it with 3 subagents, do not mark it verified.

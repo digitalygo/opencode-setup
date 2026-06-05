@@ -270,9 +270,7 @@ Write structured documentation to `substrate/traces/reviews/`:
 
 ### Review communication style
 
-When writing findings, read and follow `skills/caveman-review/SKILL.md` for concise, actionable review communication. Each finding should be terse: location, problem, fix. Drop throat-clearing phrases and hedging. Provide the *why* only when the fix is not obvious.
-
-Exception to terse mode: critical security findings (CVE-class bugs) require full explanation with references, as per caveman-review auto-clarity rules.
+When writing findings, load the **mycelium-review** skill and follow its review communication style for concise, actionable review communication.
 
 ### Constraints
 
