@@ -57,6 +57,14 @@
       "~/.config/opencode/skills/**": "allow",
       "~/Documents/**": "allow"
     },
+    "read": {
+      ".env": "deny",
+      "*/.env": "deny",
+      ".env.*": "deny",
+      "*/.env.*":"deny",
+      ".env*.example":"allow",
+      "*/.env*.example":"allow"
+    },
     "doom_loop": "deny",
     "bash": {
       "*": "allow",
