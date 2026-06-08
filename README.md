@@ -106,7 +106,7 @@ Agents configured with `mode: primary` can be invoked directly, not only as suba
 
 The orchestrator delegates to these categories of specialized subagents:
 
-**Research**: directives-locator, directives-analyzer, expectations-locator, expectations-analyzer, traces-locator, traces-analyzer, codebase-locator, codebase-analyzer, codebase-pattern-finder, web-researcher, complex-problem-researcher
+**Research**: directives-locator, directives-analyzer, expectations-locator, expectations-analyzer, traces-locator, traces-analyzer, codebase-locator, codebase-analyzer, codebase-pattern-finder, media-analyzer, web-researcher, complex-problem-researcher
 
 **Development**: javascript-typescript-dev, go-dev, python-dev, php-laravel-dev, ruby-dev, static-site-dev, web-app-dev, frontend-html-css-specialist
 
