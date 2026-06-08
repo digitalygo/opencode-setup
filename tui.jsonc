@@ -8,8 +8,9 @@
     "enabled": true,
     "volume": 0.8,
     "sounds": {
-      "done": "sounds/done.mp3",
-      "permission": "sounds/permission.mp3"
+      "done": "sounds/done.wav",
+      "permission": "sounds/permission.wav",
+      "error": "sounds/error.wav"
     }
   }
 }
