@@ -1,7 +1,7 @@
 ---
 description: READ ONLY codebase analyst that traces implementation flow and documents existing behavior with precise file:line references
 mode: subagent
-model: opencode-go/deepseek-v4-flash
+model: openrouter/deepseek/deepseek-v4-flash
 steps: 150
 tools:
   "figma*": false

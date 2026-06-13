@@ -1,7 +1,7 @@
 ---
 description: READ ONLY analyst for DRC-* developer directives documents
 mode: subagent
-model: opencode-go/deepseek-v4-flash
+model: openrouter/deepseek/deepseek-v4-flash
 steps: 150
 tools:
   "figma*": false

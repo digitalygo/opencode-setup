@@ -1,7 +1,7 @@
 ---
 description: READ ONLY insights analyst that distills high-value decisions and constraints from traces/ research without adding new interpretation
 mode: subagent
-model: opencode-go/deepseek-v4-flash
+model: openrouter/deepseek/deepseek-v4-flash
 steps: 150
 tools:
   "figma*": false

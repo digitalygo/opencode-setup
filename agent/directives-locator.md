@@ -1,7 +1,7 @@
 ---
 description: READ ONLY directives locator for DRC-* files under substrate/directives/
 mode: subagent
-model: opencode-go/deepseek-v4-flash
+model: openrouter/deepseek/deepseek-v4-flash
 steps: 150
 tools:
   "figma*": false
