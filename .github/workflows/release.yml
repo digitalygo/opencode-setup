@@ -28,6 +28,158 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Fetch release notes
+        run: |
+          git fetch --force origin '+refs/notes/semantic-release-*:refs/notes/semantic-release-*'
+          git fetch --force origin '+refs/notes/semantic-release:refs/notes/semantic-release' || true
+
+      - name: Normalize semantic-release notes
+        shell: python3 {0}
+        env:
+          GIT_AUTHOR_NAME: github-actions[bot]
+          GIT_AUTHOR_EMAIL: 41898282+github-actions[bot]@users.noreply.github.com
+          GIT_COMMITTER_NAME: github-actions[bot]
+          GIT_COMMITTER_EMAIL: 41898282+github-actions[bot]@users.noreply.github.com
+        run: |
+          import subprocess, json, sys
+
+          SUFFIXED_HEADROOM = 20
+          MAX_NOTES_PER_REF = 5000
+          MAX_TOTAL_NOTES = 50000
+          MAX_BLOB_SIZE = 10240
+          ALLOWED_CHANNELS = {None, 'alpha', 'beta'}
+          CHANNEL_ORDER = {None: 0, 'alpha': 1, 'beta': 2}
+
+          def git(*args):
+              p = subprocess.run(['git'] + list(args), capture_output=True, encoding='utf-8', errors='replace')
+              return p.stdout.strip(), p.stderr.strip(), p.returncode
+
+          refs_out, _, _ = git('for-each-ref', '--format=%(refname)', 'refs/notes/semantic-release-*')
+          suffixed = [r for r in refs_out.splitlines() if r]
+
+          tags_out, _, _ = git('tag', '--list', 'v*')
+          valid_tags = set(t.strip() for t in tags_out.splitlines() if t.strip())
+
+          expected_max = len(valid_tags) + SUFFIXED_HEADROOM
+          if len(suffixed) > expected_max:
+              print(f"::error::too many suffixed refs: {len(suffixed)} (expected at most {expected_max} based on {len(valid_tags)} local release tags + {SUFFIXED_HEADROOM} headroom)")
+              sys.exit(1)
+
+          valid_suffixed = []
+          for ref in suffixed:
+              suffix = ref.replace('refs/notes/semantic-release-', '')
+              if suffix in valid_tags:
+                  valid_suffixed.append(ref)
+              else:
+                  print(f"::warning::ignoring note ref {ref}: no matching local tag '{suffix}' found")
+
+          if not valid_suffixed:
+              print("No suffixed note refs with matching tags found; nothing to normalize")
+              sys.exit(0)
+
+          print(f"Found {len(valid_suffixed)} suffixed note ref(s) with matching tags to normalize")
+
+          all_notes = []
+          for ref in valid_suffixed:
+              short = ref.replace('refs/notes/', '', 1)
+              notes_out, notes_err, rc = git('notes', f'--ref={short}', 'list')
+              if rc != 0:
+                  print(f"::warning::git notes list failed for {ref}: {notes_err}")
+                  continue
+              if not notes_out:
+                  continue
+              lines = notes_out.splitlines()
+              if len(lines) > MAX_NOTES_PER_REF:
+                  print(f"::error::too many notes in {ref}: {len(lines)} (max {MAX_NOTES_PER_REF})")
+                  sys.exit(1)
+              all_notes.append((ref, short, lines))
+
+          total_notes = sum(len(lines) for _, _, lines in all_notes)
+          if total_notes > MAX_TOTAL_NOTES:
+              print(f"::error::total notes across all refs ({total_notes}) exceeds MAX_TOTAL_NOTES ({MAX_TOTAL_NOTES})")
+              sys.exit(1)
+
+          print(f"Processing {total_notes} note(s) across {len(all_notes)} ref(s)")
+
+          commit_channels = {}
+          for ref, short, lines in all_notes:
+              for line in lines:
+                  parts = line.split()
+                  if len(parts) < 2:
+                      continue
+                  blob_sha, commit_sha = parts[0], parts[1]
+                  size_out, _, rc_size = git('cat-file', '-s', blob_sha)
+                  if rc_size != 0:
+                      continue
+                  try:
+                      blob_size = int(size_out)
+                  except ValueError:
+                      continue
+                  if blob_size > MAX_BLOB_SIZE:
+                      print(f"::warning::skipping oversized blob {blob_sha} ({blob_size} bytes)")
+                      continue
+                  content, _, rc2 = git('cat-file', '-p', blob_sha)
+                  if rc2 != 0:
+                      continue
+                  if len(content) > MAX_BLOB_SIZE:
+                      print(f"::warning::skipping oversized blob content {blob_sha} ({len(content)} bytes)")
+                      continue
+                  try:
+                      data = json.loads(content)
+                      if not isinstance(data, dict):
+                          continue
+                      channels = data.get('channels', [])
+                      if isinstance(channels, list):
+                          valid_channels = {c for c in channels if c in ALLOWED_CHANNELS}
+                          if valid_channels:
+                              commit_channels.setdefault(commit_sha, set()).update(valid_channels)
+                  except (json.JSONDecodeError, TypeError):
+                      continue
+
+          if not commit_channels:
+              print("No notes with valid channels found; skipping normalization")
+              sys.exit(0)
+
+          canonical_present = False
+          for commit in list(commit_channels.keys()):
+              show_out, _, rc = git('notes', '--ref=semantic-release', 'show', commit)
+              if rc == 0 and show_out:
+                  canonical_present = True
+                  try:
+                      existing = json.loads(show_out)
+                      if not isinstance(existing, dict):
+                          continue
+                      existing_channels = existing.get('channels', [])
+                      if isinstance(existing_channels, list):
+                          valid_existing = {c for c in existing_channels if c in ALLOWED_CHANNELS}
+                          commit_channels[commit].update(valid_existing)
+                  except (json.JSONDecodeError, TypeError):
+                      pass
+
+          if canonical_present:
+              print("Merged existing canonical note channels")
+
+          print(f"Merging channels for {len(commit_channels)} commit(s)")
+
+          for commit, channels in sorted(commit_channels.items()):
+              sorted_channels = sorted(channels, key=lambda c: CHANNEL_ORDER.get(c, 99))
+              merged = json.dumps({'channels': sorted_channels}, sort_keys=True)
+              _, err, rc = git('notes', '--ref=semantic-release', 'add', '-f', '-m', merged, commit)
+              if rc != 0:
+                  print(f"::error::failed to add merged note for {commit}: {err}")
+                  sys.exit(1)
+
+          print(f"Wrote merged notes to refs/notes/semantic-release")
+
+          for ref in valid_suffixed:
+              _, err, rc = git('update-ref', '-d', f'{ref}')
+              if rc != 0:
+                  print(f"::warning::could not delete {ref}: {err}")
+              else:
+                  print(f"Deleted {ref}")
+
+          print("Normalization complete")
+
       - name: Semantic Release
         uses: cycjimmy/semantic-release-action@v6
         env:
