@@ -1,7 +1,7 @@
 ---
 description: READ ONLY multimodal media analyst that inspects documents, PDFs, images, screenshots, diagrams, audio, video, and other files to return structured content descriptions
 mode: subagent
-model: opencode/gemini-3.5-flash
+model: openrouter/google/gemini-3.5-flash
 steps: 150
 tools:
   "figma*": false

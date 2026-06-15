@@ -28,7 +28,7 @@ supporting_docs:
 
 # Summary of changes
 
-- Added `agent/media-analyzer.md` as a new read-only multimodal subagent using `opencode/gemini-3.5-flash` for detailed analysis of documents, PDFs, images, screenshots, diagrams, audio, video, and other readable files.
+- Added `agent/media-analyzer.md` as a new read-only multimodal subagent using `openrouter/google/gemini-3.5-flash` for detailed analysis of documents, PDFs, images, screenshots, diagrams, audio, video, and other readable files.
 - Updated the primary-agent prompts and repository roster so `media-analyzer` is explicitly discoverable and callable where research-style delegation happens.
 - Applied security-review remediation so media-derived content is treated as untrusted data by parent agents and the media subagent never emits exact secret values.
 
@@ -36,7 +36,7 @@ supporting_docs:
 
 The repository already had a mature family of read-only locator and analyzer subagents for code, directives, expectations, and traces, but no equivalent agent for non-code artifacts. That gap mattered because several workflows need content extracted from files that are not source code: screenshots, diagrams, recorded briefings, PDFs, scan reports, UI mockups, and other multimodal inputs.
 
-The new `media-analyzer` follows the established read-only analyzer pattern: `mode: subagent`, restricted tool access, denied mutation and execution permissions, `caveman` session-start loading, and a prompt focused on describing what exists rather than acting on it. The model was set to `opencode/gemini-3.5-flash` because the user explicitly wanted a file-, image-, audio-, and video-capable model.
+The new `media-analyzer` follows the established read-only analyzer pattern: `mode: subagent`, restricted tool access, denied mutation and execution permissions, `caveman` session-start loading, and a prompt focused on describing what exists rather than acting on it. The model was set to `openrouter/google/gemini-3.5-flash` because the user explicitly wanted a file-, image-, audio-, and video-capable model.
 
 No `opencode.jsonc` change was needed. The repository already treats `agent/` as the runtime-discovered agent directory, and prior agent-addition traces confirmed that adding a new file under `agent/` is sufficient for sync and discovery.
 

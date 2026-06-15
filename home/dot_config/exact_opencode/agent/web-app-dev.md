@@ -1,7 +1,7 @@
 ---
 description: Web application developer for dynamic, data-driven systems using Next.js/React frontend with Laravel backend
 mode: subagent
-model: opencode-go/kimi-k2.6
+model: openrouter/moonshotai/kimi-k2.7-code
 temperature: 0.3
 ---
 

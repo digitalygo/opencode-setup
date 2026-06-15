@@ -32,7 +32,7 @@ The wiki agent is a primary (orchestrator-like) agent because wiki maintenance o
 
 Design choices:
 
-- **Model**: `openai/gpt-5.4` matches the orchestrator and planner tier, appropriate for a primary coordination role.
+- **Model**: `openrouter/openai/gpt-5.5` matches the orchestrator and planner tier, appropriate for a primary coordination role.
 - **Temperature**: `0.1` enforces factual, non-speculative output suitable for knowledge curation.
 - **Color**: `#4a9f6e` (green) distinguishes it from existing primary agents (orchestrator purple, quick teal, planner pink).
 - **Permissions**: write access limited to `docs/**/*.md`, `tmp/**/*.md`, and `substrate/traces/operations/*.md`. All code files and `.gitignore` are denied. Task permissions are limited to `traces-*`, `codebase-*`, `documentation-*`, `web-researcher`, and `complex-problem-researcher` — only subagents the wiki agent actually delegates to.

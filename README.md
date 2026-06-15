@@ -115,7 +115,7 @@ Everything under `home/dot_config/exact_opencode/` is deployed to `~/.config/ope
 `opencode.jsonc` drives the entire setup:
 
 - **default agent**: `orchestrator` — plans tasks, delegates to subagents, verifies results
-- **models**: `openai/gpt-5.5` (primary), `opencode-go/deepseek-v4-flash` (small)
+- **models**: `openrouter/openai/gpt-5.5` (primary), `openrouter/deepseek/deepseek-v4-flash` (small)
 - **instructions**: loads `.github/CONTRIBUTING.md` and `AGENTS.md` as system-level rules
 - **autoupdate**: enabled
 - **compaction**: manual trigger, pruning enabled, preserves last 10k tokens

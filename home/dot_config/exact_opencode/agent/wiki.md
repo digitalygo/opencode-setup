@@ -2,7 +2,7 @@
 description: knowledge compiler agent that ingests raw source material into a structured, queryable LLM wiki of durable markdown artifacts
 mode: primary
 color: "#4a9f6e"
-model: openai/gpt-5.4
+model: openrouter/openai/gpt-5.5
 temperature: 0.3
 permission:
   task:

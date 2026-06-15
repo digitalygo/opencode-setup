@@ -1,7 +1,7 @@
 ---
 description: Security specialist for comprehensive authorized security assessments using the pentest toolbox
 mode: subagent
-model: opencode/claude-sonnet-4-6
+model: openrouter/anthropic/claude-sonnet-4.6
 temperature: 0.15
 steps: 100
 tools:

@@ -66,7 +66,7 @@ This preserves separation of concerns while making security validation a mandato
 
 ## Summary of changes
 
-- Added `agent/security-review-specialist.md` as a model-only changed-code security review subagent using `opencode/claude-opus-4-8`.
+- Added `agent/security-review-specialist.md` as a model-only changed-code security review subagent using `openrouter/anthropic/claude-opus-4.8`.
 - Updated `agent/orchestrator.md` so its final security gate uses `security-review-specialist` instead of the Docker-backed `security-specialist`.
 - Updated `agent/security.md` so the primary security coordinator uses `security-review-specialist` for model-only code review and independent validation of `security-specialist` findings, while keeping `security-specialist` for toolbox-backed pentesting and active scans.
 - Updated `agent/planner.md` and `agent/quick.md` so primary agents with `security-*` delegation know when to use each security subagent.

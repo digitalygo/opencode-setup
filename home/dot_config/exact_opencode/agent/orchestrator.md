@@ -2,7 +2,7 @@
 description: Primary coordinator that plans tasks, assigns specialized subagents, and verifies results without doing the implementation
 mode: primary
 color: "#6562c0"
-model: openai/gpt-5.4
+model: openrouter/openai/gpt-5.5
 variant: xhigh
 temperature: 0.15
 permission:
