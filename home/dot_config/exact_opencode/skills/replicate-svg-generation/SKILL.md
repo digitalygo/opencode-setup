@@ -10,7 +10,7 @@ description: Generate SVG images with Replicate via direct Bash HTTP calls. Use 
 - generate a `.svg` image using `recraft-ai/recraft-v4-svg` on Replicate
 - use a direct `curl` call to Replicate HTTP API
 - save the SVG locally for immediate usage
-- use token from `~/.config/opencode/.secrets/replicate-key`
+- use token from `~/Documents/.secrets/replicate-key`
 
 ## When to use
 
@@ -44,14 +44,14 @@ Rules:
 ```bash
 set -euo pipefail
 
-REPLICATE_API_TOKEN="$(tr -d '\n' < "$HOME/.config/opencode/.secrets/replicate-key")"
+REPLICATE_API_TOKEN="$(tr -d '\n' < "$HOME/Documents/.secrets/replicate-key")"
 PROMPT="Retro 1970s style poster with the text 'Recraft V4' in bold groovy typography with rainbow gradient colors"
 ASPECT_RATIO="1:1"
 SIZE="1024x1024"
 OUTPUT_FILE="output.svg"
 
 if [ -z "$REPLICATE_API_TOKEN" ]; then
-  echo "Missing Replicate token in ~/.config/opencode/.secrets/replicate-key" >&2
+  echo "Missing Replicate token in ~/Documents/.secrets/replicate-key" >&2
   exit 1
 fi
 
@@ -98,7 +98,7 @@ echo "Output URL: $OUTPUT_URL"
 
 ## Error handling
 
-- `401 Unauthorized`: token missing or invalid. Check `~/.config/opencode/.secrets/replicate-key`.
+- `401 Unauthorized`: token missing or invalid. Check `~/Documents/.secrets/replicate-key`.
 - `402 Payment Required`: billing or quota issue on Replicate account.
 - `422 Unprocessable Entity`: invalid `aspect_ratio`, `size`, or payload structure.
 - Empty output URL: request accepted but no usable output returned.

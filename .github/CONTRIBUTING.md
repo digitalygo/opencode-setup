@@ -5,9 +5,9 @@ please follow our rules and convention when contributing to this repository
 
 ## project overview
 
-this repository contains our full OpenCode setup, including configurations, agents, skills, commands, and our custom made docker image for pentesting
+this repository contains our full OpenCode setup, including configurations, agents, skills, commands, and our custom made docker image for pentesting. the setup is deployed via [chezmoi](https://chezmoi.io).
 
-you can expect automated releases via semantic-release
+you can expect automated releases via semantic-release.
 
 ## getting started
 
@@ -35,7 +35,17 @@ prerequisites:
 
 3. **test the setup locally**
 
-   this process is pretty manual. use your OpenCode setup, explain why you made changes, test them and report back your results
+   apply your local clone with chezmoi to test changes:
+
+   ```bash
+   chezmoi init --source ~/path/to/your/clone
+   chezmoi diff          # preview what would change
+   chezmoi apply         # apply to ~/.config/opencode/
+   ```
+
+   use your OpenCode setup, explain why you made changes, test them and report back your results.
+
+   **note**: the `exact_opencode` directory keeps `~/.config/opencode/` in exact sync. unmanaged files in that tree are removed on apply. back up any local additions and move secret files outside the managed tree before testing.
 
 4. **create a feature / fix branch**
 
@@ -49,19 +59,29 @@ prerequisites:
 
 understanding the repository structure is crucial for effective contributions. please keep files and edits as tidy as possible
 
-- `.github/` - gitHub automation and configuration
-- `agent/` - our collection of ai agents and subagents
-- `command/` - custom command definitions
-- `skills/` - our skills collection
-- `substrate/` - Mycelium framework storage
-  - `traces/` - agent-written documentation
-  - `directives/` - structured developer instructions (DRC-*.md)
-  - `expectations/` - client expectations (EXP-*.md)
-- `.markdownlint*` - markdownlint configuration
-- `.releaserc.jsonc` - semantic-release configuration
-- `opencode.jsonc` - main OpenCode configuration
-- `setup.sh` - our automatic installation script
-- `AGENTS.md` - agent documentation
+this repo uses a [`.chezmoiroot`](../.chezmoiroot) file that tells chezmoi the source directory is `home/`. everything under `home/dot_config/exact_opencode/` maps to `~/.config/opencode/`. everything outside that tree is repo-internal.
+
+### repo-internal paths
+
+- `.github/` — gitHub automation and configuration
+- `substrate/` — Mycelium framework storage
+  - `traces/` — agent-written documentation
+  - `directives/` — structured developer instructions (DRC-*.md)
+  - `expectations/` — client expectations (EXP-*.md)
+- `.chezmoiroot` — chezmoi source root marker
+- `.gitignore` — git ignore rules
+- `.markdownlint*` — markdownlint configuration
+- `.releaserc.json` — semantic-release configuration
+
+### synced paths (under `home/dot_config/exact_opencode/`)
+
+these are deployed by chezmoi to `~/.config/opencode/`:
+
+- `agent/` — our collection of ai agents and subagents
+- `command/` — custom command definitions
+- `skills/` — our skills collection
+- `AGENTS.md` — agent documentation
+- `opencode.jsonc` — main OpenCode configuration
 
 ## code style guidelines
 
@@ -91,7 +111,7 @@ please *never* write comments in the codebase
 
 ### agent naming conventions
 
-agent definition files live in `agent/`. use these patterns so names stay predictable and match the `subagent_type` you invoke:
+agent definition files live in `home/dot_config/exact_opencode/agent/`. use these patterns so names stay predictable and match the `subagent_type` you invoke:
 
 - `*-dev.md` for language or framework implementers (e.g., `javascript-typescript-dev.md`, `react-nextjs-dev.md`, `php-laravel-dev.md`, `elixir-dev.md`)
 - `*-specialist.md` for domain/tool implementers (design systems, Docker, Ansible, OpenTofu, OpenSCAD, etc.)
@@ -108,9 +128,9 @@ when writing agent prompts, skill instructions, command definitions, or any inst
 
 applies to files like:
 
-- `agent/*.md`
-- `command/*.md`
-- `skills/**/SKILL.md`
+- `home/dot_config/exact_opencode/agent/*.md`
+- `home/dot_config/exact_opencode/command/*.md`
+- `home/dot_config/exact_opencode/skills/**/SKILL.md`
 - any other prompt or instruction file
 
 examples:
@@ -139,7 +159,7 @@ this repository uses semantic-release, which *requires* conventional commits
 ### commit types
 
 - `feat`: new feature for the user
-- `fix`: bug fix for the user  
+- `fix`: bug fix for the user
 - `docs`: documentation changes only
 - `style`: code formatting, no production code change
 - `refactor`: code change that neither fixes bug nor adds feature
@@ -153,7 +173,7 @@ this repository uses semantic-release, which *requires* conventional commits
 ### impact on releases
 
 - `feat` commits trigger minor version bump
-- `fix` and `chore` commits trigger patch version bump  
+- `fix` and `chore` commits trigger patch version bump
 - commits with `BREAKING CHANGE:` footer trigger major version bump
 - other types don't trigger version bumps
 
@@ -163,19 +183,36 @@ when opening new pr, *always target `alpha`* branch. please try to keep prs *sma
 
 ### branching strategy always target `alpha`
 
-- `main` - production branch (protected)
-- `beta` - beta releases branch (protected)
-- `alpha` - alpha releases branch (protected) - DEFAULT BRANCH
-- `feature/*` - feature development branches
-- `fix/*` - bug fix branches
+- `main` — production branch (protected)
+- `beta` — beta releases branch (protected)
+- `alpha` — alpha releases branch (protected) — DEFAULT BRANCH
+- `feature/*` — feature development branches
+- `fix/*` — bug fix branches
 
 ### pr requirements
 
-1. **conventional commits** - all commits must follow conventional commit format
-2. **tested changes** - all changes must be tested and documented
-3. **no comments** - code must follow no-comments policy
-4. **code style** - must follow style guidelines
-5. **documentation** - update relevant documentation
+1. **conventional commits** — all commits must follow conventional commit format
+2. **tested changes** — all changes must be tested and documented. apply locally with `chezmoi diff` and `chezmoi apply` to validate before opening a pr
+3. **no comments** — code must follow no-comments policy
+4. **code style** — must follow style guidelines
+5. **documentation** — update relevant documentation
+
+### validation workflows
+
+before opening a pr, run these checks:
+
+```bash
+# lint all Markdown files
+curl -fsSL https://raw.githubusercontent.com/one-ring-ai/dotfiles/refs/heads/main/.markdownlint.json -o ./.markdownlint.json
+curl -fsSL https://raw.githubusercontent.com/one-ring-ai/dotfiles/refs/heads/main/.markdownlintignore -o ./.markdownlintignore
+npx markdownlint-cli "**/*.md" --config .markdownlint.json --ignore-path .markdownlintignore --dot --fix
+```
+
+```bash
+# preview chezmoi diff on your local changes
+chezmoi init --source "$(pwd)"
+chezmoi diff
+```
 
 ## release process
 
@@ -184,7 +221,7 @@ when opening new pr, *always target `alpha`* branch. please try to keep prs *sma
 this repository uses **semantic-release** for fully automated releases:
 
 - **commits to `main`** → production releases
-- **commits to `beta`** → beta releases  
+- **commits to `beta`** → beta releases
 - **commits to `alpha`** → alpha releases
 
 ### release triggers

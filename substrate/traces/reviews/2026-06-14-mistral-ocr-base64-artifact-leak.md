@@ -1,7 +1,7 @@
 ---
 status: completed
 created_at: 2026-06-14
-updated_at: 2026-06-14
+updated_at: 2026-06-15
 reviewer: security-review-specialist
 target: skills/mistral-ocr-pdf-to-md/SKILL.md and live Mistral OCR compatibility artifacts
 scope: current session diff for OCR format broadening, base64 fallback behavior, secret handling, validation, cleanup, and generated verification artifacts under /tmp/opencode/mistral-ocr-compat-*
@@ -90,3 +90,87 @@ No current findings.
 ### New validation notes
 
 If future edits reintroduce claims of content validation, re-check the implementation for local magic/signature checks before bytes are sent to Mistral.
+
+## Update: 2026-06-15 by security-review-specialist
+
+### Prior finding status
+
+- M1 base64 and signed URL data leak (medium): reopened — the moved skill removed `_sanitize_error`, now raises upload-route exceptions unchanged for non-fallback suffixes and raises base64 fallback exceptions unchanged for `.doc`, `.ppt`, `.rtf`, and `.html` (`home/dot_config/exact_opencode/skills/mistral-ocr-pdf-to-md/SKILL.md:147-167`).
+- L1 file validation overclaim / symlink-component handling (low): reopened — the moved skill only checks whether the final `input_path` is a symlink, follows symlinked parent components through `resolve(strict=True)`, and writes output through `input_path.with_suffix(".md")` (`home/dot_config/exact_opencode/skills/mistral-ocr-pdf-to-md/SKILL.md:99-123`).
+
+### New findings
+
+No new independent findings. The chezmoi migration reintroduced the prior OCR issues in the moved runtime path.
+
+#### Medium: M1 reopened: OCR exceptions can leak signed URLs and base64 document bytes
+
+- **Location**: `home/dot_config/exact_opencode/skills/mistral-ocr-pdf-to-md/SKILL.md:45`, `home/dot_config/exact_opencode/skills/mistral-ocr-pdf-to-md/SKILL.md:147-167`, `home/dot_config/exact_opencode/skills/mistral-ocr-pdf-to-md/SKILL.md:181-187`
+- **Evidence**: `home/dot_config/exact_opencode/skills/mistral-ocr-pdf-to-md/SKILL.md:45` documents automatic upload-first then base64 fallback behavior. The code obtains a signed URL and passes it to OCR (`:147-155`). On any non-fallback exception it re-raises the original exception unchanged (`:156-158`). For fallback suffixes it builds a full `data:<mime>;base64,...` document URL from file bytes and passes it to OCR without a sanitizing wrapper (`:160-167`). Error docs no longer promise sanitized `RuntimeError`; they only say base64 failure indicates unprocessable content (`:181-187`).
+- **Impact**: Failed OCR calls can expose Mistral signed URLs or full base64 document bytes into terminal output, tool logs, chat, traces, or generated review artifacts. This crosses from intended third-party OCR processing into durable local and conversational logs.
+- **False-positive notes**: No raw API key was observed. Leakage depends on SDK/API exception text including request material, which prior live compatibility artifacts already proved for this API class. No network, OCR execution, scanner, Docker, or active test was run in this follow-up.
+- **Remediation**: Restore `_sanitize_error` or equivalent wrapping for both upload and base64 OCR paths. Redact `data:*;base64,*`, signed URLs, query strings, and credential-like parameters before surfacing errors. Prefer direct base64 routing for base64-only suffixes to avoid unnecessary upload attempts.
+
+#### Low: L1 reopened: symlinked parents can steer input and output paths
+
+- **Location**: `home/dot_config/exact_opencode/skills/mistral-ocr-pdf-to-md/SKILL.md:51`, `home/dot_config/exact_opencode/skills/mistral-ocr-pdf-to-md/SKILL.md:99-123`, `home/dot_config/exact_opencode/skills/mistral-ocr-pdf-to-md/SKILL.md:181-184`
+- **Evidence**: The docs say validation resolves the path strictly and rejects symlinks (`home/dot_config/exact_opencode/skills/mistral-ocr-pdf-to-md/SKILL.md:51`), but the code checks only `input_path.is_symlink()` (`:99-100`) before resolving (`:102`). It then writes output to `input_path.with_suffix(".md")` (`:123`) rather than the resolved path. Error docs say the resolved path is a symlink (`:181-183`), but symlinked parent directories are still followed.
+- **Impact**: A user-supplied path through a symlinked parent can upload bytes from outside the expected directory and write Markdown through the symlinked path. This weakens traversal defenses and can place generated content somewhere the caller did not intend.
+- **False-positive notes**: The user normally chooses `input_path`, and final-file symlinks are still rejected. Risk is mainly shared workspaces, automated queues, or untrusted file drops where path components may be attacker-controlled. No active symlink test was run.
+- **Remediation**: Restore component-by-component symlink rejection before `resolve(strict=True)`. Write output to `resolved_path.with_suffix(".md")`. Update docs to distinguish suffix validation from content validation and final-file symlink checks from component checks.
+
+### New validation notes
+
+After remediation, force failing upload and base64 OCR paths and scan terminal/tool output for `data:`, `;base64,`, signed URLs, and credential-like query parameters. Test parent-directory symlinks and final-file symlinks; confirm both reject before upload and output writes use the resolved path.
+
+## Update: 2026-06-15 by security-review-specialist
+
+### Prior finding status
+
+- M1 base64 and signed URL data leak (medium): resolved — `_sanitize_error` redacts `data:*;base64,*`, URLs, and bearer tokens (`home/dot_config/exact_opencode/skills/mistral-ocr-pdf-to-md/SKILL.md:62-73`). Base64-only suffixes go straight to sanitized base64 OCR without upload (`:159-173`). Upload, signed URL, and upload-route OCR errors are also wrapped before surfacing (`:176-201`).
+- L1 symlink-component handling and output-path regression (low): resolved — the snippet rejects symlinks at each path component before resolution (`home/dot_config/exact_opencode/skills/mistral-ocr-pdf-to-md/SKILL.md:114-119`), still rejects final-file symlinks (`:121-124`), writes output via `resolved_path.with_suffix(".md")` (`:145`), and documents suffix-only validation plus component symlink rejection (`:51`, `:219-220`).
+
+### New findings
+
+No new findings in this thread. Residual suffix-only file validation is documented behavior, not an overclaim, at `home/dot_config/exact_opencode/skills/mistral-ocr-pdf-to-md/SKILL.md:51` and `home/dot_config/exact_opencode/skills/mistral-ocr-pdf-to-md/SKILL.md:220`.
+
+### New validation notes
+
+Future verification should force failing upload and base64 OCR paths, then scan output for `data:`, `;base64,`, Mistral signed URLs, and credential-like parameters. Also retest parent-directory and final-file symlinks. No Docker, scanner, network, OCR/API execution, or active symlink test was run in this follow-up.
+
+## Update: 2026-06-15 by security-review-specialist
+
+### Prior finding status
+
+- M1 base64 and signed URL data leak (medium): unresolved — the intended sanitizer is present, but the helper body uses invalid Python syntax at `home/dot_config/exact_opencode/skills/mistral-ocr-pdf-to-md/SKILL.md:73` (`return RuntimeError(msg) from None`). As written, the snippet fails before OCR and does not leak document bytes, but the security control is not a runnable remediation. If fixed by only removing `from None`, `raise _sanitize_error(exc)` at `:173`, `:185`, `:190`, and `:201` would chain the original SDK exception and can still print unsanitized signed URLs or base64 data.
+- L1 symlink-component handling and output-path regression (low): resolved — path components are checked for symlinks before strict resolution (`home/dot_config/exact_opencode/skills/mistral-ocr-pdf-to-md/SKILL.md:114-124`), and output writes use `resolved_path.with_suffix(".md")` (`:145`).
+
+### New findings
+
+No new independent findings. The prior M1 sanitization thread remains open until the sanitizer is syntactically valid and exception context is suppressed at each raise site.
+
+#### Medium: M1 still open: sanitizer control is not runnable and safe context suppression is misplaced
+
+- **Location**: `home/dot_config/exact_opencode/skills/mistral-ocr-pdf-to-md/SKILL.md:62-73`, `home/dot_config/exact_opencode/skills/mistral-ocr-pdf-to-md/SKILL.md:172-173`, `home/dot_config/exact_opencode/skills/mistral-ocr-pdf-to-md/SKILL.md:184-185`, `home/dot_config/exact_opencode/skills/mistral-ocr-pdf-to-md/SKILL.md:189-190`, `home/dot_config/exact_opencode/skills/mistral-ocr-pdf-to-md/SKILL.md:200-201`
+- **Evidence**: `_sanitize_error` builds a redacted message, then attempts `return RuntimeError(msg) from None` (`:62-73`). `from None` belongs on `raise`, not `return`. The exception handlers then call `raise _sanitize_error(exc)` without `from None` (`:172-173`, `:184-185`, `:189-190`, `:200-201`).
+- **Impact**: Current snippet fails closed before network/OCR, so it does not leak signed URLs or base64 bytes as written. The remediation is still incomplete: a likely syntax fix that returns `RuntimeError(msg)` without changing the raise sites would preserve Python's implicit exception context and can print the original unsanitized SDK exception above the sanitized RuntimeError.
+- **False-positive notes**: No OCR/API execution, syntax test, network, Docker, scanner, or active exploit was run. This is source review of the Markdown snippet. The leak path depends on a future syntax correction that does not also suppress exception context, but the current committed remediation is not runnable and cannot be considered verified.
+- **Remediation**: Change the helper to `return RuntimeError(msg)`. Change every handler to `raise _sanitize_error(exc) from None`, or make the helper raise the sanitized exception directly and never expose the original exception context. Then force failing upload and base64 OCR paths and scan output for `data:`, `;base64,`, signed URLs, query strings, and bearer tokens.
+
+### New validation notes
+
+Before closing M1, parse or execute the snippet in a disposable environment, then force one upload failure and one base64 OCR failure. Confirm only sanitized `RuntimeError` text is printed and no chained original SDK exception appears.
+
+## Update: 2026-06-15 by security-review-specialist
+
+### Prior finding status
+
+- M1 base64 and signed URL data leak (medium): resolved — `_sanitize_error` now returns a valid `RuntimeError` (`home/dot_config/exact_opencode/skills/mistral-ocr-pdf-to-md/SKILL.md:62-73`), redacts base64 data URIs, URLs, and bearer tokens (`:66-73`), and every upload/OCR exception handler raises the sanitized error with `from None` (`:172-173`, `:184-185`, `:189-190`, `:200-201`). Base64-only suffixes still bypass upload and signed URL generation (`:159-173`).
+- L1 symlink-component handling and output-path regression (low): resolved — path components and the final file are checked for symlinks before strict resolution (`home/dot_config/exact_opencode/skills/mistral-ocr-pdf-to-md/SKILL.md:114-124`), output uses `resolved_path.with_suffix(".md")` (`:145`), and suffix-only validation is documented (`:51`, `:220`).
+
+### New findings
+
+No new findings. Residual suffix-only content validation is documented behavior, not an undisclosed validation control, at `home/dot_config/exact_opencode/skills/mistral-ocr-pdf-to-md/SKILL.md:51` and `home/dot_config/exact_opencode/skills/mistral-ocr-pdf-to-md/SKILL.md:220`.
+
+### New validation notes
+
+Future verification should parse the snippet, then force one upload failure and one base64 OCR failure. Confirm output contains only sanitized `RuntimeError` text and no `data:`, `;base64,`, signed URL, query-string credential, bearer token, or chained original SDK exception. No Docker, scanner, network, OCR/API execution, or active symlink test was run in this follow-up.

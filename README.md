@@ -1,78 +1,114 @@
 # opencode-setup
 
-OpenCode configuration for [digitalygo](https://digitalygo.it): agents, commands, skills, MCP servers, and a one-command installer. automated releases via semantic-release.
+OpenCode configuration for [digitalygo](https://digitalygo.it): agents, commands, skills, MCP servers, managed via [chezmoi](https://chezmoi.io). automated releases via semantic-release.
 
-## Quick start
+## Quick start (new install)
 
-### Option 1: one-liner
-
-```bash
-curl -fsSL https://raw.githubusercontent.com/digitalygo/opencode-setup/main/setup.sh | bash
-```
-
-Installs config to `~/.config/opencode`, adds `sync-opencode` alias to your shell rc file, and exports `OPENCODE_ENABLE_EXA=true`.
-
-### Option 2: manual clone + rsync
+On a machine with no prior OpenCode configuration, install [chezmoi](https://chezmoi.io/install/) then apply this repo:
 
 ```bash
-git clone https://github.com/digitalygo/opencode-setup.git
-rsync -av --delete \
-  --exclude=.git/ --exclude=.secrets/ --exclude=.github/ --exclude=substrate/ \
-  --exclude=.gitignore --exclude=.markdownlint.json --exclude=.markdownlintignore \
-  --exclude=.releaserc.json \
-  opencode-setup/ ~/.config/opencode/
+chezmoi init --apply digitalygo/opencode-setup
 ```
 
-### Installer options
+This deploys the configuration to `~/.config/opencode/`. for later updates:
 
 ```bash
-./setup.sh --channel beta    # install from beta (default: stable → main)
-./setup.sh --dry-run          # preview without writing
-./setup.sh --help             # show usage
+chezmoi update
 ```
 
-Channel values: `stable` (synonym for `main`), `beta`, `alpha`, or any branch name.
+### Branch / channel equivalents
 
-### Prerequisites
+chezmoi uses `--branch` instead of channel flags. use these to track pre-release branches:
 
-**Install** — needed by `setup.sh`:
+```bash
+chezmoi init --apply --branch beta digitalygo/opencode-setup   # beta channel
+chezmoi init --apply --branch alpha digitalygo/opencode-setup  # alpha channel
+```
 
-- `curl`, `git`, `rsync`, `mktemp` (standard on Linux/macOS)
-- a shell rc file (`.bashrc` or `.zshrc`) for the alias and export
+Branch mapping:
 
-**Contributing** — additional tools for development and security workflows (see [`.github/CONTRIBUTING.md`](.github/CONTRIBUTING.md)):
+| chezmoi flag | Channel | Branch |
+|---|---|---|
+| (default) | stable | `main` |
+| `--branch beta` | beta | `beta` |
+| `--branch alpha` | alpha | `alpha` |
 
-- Docker
+### What this repo manages
 
-## What gets synced
+This repository manages **only** the OpenCode configuration under `~/.config/opencode/`. it does **not** manage shell rc files, environment variables, or any other dotfiles.
 
-`setup.sh` copies the repository to `~/.config/opencode/` while excluding repo-internal paths. everything else — directories and top-level files — is synced.
+The source tree uses the `exact_opencode` directory name, which tells chezmoi to keep the target directory in exact sync. unmanaged files in `~/.config/opencode/` are removed on apply.
 
-Core runtime paths synced to `~/.config/opencode/`:
+## Migration from the legacy installer
 
-| Directory/file | Purpose |
-|---|---|
-| `agent/` | AI agent definitions |
-| `command/` | Custom command definitions |
-| `skills/` | Skill instruction packs |
-| `AGENTS.md` | Agent-wide shared rules |
-| `README.md` | This documentation |
-| `LICENSE` | MIT license |
-| `opencode.jsonc` | Main OpenCode configuration |
-| `setup.sh` | Installer script |
+If you previously used `setup.sh` to install OpenCode, or already have files in `~/.config/opencode/` from an earlier setup, complete this section **before** running any apply command. skipping these steps can delete local-only files.
 
-Paths kept repo-internal (never synced to `~/.config/opencode/`):
+### Why this matters
 
-| Directory/file | Purpose |
-|---|---|
-| `.github/` | GitHub Actions, CONTRIBUTING.md |
-| `substrate/` | Mycelium framework traces |
-| `.gitignore` | Git ignore rules |
-| `.markdownlint.json`, `.markdownlintignore` | Lint configuration |
-| `.releaserc.json` | Semantic-release configuration |
-| `.secrets/` | Local secrets (preserved if exists) |
+The `exact_opencode` source directory means chezmoi replaces the entire managed `~/.config/opencode/` tree on apply. any file in `~/.config/opencode/` that is not tracked by this repository will be deleted.
 
-The installer preserves any existing `~/.config/opencode/.secrets/` directory across syncs.
+### Before you apply
+
+1. **Back up your current configuration**:
+
+   ```bash
+   cp -a ~/.config/opencode ~/.config/opencode.backup
+   ```
+
+2. **Move local secrets and tokens out of the managed tree**:
+
+   Move any secret files, API tokens, or local-only configuration from `~/.config/opencode/` to a directory outside the managed tree, such as `~/Documents/.secrets/`. these files are never synced by chezmoi and must stay outside `~/.config/opencode/` to survive applies.
+
+3. **Preview the changes with chezmoi diff**:
+
+   ```bash
+   chezmoi init --dry-run digitalygo/opencode-setup
+   chezmoi diff
+   ```
+
+   review the diff carefully. files listed as removed are unmanaged and will be deleted on apply. if anything unexpected appears, investigate before proceeding.
+
+### Apply
+
+Only after you have backed up your configuration, moved secrets out of `~/.config/opencode/`, and reviewed the diff:
+
+```bash
+chezmoi init --apply digitalygo/opencode-setup
+```
+
+After the apply succeeds, restore any local-only files you preserved outside the managed tree.
+
+## Repo structure
+
+This repo uses a [`.chezmoiroot`](.chezmoiroot) file to tell chezmoi that the source directory is `home/`. the runtime config lives under `home/dot_config/exact_opencode/`, which chezmoi maps to `~/.config/opencode/`.
+
+### Source layout
+
+```text
+.
+├── .chezmoiroot                    # chezmoi source root marker
+├── .github/                        # GitHub Actions, CONTRIBUTING.md (repo-internal)
+├── .gitignore                      # Git ignore rules (repo-internal)
+├── .markdownlint.json              # Markdown lint config (repo-internal)
+├── .markdownlintignore             # Markdown lint ignore (repo-internal)
+├── .releaserc.json                 # semantic-release config (repo-internal)
+├── LICENSE                         # MIT license (repo-internal)
+├── README.md                       # this file (repo-internal)
+├── substrate/                      # Mycelium framework traces (repo-internal)
+└── home/
+    └── dot_config/
+        └── exact_opencode/         # maps to ~/.config/opencode/
+            ├── agent/              # AI agent definitions
+            ├── command/            # custom command definitions
+            ├── skills/             # skill instruction packs
+            ├── AGENTS.md           # agent-wide shared rules
+            ├── opencode.jsonc      # main OpenCode configuration
+            └── ...
+```
+
+### What gets synced
+
+Everything under `home/dot_config/exact_opencode/` is deployed to `~/.config/opencode/`. the `exact_` prefix means chezmoi keeps the target directory in exact sync — files in `~/.config/opencode/` that are not in the repo get removed on apply. everything else in the repo is repo-internal and never reaches the target directory.
 
 ## Configuration overview
 
@@ -83,8 +119,8 @@ The installer preserves any existing `~/.config/opencode/.secrets/` directory ac
 - **instructions**: loads `.github/CONTRIBUTING.md` and `AGENTS.md` as system-level rules
 - **autoupdate**: enabled
 - **compaction**: manual trigger, pruning enabled, preserves last 10k tokens
-- **permissions**: bash broadly allowed except destructive system commands; git asks except read-only commands (status, diff, log, show, rev-parse)
-- **MCP servers**: figma, shadcn, chrome-devtools — all enabled by default (see below)
+- **permissions**: bash asks by default except explicit read-only allows (git status, diff, log, show, rev-parse) and destructive-command denies
+- **MCP servers**: figma, shadcn, chrome-devtools — all enabled by default
 
 ## Agents
 
@@ -152,20 +188,26 @@ Skills provide specialized instruction packs for agents. loaded on demand via th
 
 Three MCP servers run locally, all enabled by default:
 
-- **figma**: `figma-developer-mcp` — reads Figma designs via a local token file (`~/.config/opencode/.secrets/figma-token`)
+- **figma**: `figma-developer-mcp` — reads Figma designs via a local token file
 - **shadcn**: `shadcn@latest mcp` — generates and manages shadcn/ui components
 - **chrome-devtools**: `chrome-devtools-mcp@latest` — headless browser automation for testing and scraping (remove `--headless=true` for GUI)
 
+## Secret files
+
+API tokens and secret files are never managed by chezmoi. store them in a directory outside the managed `~/.config/opencode/` tree (e.g. `~/Documents/.secrets/`). create each file locally with the correct value.
+
+The Figma MCP server and the Replicate and Mistral skills read credentials from local files. configure these paths in your environment as needed.
+
 ## Mycelium framework
 
-This repository follows the Mycelium substrate standard for agent-written documentation:
+This repository follows the Mycelium substrate standard for agent-written documentation.
 
 ### Current state
 
-The entire `substrate/` tree is repo-internal — it is excluded from `setup.sh` syncs and lives only in this repository.
+The entire `substrate/` tree is repo-internal — it is not deployed by chezmoi and lives only in this repository.
 
-- **`substrate/traces/`** — exists and is actively populated with operations, plans, research, reviews, and status records.
-- **`substrate/directives/`** — not yet authored in this repository. supported by the `mycelium-directive` skill and the `migrate-to-mycelium` command. agents reference this path as required (see `AGENTS.md`, `orchestrator.md`).
+- **`substrate/traces/`** — actively populated with operations, plans, research, reviews, and status records.
+- **`substrate/directives/`** — not yet authored in this repository. supported by the `mycelium-directive` skill and the `migrate-to-mycelium` command.
 - **`substrate/expectations/`** — not yet authored. supported by the `mycelium-expectation` skill and the migration command.
 
 ### Substrate traces layout
@@ -229,6 +271,14 @@ git clone https://github.com/YOUR_USERNAME/opencode-setup.git
 cd opencode-setup
 git remote add upstream https://github.com/digitalygo/opencode-setup.git
 git checkout -b feature/your-feature-name
+```
+
+To test your changes locally with chezmoi:
+
+```bash
+chezmoi init --source ~/path/to/your/clone
+chezmoi diff          # preview changes
+chezmoi apply         # apply to ~/.config/opencode/
 ```
 
 ## License

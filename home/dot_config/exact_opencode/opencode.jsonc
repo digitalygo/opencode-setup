@@ -33,7 +33,7 @@
         "npx",
         "-y",
         "figma-developer-mcp",
-        "--figma-api-key={file:~/.config/opencode/.secrets/figma-token}",
+        "--figma-api-key={file:~/Documents/.secrets/figma-token}",
         "--stdio",
       ],
       "enabled": true,

@@ -10,7 +10,7 @@ description: Generate PNG images with Replicate via direct Bash HTTP calls. Use 
 - generate a `.png` image using `google/nano-banana-2` on Replicate
 - use a direct `curl` call to Replicate HTTP API
 - save the PNG locally for immediate usage
-- use token from `~/.config/opencode/.secrets/replicate-key`
+- use token from `~/Documents/.secrets/replicate-key`
 
 ## When to use
 
@@ -46,7 +46,7 @@ Rules:
 ```bash
 set -euo pipefail
 
-REPLICATE_API_TOKEN="$(tr -d '\n' < "$HOME/.config/opencode/.secrets/replicate-key")"
+REPLICATE_API_TOKEN="$(tr -d '\n' < "$HOME/Documents/.secrets/replicate-key")"
 PROMPT="A photorealistic golden retriever playing in a sunny park"
 ASPECT_RATIO="1:1"
 GOOGLE_SEARCH="false"
@@ -55,7 +55,7 @@ OUTPUT_FORMAT="png"
 OUTPUT_FILE="output.png"
 
 if [ -z "$REPLICATE_API_TOKEN" ]; then
-  echo "Missing Replicate token in ~/.config/opencode/.secrets/replicate-key" >&2
+  echo "Missing Replicate token in ~/Documents/.secrets/replicate-key" >&2
   exit 1
 fi
 
@@ -102,7 +102,7 @@ echo "Output URL: $OUTPUT_URL"
 
 ## Error handling
 
-- `401 Unauthorized`: token missing or invalid. Check `~/.config/opencode/.secrets/replicate-key`.
+- `401 Unauthorized`: token missing or invalid. Check `~/Documents/.secrets/replicate-key`.
 - `402 Payment Required`: billing or quota issue on Replicate account.
 - `422 Unprocessable Entity`: invalid `aspect_ratio` or payload structure.
 - Empty output URL: request accepted but no usable output returned.

@@ -12,7 +12,7 @@
       "customType": "jsonata",
       "fileFormat": "toml",
       "managerFilePatterns": [
-        "/^skills/dependency-catalog/references/dependency-catalog\\.toml$/"
+        "/^home/dot_config/exact_opencode/skills/dependency-catalog/references/dependency-catalog\\.toml$/"
       ],
       "matchStrings": [
         "entries[mode = 'managed'].{\"depName\": dep_name, \"currentValue\": recommended_version, \"datasource\": datasource, \"versioning\": versioning, \"extractVersion\": extract_version}"
@@ -24,7 +24,7 @@
       "description": "Group all dependency catalog updates into a single PR",
       "matchManagers": ["custom.jsonata"],
       "matchFileNames": [
-        "skills/dependency-catalog/references/dependency-catalog.toml"
+        "home/dot_config/exact_opencode/skills/dependency-catalog/references/dependency-catalog.toml"
       ],
       "groupName": "dependency catalog baseline",
       "groupSlug": "dependency-catalog",
@@ -46,7 +46,7 @@
     {
       "description": "Require minimum baseline policy review for all catalog entries",
       "matchFileNames": [
-        "skills/dependency-catalog/references/dependency-catalog.toml"
+        "home/dot_config/exact_opencode/skills/dependency-catalog/references/dependency-catalog.toml"
       ],
       "reviewersFromCodeOwners": true
     }
