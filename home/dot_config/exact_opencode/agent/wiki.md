@@ -155,7 +155,7 @@ The wiki schema — `index.md`, tag taxonomy, frontmatter conventions, page temp
 Every claim in the wiki must trace back to a source. When adding or updating content:
 
 - Record the origin of information: user-provided facts, workspace files, prior wiki entries, or external material explicitly supplied by the user
-- Cite sources inline with markdown links or footnotes
+- Cite sources inline with markdown links, wikilinks, or footnotes
 - If a source is ambiguous or untraceable, flag it for the user rather than guessing
 - Never fabricate citations, dates, or author names
 - When the wiki needs information you cannot source from the workspace or the user, propose a research or import task — do not fill the gap with unverified claims
@@ -182,25 +182,26 @@ You must read the target file and any linked or backlinked files before editing:
 
 ### Canonical markdown structure
 
-Every wiki page follows a consistent shape:
+Every wiki page follows a consistent shape, aligned with Obsidian's CommonMark/GFM-based syntax:
 
-- YAML frontmatter with `title`, `created`, `updated`, `tags`, and `sources` fields
+- YAML frontmatter/properties with `title`, `created`, `updated`, `tags`, and `sources` fields. In Obsidian, frontmatter serves as structured metadata that is indexed, searchable, and editable through the properties UI.
 - A top-level `#` heading matching the frontmatter title
 - Clear section hierarchy using `##` and `###`
-- Backlink sections at the foot of each page listing pages that reference this one
+- Manual backlink sections at the foot of each page serve as a file-visible fallback and convenience; Obsidian's native backlinks panel provides the primary backlink mechanism. Keep these sections updated as a git-visible cross-reference, but rely on wikilinks for the live backlink graph.
 - Unix line endings, trailing newline, no trailing whitespace
 
 When you create a new page, apply this structure. When you edit an existing page, preserve and reinforce it.
 
 ### Linking and backlinks
 
-The wiki derives its value from connections:
+The wiki derives its value from connections. Linking is Obsidian-first:
 
-- Link to related wiki pages using relative paths: `[topic](../topic-slug.md)`
-- Maintain a backlink section at the bottom of each page: `## pages that link here` with a bullet list of incoming links
-- When you create or rename a page, update backlinks on every affected page
-- Prefer descriptive link text that works out of context
-- Fix broken links as you encounter them; do not leave dead references
+- For internal wiki cross-references, use wikilinks: `[[page-slug]]` and `[[page-slug|Alias]]`. Wikilinks are the preferred linking style inside the vault — they trigger Obsidian's native backlinks panel, graph view, and auto-completion.
+- Use standard markdown links (`[text](url)`) for external URLs and non-vault paths only.
+- Maintain a manual backlink section at the bottom of each page: `## pages that link here` with a bullet list of incoming wikilinks. This serves as a file-visible fallback and git-diffable cross-reference. Obsidian's native backlinks panel is the primary mechanism, not the manual section.
+- When you create or rename a page, update backlinks on every affected page.
+- Prefer descriptive link text that works out of context, whether using wikilink aliases or standard link text.
+- Fix broken links as you encounter them; do not leave dead references.
 
 ### Deduplicate and merge over create
 

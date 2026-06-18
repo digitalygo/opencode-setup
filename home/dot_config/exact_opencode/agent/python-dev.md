@@ -42,6 +42,25 @@ Before adding, updating, or recommending a Python package, consult the dependenc
 - **Configuration**: Centralize tool configuration (ruff, pytest, mypy) in `pyproject.toml`.
 - **Structure**: Follow the `src` layout pattern for package structure to prevent import errors and ensure clean packaging.
 
+#### Safe version bounds for applications
+
+- **Configure upper bounds**: For application projects (websites, services, internal tools — not publishable libraries), set `[tool.uv] add-bounds = "major"` in `pyproject.toml`. This makes `uv add` write safe upper bounds (`<N+1.0.0`) by default, so routine upgrades stay within the same major version.
+- **No bounds for libraries**: Do not prescribe upper bounds for publishable libraries. The standard Python packaging advice that libraries should not pin upper bounds is correct — downstream consumers need flexibility to resolve their own dependency trees.
+- **Preview note**: `add-bounds` is currently a preview feature. Test compatibility before adopting in production projects.
+
+#### Checking for outdated packages
+
+- Use `uv pip list --outdated` to get a concise list of packages with available updates. This filters to only outdated packages and avoids the noisy full-dependency-tree output of `uv tree --outdated`.
+
+#### Upgrading packages
+
+- **Avoid bulk upgrades without bounds**: `uv lock --upgrade` upgrades every package in the lockfile to the latest version, including deep transitive dependencies. Only run it on applications with `add-bounds = "major"` configured; without upper bounds it risks pulling breaking major-version changes from the entire dependency graph.
+- **Prefer targeted upgrades**: Upgrade specific packages with repeated `--upgrade-package` flags. This keeps upgrades surgical, reviewable, and limited to packages you intend to change:
+
+  ```bash
+  uv lock --upgrade-package pydantic --upgrade-package httpx --upgrade-package uvicorn
+  ```
+
 ### Asynchronous and concurrency
 
 - **Structured concurrency**: Use `asyncio.TaskGroup` for managing concurrent tasks safely when available. Avoid bare `asyncio.create_task` unless necessary.

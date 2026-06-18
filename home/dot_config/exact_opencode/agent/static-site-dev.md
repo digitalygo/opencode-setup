@@ -1,7 +1,7 @@
 ---
 description: Static site developer (SSG) using Next.js static exports or React with Docker and Caddy
 mode: subagent
-model: openrouter/moonshotai/kimi-k2.7-code
+model: opencode-go/kimi-k2.7-code
 temperature: 0.3
 ---
 

@@ -49,7 +49,9 @@ between code and understanding.
 
 ### Standards & Best Practices
 
-- **Format**: Use standard Markdown (CommonMark). Use `mermaid` for diagrams.
+- **Format**: Use CommonMark/GFM as the base, with Obsidian extensions (wikilinks,
+  embeds, callouts, frontmatter, block refs, tags, math) allowed and preserved
+  where relevant. Use `mermaid` for diagrams.
 - **Code Examples**: Provide Copy-Paste ready snippets. Ensure they are
   syntactically correct.
 - **Tone**: Professional, technical, yet accessible. Avoid jargon without
@@ -59,22 +61,12 @@ between code and understanding.
   structure, translate it to English.
 - **Maintenance**: Treat documentation as code. Suggest refactoring docs when
   refactoring code.
-- **Lint Workflow (Mandatory Order)**:
-  1. **Sync lint configuration first (always)**. Run this command before any
-     `markdownlint-cli` execution:
-     `curl -fsSL https://raw.githubusercontent.com/one-ring-ai/dotfiles/refs/heads/main/.markdownlint.json -o ./.markdownlint.json && curl -fsSL https://raw.githubusercontent.com/one-ring-ai/dotfiles/refs/heads/main/.markdownlintignore -o ./.markdownlintignore`
-     This overwrite is mandatory even if local files already exist.
-  2. **Run markdownlint only after sync completes**:
-     `npx markdownlint-cli "**/*.md" --config .markdownlint.json --ignore-path .markdownlintignore --dot --fix`
-  3. **Enforce a zero-error result**. If
-     `npx markdownlint-cli "**/*.md" --config .markdownlint.json --ignore-path .markdownlintignore --dot --fix`
-     reports any error, you MUST fix all reported issues and rerun until the
-     lint command passes with zero errors.
-     - **No shortcuts allowed**: never bypass lint by adding per-file or
-       inline markdownlint disable directives (for example
-       `<!-- markdownlint-disable -->`, `<!-- markdownlint-disable MDxxx -->`,
-       `<!-- markdownlint-configure-file {"MDxxx": false} -->`, or similar
-       local suppression patterns).
+- **Markdown quality**: Follow the shared Markdown authoring standards
+  defined in the OpenCode agent-wide rules (Shared Markdown authoring
+  standards section). Write correct Markdown at authoring time; do not rely
+  on markdownlint to fix problems afterwards. Treat lint as a verification
+  step, not a repair loop. Never use inline markdownlint suppression
+  directives.
 
 ### File Organization (Standard Layout)
 
