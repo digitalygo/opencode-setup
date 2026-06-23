@@ -247,7 +247,7 @@ policy = "minimum-baseline"
 source_url = "https://github.com/motiondivision/motion"
 notes = "Animation library; default for static-site-dev agent transitions"
 datasource = "npm"
-dep_name = "framer-motion"
+dep_name = "motion"
 versioning = "npm"
 
 [[entries]]
