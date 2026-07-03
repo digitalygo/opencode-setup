@@ -4,9 +4,12 @@
     "config:recommended",
     ":disableDependencyDashboard"
   ],
-  "schedule": ["before 10am on wednesday"],
   "timezone": "Europe/Rome",
   "labels": ["dependencies"],
+  "enabledManagers": [
+    "custom.jsonata",
+    "github-actions"
+  ],
   "customManagers": [
     {
       "customType": "jsonata",
@@ -21,11 +24,12 @@
   ],
   "packageRules": [
     {
-      "description": "Group all dependency catalog updates into a single PR",
+      "description": "Group all dependency catalog updates into a single weekly PR",
       "matchManagers": ["custom.jsonata"],
       "matchFileNames": [
         "home/dot_config/exact_opencode/skills/dependency-catalog/references/dependency-catalog.toml"
       ],
+      "schedule": ["after 10am and before 11am on wednesday"],
       "groupName": "dependency catalog baseline",
       "groupSlug": "dependency-catalog",
       "commitMessageTopic": "dependency catalog",
@@ -45,9 +49,19 @@
     },
     {
       "description": "Require minimum baseline policy review for all catalog entries",
+      "matchManagers": ["custom.jsonata"],
       "matchFileNames": [
         "home/dot_config/exact_opencode/skills/dependency-catalog/references/dependency-catalog.toml"
       ],
+      "reviewersFromCodeOwners": true
+    },
+    {
+      "description": "Group GitHub Actions updates managed by Renovate",
+      "matchManagers": ["github-actions"],
+      "groupName": "GitHub Actions dependencies",
+      "groupSlug": "github-actions",
+      "semanticCommits": "enabled",
+      "semanticCommitType": "ci",
       "reviewersFromCodeOwners": true
     }
   ]
