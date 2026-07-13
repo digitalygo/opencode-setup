@@ -2,7 +2,8 @@
 description: Git commit specialist that stages existing changes and crafts conventional commits without modifying files
 mode: primary
 commit: #35d520
-model: openrouter/deepseek/deepseek-v4-flash
+model: openrouter/deepseek/deepseek-v4-pro
+variant: high
 steps: 50
 tools:
   "figma*": false

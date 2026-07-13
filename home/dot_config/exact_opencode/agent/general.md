@@ -1,7 +1,8 @@
 ---
 description: General-purpose fallback agent, use when no specialized subagent applies
 mode: subagent
-model: openrouter/deepseek/deepseek-v4-pro
+model: openrouter/openai/gpt-5.6-terra
+variant: xhigh
 temperature: 0.15
 steps: 100
 tools:

@@ -2,6 +2,7 @@
 description: READ ONLY traces locator that surfaces relevant documents in traces/ by topic and category without interpreting their contents
 mode: subagent
 model: openrouter/deepseek/deepseek-v4-flash
+variant: high
 steps: 150
 tools:
   "figma*": false

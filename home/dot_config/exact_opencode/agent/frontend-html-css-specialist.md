@@ -1,7 +1,8 @@
 ---
 description: Frontend developer using HTML5/CSS3/Vanilla JS without external frameworks
 mode: subagent
-model: openrouter/moonshotai/kimi-k2.7-code
+model: openrouter/openai/gpt-5.6-terra
+variant: xhigh
 temperature: 0.3
 steps: 100
 tools:

@@ -2,6 +2,7 @@
 description: OpenTofu/Terraform engineer for secure, modular IaC
 mode: subagent
 model: openrouter/deepseek/deepseek-v4-pro
+variant: high
 temperature: 0.15
 steps: 100
 tools:

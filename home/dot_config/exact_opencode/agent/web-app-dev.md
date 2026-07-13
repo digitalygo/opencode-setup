@@ -1,7 +1,8 @@
 ---
 description: Web application developer for dynamic, data-driven systems using Next.js/React frontend with Laravel backend
 mode: subagent
-model: openrouter/moonshotai/kimi-k2.7-code
+model: openrouter/openai/gpt-5.6-terra
+variant: xhigh
 temperature: 0.3
 ---
 

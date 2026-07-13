@@ -1,7 +1,8 @@
 ---
 description: READ ONLY pattern finder that locates related implementations and returns file-referenced code snippets and usage conventions for reuse
 mode: subagent
-model: openrouter/deepseek/deepseek-v4-flash
+model: openrouter/deepseek/deepseek-v4-pro
+variant: high
 steps: 150
 tools:
   "figma*": false

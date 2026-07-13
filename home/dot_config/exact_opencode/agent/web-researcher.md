@@ -1,7 +1,8 @@
 ---
 description: READ ONLY web researcher that finds authoritative sources to answer general questions and specific questions about code
 mode: subagent
-model: openrouter/deepseek/deepseek-v4-flash
+model: openrouter/deepseek/deepseek-v4-pro
+variant: high
 steps: 100
 tools:
   "figma*": false
