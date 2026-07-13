@@ -121,18 +121,10 @@
       "yes > /dev/null": "deny",
       "stress *": "deny",
       "eval *": "deny",
-      "git *": "ask",
-      "git status": "allow",
-      "git status *": "allow",
-      "git diff": "allow",
-      "git diff *": "allow",
-      "git log": "allow",
-      "git log *": "allow",
-      "git show": "allow",
-      "git show *": "allow",
-      "git rev-parse *": "allow",
-      "git ls-files *": "allow",
-      "git branch --show-current": "allow"
+      "git commit": "ask",
+      "git commit *": "ask",
+      "git push": "ask",
+      "git push *": "ask"
     },
   },
 }
