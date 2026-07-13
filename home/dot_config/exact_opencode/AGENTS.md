@@ -1,5 +1,9 @@
 # Agent-wide shared rules
 
+## seed vs migration
+
+when possible, no matter what the user says, always use migrations to seed the database. and always use incremental migrations.
+
 ## Shared standards compliance
 
 - Always ensure alignment with `.github/CONTRIBUTING.md`, `AGENTS.md`, and any files under the `substrate/directives/` and `substrate/expectations/` folders before planning, implementing, reviewing, or documenting changes.
@@ -31,8 +35,8 @@ When writing Markdown files, produce correct output from the start.
 
 - **Marker consistency** — pick either `-` or `*` for unordered lists and stick
   with it throughout the file.
-- **Ordered lists** — use `1.` for every item; the renderer numbers them
-  automatically.
+- **Ordered lists** — use incrementing numeric markers (`1.`, `2.`, `3.`) when
+  sequence matters. If sequence does not matter, use an unordered list instead.
 - **Indent consistently** — use the same sub-list indent across the entire file
   (2 or 4 spaces).
 
