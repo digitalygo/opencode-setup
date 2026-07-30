@@ -1,290 +1,236 @@
-# opencode-setup
+# Digitalygo OpenCode setup
 
-OpenCode configuration for [digitalygo](https://digitalygo.it): agents, commands, skills, MCP servers, managed via [chezmoi](https://chezmoi.io). automated releases via semantic-release.
+Public, OpenCode-only configuration for [Digitalygo](https://digitalygo.it), distributed with [chezmoi](https://www.chezmoi.io/). It provides shared agents, commands, skills, plugins, models, permissions, MCP integrations, and TUI settings under `~/.config/opencode/`.
 
-## Quick start (new install)
+This repository does not manage shell files, environment variables, OpenCode provider authentication, or unrelated dotfiles. Internal users who need the complete development and operations environment should use the private `digitalygo/dotfiles` repository.
 
-On a machine with no prior OpenCode configuration, install [chezmoi](https://chezmoi.io/install/) then apply this repo:
+## Requirements
+
+- [OpenCode](https://opencode.ai/)
+- [chezmoi](https://www.chezmoi.io/install/)
+- Git
+- Node.js 24.18.0 or newer for plugin development and tests
+
+Provider authentication and optional API credentials remain machine-local and must be configured separately.
+
+## Installation
+
+### New OpenCode configuration
+
+On a machine without an existing `~/.config/opencode/` tree:
 
 ```bash
 chezmoi init --apply digitalygo/opencode-setup
 ```
 
-This deploys the configuration to `~/.config/opencode/`. for later updates:
+### Existing OpenCode configuration
+
+The source directory is named `exact_opencode`, so chezmoi manages the target directory exactly. Nested `exact_agent`, `exact_command`, `exact_plugins`, and `exact_skills` directories also propagate deletions. Unmanaged files in those target paths can be removed during an apply.
+
+Back up and preview before the first apply:
+
+```bash
+cp -a ~/.config/opencode ~/.config/opencode.backup
+chezmoi init digitalygo/opencode-setup
+chezmoi diff
+chezmoi apply
+```
+
+Keep secrets, provider authentication, and local-only configuration outside `~/.config/opencode/`. Do not restore local-only files into the exact-managed paths after applying.
+
+## Updates
+
+Pull the current source and apply it with:
 
 ```bash
 chezmoi update
 ```
 
-### Branch / channel equivalents
-
-chezmoi uses `--branch` instead of channel flags. use these to track pre-release branches:
+Preview repository changes before applying when needed:
 
 ```bash
-chezmoi init --apply --branch beta digitalygo/opencode-setup   # beta channel
-chezmoi init --apply --branch alpha digitalygo/opencode-setup  # alpha channel
+chezmoi git pull -- --ff-only
+chezmoi diff
+chezmoi apply
 ```
 
-Branch mapping:
+## Source-to-runtime mapping
 
-| chezmoi flag | Channel | Branch |
-|---|---|---|
-| (default) | stable | `main` |
-| `--branch beta` | beta | `beta` |
-| `--branch alpha` | alpha | `alpha` |
+The root `.chezmoiroot` file selects `home/` as the source directory. Repository files outside `home/` are not deployed.
 
-### What this repo manages
+| Source | Runtime target | Purpose |
+| --- | --- | --- |
+| `home/dot_config/exact_opencode/` | `~/.config/opencode/` | Exact-managed OpenCode root |
+| `exact_agent/` | `agent/` | Primary agents and subagents |
+| `exact_command/` | `command/` | Reusable commands |
+| `exact_plugins/` | `plugins/` | TypeScript plugins and plugin modules |
+| `exact_skills/` | `skills/` | On-demand instruction packs and references |
+| `AGENTS.md` | `AGENTS.md` | Shared agent rules |
+| `opencode.jsonc` | `opencode.jsonc` | Models, MCP servers, permissions, and runtime behavior |
+| `tui.jsonc` | `tui.jsonc` | TUI theme and attention sounds |
+| `sounds/` | `sounds/` | Completion, permission, and error sounds |
 
-This repository manages **only** the OpenCode configuration under `~/.config/opencode/`. it does **not** manage shell rc files, environment variables, or any other dotfiles.
+The repository-level `.github/`, `substrate/`, release files, and documentation remain repository-internal.
 
-The source tree uses the `exact_opencode` directory name, which tells chezmoi to keep the target directory in exact sync. unmanaged files in `~/.config/opencode/` are removed on apply.
+## Current configuration
 
-## Migration from the legacy installer
+`opencode.jsonc` defines the active defaults:
 
-If you previously used `setup.sh` to install OpenCode, or already have files in `~/.config/opencode/` from an earlier setup, complete this section **before** running any apply command. skipping these steps can delete local-only files.
+| Setting | Value |
+| --- | --- |
+| Default agent | `orchestrator` |
+| Primary model | `openrouter/moonshotai/kimi-k3` |
+| Small model | `openrouter/qwen/qwen3.7-flash` |
+| Automatic updates | Enabled |
+| Automatic compaction | Enabled, with pruning and 50,000 recent tokens preserved |
+| Tool output limit | 4,000 lines |
+| MCP servers | Figma, shadcn/ui, and Chrome DevTools |
+| Provider and secret state | Local only, not managed by chezmoi |
 
-### Why this matters
+The watcher ignores common dependency, build, Git, vendor, and virtual-environment directories. The TUI enables mouse input and attention sounds for completion, permission requests, and errors.
 
-The `exact_opencode` source directory means chezmoi replaces the entire managed `~/.config/opencode/` tree on apply. any file in `~/.config/opencode/` that is not tracked by this repository will be deleted.
+### Permissions
 
-### Before you apply
+The default Bash policy allows ordinary commands while explicitly denying destructive disk, privilege-escalation, persistence, credential-reading, selected network-transfer and reconnaissance, container-escape, and shutdown patterns.
 
-1. **Back up your current configuration**:
+Additional boundaries include:
 
-   ```bash
-   cp -a ~/.config/opencode ~/.config/opencode.backup
-   ```
+- `.env` and `.env.*` reads are denied, while example environment files remain readable.
+- External access asks by default, with the OpenCode skills tree and `~/Documents/**` allowed.
+- Doom-loop continuation is denied.
+- `git commit` and `git push` require approval.
 
-2. **Move local secrets and tokens out of the managed tree**:
-
-   Move any secret files, API tokens, or local-only configuration from `~/.config/opencode/` to a directory outside the managed tree, such as `~/Documents/.secrets/`. these files are never synced by chezmoi and must stay outside `~/.config/opencode/` to survive applies.
-
-3. **Preview the changes with chezmoi diff**:
-
-   ```bash
-   chezmoi init --dry-run digitalygo/opencode-setup
-   chezmoi diff
-   ```
-
-   review the diff carefully. files listed as removed are unmanaged and will be deleted on apply. if anything unexpected appears, investigate before proceeding.
-
-### Apply
-
-Only after you have backed up your configuration, moved secrets out of `~/.config/opencode/`, and reviewed the diff:
-
-```bash
-chezmoi init --apply digitalygo/opencode-setup
-```
-
-After the apply succeeds, restore any local-only files you preserved outside the managed tree.
-
-## Repo structure
-
-This repo uses a [`.chezmoiroot`](.chezmoiroot) file to tell chezmoi that the source directory is `home/`. the runtime config lives under `home/dot_config/exact_opencode/`, which chezmoi maps to `~/.config/opencode/`.
-
-### Source layout
-
-```text
-.
-├── .chezmoiroot                    # chezmoi source root marker
-├── .github/                        # GitHub Actions, CONTRIBUTING.md (repo-internal)
-├── .gitignore                      # Git ignore rules (repo-internal)
-├── .markdownlint.json              # Markdown lint config (repo-internal)
-├── .markdownlintignore             # Markdown lint ignore (repo-internal)
-├── .releaserc.json                 # semantic-release config (repo-internal)
-├── LICENSE                         # MIT license (repo-internal)
-├── README.md                       # this file (repo-internal)
-├── substrate/                      # Mycelium framework traces (repo-internal)
-└── home/
-    └── dot_config/
-        └── exact_opencode/         # maps to ~/.config/opencode/
-            ├── agent/              # AI agent definitions
-            ├── command/            # custom command definitions
-            ├── skills/             # skill instruction packs
-            ├── AGENTS.md           # agent-wide shared rules
-            ├── opencode.jsonc      # main OpenCode configuration
-            └── ...
-```
-
-### What gets synced
-
-Everything under `home/dot_config/exact_opencode/` is deployed to `~/.config/opencode/`. the `exact_` prefix means chezmoi keeps the target directory in exact sync — files in `~/.config/opencode/` that are not in the repo get removed on apply. everything else in the repo is repo-internal and never reaches the target directory.
-
-## Configuration overview
-
-`opencode.jsonc` drives the entire setup:
-
-- **default agent**: `orchestrator` — plans tasks, delegates to subagents, verifies results
-- **models**: `openrouter/openai/gpt-5.5` (primary), `openrouter/deepseek/deepseek-v4-flash` (small)
-- **instructions**: loads `.github/CONTRIBUTING.md` and `AGENTS.md` as system-level rules
-- **autoupdate**: enabled
-- **compaction**: manual trigger, pruning enabled, preserves last 10k tokens
-- **permissions**: bash asks by default except explicit read-only allows (git status, diff, log, show, rev-parse) and destructive-command denies
-- **MCP servers**: figma, shadcn, chrome-devtools — all enabled by default
+Agent definitions can narrow these defaults further.
 
 ## Agents
 
 ### Primary entrypoints
 
-Agents configured with `mode: primary` can be invoked directly, not only as subagents:
+| Agent | Purpose |
+| --- | --- |
+| `orchestrator` | Coordinates planning, specialist implementation, verification, and the final quality gate |
+| `planner` | Researches a codebase and writes plans without implementing changes |
+| `quick` | Handles quick questions, lookups, and lightweight research |
+| `commit` | Stages existing changes and creates conventional commits without editing files |
+| `security` | Coordinates authorized vulnerability discovery, validation, and documentation |
+| `directives-writer` | Authors and maintains Mycelium developer directives |
+| `expectations-writer` | Authors and maintains Mycelium client expectations |
+| `wiki` | Compiles source material into a durable Markdown knowledge base |
 
-| Agent | Role |
-|---|---|
-| `orchestrator` | Default entrypoint — plans, delegates, verifies, enforces security gates |
-| `planner` | Researches codebase and writes implementation plans without executing |
-| `quick` | Answers quick questions and research/documentation without implementation changes |
-| `commit` | Stages existing changes and crafts conventional commits |
-| `security` | Discovers, validates, and documents vulnerabilities with subagents |
-| `directives-writer` | Generates and refines developer directives (DRC-*.md) |
-| `expectations-writer` | Generates and refines client expectations (EXP-*.md) |
+The repository also overrides OpenCode's built-in `build` and `plan` definitions.
 
-### Subagent roster
+### Specialist groups
 
-The orchestrator delegates to these categories of specialized subagents:
+- **Codebase and repository research:** codebase, directive, expectation, and trace locators and analyzers; pattern finding; media analysis; web research
+- **Development:** JavaScript and TypeScript, Python, PHP and Laravel, Ruby and Rails, Go, web applications, static sites, frontend HTML and CSS, and Godot
+- **Infrastructure:** Docker, Ansible, OpenTofu and Terraform, and GitHub Actions
+- **Design and documentation:** API design, documentation, OpenSCAD, and a general fallback
+- **Security and quality:** security review, authorized penetration testing, and an independent read-only quality gate
 
-**Research**: directives-locator, directives-analyzer, expectations-locator, expectations-analyzer, traces-locator, traces-analyzer, codebase-locator, codebase-analyzer, codebase-pattern-finder, media-analyzer, web-researcher, complex-problem-researcher
-
-**Development**: javascript-typescript-dev, go-dev, python-dev, php-laravel-dev, ruby-dev, static-site-dev, web-app-dev, frontend-html-css-specialist
-
-**Infrastructure**: docker-specialist, ansible-specialist, opentofu-terraform-specialist, github-actions-workflow-specialist
-
-**Security**: security-review-specialist (code review), security-specialist (toolbox-based pentesting)
-
-**Other**: api-designer, documentation-writer, openscad-specialist
-
-**Fallback**: general (use only when no other subagent fits)
+Read `home/dot_config/exact_opencode/exact_agent/` for the current agent frontmatter, model selection, permissions, and full prompts.
 
 ## Commands
 
-Commands invoke specific agents for common workflows:
+The current command catalog contains one command:
 
 | Command | Agent | Purpose |
-|---|---|---|
-| `commit` | commit | Commit changes following conventional commit format |
-| `review` | planner | Review repository changes for CONTRIBUTING compliance, output review trace |
-| `migrate-to-mycelium` | orchestrator | Migrate from legacy `thoughts/`/`intents/` to Mycelium substrate layout |
+| --- | --- | --- |
+| `commit` | `commit` | Review the current changes, stage the intended files, and create conventional commits |
 
 ## Skills
 
-Skills provide specialized instruction packs for agents. loaded on demand via the skill tool:
-
 | Skill | Purpose |
-|---|---|
-| `caveman` | Compressed communication format, mandatory for all agent-user interactions |
-| `godot-game-dev` | End-to-end Godot game development workflow |
-| `modern-css-snippets` | Modern CSS capabilities and legacy replacements |
-| `mycelium-operation` | Operations record authoring rules |
-| `mycelium-directive` | Developer directive (DRC-*.md) authoring rules |
-| `mycelium-expectation` | Client expectation (EXP-*.md) authoring rules |
-| `mycelium-plan` | Plan record authoring rules |
-| `mycelium-research` | Research record authoring rules |
-| `mycelium-review` | Review record authoring rules |
-| `mycelium-status` | Workspace state record authoring rules |
-| `replicate-png-generation` | PNG image generation via Replicate |
-| `replicate-svg-generation` | SVG image generation via Replicate |
-| `web-design-references` | Curated web design system snapshots |
+| --- | --- |
+| `caveman` | Ultra-compressed technical communication |
+| `dependency-catalog` | Shared dependency versions and upgrade guidance |
+| `godot-game-dev` | End-to-end Godot planning, implementation, testing, capture, profiling, and visual QA |
+| `mistral-ocr-pdf-to-md` | OCR for documents and images into Markdown |
+| `modern-css-snippets` | Current CSS capabilities and replacements for legacy patterns |
+| `mycelium-directive` | Developer directive authoring |
+| `mycelium-expectation` | Client expectation authoring |
+| `mycelium-operation` | Operation record authoring |
+| `mycelium-plan` | Implementation plan authoring |
+| `mycelium-research` | Research record authoring |
+| `mycelium-review` | Security and repository review authoring |
+| `mycelium-status` | Workspace state record authoring |
+| `replicate-image-generation` | Raster image generation and editing through Replicate |
+| `replicate-svg-generation` | SVG generation through Replicate |
+| `team-leader` | User-facing language, precision, and verification rules for leader agents |
+| `web-design-references` | Curated design-system snapshots for web work |
 
-## MCP integrations
+## Plugins
 
-Three MCP servers run locally, all enabled by default:
+The `usage-logger` plugin is implemented in TypeScript. It detects supported projects, validates owner-only local configuration, and records usage through a durable pending and outbox flow. If project or secure configuration requirements are not met, it returns a no-op event handler instead of sending data.
 
-- **figma**: `figma-developer-mcp` — reads Figma designs via a local token file
-- **shadcn**: `shadcn@latest mcp` — generates and manages shadcn/ui components
-- **chrome-devtools**: `chrome-devtools-mcp@latest` — headless browser automation for testing and scraping (remove `--headless=true` for GUI)
+Its optional local files are:
 
-## Secret files
+- `~/Documents/.secrets/usage-log-api-base`
+- `~/Documents/.secrets/usage-log-api-key`
 
-API tokens and secret files are never managed by chezmoi. store them in a directory outside the managed `~/.config/opencode/` tree (e.g. `~/Documents/.secrets/`). create each file locally with the correct value.
+The secrets directory must not be group- or world-writable. Secret files must be regular, non-symlink files owned by the current user with owner-only permissions such as `0400` or `0600`.
 
-The Figma MCP server and the Replicate and Mistral skills read credentials from local files. configure these paths in your environment as needed.
+## Optional skill credentials
 
-## Mycelium framework
+Credentials are never committed or deployed by chezmoi. The current skills and MCP configuration can use these local files:
 
-This repository follows the Mycelium substrate standard for agent-written documentation.
+- `~/Documents/.secrets/figma-token`
+- `~/Documents/.secrets/mistral-key`
+- `~/Documents/.secrets/replicate-key`
 
-### Current state
+Only create the files for integrations you intend to use.
 
-The entire `substrate/` tree is repo-internal — it is not deployed by chezmoi and lives only in this repository.
+## Mycelium repository records
 
-- **`substrate/traces/`** — actively populated with operations, plans, research, reviews, and status records.
-- **`substrate/directives/`** — not yet authored in this repository. supported by the `mycelium-directive` skill and the `migrate-to-mycelium` command.
-- **`substrate/expectations/`** — not yet authored. supported by the `mycelium-expectation` skill and the migration command.
+`substrate/` is repository-internal and is not deployed. The current repository stores plans, research, reviews, and operation traces under `substrate/traces/`. Mycelium skills support directives and expectations when those collections are added to a project.
 
-### Substrate traces layout
+## Development and validation
 
-```text
-substrate/traces/
-├── operations/    # completed agent work records (YYYY-MM-DD-description.md)
-├── plans/         # implementation plans before execution
-├── research/      # research findings and analysis
-├── reviews/       # compliance and security review reports
-└── status/        # workspace state snapshots (gitignored)
-```
-
-### Migration support
-
-Repositories using the legacy `thoughts/` and `intents/` layout can migrate via:
+Install the pinned plugin dependencies and run the complete TypeScript checks from the package directory:
 
 ```bash
-opencode migrate-to-mycelium
+cd home/dot_config/exact_opencode
+npm ci
+npm run typecheck
+npm test
+npm run build
 ```
 
-The command detects layout state, moves files to the substrate standard, updates `.gitignore` and `.markdownlintignore`, and refuses on ambiguous states.
+Synchronize the shared Markdown lint configuration, then lint all Markdown from the repository root:
+
+```bash
+curl -fsSL \
+  https://raw.githubusercontent.com/one-ring-ai/dotfiles/refs/heads/main/.markdownlint.json \
+  -o ./.markdownlint.json
+curl -fsSL \
+  https://raw.githubusercontent.com/one-ring-ai/dotfiles/refs/heads/main/.markdownlintignore \
+  -o ./.markdownlintignore
+npx markdownlint-cli "**/*.md" \
+  --config .markdownlint.json \
+  --ignore-path .markdownlintignore \
+  --dot --fix
+```
+
+Preview the target changes before applying a working clone:
+
+```bash
+chezmoi init --source /path/to/opencode-setup
+chezmoi diff
+```
 
 ## Release model
 
-Fully automated via semantic-release on pushes to release branches:
+Semantic Release runs on pushes to configured release branches. `main` is the stable default branch. The release configuration also recognizes `beta` and `alpha` as prerelease channels when those branches are used.
 
-```text
-main (production) ← beta ← alpha ← feature / fix branches
-```
+- `feat` produces a minor release.
+- `fix` and `chore` produce a patch release.
+- A `BREAKING CHANGE:` footer produces a major release.
 
-| Branch | Release type | Version bump |
-|---|---|---|
-| `main` | Production | Based on commit type |
-| `beta` | Pre-release (beta channel) | Based on commit type |
-| `alpha` | Pre-release (alpha channel) | Based on commit type |
-
-Commit types that trigger releases:
-
-- `feat` → minor bump
-- `fix`, `chore` → patch bump
-- `BREAKING CHANGE:` footer → major bump
-
-Other commit types (`docs`, `style`, `refactor`, `perf`, `test`, `build`, `ci`, `revert`) do not trigger releases.
+Other conventional commit types do not produce a release by default.
 
 ## Contributing
 
-See [`.github/CONTRIBUTING.md`](.github/CONTRIBUTING.md) for full guidelines. key points:
-
-- **Branching**: always target `alpha`. work in `feature/*` or `fix/*` branches
-- **Commits**: conventional commit format required. `feat`, `fix`, `chore` drive releases
-- **Style**: no comments policy, kebab-case filenames, `set -euo pipefail` in bash scripts
-- **Agent naming**: follow patterns (`*-dev.md`, `*-specialist.md`, `*-locator.md`, etc.)
-- **Prompt writing**: second person, active voice ("you must" not "agents must")
-- **PRs**: small, focused, tested, no lint errors
-
-### Local dev setup
-
-```bash
-git clone https://github.com/YOUR_USERNAME/opencode-setup.git
-cd opencode-setup
-git remote add upstream https://github.com/digitalygo/opencode-setup.git
-git checkout -b feature/your-feature-name
-```
-
-To test your changes locally with chezmoi:
-
-```bash
-chezmoi init --source ~/path/to/your/clone
-chezmoi diff          # preview changes
-chezmoi apply         # apply to ~/.config/opencode/
-```
+Read [the contribution guide](.github/CONTRIBUTING.md) and root `AGENTS.md` before changing the repository. Keep pull requests focused, use conventional commits, preserve the exact-managed layout, and include real validation evidence.
 
 ## License
 
-MIT — see [LICENSE](LICENSE). copyright DigItalyGo S.R.L. SB.
-
----
-
-the [digitalygo](https://digitalygo.it) team
+MIT. See [the license](LICENSE). Copyright DigItalyGo S.R.L. SB.
