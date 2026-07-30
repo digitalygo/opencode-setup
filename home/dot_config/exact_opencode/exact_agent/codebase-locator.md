@@ -1,7 +1,7 @@
 ---
 description: READ ONLY codebase locator that surfaces relevant files, directories, and organization patterns for a feature without examining code internals
 mode: subagent
-model: openrouter/deepseek/deepseek-v4-flash
+model: openrouter/qwen/qwen3.7-flash
 variant: high
 steps: 150
 tools:

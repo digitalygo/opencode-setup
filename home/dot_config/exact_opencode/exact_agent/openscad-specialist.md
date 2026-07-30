@@ -1,8 +1,8 @@
 ---
 description: OpenSCAD engineer creating parametric, print-ready 3D models
 mode: subagent
-model: openrouter/openai/gpt-5.6-sol
-variant: xhigh
+model: openrouter/moonshotai/kimi-k3
+variant: max
 temperature: 0.3
 steps: 100
 tools:

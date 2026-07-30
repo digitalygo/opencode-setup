@@ -2,7 +2,7 @@
 description: Documentation writer for both human engineers and AI agents
 mode: subagent
 model: openrouter/deepseek/deepseek-v4-pro
-variant: high
+variant: xhigh
 steps: 100
 tools:
   "figma*": false

@@ -2,8 +2,8 @@
 description: Agent for quick questions and research, not for implementing changes
 mode: primary
 color: "#0df8cc"
-model: openrouter/z-ai/glm-5.2
-variant: max
+model: openrouter/openai/gpt-5.6-terra
+variant: high
 permission:
   edit:
     "*": "deny"

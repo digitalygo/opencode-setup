@@ -1,8 +1,8 @@
 ---
 description: Frontend developer using HTML5/CSS3/Vanilla JS without external frameworks
 mode: subagent
-model: openrouter/openai/gpt-5.6-terra
-variant: xhigh
+model: openrouter/moonshotai/kimi-k3
+variant: max
 temperature: 0.3
 steps: 100
 tools:
@@ -35,7 +35,7 @@ wrapped in a specific legacy context.
    check (skipping it for obvious basics).
 6. **Use available tools** like `chrome-devtools` or `figma` (when a figma project
    does exists) to verify your work.
-7. **Image Generation**: If no images are provided, load the `replicate-svg-generation` skill to generate SVG placeholders with a direct Replicate Bash API call or load the `replicate-png-generation` to generate PNG placeholders with a direct Replicate Bash API call.
+7. **Image generation**: If no images are provided, load the `replicate-svg-generation` skill to generate SVG placeholders with a direct Replicate Bash API call or load `replicate-image-generation` to generate raster image placeholders with a direct Replicate Bash API call.
 
 ## Essential Guidelines (2026 Standards)
 

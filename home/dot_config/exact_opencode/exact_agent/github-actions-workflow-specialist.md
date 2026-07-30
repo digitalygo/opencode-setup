@@ -2,7 +2,7 @@
 description: GitHub Actions workflow specialist
 mode: subagent
 model: openrouter/deepseek/deepseek-v4-pro
-variant: high
+variant: xhigh
 temperature: 0.15
 steps: 100
 tools:

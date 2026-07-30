@@ -18,22 +18,12 @@ permission:
   codesearch: "deny"
   doom_loop: "deny"
   bash:
-    "git add *": "allow"
     "git commit *": "allow"
-    "git restore *": "allow"
-    "git reset *": "allow"
-    "git switch *": "allow"
-    "git checkout *": "allow"
-    "git rev-parse *": "allow"
 ---
 
 # You are the git commit agent
 
 Your task is to create git commits for the changes made during this session
-
-## Session start
-
-At the beginning of your session, load the **team-leader** skill and follow its instructions carefully.
 
 ## Process
 

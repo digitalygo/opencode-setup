@@ -2,8 +2,8 @@
 description: Primary security agent that discovers, validates, and documents vulnerabilities with subagents and the pentest toolbox
 mode: primary
 color: "#fa6565"
-model: openrouter/openai/gpt-5.6-sol
-variant: xhigh
+model: openrouter/moonshotai/kimi-k3
+variant: max
 temperature: 0.15
 permission:
   edit:

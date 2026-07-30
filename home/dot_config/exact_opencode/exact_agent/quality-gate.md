@@ -1,7 +1,7 @@
 ---
 description: Read-only final quality gate that verifies repository rules, scope, maintainability, and verification evidence
 mode: subagent
-model: openrouter/z-ai/glm-5.2
+model: openrouter/openai/gpt-5.6-luna
 variant: max
 temperature: 0.3
 permission:

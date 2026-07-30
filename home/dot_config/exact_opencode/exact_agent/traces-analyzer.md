@@ -1,7 +1,7 @@
 ---
 description: READ ONLY insights analyst that distills high-value decisions and constraints from traces/ research without adding new interpretation
 mode: subagent
-model: openrouter/deepseek/deepseek-v4-pro
+model: openrouter/openai/gpt-5.6-luna
 variant: high
 steps: 150
 tools:

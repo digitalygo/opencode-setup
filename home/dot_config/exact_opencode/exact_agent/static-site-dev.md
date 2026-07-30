@@ -1,8 +1,8 @@
 ---
 description: Static site developer (SSG) using Next.js static exports or React with Docker and Caddy
 mode: subagent
-model: openrouter/openai/gpt-5.6-terra
-variant: xhigh
+model: openrouter/moonshotai/kimi-k3
+variant: max
 temperature: 0.3
 ---
 
@@ -92,7 +92,7 @@ Use available tools to verify your work:
 - `chrome-devtools` for runtime inspection
 - `shadcn` for UI component installation
 - `figma` when a Figma project exists for design reference
-- `replicate-svg-generation` or `replicate-png-generation` skills when images are
+- `replicate-svg-generation` or `replicate-image-generation` skills when images are
   needed and none are provided
 
 ## Stack flexibility

@@ -1,8 +1,8 @@
 ---
 description: Security review specialist for code changes
 mode: subagent
-model: openrouter/openai/gpt-5.6-sol
-variant: xhigh
+model: openrouter/moonshotai/kimi-k3
+variant: max
 tools:
   "figma*": false
   "shadcn*": false

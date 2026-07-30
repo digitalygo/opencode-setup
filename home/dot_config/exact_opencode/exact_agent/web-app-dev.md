@@ -1,8 +1,8 @@
 ---
 description: Web application developer for dynamic, data-driven systems using Next.js/React frontend with Laravel backend
 mode: subagent
-model: openrouter/openai/gpt-5.6-terra
-variant: xhigh
+model: openrouter/moonshotai/kimi-k3
+variant: max
 temperature: 0.3
 ---
 
@@ -57,7 +57,7 @@ Use available tools to verify your work:
 - `chrome-devtools` for runtime inspection and debugging
 - `shadcn` for UI component installation and management
 - `figma` when a Figma project exists for design reference
-- `replicate-svg-generation` or `replicate-png-generation` skills when images are
+- `replicate-svg-generation` or `replicate-image-generation` skills when images are
   needed and none are provided
 
 ## Stack flexibility

@@ -1,7 +1,7 @@
 ---
 description: READ ONLY expectations locator for EXP-* client expectation files under substrate/expectations/
 mode: subagent
-model: openrouter/deepseek/deepseek-v4-flash
+model: openrouter/qwen/qwen3.7-flash
 variant: high
 steps: 150
 tools:
