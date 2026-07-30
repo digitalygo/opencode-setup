@@ -1,0 +1,19 @@
+{
+  "type": "module",
+  "engines": {
+    "node": ">=24.18.0"
+  },
+  "dependencies": {
+    "@opencode-ai/plugin": "1.17.13"
+  },
+  "devDependencies": {
+    "@types/node": "26.1.1",
+    "typescript": "7.0.2"
+  },
+  "scripts": {
+    "clean": "node ./exact_plugins/usage-logger/__scripts__/clean.js",
+    "build": "node ./exact_plugins/usage-logger/__scripts__/build.js",
+    "typecheck": "tsc --noEmit",
+    "test": "node ./exact_plugins/usage-logger/__scripts__/test.js"
+  }
+}
