@@ -1,160 +1,129 @@
-# Godot capture skill
+# Godot capture workflow
 
 ## Purpose
 
-Produce deterministic screenshots and gameplay video from a running Godot 4.6 project in headless or remote environments so executor and visual QA can verify real output.
+Produce deterministic screenshots, frame sequences, or gameplay video from a running Godot project without suppressing engine failures.
 
-## Use this when
+Follow the version policy in `../SKILL.md`.
 
-- A task needs screenshot proof.
-- Dynamic systems need frame-sequence review.
-- Final presentation video is required.
+## When to use this
 
-## Setup goals
+- Visible changes need screenshot evidence.
+- Motion, animation, physics, transitions, or timing need frame-sequence review.
+- The requester needs a presentation video.
 
-- Prefer hardware rendering when available.
-- Support headless Linux with `xvfb-run`.
-- Keep one reusable wrapper script for all captures.
+Do not require capture for a nonvisual change when automated and runtime checks prove the acceptance criteria.
 
-## Setup workflow
+## Capture principles
 
-Create `.capture/run_godot` plus `.capture/env` once per session.
+- Use the project's configured renderer first.
+- Do not force Forward+, Vulkan, Compatibility, or another renderer unless diagnosing a verified renderer problem.
+- Keep stderr and the real process exit status.
+- Treat parser errors, import errors, crashes, resource leaks, blank frames, and nonzero exits as evidence to investigate.
+- Use a fresh, scoped output directory and never delete an ambiguous path.
+- Keep captures outside runtime assets and add an empty `.gdignore` when the output lives inside the project.
+- Use software rendering for functional visual evidence when necessary, but not as target-hardware performance evidence.
 
-Make wrapper handle this:
+## Environment preflight
 
-- Detect whether a display server exists.
-- Use `xvfb-run` on headless Linux if needed.
-- Prefer `--rendering-method forward_plus` on hardware-capable systems.
-- Filter known harmless RID leak noise from stderr.
+1. Resolve the Godot editor binary and run `--version`.
+2. Confirm the project imports successfully.
+3. Identify the project's renderer and target resolution.
+4. Check display availability and whether `xvfb-run`, `Xvfb`, and the `xauth` dependency required by `xvfb-run` are available on headless Linux.
+5. Check for an available process timeout mechanism.
+6. Check `ffmpeg` only when video conversion is required.
 
-Persist environment values:
+## Display strategy
 
-- `GPU_AVAILABLE=true|false`
-- `TIMEOUT_CMD=timeout|gtimeout|custom wrapper`
+- With a working display server, run the project normally.
+- On Linux without `DISPLAY` or `WAYLAND_DISPLAY`, use `xvfb-run` only after a smoke test proves the wrapper and `xauth` dependency work.
+- If `xvfb-run` is incomplete but `Xvfb` is available, start a private X server through the host's process manager, set `DISPLAY` only for the capture process, and terminate the server afterward.
+- Use Godot's `--headless` mode for nonvisual checks.
+- Do not combine `--headless` and `--write-movie` unless that exact engine and renderer path has been proven. A dummy renderer can produce blank output or crash instead of capturing frames.
+- If the configured renderer cannot capture in the environment, report the limitation and try a documented, project-compatible fallback without changing committed project settings.
 
-Concrete setup example:
+## Screenshot and frame-sequence contract
 
-```bash
-set -e
-mkdir -p .capture
-touch .capture/.gdignore
+Use a test or presentation script that extends a command-line-compatible Godot main loop and produces deterministic state.
 
-PLATFORM=$(uname -s)
-GPU_KIND=software
-
-if command -v timeout >/dev/null 2>&1; then
-  TIMEOUT_CMD=timeout
-elif command -v gtimeout >/dev/null 2>&1; then
-  TIMEOUT_CMD=gtimeout
-else
-  cat > .capture/ptimeout <<'PERL'
-#!/usr/bin/env perl
-use POSIX; my $s=shift; my $p; $SIG{ALRM}=sub{kill 'TERM',$p;exit 124};
-alarm $s; die "fork: $!" unless defined($p=fork); exec @ARGV unless $p; waitpid $p,0; exit($?>>8);
-PERL
-  chmod +x .capture/ptimeout
-  TIMEOUT_CMD="$(pwd)/.capture/ptimeout"
-fi
-
-if [[ "$PLATFORM" == "Darwin" ]]; then
-  GPU_KIND=hardware
-elif command -v vulkaninfo >/dev/null 2>&1; then
-  if vulkaninfo --summary 2>&1 | grep -Eq "deviceType *= PHYSICAL_DEVICE_TYPE_(DISCRETE_GPU|INTEGRATED_GPU|VIRTUAL_GPU)"; then
-    GPU_KIND=hardware
-  fi
-fi
-
-cat > .capture/run_godot <<'WRAPPER'
-#!/usr/bin/env bash
-set -o pipefail
-NOISE="leaked RID|Leaked instance|ObjectDB instances"
-cmd=()
-
-if [[ "$(uname -s)" != "Darwin" && -z "${DISPLAY:-}" && -z "${WAYLAND_DISPLAY:-}" ]]; then
-  cmd+=(xvfb-run -a -s '-screen 0 1920x1080x24')
-fi
-
-if [[ "$(uname -s)" == "Darwin" ]]; then
-  cmd+=(godot --path . --rendering-method forward_plus)
-elif command -v vulkaninfo >/dev/null 2>&1 && vulkaninfo --summary 2>&1 | grep -Eq "deviceType *= PHYSICAL_DEVICE_TYPE_(DISCRETE_GPU|INTEGRATED_GPU|VIRTUAL_GPU)"; then
-  cmd+=(godot --path . --rendering-method forward_plus)
-else
-  cmd+=(godot --path . --rendering-driver vulkan)
-fi
-
-"${cmd[@]}" "$@" 2>&1 | { grep -v "$NOISE" || true; }
-WRAPPER
-chmod +x .capture/run_godot
-
-cat > .capture/env <<ENV
-GPU_AVAILABLE=$([[ "$GPU_KIND" == "hardware" ]] && echo true || echo false)
-TIMEOUT_CMD=$TIMEOUT_CMD
-ENV
-```
-
-## Screenshot capture contract
+Linux example with a display:
 
 ```bash
-source .capture/env
-
-MOVIE=screenshots/task_name
-rm -rf "$MOVIE" && mkdir -p "$MOVIE"
+mkdir -p screenshots/task_name
 touch screenshots/.gdignore
-$TIMEOUT_CMD 30 .capture/run_godot \
-  --write-movie "$MOVIE"/frame.png \
-  --fixed-fps 10 --quit-after 50 \
+timeout 30s godot --path . \
+  --write-movie screenshots/task_name/frame.png \
+  --fixed-fps 10 \
+  --quit-after 50 \
   --script test/test_task.gd
 ```
 
-Godot expands `frame.png` into numbered PNG frames plus a `frame.wav` companion file.
-
-## Video capture contract
-
-Only run full video capture when `GPU_AVAILABLE=true`.
+Linux example without a display:
 
 ```bash
-source .capture/env
-
-VIDEO=screenshots/presentation
-rm -rf "$VIDEO" && mkdir -p "$VIDEO"
+mkdir -p screenshots/task_name
 touch screenshots/.gdignore
-$TIMEOUT_CMD 60 .capture/run_godot \
-  --write-movie "$VIDEO"/output.avi \
-  --fixed-fps 30 --quit-after 900 \
-  --script test/presentation.gd
-
-ffmpeg -i "$VIDEO"/output.avi \
-  -c:v libx264 -pix_fmt yuv420p -crf 28 -preset slow \
-  -vf "scale='min(1280,iw)':-2" \
-  -movflags +faststart \
-  "$VIDEO"/gameplay.mp4
+timeout 30s xvfb-run -a godot --path . \
+  --write-movie screenshots/task_name/frame.png \
+  --fixed-fps 10 \
+  --quit-after 50 \
+  --script test/test_task.gd
 ```
 
-## Frame rates
+Adapt `timeout` and the display wrapper to the host. Do not create an unverified custom timeout implementation merely to copy these examples.
 
-- Static scenes: `--fixed-fps 1`.
-- Dynamic gameplay: `--fixed-fps 10`.
-- Presentation video: `--fixed-fps 30`.
+Godot expands a PNG movie path into numbered frames and may create a companion audio file.
 
-Do not use very low FPS for physics validation. Physics becomes misleading.
+## Video contract
 
-## Hard rules
+Capture video only when requested or when it is the most efficient evidence for dynamic acceptance criteria.
 
-- Always create `screenshots/.gdignore`.
-- Use frame sequences for motion bugs, not one screenshot.
-- If `GPU_AVAILABLE=false`, skip final video and report limitation explicitly.
-- Position camera before frame 0 when using `--write-movie`.
-- Treat blank, black, or obviously wrong frames as capture failure, not game success.
+```bash
+mkdir -p screenshots/presentation
+touch screenshots/.gdignore
+timeout 60s godot --path . \
+  --write-movie screenshots/presentation/output.avi \
+  --fixed-fps 30 \
+  --quit-after 900 \
+  --script test/presentation.gd
+```
 
-## Common failure modes
+When `ffmpeg` is available and MP4 is needed:
 
-- Black frames -> wrong renderer or display setup.
-- Junk first frame -> camera only set in `_process()` instead of `_initialize()`.
-- Missing frames -> wrong `--quit-after` or capture script exited early.
-- Dynamic bug invisible -> capture window too short or FPS too low.
+```bash
+ffmpeg -i screenshots/presentation/output.avi \
+  -c:v libx264 \
+  -pix_fmt yuv420p \
+  -crf 28 \
+  -preset slow \
+  -vf "scale='min(1280,iw)':-2" \
+  -movflags +faststart \
+  screenshots/presentation/gameplay.mp4
+```
+
+Choose duration, frame rate, resolution, and codec from the evidence requirement rather than treating 30 seconds as mandatory.
+
+## Frame-rate guidance
+
+- Static composition: one or a few settled frames.
+- Short transitions: enough fixed-FPS frames to include pre-state, transition, and post-state.
+- Physics and animation: use a cadence high enough to reveal jitter, clipping, and timing defects.
+- Presentation video: use the project's intended playback rate when practical.
+
+A low-rate sampled contact sheet can help review a long sequence, but preserve the full source sequence for timing claims.
+
+## Verification
+
+- Check the capture command's real exit status.
+- Read unfiltered stderr and engine logs.
+- Confirm files are nonempty and dimensions match expectations.
+- Inspect first, middle, transition, and final frames.
+- Confirm the capture script did not override the behavior being tested.
+- Treat black, blank, frozen, incomplete, or obviously incorrect frames as capture failure.
+- Do not infer runtime performance from fixed-FPS movie writing.
 
 ## Boundaries
 
-- You do not use this file to decide gameplay verification criteria.
-- You do not use this file to perform image critique itself.
-- You use this file with executor and visual QA; it does not replace them.
+- This workflow does not define gameplay acceptance criteria.
+- This workflow does not perform the independent visual verdict.
+- Use `godot-visual-qa.md` after capture when visual correctness is in scope.

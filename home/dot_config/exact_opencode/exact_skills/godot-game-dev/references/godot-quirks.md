@@ -1,78 +1,89 @@
-# Godot quirks skill
+# Godot quirks workflow
 
 ## Purpose
 
-Use this to handle engine-level sharp edges and mandatory workarounds for Godot 4.x GDScript projects. Do not treat it as a language tutorial.
+Record verified Godot-specific sharp edges and the narrow workarounds needed for GDScript projects.
+
+Follow the version policy in `../SKILL.md`. Recheck every version-sensitive quirk against the project's exact minor version.
 
 ## When to use this
 
-- Before you write code.
-- When behavior looks impossible or inconsistent.
-- When build-time and runtime behavior diverge.
+- Before changing generated scenes, physics interpolation, procedural geometry, imported scenes, or capture harnesses.
+- When editor, import, build-time, and runtime behavior differ.
+- When a failure looks like an engine lifecycle or serialization issue.
 
-## Core quirks to enforce
+## Scene serialization
 
-### Scene building
+- Nodes without the correct `owner` are not serialized into a packed scene.
+- For an instantiated scene, set ownership on the instance root as needed and do not recursively claim ownership of its internal children.
+- Check `PackedScene.pack()` and `ResourceSaver.save()` return values.
+- Instantiate the packed result and verify required nodes and resources before accepting a generated scene.
+- Do not introduce generated-scene machinery when the project already uses a simpler maintained authoring workflow.
 
-- Assign scene ownership correctly or nodes vanish from saved `.tscn`.
-- Do not recurse ownership into instantiated GLB/TSCN children or scenes bloat massively.
-- Avoid `:=` when right-hand side is type-ambiguous: `load()`, `instantiate()`, `abs()`, `clamp()`, `min()`, `max()`, and array or dictionary access often infer badly or stay Variant-like.
-- Prefer `load()` over `preload()` in generated build-time scripts when import order or generated file timing is uncertain.
+## GDScript typing
 
-### Runtime/capture
+- Use explicit types when `load()`, `instantiate()`, collection access, or a generic function leaves the intended type ambiguous.
+- Prefer typed numeric functions such as `absf()`, `absi()`, `clampf()`, `clampi()`, and `lerpf()` when their type matches the operation.
+- Check casts that can yield `null` before dereferencing.
+- Follow the project's consistent typed or dynamic style, with typed GDScript preferred for new code.
 
-- `_ready()` on instantiated children is not reliable inside scene-builder `_initialize()` flows.
-- Call `Camera2D.make_current()` only after node is inside scene tree.
-- `--write-movie` frame 0 renders before `_process()`; pre-position important cameras.
-- Use `free()` instead of `queue_free()` when test harness replaces scenes immediately.
-- Avoid `await` during movie-writing flows because it can distort frame progression; use deterministic timer or state logic in capture scripts.
-- Remember that `@onready` runs after initialization and exported values; do not let it silently override intended setup.
-- Snap once before lerping from world origin or first frame will swoop visibly.
-- Disable game camera consistently or test harness camera can be overridden every frame.
+## Runtime and capture lifecycle
 
-### Physics and rendering
+- `_ready()` does not run merely because a node was instantiated. The node must enter a scene tree.
+- Add a camera to the tree before making it current.
+- Movie writing can capture a frame before `_process()` establishes presentation state, so place critical cameras and visible state during deterministic setup.
+- Use immediate `free()` only when a short-lived harness must remove an object before the next deferred frame. Use the project's normal lifecycle elsewhere.
+- Release simulated input actions during harness cleanup.
+- Separate game cameras from harness cameras so they cannot continuously override one another.
 
-- Collision layers are bitmasks, not UI layer numbers.
-- `ArrayMesh.GenerateNormals()` is required for correct shadow reception.
-- `CharacterBody3D.MOTION_MODE_FLOATING` has slope caveats.
-- Default collision mask often misses non-default layers.
-- Frame-rate-dependent drag formulas create hidden gameplay bugs.
-- `BoxShape3D` can snag badly on trimesh edges; use `CapsuleShape3D` for sliding bodies when needed.
-- `ConcavePolygonShape3D` winding order matters; bad winding can make bodies fall through.
-- Raycasts against concave terrain can be unreliable; shape casts or direct geometry queries may be safer.
-- Call `reset_physics_interpolation()` after teleports or abrupt camera handoffs.
-- Wrap yaw differences to `[-PI, PI]` before lerping or entities may spin the long way around.
+## Physics and interpolation
 
-### Asset/import traps
+- Collision layers and masks are bitmasks even though the editor presents numbered layers.
+- Run movement and transform updates for interpolated physics objects in `_physics_process()`.
+- Call `reset_physics_interpolation()` after teleports, respawns, and abrupt camera handoffs when interpolation is enabled.
+- Make damping and drag frame-rate independent.
+- Defer collision-state changes when the physics callback cannot safely apply them immediately.
+- Prefer simple collision proxies for dynamic bodies and measure behavior before increasing physics tick rate.
+- Verify terrain collision orientation and back-face behavior rather than assuming a generated concave shape is correct.
 
-- `.gdignore` inside `assets/` silently blocks imports.
-- `MultiMeshInstance3D` and imported GLBs have serialization pitfalls.
-- `MaterialOverride` on internal GLB mesh nodes may not serialize.
-- Duplicated `MultiMesh` meshes may need `.duplicate()` before freeing the source model.
-- `MultiMeshInstance3D.custom_aabb` must cover visible area or frustum culling will hide instances early.
-- Do not combine world-space UV logic and extra material UV scaling unless double-scaling is intended.
+## Procedural geometry
 
-### API and syntax
+- For geometry built with `SurfaceTool`, call `generate_normals()` after adding geometry and before `commit()` when normals were not provided.
+- Call `generate_tangents()` only after normals and UVs exist and the material needs tangents.
+- `SurfaceTool.generate_normals()` requires triangle primitives.
+- Set a `MultiMeshInstance3D.custom_aabb` that covers all visible instances when default culling bounds are insufficient.
+- Duplicate mutable mesh or material resources before making per-instance changes that must not affect shared users.
 
-- Do not guess engine constants or enum-style names from memory; verify through `godot-api`.
-- Use Godot 4.6 naming as baseline and keep output compatible with Godot 4.x.
-- Sibling signal timing in `_ready()` can race; after connecting, manually sync current state if needed.
-- Changing collision state inside collision callbacks should be deferred, not immediate.
+## Assets and imports
+
+- A `.gdignore` inside a runtime asset directory prevents Godot from importing and exporting that directory.
+- Preserve imported scene boundaries and resource UIDs.
+- Verify material overrides, animation names, scale, orientation, and collision after import.
+- Keep visual references, captures, and debug inputs outside runtime asset directories.
+
+## API discipline
+
+- Verify exact GDScript names through `godot-api.md`.
+- Do not copy PascalCase C# methods into GDScript.
+- Check migration guides before changing project settings or APIs across Godot minor versions.
+- Treat undocumented behavior as a hypothesis until a minimal reproduction proves it.
 
 ## Workflow
 
-1. Match symptom to known quirk.
-2. Apply precise workaround.
-3. If unresolved, build a minimal repro.
-4. Record project-local discovery in `MEMORY.md`.
+1. Match the symptom to a documented, version-applicable quirk.
+2. Verify the exact API or lifecycle behavior.
+3. Apply the narrow workaround.
+4. Build a minimal reproduction if the symptom remains unclear.
+5. Record a project-local discovery only when it will remain useful and has no better home in code or tests.
 
 ## Hard rules
 
-- Keep this file short, opinionated, and proven.
-- Keep only bugs and non-obvious behaviors.
-- Do not fill it with beginner guidance.
+- Keep only verified, actionable quirks.
+- Do not convert broad anecdotes into universal engine rules.
+- Do not suppress engine errors to make a workaround appear successful.
+- Do not use this file as a substitute for current official API documentation.
 
 ## Boundaries
 
-- You do not use this file to replace API docs.
-- You do not use this file to replace executor.
+- Use `godot-api.md` for exact API lookup.
+- Use `godot-executor.md` for the implementation and verification loop.

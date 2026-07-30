@@ -1,93 +1,112 @@
-# Godot decomposer skill
+# Godot decomposer workflow
 
 ## Purpose
 
-Translate game description and visual target into a risk-aware `PLAN.md` with verifiable tasks.
+Translate a substantial game request into a risk-aware plan with observable verification criteria.
 
-Target engine baseline: Godot 4.6 stable, compatible with Godot 4.x.
+Follow the version policy in `../SKILL.md`.
+
+## When to use this
+
+- Full game builds.
+- Major rebuilds.
+- Multi-system features that benefit from resumable planning.
+
+Do not create a standalone plan for a narrow task when the repository's existing issue, checklist, or test already provides enough structure.
 
 ## Inputs
 
-- User game description
-- `reference.png`
-- Target language and runtime: native GDScript gameplay and headless GDScript scene builders
+- Request and acceptance criteria.
+- Existing repository instructions and project files.
+- Target platforms and engine version.
+- Visual reference when one exists.
+- Existing assets, tests, architecture documents, and constraints.
 
 ## Output
 
-- `PLAN.md`
+Use the repository's existing planning format. Create `PLAN.md` only when no suitable maintained plan exists and the task is large enough to need one.
 
 ## Workflow
 
-1. Read `reference.png` for camera angle, composition, entity count, and scene complexity.
-2. Read the game description verbatim.
-3. Classify features into:
-    - risk tasks
-    - main build
-4. Write explicit verification criteria for every task.
-5. Require final presentation video in main build verification.
+1. Read the request and preserve its observable requirements.
+2. Inspect the existing project before proposing architecture.
+3. Identify target platforms, inputs, persistence, accessibility, performance, and export constraints.
+4. Separate only genuinely risky work from the main build.
+5. Write concrete verification criteria for each task.
+6. Choose static, dynamic, automated, visual, performance, and export evidence according to the requirement.
+7. Record dependencies and completion order without splitting routine work into microtasks.
 
 ## Risk taxonomy
 
-Isolate these before main build:
+Consider isolating:
 
-- procedural generation
-- procedural animation, IK, ragdoll blending
-- sprite or character animation systems with transitions
-- `AnimationTree` state machines and animation blending graphs
-- complex vehicle physics
-- custom shaders
-- runtime geometry
-- dynamic navigation
-- complex camera systems
+- procedural generation;
+- procedural animation, inverse kinematics, or ragdoll blending;
+- animation state machines and blend graphs;
+- complex vehicle or multiplayer physics;
+- custom shaders and runtime geometry;
+- dynamic navigation;
+- save migrations;
+- networking and authority boundaries;
+- platform-specific exports;
+- complex camera systems.
 
-Everything else belongs in main build unless there is a concrete reason to isolate it.
+Everything else belongs in the main build unless current project evidence shows a concrete risk.
 
-## Verify-writing rules
+## Verification-writing rules
 
-- Every task must have concrete `Verify` text.
-- If requirement implies motion, transition, blend, handoff, animation, or physics behavior, verification must be dynamic.
-- “matches reference” is not enough for animation or state transitions.
+- Every task must name an observable success condition.
+- Motion, transitions, animation, physics, and timing require dynamic evidence.
+- A visual reference can establish composition, scale, density, and palette, but it does not prove runtime behavior.
+- Use a presentation video only when requested or when it is the most efficient evidence for the acceptance criteria.
+- Include relevant negative paths and lifecycle transitions, not only the first happy path.
 
-## PLAN.md schema
+## Suggested plan shape
 
 ```markdown
 # Game plan: {name}
 
-## Game description
+## Scope
 
-{original description}
+{request, constraints, target platforms, and engine version}
 
-## Risk tasks
+## Existing project contract
 
-### 1. {risk feature}
-- **Why isolated:** {why it is algorithmically risky}
-- **Approach:** {high-level strategy}
-- **Verify:** {specific observable criteria}
+{architecture, language, renderer, tests, assets, and conventions to preserve}
+
+## Risk work
+
+### {risk feature}
+
+- **Why isolated:** {specific risk}
+- **Approach:** {smallest proving slice}
+- **Verify:** {observable and executable evidence}
 
 ## Main build
 
-- **Assets needed:** {asset summary if relevant}
-- **Verify:**
-  - {movement/input/animation alignment}
-  - {physics checks}
-  - {UI checks}
-  - {game-specific checks}
-  - gameplay flow matches description
-  - no placeholder remnants or visual glitches
-  - reference consistency: camera, scale, density, palette
-  - **Presentation video:** ~30-second gameplay video
+### {task}
+
+- **Dependencies:** {dependencies}
+- **Verify:** {observable and executable evidence}
+
+## Final verification
+
+- {automated checks}
+- {bounded runtime checks}
+- {visual or dynamic evidence when relevant}
+- {export and target-platform checks when relevant}
 ```
 
 ## Hard rules
 
-- Do not split routine features into tiny microtasks.
+- Do not assume a visual reference exists.
+- Do not mandate generated assets, scene builders, or video without scope evidence.
 - Do not produce untestable requirements.
-- Do not omit presentation-video requirement.
-- Do not isolate easy systems just to feel structured.
-- Do not write C#-specific implementation assumptions into the plan.
+- Do not choose engine APIs from memory.
+- Do not replace established project planning with a redundant top-level file.
 
 ## Boundaries
 
-- You do not use this file to write architecture.
-- You do not use this file to write code.
-- You do not use this file to choose implementation details for routine features.
+- This workflow defines tasks and evidence, not detailed architecture or implementation.
+- Use `godot-scaffold.md` for fresh-project structure.
+- Use `godot-executor.md` for implementation.

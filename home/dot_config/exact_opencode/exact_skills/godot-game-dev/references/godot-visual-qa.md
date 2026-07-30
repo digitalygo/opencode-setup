@@ -1,17 +1,20 @@
-# Godot visual QA skill
+# Godot visual QA workflow
 
 ## Purpose
 
-Inspect screenshots or frame sequences from a running Godot game and report visual defects, implementation shortcuts, and motion anomalies.
+Review screenshots or frame sequences from a running Godot project and report visual defects, implementation shortcuts, and motion anomalies independently from the implementation pass.
 
-Target engine baseline: Godot 4.6 stable, compatible with Godot 4.x.
+Follow the version policy in `../SKILL.md` when a finding depends on engine behavior.
 
-## Use these inputs
+## Inputs
 
-- `reference.png` for static or dynamic mode
-- One screenshot or frame sequence
-- Optional freeform context: goal, requirements, verify
-- Optional context about intended GDScript behavior or scene-builder output
+- One or more captures from the running project.
+- Request and visual acceptance criteria.
+- Visual reference when one exists.
+- Target resolution, aspect ratio, platform, and art-direction constraints.
+- Frame timestamps or indices for dynamic review.
+
+A visual reference is optional. Without one, judge the explicit request, internal consistency, usability, and observable defects.
 
 ## Modes
 
@@ -19,83 +22,104 @@ Target engine baseline: Godot 4.6 stable, compatible with Godot 4.x.
 
 Use static mode for:
 
-- terrain
-- decoration
-- HUD
-- menu/title screens
+- terrain and environment composition;
+- decoration and asset placement;
+- HUD and menus;
+- typography and layout;
+- material, lighting, clipping, and scaling defects.
 
-Inputs: `reference.png` + one representative screenshot.
+Inspect representative settled frames at required resolutions and aspect ratios.
 
 ### Dynamic mode
 
 Use dynamic mode for:
 
-- movement
-- animation
-- physics
-- transitions
-- interaction timing
+- movement and camera behavior;
+- animation and blending;
+- physics and collisions;
+- transitions and scene handoffs;
+- interaction timing;
+- responsive UI states.
 
-Inputs: `reference.png` + frame sequence sampled at roughly 2 FPS cadence.
+Inspect enough consecutive source frames to observe pre-state, transition, and post-state. A low-rate contact sheet alone cannot prove smoothness or timing.
 
 ### Question mode
 
-Use question mode for:
-
-- targeted debugging without a reference image
-- specific questions about materials, paths, overlap, clipping, motion
+Use question mode for a targeted visual diagnosis without a reference image, such as overlap, clipping, material response, orientation, or motion discontinuity.
 
 ## Review rubric
 
-Check for:
+Check as applicable:
 
-- poor placement, scaling, and composition
-- z-fighting
-- stretching, seams, missing textures
-- clipping and floating objects
-- impossible scale/orientation
-- placeholder remnants
-- jitter, teleporting, frozen poses, sliding, broken physics
+- composition, hierarchy, readability, scale, and visual balance;
+- target-resolution and aspect-ratio behavior;
+- z-fighting, clipping, seams, stretching, and missing textures;
+- lighting, materials, color space, filtering, and transparency;
+- floating, intersecting, or incorrectly oriented objects;
+- placeholder remnants and inconsistent asset quality;
+- jitter, teleporting, frozen poses, foot sliding, broken blending, and timing discontinuities;
+- input focus, hover, disabled, pause, loading, and error states;
+- accessibility requirements that are visually observable.
 
-## Use this output format
+## Output format
 
 ```markdown
 ### Verdict: {pass | fail | warning}
 
-### Reference match
-{1-3 sentences}
+### Scope
 
-### Goal assessment
-{1-3 sentences}
+{captures, resolution, platform assumptions, and acceptance criteria reviewed}
+
+### Reference assessment
+
+{comparison with the visual reference, or state that no reference was supplied}
 
 ### Issues
 
 #### Issue 1: {title}
-- **Type:** style mismatch | visual bug | logical inconsistency | motion anomaly | placeholder
-- **Severity:** major | minor | note
-- **Frames:** {if dynamic}
-- **Location:** {where}
-- **Description:** {1-2 sentences}
+
+- **Type:** {style mismatch | visual bug | logical inconsistency | motion anomaly | placeholder | accessibility}
+- **Severity:** {major | minor | note}
+- **Frames:** {frame or range when dynamic}
+- **Location:** {screen region or object}
+- **Evidence:** {observable defect}
+- **Expected:** {acceptance criterion}
 
 ### Summary
-{one sentence}
+
+{one concise verdict summary}
 ```
 
-## Hard rules
+## Independence rule
 
-- Do not rationalize defects.
-- Do not read code while doing image QA.
-- Static mode is not enough for motion bugs.
-- `major` and `minor` are fix-required.
-- If you review dynamic behavior, reference exact frames.
-- When scene-builder output looks incomplete, call out likely serialization or ownership symptoms explicitly.
+Complete the visual verdict from the captures before reading implementation details. After recording the verdict, a separate diagnostic pass may inspect code, scenes, settings, and logs to find the cause.
+
+## Severity policy
+
+- `major`: blocks intended use, core presentation, or a required interaction.
+- `minor`: visible defect that must be fixed before visual acceptance.
+- `note`: nonblocking observation or optional improvement.
+- `warning`: evidence is incomplete or environment limitations prevent a full verdict.
+
+Do not return `pass` when required dynamic evidence is missing.
 
 ## Failure policy
 
-- `fail` must trigger a fix cycle.
-- Repeated non-converging failures must trigger replan or escalation.
+- A `fail` verdict triggers a focused fix and fresh capture.
+- A changed visual surface invalidates the previous verdict for that surface.
+- Repeated non-converging failures trigger a minimal reproduction or design review.
+- Keep prior captures only as comparison evidence, not as proof of the new state.
+
+## Hard rules
+
+- Do not rationalize observable defects.
+- Do not use one screenshot to prove motion or timing.
+- Do not infer target-platform appearance from a materially different renderer without stating the limitation.
+- Reference exact frames for dynamic findings.
+- Distinguish a capture failure from a game defect.
 
 ## Boundaries
 
-- You do not use this file to implement fixes.
-- You do not use this file to choose architecture.
+- This workflow does not implement fixes.
+- This workflow does not choose architecture.
+- Use `godot-capture.md` for capture mechanics.

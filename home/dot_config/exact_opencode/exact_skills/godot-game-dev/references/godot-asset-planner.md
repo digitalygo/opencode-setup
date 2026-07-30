@@ -1,80 +1,84 @@
-# Godot asset planner skill
+# Godot asset planning workflow
 
 ## Purpose
 
-Determine what assets the game needs, decide generation order, track sizes and assignments, and write `ASSETS.md`.
+Inventory, source, size, license, assign, and verify assets required by a Godot project without assuming a particular generation provider.
 
-Target engine baseline: Godot 4.6 stable, compatible with Godot 4.x.
+Follow the version policy in `../SKILL.md`.
 
-## Use these inputs
+## When to use this
 
-- `reference.png`
-- `PLAN.md`
-- `STRUCTURE.md`
-- available asset-generation backends in the host stack
-- optional budget or generation constraints
-- target runtime assumptions from `STRUCTURE.md` such as 2D vs 3D and GDScript-driven scene usage
+- A full game or feature requires multiple new assets.
+- Existing assets must be audited for provenance, scale, format, or assignment.
+- Asset choices affect runtime performance, import settings, licensing, or visual consistency.
 
-## Use these outputs
+Do not create a separate asset manifest for a small change with one obvious existing asset.
 
-- `ASSETS.md`
-- updated `PLAN.md` asset assignments
+## Inputs
+
+- Request and visual requirements.
+- Existing project assets and import settings.
+- Target platforms, renderer, memory budget, and performance constraints.
+- Visual reference when one exists.
+- Available approved sources, licenses, tools, and budget.
+- Existing `PLAN.md`, `STRUCTURE.md`, or asset manifest when present.
+
+## Outputs
+
+Use the repository's existing asset manifest when available. Create `ASSETS.md` only for a substantial asset set that benefits from durable tracking.
+
+Record as applicable:
+
+- stable asset identifier and purpose;
+- source path or source URL;
+- author, license, attribution, and usage restrictions;
+- source dimensions or scale;
+- intended in-game dimensions or scale;
+- import settings and compression choices;
+- target path and assigned scene or system;
+- status and verification evidence.
 
 ## Workflow
 
-1. Read `reference.png` to understand visible composition.
-2. Read `STRUCTURE.md` `Asset Hints`.
-3. Read `PLAN.md` `Assets needed`.
-4. Merge them into one full asset list.
-5. Classify assets into:
-    - 3D models
-    - textures
-    - backgrounds
-    - sprites
-    - animated sprites
-6. Prioritize by visual impact.
-7. Reserve retry budget if budget exists.
-8. Generate anchors first, derivatives second.
-9. Review generated assets before conversion or downstream reuse.
-10. Write `ASSETS.md` with dimensions and final file paths.
-11. Update `PLAN.md` so every generated asset is assigned to a task.
+1. Inventory existing assets before sourcing new ones.
+2. Derive the required asset list from the request, architecture, and visible composition.
+3. Classify assets by type, role, reuse, licensing, and runtime cost.
+4. Prefer provided or already-approved assets when they satisfy the requirement.
+5. Choose procedural, commissioned, purchased, open-licensed, or generated assets only after checking project policy, rights, quality, cost, and reproducibility.
+6. Establish one approved visual anchor when consistency across an asset family matters.
+7. Validate anchor scale, orientation, palette, topology, and import behavior before creating derivatives.
+8. Import representative assets into Godot and verify them in their actual scene context.
+9. Update the maintained manifest and task assignments.
 
-## Require these `ASSETS.md` fields
+## Size and format rules
 
-Every asset row must include `Size`.
+- 3D models: record source units, target meters, orientation, origin, topology, material count, and collision strategy.
+- Textures: record pixel dimensions, color space, compression, filtering, repeat behavior, and intended world or UI size.
+- Backgrounds: record viewport role, target aspect ratios, safe crop regions, and scaling behavior.
+- Sprites: record source pixels, intended display size, pivot, filtering, animation frames, and atlas strategy.
+- Audio: record duration, channels, sample rate, loop behavior, loudness expectations, and import compression.
+- Fonts: record license, supported glyph ranges, fallback strategy, and UI scaling requirements.
 
-- 3D models -> meters
-- Textures -> tile size in meters
-- Backgrounds -> display dimensions or viewport role
-- Sprites -> in-game display size in pixels
+## Asset policy
 
-## Anchor/derivative rule
+- Do not invoke a paid or external service without explicit requester approval of the provider, cost, terms, and data being uploaded.
+- Do not fabricate provenance or licensing.
+- Do not replace required production assets with primitives merely to claim completion.
+- Use primitives and placeholders only when the scope permits them, and label them clearly.
+- Do not stretch low-resolution textures or unique backgrounds beyond their intended use.
+- Keep source assets, runtime assets, visual references, captures, and generated builds in distinct locations.
+- Use Git LFS only when the repository supports it and the relevant binary patterns are configured before adding large files.
 
-Use anchors to maintain visual consistency:
+## Verification
 
-- generate hero/reference asset first
-- review it
-- use it to create variants, views, or families
-
-If anchor is wrong, fix anchor before producing more derivatives.
-
-## Asset-generation policy
-
-- Procedural primitives are allowed only for truly abstract shapes or when explicitly justified.
-- Do not fake rich assets with boxes and spheres if real assets are part of scope.
-- Do not use a tileable texture as a unique scenic background.
-- Do not stretch a low-resolution texture across a large surface.
-- Size assets for actual in-game GDScript scene usage, not only for source-image aesthetics.
-
-## Animated-sprite planning rules
-
-- Define reference image per character.
-- Define transition graph.
-- Roots first, chained actions after.
-- Dynamic verification required later in executor and QA.
+- Open assets through the project's actual import pipeline.
+- Check scale, orientation, materials, animation names, loop behavior, compression, and memory impact.
+- Capture representative scenes when appearance is part of acceptance.
+- Confirm every new asset has an owner, license, target path, and runtime assignment.
+- Verify there are no unassigned derivatives or placeholder remnants.
 
 ## Boundaries
 
-- Do not use this file to implement gameplay.
-- Do not use this file to write scene graph.
-- Do not use this file to own visual QA.
+- This workflow does not select a proprietary provider.
+- This workflow does not implement gameplay or own scene architecture.
+- Use `godot-visual-qa.md` for the visual verdict.

@@ -1,148 +1,148 @@
-# Godot executor skill
+# Godot executor workflow
 
 ## Purpose
 
-Implement tasks from `PLAN.md`, verify them in-engine, capture evidence, run QA, and iterate until done.
+Implement the requested Godot behavior, verify it in the engine, capture evidence when relevant, and iterate until the acceptance criteria are satisfied.
+
+Follow the version policy in `../SKILL.md`.
 
 ## Inputs
 
-- `PLAN.md`
-- `STRUCTURE.md`
-- `MEMORY.md`
-- `ASSETS.md` if present
-- `reference.png`
+- Request and acceptance criteria.
+- Repository instructions and current project files.
+- Existing tests, plans, architecture documents, and asset manifests when present.
+- Visual reference only when one exists.
 
 ## Outputs
 
-- updated scenes and scripts
-- test harness scripts
-- screenshots and video
-- updated `PLAN.md`
-- updated `MEMORY.md`
+Produce only outputs required by the task:
 
-## Phase order
-
-1. Risk tasks first.
-2. Main build second.
+- updated scenes, scripts, resources, settings, and tests;
+- focused test harnesses when the project lacks a suitable test path;
+- screenshots or frame sequences for visible behavior;
+- updated maintained planning or architecture documents when their contract changed.
 
 ## Per-task workflow
 
-1. Read task and verification criteria.
-2. Write a concrete local implementation approach.
-3. If task is risky, create minimal repro environment first.
-4. Implement.
-5. Syntax-check changed scripts and validate project.
-6. Validate headless.
-7. Capture screenshots or frame sequence.
-8. Check assertions.
-9. Run visual QA if applicable.
-10. Fix and repeat if needed.
-11. Update `PLAN.md` and `MEMORY.md`.
+1. Read the acceptance criteria and trace the current runtime path.
+2. Confirm the engine version and version-sensitive APIs.
+3. Define the smallest runnable implementation slice.
+4. Create a minimal reproduction first when the task is risky or the defect is unclear.
+5. Implement without overwriting unrelated project conventions.
+6. Run targeted parse, import, test, and bounded runtime checks.
+7. Capture visual or dynamic evidence when the requirement is visible.
+8. Profile before making performance claims or optimizations.
+9. Fix verified failures and rerun affected checks.
+10. Read the final changes and update maintained documentation only where behavior changed.
 
-## Main implementation loop
+## Validation commands
 
-1. Import assets.
-2. Generate scenes.
-3. Generate scripts.
-4. Run `godot --headless --check-only -s` on changed `.gd` files.
-5. Run `godot --headless --quit`.
-6. Capture screenshots or video using `godot-capture.md`.
-7. Verify assertions and visual output.
-8. Run visual QA.
-9. If failed, return to step 2.
+Adapt the binary and paths to the project:
+
+```bash
+godot --version
+godot --headless --path . --check-only --script path/to/script.gd
+godot --headless --path . --import
+godot --headless --path . --editor --quit
+godot --headless --path . --quit-after 2
+```
+
+- `--check-only` must be paired with an explicit `--script` path.
+- Run the project's existing automated test framework in addition to engine startup checks.
+- Run an affected scene directly when that gives stronger evidence than the main project.
+- Use a bounded exit for test scenes and automation.
+- Treat nonzero exits and engine errors as failures until investigated.
+- Do not treat successful parsing as proof of scene wiring or gameplay correctness.
 
 ## Test-harness rules
 
-- Harness extends `SceneTree`.
-- Use `_initialize()` for setup.
-- `_process(delta: float)` returns `bool`.
-- Do not call `quit()` when using movie writing.
-- Print `ASSERT PASS:` and `ASSERT FAIL:` for non-visual checks.
+Use the existing test framework first. When a small custom harness is necessary:
 
-Example GDScript harness pattern:
+- keep it isolated from runtime assets;
+- extend `SceneTree` or another documented command-line-compatible main loop;
+- make setup deterministic;
+- emit machine-readable pass and failure messages;
+- return a nonzero process result for failed assertions;
+- free temporary scenes and reset global input state;
+- remove or retain the harness according to repository policy.
+
+Example bounded harness shape:
 
 ```gdscript
 extends SceneTree
 
-var _scene: Node
+var _failed := false
 
 func _initialize() -> void:
-    var scene_res: PackedScene = load("res://scenes/main.tscn")
-    _scene = scene_res.instantiate()
-    root.add_child(_scene)
-    print("ASSERT PASS: scene loaded")
+    var scene_resource: PackedScene = load("res://scenes/main.tscn")
+    if scene_resource == null:
+        push_error("ASSERT FAIL: main scene did not load")
+        quit(1)
+        return
 
-func _process(delta: float) -> bool:
-    return false
+    var scene := scene_resource.instantiate()
+    root.add_child(scene)
+    print("ASSERT PASS: main scene loaded")
+    scene.free()
+    quit(0)
 ```
 
 ## Simulated input rules
 
-- Use `Input.action_press()` and `Input.action_release()` through deterministic timers or state machines.
-- For sustained movement, default to closed-loop steering based on actual position instead of open-loop button timing.
-- Print assertion lines for exact non-visual facts.
-
-Example timed input:
-
-```gdscript
-var timer := Timer.new()
-timer.wait_time = 1.0
-timer.one_shot = true
-timer.timeout.connect(func() -> void:
-    Input.action_press("move_forward")
-)
-root.add_child(timer)
-timer.start()
-```
-
-Closed-loop movement principle:
-
-- read actual position every frame
-- steer toward a waypoint
-- switch waypoint only after proximity threshold is reached
-- avoid long blind press/release chains that accumulate drift
-
-## GDScript validation rules
-
-- Prefer explicit types when writing generated gameplay code.
-- Use `godot --headless --check-only -s path/to/script.gd` for targeted syntax or type validation.
-- Use whole-project `godot --headless --quit` after integrating new scripts and scenes.
-- Do not treat successful parsing as proof that runtime wiring is correct.
+- Prefer the project's input abstraction or `InputMap` actions.
+- Use `Input.action_press()` and `Input.action_release()` only in deterministic harnesses.
+- Release every simulated action during cleanup.
+- For sustained movement, use observed position and bounded state transitions rather than long blind timing chains.
+- Verify keyboard, gamepad, touch, dead zones, and remapping only when they are in scope.
 
 ## Dynamic-debugging rules
 
-Use dynamic capture whenever requirement mentions:
+Use dynamic evidence for:
 
-- smooth movement
-- transitions
-- handoff between states
-- animation blending
-- physics interactions
+- movement smoothness;
+- transitions and scene handoffs;
+- animation playback and blending;
+- physics interactions;
+- camera behavior;
+- timing-sensitive UI or input.
 
-For these tasks:
+For dynamic evidence:
 
-- Capture 3-5 seconds at fixed FPS.
-- Review multiple frames, not one screenshot.
-- Ask visual QA about motion, not only layout.
-- Pre-position important cameras before frame 0 when using movie writing.
+- capture enough frames to observe the complete transition;
+- keep the source sequence even when producing a sampled contact sheet;
+- inspect the first frame, steady state, transition frames, and terminal state;
+- pre-position cameras before frame zero when using movie writing;
+- do not use capture playback as performance evidence.
+
+## Performance rules
+
+- Reproduce the performance problem on representative content and hardware.
+- Use Godot's profiler and relevant CPU, GPU, memory, rendering, or network monitors.
+- Record a before measurement, make one targeted change, and record an after measurement.
+- Re-run gameplay and visual checks after optimization.
+- Do not trade maintainability for an unmeasured micro-optimization.
 
 ## Hard rules
 
-- Never declare success from compile or build alone.
-- A missing or wrong animation clip is a verification failure.
-- Do not replace one model with another to fake success.
-- If fix attempts stop converging, stop and re-evaluate architecture.
+- Never declare success from parsing, import, or build alone.
+- Do not hide engine output that contradicts success.
+- Do not replace missing assets or behavior with unrelated substitutes to manufacture a pass.
+- Do not keep repeating a non-converging fix strategy.
+- Do not update planning status before verification exists.
 
 ## When to replan
 
 Replan when:
 
-- same class of fix repeats without convergence
-- root cause is upstream architecture
-- assets make correct implementation impossible
+- the same class of fix repeats without convergence;
+- the root cause is in upstream architecture or project settings;
+- the pinned engine version cannot support the proposed API;
+- assets or platform constraints make the intended behavior impossible;
+- new evidence invalidates the current acceptance criteria.
 
 ## Boundaries
 
-- You do not use this file to own project scope.
-- You do not use this file to own high-level architecture unless replanning is required.
-- You do not use this file to ignore QA reports.
+- This workflow does not own project scope.
+- Use `godot-capture.md` for capture mechanics.
+- Use `godot-visual-qa.md` for the visual verdict.
+- Use `godot-api.md` for uncertain engine APIs.
