@@ -3,9 +3,9 @@
   "default_agent": "orchestrator",
   "autoupdate": true,
   "compaction": {
-    "auto": false,
+    "auto": true,
     "prune": true,
-    "preserve_recent_tokens": 10000,
+    "preserve_recent_tokens": 50000,
   },
   "watcher": {
     "ignore": [
@@ -22,8 +22,8 @@
     "max_lines": 4000
   },
   // model selection
-  "model": "openrouter/openai/gpt-5.6-terra",
-  "small_model": "openrouter/deepseek/deepseek-v4-flash",
+  "model": "openrouter/moonshotai/kimi-k3",
+  "small_model": "openrouter/qwen/qwen3.7-flash",
   "instructions": [".github/CONTRIBUTING.md", "AGENTS.md"],
   // pre-configured mcp servers
   "mcp": {
@@ -53,7 +53,7 @@
   // default CLI permissions
   "permission": {
     "external_directory": {
-      "*": "deny",
+      "*": "ask",
       "~/.config/opencode/skills/**": "allow",
       "~/Documents/**": "allow"
     },
