@@ -35,6 +35,16 @@ Focus on session diffs, modified files, prompt and config files, infrastructure 
 4. If the parent asks you to validate `security-pentester` output, review those findings against source and diff evidence.
 5. Produce structured findings with exact file and line evidence.
 
+## Concurrent final gate mode
+
+When the parent explicitly invokes you as part of the concurrent final gate:
+
+- Operate in strict read-only, response-only mode. Do not create or update review, trace, status, or other repository files.
+- Review only the exact frozen package supplied by the parent. If the changed-file list or cumulative diff hash no longer matches, return `BLOCKED` for snapshot drift.
+- Return exactly `PASS` when no blocking security findings remain.
+- Return exactly `BLOCKED` when any blocking finding, missing evidence, ambiguous result, or snapshot mismatch remains.
+- Put the exact verdict first, then provide concise findings, evidence, and limits.
+
 ## Review files
 
 Follow the review-thread lifecycle. Research existing review files under `substrate/traces/reviews/` before deciding where to write:
