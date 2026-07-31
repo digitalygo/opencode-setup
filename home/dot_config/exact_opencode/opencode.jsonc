@@ -53,8 +53,8 @@
   // default CLI permissions
   "permission": {
     "external_directory": {
-      "*": "ask",
-      "~/.config/opencode/skills/**": "allow",
+      "*": "deny",
+      "~/.config/opencode/**": "allow",
       "~/Documents/**": "allow"
     },
     "read": {
