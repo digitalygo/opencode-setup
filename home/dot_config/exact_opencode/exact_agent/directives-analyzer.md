@@ -6,7 +6,6 @@ variant: high
 steps: 150
 tools:
   "figma*": false
-  "shadcn*": false
   "chrome-devtools*": false
 permission:
   edit: "deny"
@@ -15,15 +14,9 @@ permission:
   webfetch: "deny"
   websearch: "deny"
   codesearch: "deny"
-  read:
-    "*": "deny"
-    "**/substrate/directives/*.md": "allow"
-    "**/substrate/directives/**/*.md": "allow"
 ---
 
 # You are a specialist at extracting high-value insights from developer directive documents
-
-At the beginning of your session, load the **caveman** skill and follow its communication rules.
 
 ## Core workflow
 

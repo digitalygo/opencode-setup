@@ -26,6 +26,14 @@ function validateTscPath() {
   }
 }
 
+function findTestFiles(dir) {
+  return readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
+    const full = resolve(dir, entry.name)
+    if (entry.isDirectory()) return findTestFiles(full)
+    return entry.name.endsWith(".test.js") ? [full] : []
+  })
+}
+
 export function runTests() {
   const outDir = getBuildDir()
   try {
@@ -42,11 +50,7 @@ export function runTests() {
       return buildResult.status ?? 1
     }
 
-    const testDir = resolve(outDir, "exact_plugins", "usage-logger", "__tests__")
-    const testFiles = readdirSync(testDir)
-      .filter((f) => f.endsWith(".test.js"))
-      .map((f) => resolve(testDir, f))
-
+    const testFiles = findTestFiles(resolve(outDir, "exact_plugins"))
     const buildDirTestFile = resolve(rootDir, "exact_plugins", "usage-logger", "__tests__", "build-dir.test.js")
     const allTestFiles = [...testFiles, buildDirTestFile]
 

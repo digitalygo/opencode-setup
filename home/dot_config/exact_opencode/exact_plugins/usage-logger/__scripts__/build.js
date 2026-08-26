@@ -27,40 +27,30 @@ function validateTscPath() {
 }
 
 function checkEmittedJs(outDir) {
-  const walkRoot = resolve(outDir, "exact_plugins", "usage-logger")
-  const topLevelFile = resolve(outDir, "exact_plugins", "usage-logger.js")
-  if (existsSync(topLevelFile)) {
-    const check = spawnSync(process.execPath, ["--check", topLevelFile], {
-      stdio: "inherit",
-    })
-    if (check.status !== 0) {
-      process.stderr.write(`node --check failed: ${topLevelFile}\n`)
-      return 1
-    }
-  }
-  if (existsSync(walkRoot)) {
-    function checkJsDir(dir) {
-      const entries = readdirSync(dir, { withFileTypes: true })
-      for (const entry of entries) {
-        const full = join(dir, entry.name)
-        if (entry.isDirectory()) {
-          const inner = checkJsDir(full)
-          if (inner !== 0) return inner
-        } else if (entry.name.endsWith(".js")) {
-          const check = spawnSync(process.execPath, ["--check", full], {
-            stdio: "inherit",
-          })
-          if (check.status !== 0) {
-            process.stderr.write(`node --check failed: ${full}\n`)
-            return 1
-          }
+  const walkRoot = resolve(outDir, "exact_plugins")
+  if (!existsSync(walkRoot)) return 0
+
+  function checkJsDir(dir) {
+    const entries = readdirSync(dir, { withFileTypes: true })
+    for (const entry of entries) {
+      const full = join(dir, entry.name)
+      if (entry.isDirectory()) {
+        const inner = checkJsDir(full)
+        if (inner !== 0) return inner
+      } else if (entry.name.endsWith(".js")) {
+        const check = spawnSync(process.execPath, ["--check", full], {
+          stdio: "inherit",
+        })
+        if (check.status !== 0) {
+          process.stderr.write(`node --check failed: ${full}\n`)
+          return 1
         }
       }
-      return 0
     }
-    return checkJsDir(walkRoot)
+    return 0
   }
-  return 0
+
+  return checkJsDir(walkRoot)
 }
 
 export function runBuild() {

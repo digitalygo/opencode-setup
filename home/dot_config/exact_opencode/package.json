@@ -4,10 +4,10 @@
     "node": ">=24.18.0"
   },
   "dependencies": {
-    "@opencode-ai/plugin": "1.17.13"
+    "@opencode-ai/plugin": "1.18.21"
   },
   "devDependencies": {
-    "@types/node": "26.1.1",
+    "@types/node": "26.2.0",
     "typescript": "7.0.2"
   },
   "scripts": {

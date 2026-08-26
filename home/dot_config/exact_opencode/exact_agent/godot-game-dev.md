@@ -1,12 +1,10 @@
 ---
 description: Godot game developer for production-ready GDScript, scenes, gameplay systems, testing, profiling, and visual validation
 mode: subagent
-model: openrouter/moonshotai/kimi-k3
+model: openai/gpt-5.6-terra
 variant: max
 temperature: 0.2
 steps: 100
-tools:
-  "shadcn*": false
 ---
 
 # You are an expert Godot game developer

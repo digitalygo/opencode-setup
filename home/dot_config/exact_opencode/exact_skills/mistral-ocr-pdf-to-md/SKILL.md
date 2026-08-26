@@ -1,6 +1,6 @@
 ---
 name: mistral-ocr-pdf-to-md
-description: Convert a local document or image file to a Markdown file using Mistral OCR. Supports PDF, Office, OpenDocument, images, and text/code formats. Use when you need to extract text from a file into a clean Markdown file.
+description: Convert a local document or image file to a Markdown file using Mistral OCR. Supports PDF, Office, OpenDocument, images, and text/code formats. Prefer the local anydoc and pdf-inspector parsers first; fall back to this skill for images and scanned PDFs.
 ---
 
 # Mistral OCR to Markdown
@@ -14,13 +14,17 @@ description: Convert a local document or image file to a Markdown file using Mis
 
 ## When to use
 
-Use this skill when you need to convert a supported document or image into Markdown.
+Prefer the local, open-source Firecrawl parsers first. `anydoc` (Word, PowerPoint, Excel, OpenDocument, RTF, EPUB, CSV, and text-based PDF) and `pdf-inspector` (`pdf2md`, text-based PDF) are MIT-licensed and run 100% locally with no API key, extracting embedded text natively so only scanned pages would need OCR. Fall back to this Mistral OCR skill when those tools are unavailable or insufficient:
+
+- standalone image files (`.png`, `.jpg`, `.bmp`, `.gif`, `.tif`): the local parsers do not handle standalone images;
+- scanned or image-only PDFs that need actual OCR (the local `pdf-inspector` OCR build requires native PDFium and ONNX runtime);
+- when the `anydoc` or `pdf-inspector` CLI is not installed.
 
 ## Input schema
 
 Required:
 
-- `input_path` (string) — path to the local file. Default: `docs/inbox/example.pdf`. Change this to point to your file.
+- `input_path` (string), path to the local file. Default: `docs/inbox/example.pdf`. Change this to point to your file.
 
 No other inputs.
 
@@ -178,14 +182,14 @@ with Mistral(api_key=api_key) as client:
 
 ## Error handling
 
-- `FileNotFoundError` for `~/Documents/.secrets/mistral-key` — the token file is missing. Create it with your Mistral API key as its sole content. `ValueError` — the token file exists but is empty. Populate it with a valid key.
-- `FileNotFoundError` — `input_path` does not exist or cannot be resolved. Adjust `input_path` to point to a real file.
-- `PermissionError` — the resolved path is a symlink. Symlinks are rejected to prevent traversal. Use the direct path to the real file instead.
-- `ValueError` — the file fails validation: unsupported suffix (not in the verified lists), not a regular file, empty, or exceeds the 50 MB size limit. Check the `Supported file formats` section for accepted suffixes.
-- `pip` failures during auto-install — the environment may lack network access or `pip`. Run `python3 -m pip install --target ~/.cache/opencode/mistralai_vendor mistralai==2.4.5` manually, then retry.
-- `403` / `401` from Mistral — the API key is invalid or has no quota. Check your Mistral account.
-- Upload rejection followed by base64 fallback — for `.doc`, `.ppt`, `.rtf`, and `.html`, the skill retries automatically via base64 document URL. A failure from the base64 path itself indicates the file content could not be processed.
-- Empty `ocr_response.pages` — the file may contain no extractable text, or Mistral could not process it.
+- `FileNotFoundError` for `~/Documents/.secrets/mistral-key`: the token file is missing. Create it with your Mistral API key as its sole content. `ValueError`: the token file exists but is empty. Populate it with a valid key.
+- `FileNotFoundError`: `input_path` does not exist or cannot be resolved. Adjust `input_path` to point to a real file.
+- `PermissionError`: the resolved path is a symlink. Symlinks are rejected to prevent traversal. Use the direct path to the real file instead.
+- `ValueError`: the file fails validation: unsupported suffix (not in the verified lists), not a regular file, empty, or exceeds the 50 MB size limit. Check the `Supported file formats` section for accepted suffixes.
+- `pip` failures during auto-install: the environment may lack network access or `pip`. Run `python3 -m pip install --target ~/.cache/opencode/mistralai_vendor mistralai==2.4.5` manually, then retry.
+- `403` / `401` from Mistral: the API key is invalid or has no quota. Check your Mistral account.
+- Upload rejection followed by base64 fallback: for `.doc`, `.ppt`, `.rtf`, and `.html`, the skill retries automatically via base64 document URL. A failure from the base64 path itself indicates the file content could not be processed.
+- Empty `ocr_response.pages`: the file may contain no extractable text, or Mistral could not process it.
 
 ## References
 

@@ -25,6 +25,82 @@
   "model": "openrouter/moonshotai/kimi-k3",
   "small_model": "openrouter/qwen/qwen3.7-flash",
   "instructions": [".github/CONTRIBUTING.md", "AGENTS.md"],
+  "provider": {
+    "openrouter": {
+      "options": {
+        "timeout": false,
+        "chunkTimeout": 900000
+      },
+      "models": {
+        "deepseek/deepseek-v4-flash-0731": {
+          "limit": {
+            "context": 1048576,
+            "output": 384000
+          },
+          "options": {
+            "provider": {
+              "order": ["deepseek"],
+              "allow_fallbacks": true
+            }
+          }
+        },
+        "deepseek/deepseek-v4-pro-0813": {
+          "limit": {
+            "context": 1048576,
+            "output": 384000
+          },
+          "options": {
+            "provider": {
+              "order": ["deepseek"],
+              "allow_fallbacks": true
+            }
+          }
+        },
+        "moonshotai/kimi-k3": {
+          "limit": {
+            "context": 1048576,
+            "output": 131072
+          },
+          "options": {
+            "provider": {
+              "order": ["moonshotai"],
+              "allow_fallbacks": true
+            }
+          }
+        },
+        "openai/gpt-5.6-luna": {
+          "limit": {
+            "context": 1050000,
+            "output": 128000
+          },
+          "options": {
+            "provider": {
+              "order": ["openai"],
+              "allow_fallbacks": true
+            }
+          }
+        }
+      }
+    },
+    "openai": {
+      "options": {
+        "timeout": false,
+        "chunkTimeout": 900000
+      }
+    },
+    "opencode": {
+      "options": {
+        "timeout": false,
+        "chunkTimeout": 900000
+      }
+    },
+    "opencode-go": {
+      "options": {
+        "timeout": false,
+        "chunkTimeout": 900000
+      }
+    }
+  },
   // pre-configured mcp servers
   "mcp": {
     "figma": {
@@ -36,11 +112,6 @@
         "--figma-api-key={file:~/Documents/.secrets/figma-token}",
         "--stdio",
       ],
-      "enabled": true,
-    },
-    "shadcn": {
-      "type": "local",
-      "command": ["npx", "-y", "shadcn@latest", "mcp"],
       "enabled": true,
     },
     // remove "--headless=true" to the command if you want to use chrome with a GUI

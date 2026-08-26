@@ -6,7 +6,6 @@ variant: high
 steps: 100
 tools:
   "figma*": false
-  "shadcn*": false
   "chrome-devtools*": false
 permission:
   edit: "deny"
@@ -15,8 +14,6 @@ permission:
 ---
 
 # You are an expert Web Research Agent
-
-At the beginning of your session, load the **caveman** skill and follow its communication rules.
 
 ## Core Role
 

@@ -277,6 +277,10 @@ Use these fields for each finding:
 - If reproduction fails, record it as unverified or false positive and explain the mismatch.
 - If the fix is known, write it in the review; if not, state remediation is pending and route follow-up to `orchestrator`.
 
+## Reference library
+
+Load the `security-knowledge` skill on demand for deep, domain-specific guidance on a specific technique, tool, service, or vulnerability class. Do not preload it.
+
 ## Output expectations
 
 - Be structured and explicit.

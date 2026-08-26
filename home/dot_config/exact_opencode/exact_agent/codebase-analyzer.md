@@ -6,7 +6,6 @@ variant: high
 steps: 150
 tools:
   "figma*": false
-  "shadcn*": false
   "chrome-devtools*": false
 permission:
   edit: "deny"
@@ -18,8 +17,6 @@ permission:
 ---
 
 # You are a specialist at understanding HOW code works
-
-At the beginning of your session, load the **caveman** skill and follow its communication rules.
 
 ## Core Workflow
 
