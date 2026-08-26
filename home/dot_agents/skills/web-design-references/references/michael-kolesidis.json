@@ -1,0 +1,263 @@
+{
+  "meta": {
+    "url": "https://michaelkolesidis.com/",
+    "title": "Michael Kolesidis",
+    "captured_at": "2026-04-06T08:44:05.654Z"
+  },
+  "summary": {
+    "fonts": [
+      "\"Karlsbader Grotesk\", sans-serif",
+      "\"Karlsbader Grotesk\", sans-serif",
+      "Caveat, sans-serif"
+    ],
+    "colors": {
+      "background": "rgb(255, 255, 255)",
+      "text": "rgb(0, 0, 0)",
+      "palette": [
+        "rgb(0, 0, 0)",
+        "rgb(255, 255, 255)",
+        "rgb(0, 0, 0) rgb(10, 10, 10) rgb(0, 0, 0) rgb(0, 0, 0)",
+        "rgb(0, 0, 0) rgb(0, 0, 0) rgb(10, 10, 10)",
+        "rgb(10, 10, 10)",
+        "rgb(144, 168, 237)",
+        "rgb(255, 144, 232)",
+        "rgb(255, 201, 0)",
+        "rgb(255, 112, 81)",
+        "rgb(62, 207, 193)",
+        "rgb(255, 255, 255) rgb(255, 255, 255) rgb(10, 10, 10)",
+        "rgb(10, 10, 10) rgb(0, 0, 0)"
+      ]
+    },
+    "typography": {
+      "h1": null,
+      "h2": null,
+      "body": {
+        "font": "\"Karlsbader Grotesk\", sans-serif",
+        "size": "16px",
+        "weight": "400",
+        "lineHeight": "normal",
+        "letterSpacing": "normal",
+        "textTransform": "none"
+      }
+    },
+    "cta_sample": [],
+    "media": {
+      "images": 46,
+      "videos": 0,
+      "canvas": 2,
+      "svgs": 20
+    },
+    "animations_count": 683,
+    "layout": {
+      "viewport": {
+        "width": 588,
+        "height": 973
+      },
+      "sections_estimate": 8
+    }
+  },
+  "tokens_p1": {
+    "css_custom_properties": {},
+    "spacing_scale": [
+      "-8px",
+      "0px",
+      "normal",
+      "normal 16px",
+      "1.28px",
+      "2.5px",
+      "3.2px",
+      "4.865px",
+      "5px",
+      "5.6px",
+      "6px",
+      "6.4px",
+      "8px",
+      "8.4px",
+      "9.6px",
+      "10px",
+      "11.76px",
+      "15px",
+      "15.84px",
+      "16px",
+      "20px",
+      "24px",
+      "30px",
+      "32px",
+      "36px",
+      "40px",
+      "48px",
+      "50px",
+      "59.2px",
+      "72px",
+      "80px",
+      "100px",
+      "112px",
+      "587px"
+    ],
+    "border_radius_scale": [
+      "0px",
+      "100px",
+      "200px"
+    ],
+    "box_shadows": [
+      "rgb(0, 0, 0) 6px 6px 0px 0px"
+    ],
+    "motion": {
+      "transitions": [
+        "font-size, top, left | 0.3s, 0.3s, 0.3s | ease, ease, ease | 0s, 0s, 0s",
+        "transform | 0.25s | ease-in-out | 0s",
+        "background-color | 0.25s | ease | 0s",
+        "transform | 0.15s | linear | 0s",
+        "opacity | 0.35s | ease | 0s",
+        "opacity | 1s | ease | 0s",
+        "background-color, box-shadow, opacity | 0.25s, 0.4s, 0.4s | ease, ease-in-out, ease | 0s, 0s, 0s",
+        "box-shadow | 0.4s | ease-in-out | 0s",
+        "transform, box-shadow, background-color | 0.5s, 0.5s, 0.25s | ease-in-out, ease-in-out, ease | 0s, 0s, 0s",
+        "background-color, box-shadow | 0.25s, 0.4s | ease, ease-in-out | 0s, 0s",
+        "all | 0.5s | ease-out | 0s"
+      ],
+      "animations": [
+        "ticker | 1200s | linear | 0s | infinite",
+        "moveSmiley, levitate | 3s, 2s | ease-in-out, ease-in-out | 0s, 0s | 1, infinite",
+        "rotate | 1s | linear | 0s | infinite",
+        "appear | 1s | ease | 2s | 1",
+        "rotate | 180s | ease | 0s | infinite",
+        "levitate | 3s | ease-in-out | 0s | infinite",
+        "fadeInFromNone | 0.5s | ease-out | 0s | 1"
+      ],
+      "motion_durations": [
+        "0.3s, 0.3s, 0.3s",
+        "0.25s",
+        "0.15s",
+        "0.35s",
+        "1s",
+        "0.25s, 0.4s, 0.4s",
+        "0.4s",
+        "0.5s, 0.5s, 0.25s",
+        "0.25s, 0.4s",
+        "0.5s",
+        "1200s",
+        "3s, 2s",
+        "180s",
+        "3s"
+      ],
+      "motion_easings": [
+        "ease, ease, ease",
+        "ease-in-out",
+        "ease",
+        "linear",
+        "ease, ease-in-out, ease",
+        "ease-in-out, ease-in-out, ease",
+        "ease, ease-in-out",
+        "ease-out",
+        "ease-in-out, ease-in-out"
+      ]
+    },
+    "sticky_fixed": [
+      {
+        "tag": "DIV",
+        "class": "",
+        "position": "fixed",
+        "top": "920.188px",
+        "bottom": "14.595px",
+        "zIndex": "99",
+        "height": 38.21875
+      },
+      {
+        "tag": "DIV",
+        "class": "",
+        "position": "fixed",
+        "top": "926.078px",
+        "bottom": "14.595px",
+        "zIndex": "99",
+        "height": 32.328125
+      }
+    ],
+    "header_height": 49.71875,
+    "footer_height": 592,
+    "z_index_layers": [
+      "3",
+      "4",
+      "2",
+      "998"
+    ],
+    "breakpoints_actual": [
+      "max-width: 820px",
+      "min-width: 821px",
+      "max-width: 1148px",
+      "min-width: 820px",
+      "max-width: 1212px",
+      "max-width: 1100px",
+      "min-width: 1600px",
+      "min-width: 2200px"
+    ]
+  },
+  "tokens_p2": {
+    "letter_spacing": [
+      "normal",
+      "1.5px",
+      "1px",
+      "0.44px",
+      "2.24px",
+      "1.2px",
+      "1.088px"
+    ],
+    "text_transform": [],
+    "font_variant_numeric": [
+      "normal"
+    ],
+    "text_decoration": [
+      "none solid rgb(10, 10, 10)"
+    ],
+    "text_decoration_thickness": [],
+    "text_decoration_offset": [],
+    "border_widths": [
+      "0px",
+      "1px"
+    ],
+    "border_styles": [
+      "solid"
+    ],
+    "border_colors": [
+      "rgb(0, 0, 0)",
+      "rgb(10, 10, 10)",
+      "rgb(255, 255, 255)"
+    ],
+    "outlines": [
+      "0px none rgb(0, 0, 0) offset 0px",
+      "0px none rgb(255, 255, 255) offset 0px",
+      "0px none rgb(10, 10, 10) offset 0px"
+    ],
+    "opacity_scale": [
+      "1",
+      "0"
+    ],
+    "blend_modes": [],
+    "background_blend_modes": [],
+    "filters": [],
+    "backdrop_filters": [],
+    "background_images": [],
+    "gradients": [],
+    "aspect_ratios": [
+      "12 / 16",
+      "auto 480 / 330",
+      "auto 587 / 832"
+    ],
+    "selection_rules": [],
+    "scrollbar_rules": [
+      "body::-webkit-scrollbar { width: 1em; background: rgb(255, 255, 255); }",
+      "body::-webkit-scrollbar-thumb { background-color: rgb(10, 10, 10); outline: rgb(10, 10, 10) solid 1px; }"
+    ],
+    "prefers_reduced_motion": [],
+    "srcsets": [],
+    "icon_system": {
+      "inline_svg": 1,
+      "img_svg": 20,
+      "icon_font_detected": false
+    }
+  },
+  "tokens_states": {
+    "status": "not_collected_cors_stylesheets",
+    "note": "Same-origin CSS needed to extract :hover/:active/:focus/:disabled."
+  }
+}

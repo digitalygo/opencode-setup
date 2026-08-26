@@ -1,0 +1,280 @@
+{
+  "meta": {
+    "url": "https://www.thelordsofwater.com/",
+    "title": "The Lords of Water - Great British Water in a Can",
+    "captured_at": "2026-04-06T08:40:51.102Z"
+  },
+  "summary": {
+    "fonts": [
+      "futura-pt-condensed, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, Arial, sans-serif",
+      "\"Times New Roman\"",
+      "futura-pt-condensed, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, Arial, sans-serif",
+      "Redaction, serif"
+    ],
+    "colors": {
+      "background": "rgb(0, 0, 0)",
+      "text": "rgb(249, 249, 249)",
+      "palette": [
+        "rgb(0, 0, 0)",
+        "rgb(249, 249, 249)",
+        "rgba(0, 0, 0, 0.82)",
+        "rgb(227, 6, 19)"
+      ]
+    },
+    "typography": {
+      "h1": {
+        "font": "futura-pt-condensed, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, Arial, sans-serif",
+        "size": "46.7608px",
+        "weight": "800",
+        "lineHeight": "39.7467px",
+        "letterSpacing": "-0.145455px",
+        "textTransform": "uppercase"
+      },
+      "h2": {
+        "font": "futura-pt-condensed, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, Arial, sans-serif",
+        "size": "29.6435px",
+        "weight": "800",
+        "lineHeight": "25.197px",
+        "letterSpacing": "-0.145455px",
+        "textTransform": "uppercase"
+      },
+      "body": {
+        "font": "Redaction, serif",
+        "size": "65.7435px",
+        "weight": "400",
+        "lineHeight": "55.882px",
+        "letterSpacing": "normal",
+        "textTransform": "uppercase"
+      }
+    },
+    "cta_sample": [
+      {
+        "text": "Buy Online",
+        "tag": "A",
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(249, 249, 249)",
+        "border": "0px none rgb(249, 249, 249)",
+        "radius": "0px",
+        "padding": "0px",
+        "font": "futura-pt-condensed, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, Arial, sans-serif",
+        "weight": "800"
+      },
+      {
+        "text": "Buy Now FREE DELIVERY",
+        "tag": "A",
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(227, 6, 19)",
+        "border": "2px solid rgb(227, 6, 19)",
+        "radius": "50%",
+        "padding": "21.4891px 0px 21.4891px 42.9782px",
+        "font": "futura-pt-condensed, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, Arial, sans-serif",
+        "weight": "800"
+      }
+    ],
+    "media": {
+      "images": 10,
+      "videos": 3,
+      "canvas": 0,
+      "svgs": 0
+    },
+    "animations_count": 2007,
+    "layout": {
+      "viewport": {
+        "width": 588,
+        "height": 973
+      },
+      "sections_estimate": 15
+    }
+  },
+  "tokens_p1": {
+    "css_custom_properties": {},
+    "spacing_scale": [
+      "0px",
+      "normal",
+      "8px",
+      "13.4088px",
+      "14.8218px",
+      "16px",
+      "16.1875px",
+      "16.4674px",
+      "20px",
+      "21.4891px",
+      "21.6347px",
+      "24px",
+      "26.8174px",
+      "32px",
+      "32.9347px",
+      "40.113px",
+      "42.9782px"
+    ],
+    "border_radius_scale": [
+      "0px",
+      "6px",
+      "50%"
+    ],
+    "box_shadows": [
+      "rgba(171, 171, 171, 0.7) 0px 0px 12px 1px"
+    ],
+    "motion": {
+      "transitions": [
+        "opacity | 0.5s | ease | 0s",
+        "visibility, opacity | 0s, 0.3s | ease, ease | 0s, 0s",
+        "transform | 0.7s | cubic-bezier(0.23, 1, 0.32, 1) | 0s",
+        "color | 0.3s | ease | 0s",
+        "border-color, color | 0.3s, 0.3s | ease, ease | 0s, 0s",
+        "opacity, transform | 1s, 1s | ease, ease | 0s, 0.25s"
+      ],
+      "animations": [
+        "scrolling-text | 24s | linear | 0s | infinite",
+        "scrolling-text | 16s | linear | 0s | infinite"
+      ],
+      "motion_durations": [
+        "0.5s",
+        "0s, 0.3s",
+        "0.7s",
+        "0.3s",
+        "0.3s, 0.3s",
+        "1s, 1s",
+        "24s",
+        "16s"
+      ],
+      "motion_easings": [
+        "ease",
+        "ease, ease",
+        "cubic-bezier(0.23, 1, 0.32, 1)",
+        "linear"
+      ]
+    },
+    "sticky_fixed": [
+      {
+        "tag": "HEADER",
+        "class": "main-header  ",
+        "position": "sticky",
+        "top": "0px",
+        "bottom": "auto",
+        "zIndex": "999",
+        "height": 136.21875
+      },
+      {
+        "tag": "ASIDE",
+        "class": "modal newsletter",
+        "position": "fixed",
+        "top": "0px",
+        "bottom": "0px",
+        "zIndex": "999",
+        "height": 973
+      },
+      {
+        "tag": "DIV",
+        "class": "shopify-buy-frame shopify-buy-frame--toggle is-sticky",
+        "position": "fixed",
+        "top": "50%",
+        "bottom": "auto",
+        "zIndex": "2147483645",
+        "height": 0
+      },
+      {
+        "tag": "DIV",
+        "class": "shopify-buy-cart-wrapper shopify-buy-frame shopify-buy-frame--cart",
+        "position": "fixed",
+        "top": "0px",
+        "bottom": "0px",
+        "zIndex": "2147483647",
+        "height": 973
+      }
+    ],
+    "header_height": 136.21875,
+    "footer_height": 238,
+    "z_index_layers": [
+      "999"
+    ],
+    "breakpoints_actual": [
+      "min-width: 1190px",
+      "min-width: 950px"
+    ]
+  },
+  "tokens_p2": {
+    "letter_spacing": [
+      "normal",
+      "-0.145455px"
+    ],
+    "text_transform": [
+      "uppercase"
+    ],
+    "font_variant_numeric": [
+      "normal"
+    ],
+    "text_decoration": [
+      "underline solid rgb(249, 249, 249)",
+      "none solid rgb(249, 249, 249)",
+      "none solid rgb(227, 6, 19)"
+    ],
+    "text_decoration_thickness": [],
+    "text_decoration_offset": [],
+    "border_widths": [
+      "0px",
+      "2px"
+    ],
+    "border_styles": [
+      "solid"
+    ],
+    "border_colors": [
+      "rgb(0, 0, 0)",
+      "rgb(249, 249, 249)",
+      "rgb(227, 6, 19)"
+    ],
+    "outlines": [
+      "0px none rgb(0, 0, 0) offset 0px",
+      "0px none rgb(249, 249, 249) offset 0px",
+      "0px none rgb(227, 6, 19) offset 0px"
+    ],
+    "opacity_scale": [
+      "1",
+      "0"
+    ],
+    "blend_modes": [],
+    "background_blend_modes": [],
+    "filters": [
+      "drop-shadow(rgb(249, 249, 249) 0px 0px 12px)",
+      "drop-shadow(rgb(249, 249, 249) 0px 0px 4px)",
+      "drop-shadow(rgb(227, 6, 19) 0px 0px 15.0424px)",
+      "drop-shadow(rgb(249, 249, 249) 0px 0px 24.701px)"
+    ],
+    "backdrop_filters": [],
+    "background_images": [
+      "https://www.thelordsofwater.com/static/lod-bg-299f4e6287352853d52a2fad8a8c6da6.webp",
+      "linear-gradient(90deg, rgb(249, 249, 249) 0px, rgb(249, 249, 249))"
+    ],
+    "gradients": [
+      "linear-gradient(90deg, rgb(249, 249, 249) 0px, rgb(249, 249, 249))"
+    ],
+    "aspect_ratios": [
+      "1 / 1",
+      "16 / 9"
+    ],
+    "selection_rules": [],
+    "scrollbar_rules": [],
+    "prefers_reduced_motion": [
+      "(prefers-reduced-motion: reduce)"
+    ],
+    "srcsets": [
+      {
+        "srcset": "https://superrbimages-1fd4f.kxcdn.com/lordsofwater/39781173-2664-4b1c-8f79-bd614fc601f5_Can_1+Background+Removed.png?auto=compress&fit=max&fm=webp&q=75&w=25&h=44 25w,\nhttps://superrbimages-1fd4f.kxcdn.com/lordsofwater/39781173-2664-4b1c-8f79-bd614fc601f5_Can_1+Background+Removed.png?auto=compress&fit=max&fm=webp&q=75&w=750&h=1333 750w,\nhttps://superrbimages-1fd4f.kxcdn.com/lordsofwater/39781173-2664-4b1c-8f79-bd614fc601f5_Can_1+Background+Removed.png?auto=compress&fit=max&fm=webp&q=75&w=1080&h=1920 1080w",
+        "sizes": ""
+      },
+      {
+        "srcset": "https://superrbimages-1fd4f.kxcdn.com/lordsofwater/70d50572-1478-4e97-a928-305f9a383f6e_Screenshot+2023-04-21+at+12.14.35.png?auto=compress&fit=max&fm=webp&q=75&w=25&h=25 25w,\nhttps://superrbimages-1fd4f.kxcdn.com/lordsofwater/70d50572-1478-4e97-a928-305f9a383f6e_Screenshot+2023-04-21+at+12.14.35.png?auto=compress&fit=max&fm=webp&q=75&w=750&h=765 750w,\nhttps://superrbimages-1fd4f.kxcdn.com/lordsofwater/70d50572-1478-4e97-a928-305f9a383f6e_Screenshot+2023-04-21+at+12.14.35.png?auto=compress&fit=max&fm=webp&q=75&w=1080&h=1101 1080w,\nhttps://superrbimages-1fd4f.kxcdn.com/lordsofwater/70d50572-1478-4e97-a928-305f9a383f6e_Screenshot+2023-04-21+at+12.14.35.png?auto=compress&fit=max&fm=webp&q=75&w=1366&h=1393 1366w,\nhttps://superrbimages-1fd4f.kxcdn.com/lordsofwater/70d50572-1478-4e97-a928-305f9a383f6e_Screenshot+2023-04-21+at+12.14.35.png?auto=compress&fit=max&fm=webp&q=75&w=1438&h=1466 1438w",
+        "sizes": ""
+      }
+    ],
+    "icon_system": {
+      "inline_svg": 53,
+      "img_svg": 0,
+      "icon_font_detected": false
+    }
+  },
+  "tokens_states": {
+    "status": "not_collected_cors_stylesheets",
+    "note": "Same-origin CSS needed to extract :hover/:active/:focus/:disabled."
+  }
+}

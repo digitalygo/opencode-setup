@@ -1,0 +1,253 @@
+{
+  "meta": {
+    "url": "https://akutostudio.com/",
+    "title": "Akuto Studio · Chord Machine AKT-0.1",
+    "captured_at": "2026-04-06T08:46:41.708Z"
+  },
+  "summary": {
+    "fonts": [
+      "lausanne, Helvetica, Arial, sans-serif",
+      "lausanne, Helvetica, Arial, sans-serif",
+      "\"Times New Roman\""
+    ],
+    "colors": {
+      "background": "rgba(0, 0, 0, 0)",
+      "text": "rgb(0, 0, 0)",
+      "palette": [
+        "rgb(0, 0, 0)",
+        "rgb(255, 255, 255)",
+        "rgb(255, 53, 0)",
+        "rgb(204, 204, 204)",
+        "rgb(118, 118, 118)"
+      ]
+    },
+    "typography": {
+      "h1": {
+        "font": "lausanne, Helvetica, Arial, sans-serif",
+        "size": "29px",
+        "weight": "700",
+        "lineHeight": "17.2947px",
+        "letterSpacing": "normal",
+        "textTransform": "uppercase"
+      },
+      "h2": {
+        "font": "lausanne, Helvetica, Arial, sans-serif",
+        "size": "48.9356px",
+        "weight": "700",
+        "lineHeight": "44.5314px",
+        "letterSpacing": "normal",
+        "textTransform": "uppercase"
+      },
+      "body": {
+        "font": "lausanne, Helvetica, Arial, sans-serif",
+        "size": "14.5333px",
+        "weight": "700",
+        "lineHeight": "17.2947px",
+        "letterSpacing": "normal",
+        "textTransform": "uppercase"
+      }
+    },
+    "cta_sample": [],
+    "media": {
+      "images": 5,
+      "videos": 1,
+      "canvas": 0,
+      "svgs": 0
+    },
+    "animations_count": 185,
+    "layout": {
+      "viewport": {
+        "width": 588,
+        "height": 973
+      },
+      "sections_estimate": 8
+    }
+  },
+  "tokens_p1": {
+    "css_custom_properties": {
+      "--mbreak": "$m-break",
+      "--plyr-font-weight-regular": "400",
+      "--vh": "973px",
+      "--plyr-font-smoothing": "true",
+      "--plyr-font-weight-bold": "400",
+      "--highlight": "#ff3500",
+      "--plyr-font-family": "\"lausanne\",Helvetica,Arial,sans-serif",
+      "--sbreak": "$s-break",
+      "--offset": "0px",
+      "--plyr-color-main": "#ff3500",
+      "--vw": "100vw"
+    },
+    "spacing_scale": [
+      "-70px",
+      "0px",
+      "normal",
+      "4.36px",
+      "7.26667px",
+      "8.72px",
+      "10px",
+      "10.8273px",
+      "14.5333px",
+      "20px",
+      "21.8px",
+      "27px",
+      "29.0667px",
+      "43.6px",
+      "58.1333px",
+      "72.6667px",
+      "79.9333px",
+      "80px",
+      "87.2px",
+      "116.267px",
+      "140px",
+      "218px",
+      "220px",
+      "2700px"
+    ],
+    "border_radius_scale": [
+      "0px",
+      "25px",
+      "72.6667px",
+      "4360px"
+    ],
+    "box_shadows": [],
+    "motion": {
+      "transitions": [
+        "opacity | 0.25s | ease | 0s",
+        "transform, -webkit-transform | 0.5s, 0.5s | ease, ease | 0.1s, 0.1s",
+        "color, background-color, fill | 0.25s, 0.25s, 0.25s | ease, ease, ease | 0s, 0s, 0s",
+        "color, background-color, flex-basis, padding, width, opacity, -webkit-flex-basis, -ms-flex-preferred-size | 0.25s, 0.25s, 0.75s, 0.75s, 0.75s, 0.25s, 0.75s, 0.75s | ease, ease, ease, ease, ease, ease, ease, ease | 0s, 0s, 0s, 0s, 0s, 0s, 0s, 0s",
+        "transform, -webkit-transform | 0.1s, 0.1s | ease, ease | 0s, 0s"
+      ],
+      "animations": [],
+      "motion_durations": [
+        "0.25s",
+        "0.5s, 0.5s",
+        "0.25s, 0.25s, 0.25s",
+        "0.25s, 0.25s, 0.75s, 0.75s, 0.75s, 0.25s, 0.75s, 0.75s",
+        "0.1s, 0.1s"
+      ],
+      "motion_easings": [
+        "ease",
+        "ease, ease",
+        "ease, ease, ease",
+        "ease, ease, ease, ease, ease, ease, ease, ease"
+      ]
+    },
+    "sticky_fixed": [
+      {
+        "tag": "HEADER",
+        "class": "site-header",
+        "position": "fixed",
+        "top": "0px",
+        "bottom": "903px",
+        "zIndex": "9999",
+        "height": 70
+      },
+      {
+        "tag": "H2",
+        "class": "small",
+        "position": "sticky",
+        "top": "79.9333px",
+        "bottom": "auto",
+        "zIndex": "auto",
+        "height": 178.125
+      },
+      {
+        "tag": "SECTION",
+        "class": "site-newsletter",
+        "position": "fixed",
+        "top": "853px",
+        "bottom": "0px",
+        "zIndex": "9999",
+        "height": 120
+      }
+    ],
+    "header_height": 70,
+    "footer_height": 205.4375,
+    "z_index_layers": [
+      "9999",
+      "10"
+    ],
+    "breakpoints_actual": [
+      "min-width: 420px",
+      "min-width: 1680px",
+      "max-width: 1100px",
+      "max-width: 750px",
+      "min-width: 375px"
+    ]
+  },
+  "tokens_p2": {
+    "letter_spacing": [
+      "normal",
+      "-1.33697px",
+      "-0.157747px"
+    ],
+    "text_transform": [
+      "uppercase"
+    ],
+    "font_variant_numeric": [
+      "normal"
+    ],
+    "text_decoration": [
+      "none solid rgb(0, 0, 0)",
+      "none solid rgb(255, 255, 255)",
+      "none solid rgb(255, 53, 0)",
+      "none solid rgb(204, 204, 204)",
+      "underline solid rgb(255, 255, 255)"
+    ],
+    "text_decoration_thickness": [],
+    "text_decoration_offset": [],
+    "border_widths": [
+      "0px",
+      "1px",
+      "2px"
+    ],
+    "border_styles": [
+      "solid",
+      "inset"
+    ],
+    "border_colors": [
+      "rgb(0, 0, 0)",
+      "rgb(255, 255, 255)",
+      "rgb(255, 53, 0)",
+      "rgb(204, 204, 204)",
+      "rgb(118, 118, 118)"
+    ],
+    "outlines": [
+      "0px none rgb(0, 0, 0) offset 0px",
+      "0px none rgb(255, 255, 255) offset 0px",
+      "0px none rgb(255, 53, 0) offset 0px",
+      "0px none rgb(204, 204, 204) offset 0px"
+    ],
+    "opacity_scale": [
+      "1"
+    ],
+    "blend_modes": [],
+    "background_blend_modes": [],
+    "filters": [],
+    "backdrop_filters": [],
+    "background_images": [],
+    "gradients": [],
+    "aspect_ratios": [],
+    "selection_rules": [
+      "::selection { color: transparent; text-shadow: 0 0 .1em var(--highlight); background: transparent; }",
+      ".home .site-features ::selection { text-shadow: rgb(255, 255, 255) 0px 0px 0.1em; }",
+      ".site-newsletter.formScroll .popin ::selection { text-shadow: 0 0 .1em var(--highlight); }",
+      ".site-newsletter.formScroll .email::selection { text-shadow: 0 0 .1em var(--highlight); }",
+      ".site-newsletter .popin ::selection { text-shadow: rgb(255, 255, 255) 0px 0px 0.1em; }",
+      ".site-newsletter .email::selection { text-shadow: rgb(255, 255, 255) 0px 0px 0.1em; }"
+    ],
+    "scrollbar_rules": [],
+    "prefers_reduced_motion": [],
+    "srcsets": [],
+    "icon_system": {
+      "inline_svg": 1,
+      "img_svg": 0,
+      "icon_font_detected": false
+    }
+  },
+  "tokens_states": {
+    "status": "not_collected_cors_stylesheets",
+    "note": "Same-origin CSS needed to extract :hover/:active/:focus/:disabled."
+  }
+}
