@@ -2,7 +2,7 @@
 description: Agent for generating and refining client expectations in the substrate/expectations/ directory
 mode: primary
 color: "#f8d00d"
-model: openai/gpt-5.6-sol
+model: openrouter/openai/gpt-5.6-sol
 variant: max
 temperature: 0.3
 permission:

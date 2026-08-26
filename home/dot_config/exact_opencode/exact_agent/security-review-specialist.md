@@ -1,7 +1,7 @@
 ---
 description: Security-only review for concrete vulnerabilities and attack-surface risks
 mode: subagent
-model: openai/gpt-5.6-sol
+model: openrouter/openai/gpt-5.6-sol
 variant: max
 tools:
   "figma*": false

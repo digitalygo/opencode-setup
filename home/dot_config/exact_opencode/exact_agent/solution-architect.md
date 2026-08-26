@@ -1,7 +1,7 @@
 ---
 description: Read-only implementation advisor. Proposes a validated implementation approach for medium-to-high complexity tasks, and adversarially reviews the caller's assumptions and decisions on request. Never implements or modifies files.
 mode: subagent
-model: openai/gpt-5.6-sol
+model: openrouter/openai/gpt-5.6-sol
 variant: max
 temperature: 0.3
 permission:

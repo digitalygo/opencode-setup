@@ -1,7 +1,7 @@
 ---
 description: Godot game developer for production-ready GDScript, scenes, gameplay systems, testing, profiling, and visual validation
 mode: subagent
-model: openai/gpt-5.6-terra
+model: openrouter/openai/gpt-5.6-terra
 variant: max
 temperature: 0.2
 steps: 100
