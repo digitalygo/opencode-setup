@@ -1,0 +1,17 @@
+{
+  "lastChangelogVersion": "0.84.1",
+  "theme": "dark",
+  "defaultProvider": "openrouter",
+  "defaultModel": "z-ai/glm-5.3-flash",
+  "defaultThinkingLevel": "max",
+  "hideThinkingBlock": false,
+  "enableInstallTelemetry": false,
+  "doubleEscapeAction": "tree",
+  "retry": {
+    "maxRetries": 20
+  },
+  "compaction": {
+    "enabled": true,
+    "reserveTokens": 50000
+  }
+}

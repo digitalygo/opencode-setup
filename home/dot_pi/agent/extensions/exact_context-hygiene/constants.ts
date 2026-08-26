@@ -1,0 +1,16 @@
+export const PERSISTENCE_KEY = "selective-compact";
+export const PERSISTENCE_KEY_PINS = "context-hygiene-pins";
+export const PERSISTENCE_KEY_PRUNED = "context-hygiene-pruned";
+export const PIN_TOOL_NAME = "context_pin";
+export const PREVIEW_LENGTH = 160;
+export const MAX_SELECTION_TOKENS = 8192;
+export const MAX_CUSTOM_INSTRUCTIONS = 500;
+export const DEDUP_KEEP_LAST = 2;
+export const ERROR_PURGE_MESSAGE_COUNT = 4;
+export const PRUNE_CONTEXT_MIN = 0.25;
+export const COMPACT_CONTEXT_RATIO = 0.65;
+export const PRUNE_IDLE_MS = 300000;
+export const PRUNE_RECENT_WINDOW = 50;
+export const PRUNE_MIN_CONTENT_CHARS = 500;
+export const PRUNED_PLACEHOLDER = "[pruned, re-run the tool if you need this result again]";
+export const MAX_PINS_PER_CALL = 20;

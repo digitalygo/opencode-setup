@@ -1,0 +1,110 @@
+# Agent instructions
+
+## Role skills
+
+Before taking any action on a user request, inspect the available skills, decide which single role skill matches the request, and read that skill's SKILL.md in full before doing anything else. The role skill defines your working method, delegation rules, and binding constraints for the whole task; follow it from the first tool call. Do not start work without a role skill when one matches.
+
+### Choosing the role
+
+- orchestrator: any request to implement, modify, fix, refactor, or configure, or any operational task that changes files or systems. When in doubt between orchestrator and another role for change-producing work, choose orchestrator.
+- planner: requests for implementation plans, research documents, or analysis without executing changes.
+- quick: questions, explanations, and research that produce an answer, not changes.
+- wiki: ingesting material into, or querying, capturing, refactoring, linting, or maintaining the LLM wiki.
+- infra-operator: operations on production infrastructure (Docker Swarm, Kubernetes, Proxmox, servers) over SSH.
+- directives-writer: creating or updating DRC-* developer directives.
+- expectations-writer: creating or updating EXP-* client expectations.
+- commit: staging and crafting conventional commits.
+- security: security reviews, vulnerability assessments, authorized penetration tests.
+
+### Rules
+
+- Load exactly one role skill per task; if several match, choose the most specific one.
+- If no role skill matches, proceed without one.
+- If the task changes nature mid-session, stop and load the newly matching role skill before continuing.
+- Role skills may instruct you to load additional skills (for example team-leader, mycelium-*, quality-gate, security-review); follow those instructions.
+- Subagents are available through the subagents extension with the names the role skills reference; delegate exactly as the loaded role skill describes.
+- The role skill's rules are binding and take precedence over your default behavior for the duration of the task.
+
+## seed vs migration
+
+when possible, no matter what the user says, always use migrations to seed the database. and always use incremental migrations.
+
+## Shared standards compliance
+
+- Always ensure alignment with `.github/CONTRIBUTING.md`, `AGENTS.md`, and any files under the `substrate/directives/` and `substrate/expectations/` folders before planning, implementing, reviewing, or documenting changes.
+- Treat these files as the default behavioral contract unless a more specific repository rule explicitly overrides them.
+- When relevant, verify outputs against repository-specific templates, conventions, and structural rules in addition to these shared standards.
+
+## Shared writing style
+
+- Use sentence case for headings, titles, labels, and all writing; only proper nouns capitalized.
+- Never use title case.
+- Never use em dash.
+
+## Shared Markdown authoring standards
+
+When writing Markdown files, produce correct output from the start.
+
+### Structural rules
+
+- **One H1 per file**: mark the document title with a single level-1 heading.
+  Use the level-1 heading on the first non-blank, non-front-matter line.
+- **Heading progression**: never skip heading levels (H1 then H2 then H3, not
+  H1 then H3).
+- **Blank lines around blocks**: one blank line before and after every heading,
+  fenced code block, list, and blockquote.
+- **Single trailing newline**: exactly one newline at end of file. No trailing
+  spaces or tabs anywhere in the file.
+
+### List rules
+
+- **Marker consistency**: pick either `-` or `*` for unordered lists and stick
+  with it throughout the file.
+- **Ordered lists**: use incrementing numeric markers (`1.`, `2.`, `3.`) when
+  sequence matters. If sequence does not matter, use an unordered list instead.
+- **Indent consistently**: use the same sub-list indent across the entire file
+  (2 or 4 spaces).
+
+### Code blocks
+
+- **Fenced blocks only**: use ` ``` ` fences, never indented code blocks.
+- **Language tag required**: every fenced code block must include a language
+  identifier (` ```bash`, ` ```json`, ` ```markdown`).
+
+### Inline formatting
+
+- **No spaces inside emphasis**: `**bold**` and `_italic_`, not
+  `** bold **` or `_ italic _`.
+- **No emphasis as heading substitute**: use actual headings, not bolded
+  paragraphs.
+- **Consistent emphasis style**: use the same marker style for strong and
+  emphasis across the file.
+
+### Links
+
+- **Descriptive link text for standard links**: For `[text](url)` links, link
+  text must describe the destination; no bare URLs and no "click here". This
+  rule applies to standard Markdown links that point to external resources or
+  non-vault paths.
+- **No empty link targets**: every link must have a non-empty URL.
+
+### Obsidian syntax extensions
+
+Obsidian-specific syntax is explicitly allowed and must be preserved. The base
+format remains CommonMark/GFM; the following extensions are first-class and must
+not be stripped, converted, or lint-fixed away:
+
+- **Wikilinks**: `[[page-name]]` and `[[page-name|Alias]]` for internal vault
+  cross-references. Wikilinks are the preferred linking style inside
+  Obsidian-managed vaults. Do not convert them to standard Markdown links.
+- **Embeds**: `![[page-name]]` for transcluding content from another note.
+- **Callouts**: `> [!note]`, `> [!warning]`, `> [!tip]`, and other Obsidian
+  callout types.
+- **YAML frontmatter / properties**: `---` delimited metadata blocks at the
+  start of a file. Recognized as structural metadata, not content. The "one H1
+  per file" rule counts the first heading after frontmatter/properties as the
+  document title heading.
+- **Block references**: place a block ID with `^block-id` at the end of a
+  paragraph; reference it from another note with `[[page-name#^block-id]]`.
+- **Tags**: `#tag` and `#nested/tag` syntax for inline tagging.
+- **Math**: `$inline$` and `$$display$$` LaTeX math blocks.
